@@ -11,7 +11,10 @@ namespace ZPool.Models
 {
     public class AppDbContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     {
-        public virtual DbSet<TestCar> Cars { get; set; }
+        // space for your DbSet<EntityName> properties
+
+
+
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
