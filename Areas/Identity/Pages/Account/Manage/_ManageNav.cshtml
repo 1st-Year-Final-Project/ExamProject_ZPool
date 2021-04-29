@@ -1,5 +1,5 @@
 ﻿@using UserManagementTestApp.Models
-@inject SignInManager<ZpoolUser> SignInManager
+@inject SignInManager<AppUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

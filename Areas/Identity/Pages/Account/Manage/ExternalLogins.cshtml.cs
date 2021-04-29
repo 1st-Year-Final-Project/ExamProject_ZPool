@@ -12,12 +12,12 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 {
     public class ExternalLoginsModel : PageModel
     {
-        private readonly UserManager<ZpoolUser> _userManager;
-        private readonly SignInManager<ZpoolUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
         public ExternalLoginsModel(
-            UserManager<ZpoolUser> userManager,
-            SignInManager<ZpoolUser> signInManager)
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

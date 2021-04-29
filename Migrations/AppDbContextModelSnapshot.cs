@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using UserManagementTestApp.Data;
+using ZPool.Models;
 
-namespace UserManagementTestApp.Migrations
+namespace ZPool.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210429064403_nullableValuesInUser")]
-    partial class nullableValuesInUser
+    [DbContext(typeof(AppDbContext))]
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,7 +149,7 @@ namespace UserManagementTestApp.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("UserManagementTestApp.Models.ZpoolUser", b =>
+            modelBuilder.Entity("UserManagementTestApp.Models.AppUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -181,9 +179,6 @@ namespace UserManagementTestApp.Migrations
 
                     b.Property<string>("Introduction")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDriver")
-                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -235,6 +230,32 @@ namespace UserManagementTestApp.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("ZPool.Models.TestCar", b =>
+                {
+                    b.Property<int>("CarId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CarId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Cars");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
@@ -246,7 +267,7 @@ namespace UserManagementTestApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("UserManagementTestApp.Models.ZpoolUser", null)
+                    b.HasOne("UserManagementTestApp.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -255,7 +276,7 @@ namespace UserManagementTestApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("UserManagementTestApp.Models.ZpoolUser", null)
+                    b.HasOne("UserManagementTestApp.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -270,7 +291,7 @@ namespace UserManagementTestApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("UserManagementTestApp.Models.ZpoolUser", null)
+                    b.HasOne("UserManagementTestApp.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -279,11 +300,18 @@ namespace UserManagementTestApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("UserManagementTestApp.Models.ZpoolUser", null)
+                    b.HasOne("UserManagementTestApp.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ZPool.Models.TestCar", b =>
+                {
+                    b.HasOne("UserManagementTestApp.Models.AppUser", null)
+                        .WithMany("Cars")
+                        .HasForeignKey("AppUserId");
                 });
 #pragma warning restore 612, 618
         }
