@@ -9,11 +9,11 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 {
     public class PersonalDataModel : PageModel
     {
-        private readonly UserManager<ZpoolUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<PersonalDataModel> _logger;
 
         public PersonalDataModel(
-            UserManager<ZpoolUser> userManager,
+            UserManager<AppUser> userManager,
             ILogger<PersonalDataModel> logger)
         {
             _userManager = userManager;
@@ -27,7 +27,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
+            
             return Page();
         }
     }

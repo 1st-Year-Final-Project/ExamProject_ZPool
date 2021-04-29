@@ -1,0 +1,20 @@
+﻿@page
+@using UserManagementTestApp.Models
+@model ZPool.Pages.TestFolder.TestUserDataModel
+@{
+    AppUser user = Model.AppUser;
+}
+
+<div class="container">
+    
+    <table class="table">
+        <tr>
+            <td>@user.FirstName @user.LastName, @user.Gender, Id: @user.Id, @user.Email</td>
+        </tr>
+        <tr>
+             
+            <td>Car: @Model.Car.Brand, @Model.Car.Color</td>
+        </tr>
+    </table>
+    
+</div>

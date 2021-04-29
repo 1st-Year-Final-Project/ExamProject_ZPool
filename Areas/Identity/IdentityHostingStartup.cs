@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using UserManagementTestApp.Data;
 
 [assembly: HostingStartup(typeof(UserManagementTestApp.Areas.Identity.IdentityHostingStartup))]
 namespace UserManagementTestApp.Areas.Identity

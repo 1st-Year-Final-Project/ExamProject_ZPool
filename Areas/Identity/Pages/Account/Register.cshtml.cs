@@ -20,14 +20,14 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<ZpoolUser> _signInManager;
-        private readonly UserManager<ZpoolUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<ZpoolUser> userManager,
-            SignInManager<ZpoolUser> signInManager,
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -83,7 +83,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ZpoolUser 
+                var user = new AppUser 
                     { 
                         UserName = Input.Email, 
                         Email = Input.Email, 
