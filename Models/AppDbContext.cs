@@ -14,6 +14,9 @@ namespace ZPool.Models
         // space for your DbSet<EntityName> properties
 
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Ride> Rides { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
