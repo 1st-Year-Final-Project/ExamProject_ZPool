@@ -83,9 +83,21 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                string newUserName = $"{Input.FirstName} {Input.LastName.Substring(0, 1)}.";
+
+                AppUser existingUser = await _userManager.FindByNameAsync(newUserName);
+                if (existingUser != null)
+                {
+                    if (newUserName == existingUser.UserName)
+                    {
+                        int x = 1;
+                        newUserName = newUserName + $"{x}";
+                    }
+                }
+
                 var user = new AppUser 
-                    { 
-                        UserName = Input.Email, 
+                    {
+                        UserName = newUserName, 
                         Email = Input.Email, 
                         FirstName = Input.FirstName, 
                         LastName = Input.LastName
