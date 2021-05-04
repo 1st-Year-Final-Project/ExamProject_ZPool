@@ -7,11 +7,17 @@ namespace ZPool.Models
 {
     public class Car
     {
-        public int CarId { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
-        public string NumberPlate { get; set; }
-        public string Color { get; set; }
-        public int UserId { get; set; }
+        public int CarID { get; set; }
+        public string Make { get; set; }
+        public string Colour { get; set; }
+        public int NumberOfSeats { get; set; }
+
+
+        //Foreign Keys
+        public int UserID { get; set; }//FK
+
+        //Navigation Properties
+        public User User { get; set; }
+        public ICollection<Ride> Rides { get; set; }
     }
 }
