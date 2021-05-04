@@ -32,7 +32,11 @@ namespace UserManagementTestApp
                 options.UseSqlServer(
                     Configuration.GetConnectionString("LocalConnection")));
 
-            services.AddIdentity<AppUser, IdentityRole<int>>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddIdentity<AppUser, IdentityRole<int>>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    
+                })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
@@ -41,6 +45,12 @@ namespace UserManagementTestApp
             {
                 options.User.RequireUniqueEmail = true;
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ ";
+                
+                // Lockout options:
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                options.Lockout.MaxFailedAccessAttempts = 3;
+
             });
             
             services.AddRazorPages();
