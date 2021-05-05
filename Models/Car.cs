@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UserManagementTestApp.Models;
 
 namespace ZPool.Models
 {
@@ -16,10 +17,10 @@ namespace ZPool.Models
 
 
         //Foreign Keys
-        public int UserID { get; set; }//FK
+        public int AppUserID { get; set; }//FK
 
         //Navigation Properties
-        public User User { get; set; }
+        public AppUser AppUser { get; set; }
         public ICollection<Ride> Rides { get; set; }
     }
 }
