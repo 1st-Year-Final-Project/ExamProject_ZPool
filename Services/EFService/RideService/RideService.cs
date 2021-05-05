@@ -32,7 +32,13 @@ namespace ZPool.Services.EFService.RideService
         public void EditRide(Ride ride)
         {
             service.Rides.Update(ride);
+            service.SaveChanges();
             
+        }
+
+        public IEnumerable<Ride> GetAllRides()
+        {
+            throw new NotImplementedException();
         }
 
         public Ride GetRide(int id)
