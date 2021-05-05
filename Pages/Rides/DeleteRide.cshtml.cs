@@ -26,11 +26,11 @@ namespace ZPool.Pages.Rides
             return Page();
         }
 
-        public IActionResult OnPost(int id)
+        public IActionResult OnPost(Ride ride)
         {
-            if(id == Ride.RideID)
+            if(ride == ride)  //(id == Ride.RideID)
             {
-                rideService.DeleteRide(id);
+                rideService.DeleteRide(ride);
             }
             return RedirectToPage();
         }

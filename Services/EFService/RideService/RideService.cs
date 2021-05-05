@@ -22,9 +22,8 @@ namespace ZPool.Services.EFService.RideService
             service.SaveChanges();
         }
 
-        public void DeleteRide(int id)
+        public void DeleteRide(Ride ride)
         {
-            Ride ride = service.Rides.Find(id);
             service.Rides.Remove(ride);
             service.SaveChanges();
         }
@@ -38,7 +37,7 @@ namespace ZPool.Services.EFService.RideService
 
         public IEnumerable<Ride> GetAllRides()
         {
-            throw new NotImplementedException();
+            return service.Rides; 
         }
 
         public Ride GetRide(int id)

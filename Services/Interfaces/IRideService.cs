@@ -9,7 +9,7 @@ namespace ZPool.Services.Interfaces
     public interface IRideService
     {
         public void AddRide(Ride ride);
-        public void DeleteRide(int id);
+        public void DeleteRide(Ride ride);
         public Ride GetRide(int id);
         public IEnumerable<Ride> GetAllRides();
         public void EditRide(Ride ride);

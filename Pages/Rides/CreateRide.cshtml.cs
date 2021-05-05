@@ -33,7 +33,7 @@ namespace ZPool.Pages.Rides
                 return Page();
             }
             rideService.AddRide(ride);
-            return RedirectToPage("AllRides");
+            return RedirectToPage();
              
         }
 
