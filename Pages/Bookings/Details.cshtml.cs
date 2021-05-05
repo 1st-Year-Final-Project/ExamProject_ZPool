@@ -6,14 +6,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ZPool.Models;
+using ZPool.Services.Interface;
 
 namespace ZPool.Pages.Bookings
 {
     public class DetailsModel : PageModel
     {
-        private readonly ZPool.Models.AppDbContext _context;
+        private readonly AppDbContext _context;
 
-        public DetailsModel(ZPool.Models.AppDbContext context)
+
+        public DetailsModel(AppDbContext context)
         {
             _context = context;
         }

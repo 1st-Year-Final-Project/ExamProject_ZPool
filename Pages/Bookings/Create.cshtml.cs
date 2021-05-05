@@ -6,41 +6,39 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ZPool.Models;
+using ZPool.Services.Interface;
 
 namespace ZPool.Pages.Bookings
 {
     public class CreateModel : PageModel
     {
-        private readonly ZPool.Models.AppDbContext _context;
+        
 
-        public CreateModel(AppDbContext context)
+        [BindProperty]
+        public Booking Booking { get; set; }
+        IBookingService bookingservice;
+        public CreateModel(IBookingService service)
         {
-            _context = context;
+            bookingservice = service;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["AppUserID"] = new SelectList(_context.Users, "Id", "FirstName");
-        ViewData["RideID"] = new SelectList(_context.Rides, "RideID", "RideID");
             return Page();
-        }
+         }
 
-        [BindProperty]
-        public Booking Booking { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostAsync(Booking booking)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Bookings.Add(Booking);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
+            bookingservice.AddBooking(Booking);
+           return RedirectToPage();
         }
     }
 }

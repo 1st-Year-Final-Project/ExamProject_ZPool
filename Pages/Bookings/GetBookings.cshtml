@@ -1,0 +1,54 @@
+﻿@page
+@model ZPool.Pages.Bookings.GetBookingsModel
+@{
+    ViewData["Title"] = "GetBookings";
+}
+
+
+<div>
+    <a asp-page="Create"> Create a booking</a>
+</div>
+<div>
+    <a asp-page="Edit"> Edit a booking</a>
+</div>
+
+<div>
+    <a asp-page="Delete"> Delete a booking</a>
+</div>
+
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+
+<h4 style="color:red"> List of Ride bookings</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th> BookingID </th>
+            <th> Date </th>
+            <th> PickUpLocation</th>
+            <th> DropOffLocation </th>
+            <th> AppUser</th>
+            <th> Ride</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model.Bookings != null)
+        {
+            @foreach (var item in Model.Bookings)
+            {
+                <tr>
+                    <td>  @item.BookingID</td>
+                    <td>  @item.Date  </td>
+                    <td>  @item.PickUpLocation </td>
+                    <td>  @item.DropOffLocation </td>
+                    <td>  @item.AppUser </td>
+                    <td>  @item.Ride </td>
+                </tr>
+            }
+        }
+</table>
+

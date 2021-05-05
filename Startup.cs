@@ -13,8 +13,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using UserManagementTestApp.Models;
 using ZPool.Models;
+
 using ZPool.Services.EFService.RideService;
 using ZPool.Services.Interface;
+
+
+using ZPool.Services.EFService;
+using ZPool.Services.Interface;
+
+
+
+
 
 namespace UserManagementTestApp
 {
@@ -31,9 +40,18 @@ namespace UserManagementTestApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
             services.AddTransient<IRideService, RideService>();
             
             
+
+
+            services.AddTransient<IBookingService, EFBookingService>();
+
+
+           
+
+
 
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
