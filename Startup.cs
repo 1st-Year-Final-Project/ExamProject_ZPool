@@ -14,6 +14,13 @@ using System.Threading.Tasks;
 using UserManagementTestApp.Models;
 using ZPool.Models;
 
+using ZPool.Services.EFService;
+using ZPool.Services.Interface;
+=======
+//using ZPool.Services.EFService.RideService;
+using ZPool.Services.Interfaces;
+
+
 namespace UserManagementTestApp
 {
     public class Startup
@@ -28,15 +35,23 @@ namespace UserManagementTestApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRazorPages();
+
+            services.AddTransient<IBookingService, EFBookingService>();
+
+=======
+            //services.AddTransient<IRideService, RideService>();
+
+
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("LocalConnection")));
 
             services.AddIdentity<AppUser, IdentityRole<int>>(options =>
-                {
+            {
                     options.SignIn.RequireConfirmedAccount = false;
                     
-                })
+            })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
