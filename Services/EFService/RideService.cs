@@ -31,8 +31,7 @@ namespace ZPool.Services.EFService.RideService
         public void EditRide(Ride ride)
         {
             service.Rides.Update(ride);
-            service.SaveChanges();
-            
+            service.SaveChanges();  
         }
 
         public IEnumerable<Ride> GetAllRides()
