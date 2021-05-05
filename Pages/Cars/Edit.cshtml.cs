@@ -9,27 +9,31 @@ using ZPool.Services.Interface;
 
 namespace ZPool.Pages.Cars
 {
-    public class CreateModel : PageModel
+    public class EditModel : PageModel
     {
-        public void OnGet()
-        {
-
-        }
-
+        ICarService carService;
         [BindProperty]
         public Car Car { get; set; }
-        ICarService carService;
-        public CreateModel(ICarService service)
+        public EditModel(ICarService service)
         {
-            this.carService = service;
+            carService = service;
         }
-        public IActionResult OnPostAsync(Car car)
+        public IActionResult OnGet(int id)
+        {
+            Car = carService.GetCar(id);
+            if (Car == null)
+            {
+                return null;
+            }
+            return Page();
+        }
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            carService.AddCar(car);
+            carService.UpdateCar(Car);
             return RedirectToPage("Index");
         }
     }
