@@ -16,12 +16,12 @@ namespace ZPool.Models
 
         //Foreign Keys
         public int RideID { get; set; }//FK
-        public int UserID { get; set; }//FK
+        public int AppUserID { get; set; }//FK
 
 
 
         //Navigation Properties
-       public AppUser User { get; set; }
+        public AppUser AppUser { get; set; }
         public Ride Ride { get; set; }
     }
 }
