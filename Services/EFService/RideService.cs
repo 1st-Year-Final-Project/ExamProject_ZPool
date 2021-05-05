@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ZPool.Models;
-using ZPool.Services.Interfaces;
+using ZPool.Services.Interface;
 
 namespace ZPool.Services.EFService.RideService
 {
