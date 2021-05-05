@@ -17,7 +17,7 @@ namespace ZPool.Models
 
 
         //Foreign Keys
-        public int AppUserId { get; set; }//FK
+        public int AppUserID { get; set; }//FK
 
         //Navigation Properties
         public AppUser AppUser { get; set; }

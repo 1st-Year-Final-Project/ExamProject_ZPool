@@ -7,7 +7,7 @@ namespace ZPool.Models
 {
     public class Ride
     {
-        public int RideId { get; set; }
+        public int RideID { get; set; }
 
         public DateTime StartTime { get; set; }
         public string DepartureLocation { get; set; }
@@ -15,7 +15,7 @@ namespace ZPool.Models
         public int SeatsAvailable { get; set; }
 
         //Foreign Keys
-        public int CarId { get; set; } //FK
+        public int CarID { get; set; } //FK
 
 
         //Navigation properties

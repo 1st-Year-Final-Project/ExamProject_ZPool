@@ -8,15 +8,15 @@ namespace ZPool.Models
 {
     public class Booking
     {
-        public int BookingId { get; set; }
+        public int BookingID { get; set; }
         public DateTime Date { get; set; }
         public string PickUpLocation { get; set; }
         public string DropOffLocation { get; set; }
 
 
         //Foreign Keys
-        public int RideId { get; set; }//FK
-        public int AppUserId { get; set; }//FK
+        public int RideID { get; set; }//FK
+        public int AppUserID { get; set; }//FK
 
 
 
