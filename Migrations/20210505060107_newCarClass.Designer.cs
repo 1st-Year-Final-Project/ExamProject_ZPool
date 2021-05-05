@@ -10,13 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-<<<<<<< HEAD:Migrations/20210504145153_dbSetRemoved.Designer.cs
-    [Migration("20210504145153_dbSetRemoved")]
-    partial class dbSetRemoved
-=======
-    [Migration("20210503091406_car")]
-    partial class car
->>>>>>> 7ad9e7bd396162ab30a175f2e6994cbb3ecbebf3:Migrations/20210503091406_car.Designer.cs
+    [Migration("20210505060107_newCarClass")]
+    partial class newCarClass
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -270,7 +265,7 @@ namespace ZPool.Migrations
 
             modelBuilder.Entity("ZPool.Models.Car", b =>
                 {
-                    b.Property<int>("CarId")
+                    b.Property<int>("CarID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -278,16 +273,22 @@ namespace ZPool.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Colour")
+                    b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Make")
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberOfSeats")
                         .HasColumnType("int");
 
-                    b.HasKey("CarId");
+                    b.Property<string>("NumberPlate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CarID");
 
                     b.HasIndex("AppUserId");
 

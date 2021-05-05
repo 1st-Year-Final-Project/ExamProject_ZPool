@@ -263,7 +263,7 @@ namespace ZPool.Migrations
 
             modelBuilder.Entity("ZPool.Models.Car", b =>
                 {
-                    b.Property<int>("CarId")
+                    b.Property<int>("CarID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -271,16 +271,22 @@ namespace ZPool.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Colour")
+                    b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Make")
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Model")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberOfSeats")
                         .HasColumnType("int");
 
-                    b.HasKey("CarId");
+                    b.Property<string>("NumberPlate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CarID");
 
                     b.HasIndex("AppUserId");
 

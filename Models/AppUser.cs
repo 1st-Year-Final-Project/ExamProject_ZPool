@@ -11,7 +11,10 @@ namespace UserManagementTestApp.Models
 {
     public class AppUser : IdentityUser<int>
     {
-        // the user Id is part of the base class IdentityUser and is named: Id
+        // The user Id is part of the base class IdentityUser and is named: Id
+        // Email and others are also members of the base class
+        // and do not require a concrete implementation
+
         public override int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
