@@ -13,31 +13,31 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Booking.BookingID" />
+            <input type="hidden" asp-for="booking.BookingID" />
             <div class="form-group">
-                <label asp-for="Booking.Date" class="control-label"></label>
-                <input asp-for="Booking.Date" class="form-control" />
-                <span asp-validation-for="Booking.Date" class="text-danger"></span>
+                <label asp-for="booking.Date" class="control-label"></label>
+                <input asp-for="booking.Date" class="form-control" />
+                <span asp-validation-for="booking.Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.PickUpLocation" class="control-label"></label>
-                <input asp-for="Booking.PickUpLocation" class="form-control" />
-                <span asp-validation-for="Booking.PickUpLocation" class="text-danger"></span>
+                <label asp-for="booking.PickUpLocation" class="control-label"></label>
+                <input asp-for="booking.PickUpLocation" class="form-control" />
+                <span asp-validation-for="booking.PickUpLocation" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.DropOffLocation" class="control-label"></label>
-                <input asp-for="Booking.DropOffLocation" class="form-control" />
-                <span asp-validation-for="Booking.DropOffLocation" class="text-danger"></span>
+                <label asp-for="booking.DropOffLocation" class="control-label"></label>
+                <input asp-for="booking.DropOffLocation" class="form-control" />
+                <span asp-validation-for="booking.DropOffLocation" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.RideID" class="control-label"></label>
-                <select asp-for="Booking.RideID" class="form-control" asp-items="ViewBag.RideID"></select>
-                <span asp-validation-for="Booking.RideID" class="text-danger"></span>
+                <label asp-for="booking.RideID" class="control-label"></label>
+                <select asp-for="booking.RideID" class="form-control" asp-items="ViewBag.RideID"></select>
+                <span asp-validation-for="booking.RideID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Booking.AppUserID" class="control-label"></label>
-                <select asp-for="Booking.AppUserID" class="form-control" asp-items="ViewBag.AppUserID"></select>
-                <span asp-validation-for="Booking.AppUserID" class="text-danger"></span>
+                <label asp-for="booking.AppUserID" class="control-label"></label>
+                <select asp-for="booking.AppUserID" class="form-control" asp-items="ViewBag.AppUserID"></select>
+                <span asp-validation-for="booking.AppUserID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
