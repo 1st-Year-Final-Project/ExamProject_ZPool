@@ -10,7 +10,7 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210503092403_car")]
+    [Migration("20210503091406_car")]
     partial class car
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
