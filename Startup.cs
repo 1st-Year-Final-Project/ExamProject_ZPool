@@ -17,7 +17,7 @@ using ZPool.Models;
 using ZPool.Services.EFService;
 using ZPool.Services.Interface;
 =======
-using ZPool.Services.EFService.RideService;
+//using ZPool.Services.EFService.RideService;
 using ZPool.Services.Interfaces;
 
 
@@ -40,7 +40,7 @@ namespace UserManagementTestApp
             services.AddTransient<IBookingService, EFBookingService>();
 
 =======
-            services.AddTransient<IRideService, RideService>();
+            //services.AddTransient<IRideService, RideService>();
 
 
             services.AddDbContext<AppDbContext>(options =>
