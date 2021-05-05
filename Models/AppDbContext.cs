@@ -17,14 +17,7 @@ namespace ZPool.Models
         public DbSet<Car> Cars { get; set; }
         public DbSet<Ride> Rides { get; set; }
         public DbSet<Booking> Bookings { get; set; }
-        public DbSet<AppUser> AppUsers { get; set; }
-       
-
-
-        public DbSet<Booking> Bookings { get; set; }
-
-        public DbSet<Ride> Rides { get; set; }
-
+        
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
