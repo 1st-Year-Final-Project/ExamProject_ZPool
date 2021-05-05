@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using UserManagementTestApp.Models;
+using ZPool.Models;
 
 namespace ZPool.Models
 {
@@ -15,10 +16,16 @@ namespace ZPool.Models
 
         public DbSet<Car> Cars { get; set; }
 
+        public DbSet<Booking> Bookings { get; set; }
+
+        public DbSet<Ride> Rides { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
         }
+
+
+        //public DbSet<ZPool.Models.Booking> Booking { get; set; }
     }
 }

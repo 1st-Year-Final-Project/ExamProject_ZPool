@@ -10,8 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210503092403_car")]
-    partial class car
+    [Migration("20210504142245_spellingChanged")]
+    partial class spellingChanged
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -232,6 +232,37 @@ namespace ZPool.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("ZPool.Models.Booking", b =>
+                {
+                    b.Property<int>("BookingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DropOffLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PickUpLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RideId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookingId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("RideId");
+
+                    b.ToTable("Booking");
+                });
+
             modelBuilder.Entity("ZPool.Models.Car", b =>
                 {
                     b.Property<int>("CarId")
@@ -239,9 +270,52 @@ namespace ZPool.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Colour")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Make")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfSeats")
+                        .HasColumnType("int");
+
                     b.HasKey("CarId");
 
+                    b.HasIndex("AppUserId");
+
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("ZPool.Models.Ride", b =>
+                {
+                    b.Property<int>("RideId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CarId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DepartureLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DestinationLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SeatsAvailable")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("RideId");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("Ride");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -291,6 +365,39 @@ namespace ZPool.Migrations
                     b.HasOne("UserManagementTestApp.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ZPool.Models.Booking", b =>
+                {
+                    b.HasOne("UserManagementTestApp.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZPool.Models.Ride", "Ride")
+                        .WithMany("Bookings")
+                        .HasForeignKey("RideId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ZPool.Models.Car", b =>
+                {
+                    b.HasOne("UserManagementTestApp.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ZPool.Models.Ride", b =>
+                {
+                    b.HasOne("ZPool.Models.Car", "Car")
+                        .WithMany("Rides")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
