@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZPool.Models;
 
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210505070543_m2")]
+    partial class m2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,17 +232,12 @@ namespace ZPool.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-
-
             modelBuilder.Entity("ZPool.Models.Booking", b =>
                 {
                     b.Property<int>("BookingID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AppUserID")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -254,15 +251,17 @@ namespace ZPool.Migrations
                     b.Property<int>("RideID")
                         .HasColumnType("int");
 
-                    b.HasKey("BookingID");
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
-                    b.HasIndex("AppUserID");
+                    b.HasKey("BookingID");
 
                     b.HasIndex("RideID");
 
-                    b.ToTable("Bookings");
-                });
+                    b.HasIndex("UserID");
 
+                    b.ToTable("Booking");
+                });
 
             modelBuilder.Entity("ZPool.Models.Car", b =>
                 {
@@ -270,9 +269,6 @@ namespace ZPool.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AppUserID")
-                        .HasColumnType("int");
 
                     b.Property<string>("Brand")
                         .HasColumnType("nvarchar(max)");
@@ -289,9 +285,12 @@ namespace ZPool.Migrations
                     b.Property<string>("NumberPlate")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
                     b.HasKey("CarID");
 
-                    b.HasIndex("AppUserID");
+                    b.HasIndex("UserID");
 
                     b.ToTable("Cars");
                 });
@@ -322,7 +321,31 @@ namespace ZPool.Migrations
 
                     b.HasIndex("CarID");
 
-                    b.ToTable("Rides");
+                    b.ToTable("Ride");
+                });
+
+            modelBuilder.Entity("ZPool.Models.User", b =>
+                {
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstMidName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Introduction")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserID");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -378,24 +401,24 @@ namespace ZPool.Migrations
 
             modelBuilder.Entity("ZPool.Models.Booking", b =>
                 {
-                    b.HasOne("UserManagementTestApp.Models.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ZPool.Models.Ride", "Ride")
                         .WithMany("Bookings")
                         .HasForeignKey("RideID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZPool.Models.User", "User")
+                        .WithMany("Bookings")
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("ZPool.Models.Car", b =>
                 {
-                    b.HasOne("UserManagementTestApp.Models.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserID")
+                    b.HasOne("ZPool.Models.User", "User")
+                        .WithMany("Cars")
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
