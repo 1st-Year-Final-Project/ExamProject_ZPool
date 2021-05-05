@@ -10,8 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210505060107_newCarClass")]
-    partial class newCarClass
+    [Migration("20210505075246_twoo")]
+    partial class twoo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -234,12 +234,12 @@ namespace ZPool.Migrations
 
             modelBuilder.Entity("ZPool.Models.Booking", b =>
                 {
-                    b.Property<int>("BookingId")
+                    b.Property<int>("BookingID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AppUserId")
+                    b.Property<int>("AppUserID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
@@ -251,14 +251,14 @@ namespace ZPool.Migrations
                     b.Property<string>("PickUpLocation")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RideId")
+                    b.Property<int>("RideID")
                         .HasColumnType("int");
 
-                    b.HasKey("BookingId");
+                    b.HasKey("BookingID");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserID");
 
-                    b.HasIndex("RideId");
+                    b.HasIndex("RideID");
 
                     b.ToTable("Bookings");
                 });
@@ -270,7 +270,7 @@ namespace ZPool.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AppUserId")
+                    b.Property<int>("AppUserID")
                         .HasColumnType("int");
 
                     b.Property<string>("Brand")
@@ -290,19 +290,19 @@ namespace ZPool.Migrations
 
                     b.HasKey("CarID");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("AppUserID");
 
                     b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("ZPool.Models.Ride", b =>
                 {
-                    b.Property<int>("RideId")
+                    b.Property<int>("RideID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarId")
+                    b.Property<int>("CarID")
                         .HasColumnType("int");
 
                     b.Property<string>("DepartureLocation")
@@ -317,9 +317,9 @@ namespace ZPool.Migrations
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("RideId");
+                    b.HasKey("RideID");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("CarID");
 
                     b.ToTable("Rides");
                 });
@@ -379,13 +379,13 @@ namespace ZPool.Migrations
                 {
                     b.HasOne("UserManagementTestApp.Models.AppUser", "AppUser")
                         .WithMany()
-                        .HasForeignKey("AppUserId")
+                        .HasForeignKey("AppUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ZPool.Models.Ride", "Ride")
                         .WithMany("Bookings")
-                        .HasForeignKey("RideId")
+                        .HasForeignKey("RideID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -394,7 +394,7 @@ namespace ZPool.Migrations
                 {
                     b.HasOne("UserManagementTestApp.Models.AppUser", "AppUser")
                         .WithMany()
-                        .HasForeignKey("AppUserId")
+                        .HasForeignKey("AppUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -403,7 +403,7 @@ namespace ZPool.Migrations
                 {
                     b.HasOne("ZPool.Models.Car", "Car")
                         .WithMany("Rides")
-                        .HasForeignKey("CarId")
+                        .HasForeignKey("CarID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
