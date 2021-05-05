@@ -13,8 +13,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using UserManagementTestApp.Models;
 using ZPool.Models;
+
 using ZPool.Services.EFService;
 using ZPool.Services.Interface;
+=======
+using ZPool.Services.EFService.RideService;
+using ZPool.Services.Interfaces;
+
 
 namespace UserManagementTestApp
 {
@@ -31,7 +36,11 @@ namespace UserManagementTestApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
             services.AddTransient<IBookingService, EFBookingService>();
+
+=======
+            services.AddTransient<IRideService, RideService>();
 
 
             services.AddDbContext<AppDbContext>(options =>
@@ -39,10 +48,10 @@ namespace UserManagementTestApp
                     Configuration.GetConnectionString("LocalConnection")));
 
             services.AddIdentity<AppUser, IdentityRole<int>>(options =>
-                {
+            {
                     options.SignIn.RequireConfirmedAccount = false;
                     
-                })
+            })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();

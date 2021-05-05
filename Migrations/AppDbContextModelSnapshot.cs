@@ -230,6 +230,8 @@ namespace ZPool.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+
+
             modelBuilder.Entity("ZPool.Models.Booking", b =>
                 {
                     b.Property<int>("BookingID")
@@ -260,6 +262,7 @@ namespace ZPool.Migrations
 
                     b.ToTable("Bookings");
                 });
+
 
             modelBuilder.Entity("ZPool.Models.Car", b =>
                 {
