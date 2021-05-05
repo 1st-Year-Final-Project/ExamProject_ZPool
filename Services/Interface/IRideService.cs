@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ZPool.Models;
 
-namespace ZPool.Services.Interfaces
+namespace ZPool.Services.Interface
 {
     public interface IRideService
     {

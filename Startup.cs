@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using UserManagementTestApp.Models;
 using ZPool.Models;
 using ZPool.Services.EFService.RideService;
-using ZPool.Services.Interfaces;
+using ZPool.Services.Interface;
 
 namespace UserManagementTestApp
 {
@@ -32,6 +32,8 @@ namespace UserManagementTestApp
         {
             services.AddRazorPages();
             services.AddTransient<IRideService, RideService>();
+            
+            
 
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
