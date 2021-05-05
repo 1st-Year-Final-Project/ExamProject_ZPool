@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -24,6 +26,12 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         }
 
         public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Gender { get; set; }
+        public string Email { get; set; }
+        public string Introduction { get; set; }
+
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -33,22 +41,40 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Phone]
-            [Display(Name = "Phone number")]
-            public string PhoneNumber { get; set; }
+            //[Phone]
+            //[Display(Name = "Phone number")]
+            //public string PhoneNumber { get; set; }
+
+            public string Introduction { get; set; }
+            
+
         }
 
         private async Task LoadAsync(AppUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
+            FirstName = user.FirstName;
+            LastName = user.LastName;
+            Gender = user.Gender;  // suggest: Gender should NOT be optional in AppUser.cs, because it doesn't need to be changed.
+            Email = user.Email;
+            var introduction = user.Introduction;
+
+            /// suggest: add an attribute of profilePicture in AppUser.cs
+            /// ProfilePicture = user.ProfilePicture;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                Introduction = introduction
             };
+
+
+            //Input = new InputModel
+            //{
+            //    PhoneNumber = phoneNumber
+            //};
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -77,16 +103,24 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            var introduction = user.Introduction;
+            if(Input.Introduction != introduction)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
-                }
+                user.Introduction = Input.Introduction;
+                await _userManager.UpdateAsync(user);
             }
+
+
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //if (Input.PhoneNumber != phoneNumber)
+            //{
+            //    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            //    if (!setPhoneResult.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set phone number.";
+            //        return RedirectToPage();
+            //    }
+            //}
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
