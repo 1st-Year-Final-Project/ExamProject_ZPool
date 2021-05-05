@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZPool.Models;
 
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210505074302_newTry")]
+    partial class newTry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,8 +232,6 @@ namespace ZPool.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-
-
             modelBuilder.Entity("ZPool.Models.Booking", b =>
                 {
                     b.Property<int>("BookingID")
@@ -262,7 +262,6 @@ namespace ZPool.Migrations
 
                     b.ToTable("Bookings");
                 });
-
 
             modelBuilder.Entity("ZPool.Models.Car", b =>
                 {
