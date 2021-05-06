@@ -49,5 +49,11 @@ namespace ZPool.Services.EFService
             OldCar.Color = car.Color;
             context.SaveChanges();
         }
+
+        public IEnumerable<Car> GetCarsByUser(int id)
+        {
+            var cars = context.Cars.AsNoTracking().Where(c => c.AppUserID == id);
+            return cars;
         }
+    }
 }
