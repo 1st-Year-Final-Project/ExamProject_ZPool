@@ -6,30 +6,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZPool.Models;
 using ZPool.Services.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace ZPool.Pages.Cars
 {
-    public class CreateModel : PageModel
+    public class DeleteModel : PageModel
     {
-        public void OnGet()
-        {
-
-        }
-
         [BindProperty]
         public Car Car { get; set; }
+
         ICarService carService;
-        public CreateModel(ICarService service)
+       
+        public DeleteModel(ICarService service)
         {
             this.carService = service;
+            Car = new Car();
         }
-        public IActionResult OnPostAsync(Car car)
+        public void OnGet(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            carService.AddCar(car);
+            Car = carService.GetCar(id);
+        }
+        public IActionResult OnPost()
+        {
+            carService.DeleteCar(Car);
+
             return RedirectToPage("Index");
         }
     }
