@@ -1,4 +1,55 @@
 ﻿@page
 @model ZPool.Pages.Rides.GetAllRidesModel
 @{
+    ViewData["Title"] = "GetAllRides";
 }
+
+<div>
+    <a asp-page="CreateRide"> Create a Ride</a>
+</div>
+
+
+<div>
+    <a asp-page="EditRide"> Edit a Ride</a>
+</div>
+
+<div>
+    <a asp-page="DeleteRide"> Delete a Ride</a>
+</div>
+
+
+<h4 style="color:black"> List of Rides</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th> RideID </th>
+            <th> StartTime </th>
+            <th> DepartureLocation</th>
+            <th> DestinationLocation </th>
+            <th> SeatsAvailable</th>
+            <th> CarID</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Rides)
+        {
+            <tr>
+                <td>  @item.RideID</td>
+                <td>  @item.StartTime  </td>
+                <td>  @item.DepartureLocation </td>
+                <td>  @item.DestinationLocation </td>
+                <td>  @item.SeatsAvailable </td>
+                <td>  @item.CarID </td>
+                <td>
+                    <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a>|
+                    <a asp-page="DeleteRide" asp-route-id="@item.RideID">Delete</a> |
+                </td>
+            </tr>
+        }
+
+</table>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
