@@ -39,15 +39,7 @@ namespace UserManagementTestApp
 
             services.AddTransient<IRideService, RideService>();
             
-            
-
-
             services.AddTransient<IBookingService, EFBookingService>();
-
-
-           
-
-
 
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
