@@ -6,10 +6,12 @@ using ZPool.Models;
 
 namespace ZPool.Services.Interface
 {
-    interface ICarService
+    public interface ICarService
     {
         IEnumerable<Car> GetCars();
         void AddCar(Car car);
         void DeleteCar(Car car);
+        Car GetCar(int id);
+        void UpdateCar(Car car);
     }
 }
