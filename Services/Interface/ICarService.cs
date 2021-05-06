@@ -13,5 +13,6 @@ namespace ZPool.Services.Interface
         void DeleteCar(Car car);
         Car GetCar(int id);
         void UpdateCar(Car car);
+        IEnumerable<Car> GetCarsByUser(int id);
     }
 }
