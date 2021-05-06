@@ -41,11 +41,6 @@ namespace UserManagementTestApp
             
             services.AddTransient<IBookingService, EFBookingService>();
 
-
-           
-
-
-
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("LocalConnection")));
