@@ -40,7 +40,7 @@ namespace ZPool.Services.EFService
         public void UpdateCar(Car car)
         {
             
-                Car OldCar = context.Cars.Find(car.CarID);
+            Car OldCar = context.Cars.Find(car.CarID);
             OldCar.CarID = car.CarID;
             OldCar.Brand = car.Brand;
             OldCar.Model = car.Model;
