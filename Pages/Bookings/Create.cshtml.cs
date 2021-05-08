@@ -12,8 +12,6 @@ namespace ZPool.Pages.Bookings
 {
     public class CreateModel : PageModel
     {
-        
-
         [BindProperty]
         public Booking Booking { get; set; }
         IBookingService bookingservice;
@@ -37,7 +35,7 @@ namespace ZPool.Pages.Bookings
                 return Page();
             }
 
-            bookingservice.AddBooking(Booking);
+           bookingservice.AddBooking(Booking);
            return RedirectToPage();
         }
     }

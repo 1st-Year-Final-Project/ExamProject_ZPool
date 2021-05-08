@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UserManagementTestApp.Models;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 {
@@ -25,19 +27,30 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
+        //public enum Gender
+        //{
+        //    Male,
+        //    Female,
+        //    Nonbinary,
+        //    Guess // if you don't want to say 
+        //}
+
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Gender { get; set; }
         public string Email { get; set; }
+        //public BitArray ProfilePicture { get; set; }
         public string Introduction { get; set; }
+        [BindProperty] public string SelectGender { get; set; }
 
 
         [TempData]
         public string StatusMessage { get; set; }
 
-        [BindProperty]
+
+        [BindProperty] 
         public InputModel Input { get; set; }
+
 
         public class InputModel
         {
@@ -45,9 +58,9 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             //[Display(Name = "Phone number")]
             //public string PhoneNumber { get; set; }
 
+            //public BitArray ProfilePicture { get; set; }
             public string Introduction { get; set; }
-            
-
+            public string UserGender { get; set; }
         }
 
         private async Task LoadAsync(AppUser user)
@@ -58,16 +71,19 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             Username = userName;
             FirstName = user.FirstName;
             LastName = user.LastName;
-            Gender = user.Gender;  // suggest: Gender should NOT be optional in AppUser.cs, because it doesn't need to be changed.
             Email = user.Email;
+            var gender = user.UserGender;
             var introduction = user.Introduction;
+            //var picture = user.ProfilePicture;
 
             /// suggest: add an attribute of profilePicture in AppUser.cs
             /// ProfilePicture = user.ProfilePicture;
 
             Input = new InputModel
             {
-                Introduction = introduction
+                Introduction = user.Introduction,
+                UserGender = user.UserGender,
+                //ProfilePicture = picture
             };
 
 
@@ -104,11 +120,15 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             }
 
             var introduction = user.Introduction;
-            if(Input.Introduction != introduction)
-            {
-                user.Introduction = Input.Introduction;
-                await _userManager.UpdateAsync(user);
-            }
+            user.Introduction = Input.Introduction;
+
+            var gender = user.UserGender;
+            user.UserGender = SelectGender; 
+
+            //var picture = user.ProfilePicture;
+            //user.ProfilePicture = Input.ProfilePicture;
+            
+            await _userManager.UpdateAsync(user);
 
 
             //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

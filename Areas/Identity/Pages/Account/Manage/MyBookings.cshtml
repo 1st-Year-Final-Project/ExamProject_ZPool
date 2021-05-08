@@ -1,0 +1,39 @@
+﻿@page
+@model ZPool.Areas.Identity.Pages.Account.Manage.MyBookingsModel
+@{
+    ViewData["Title"] = "My Bookings";
+    // Please tell me what is the function of this sentence? I find the app works well without it.
+    ViewData["ActivePage"] = ManageNavPages.MyBookings;
+}
+
+<h3 style="color:red"> My Bookings</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> Start Time  </th>
+            <th> Departure </th>
+            <th> Destination </th>
+            <th> Status </th>
+            <th> Car </th>
+            <th> Driver </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null)
+        {
+            @foreach (var b in Model._myBookings)
+            {
+                <tr>
+                    <td>  @b.Date </td>
+                    <td>  @b.PickUpLocation </td>
+                    <td>  @b.DropOffLocation </td>
+                    <td>  @b.Confirmed </td>
+                    <td>  @b.Ride.Car </td>
+                    <td>  @b.AppUser.UserName </td>  
+                </tr>
+            }
+        }
+</table>

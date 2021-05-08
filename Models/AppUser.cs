@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -18,12 +19,11 @@ namespace UserManagementTestApp.Models
         public override int Id { get; set; } // this is overridden from the baseclass, pls don't change
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string? Gender { get; set; }  /// suggest: Gender should NOT be optional, because it doesn't need to be changed.
-        public string? Introduction { get; set; }
-
-        /// suggest: add an attribute of profilePicture
-
-        /// Username should be the whole email address, but currently it is just the part before @. 
+        public string? UserGender { get; set; }   // pls use this name to distinguish with the enum Gender
+        public string? Introduction { get; set; }  // for users to introduce themselves 
+        
+        // suggest: add an attribute of profilePicture
+        //public BitArray? ProfilePicture { get; set; }
 
     }
 }

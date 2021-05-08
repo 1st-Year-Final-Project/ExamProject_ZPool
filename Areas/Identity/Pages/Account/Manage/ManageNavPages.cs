@@ -25,8 +25,12 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
         public static string MyCars => "MyCars";
+        public static string MyBookings => "MyBookings";
+        //public static string MyRides => "MyRides";
 
         public static string MyCarsNavClass(ViewContext viewContext) => PageNavClass(viewContext, MyCars);
+        public static string MyBookingsNavClass(ViewContext viewContext) => PageNavClass(viewContext, MyBookings);
+        //public static string MyRidesNavClass(ViewContext viewContext) => PageNavClass(viewContext, MyRides);
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
