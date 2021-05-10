@@ -22,5 +22,10 @@ namespace ZPool.Models
         //Navigation Properties
         public AppUser AppUser { get; set; }
         public ICollection<Ride> Rides { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Brand} {Model}, {Color}";
+        }
     }
 }

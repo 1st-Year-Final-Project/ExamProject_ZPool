@@ -42,7 +42,10 @@ namespace ZPool.Services.EFService.RideService
 
         public Ride GetRide(int id)
         {
-            return service.Rides.Find(id);
+            return service.Rides
+                .Include(r=>r.Car)
+                .ThenInclude(c=>c.AppUser)
+                .FirstOrDefault(r=>r.RideID==id);
         }
 
 
