@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,6 +43,13 @@ namespace ZPool.Services.EFService.RideService
         public Ride GetRide(int id)
         {
             return service.Rides.Find(id);
+        }
+
+
+        public IEnumerable<Car> GetRegisteredCars(int id)
+        {
+            var cars = service.Cars.AsNoTracking().Where(c => c.AppUserID == id);
+            return cars;
         }
     }
 }
