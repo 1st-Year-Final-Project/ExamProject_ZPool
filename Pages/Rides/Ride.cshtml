@@ -1,0 +1,72 @@
+﻿@page
+@using UserManagementTestApp.Models
+@model ZPool.Pages.Rides.RideModel
+@{
+    ViewData["Title"] = "View Ride";
+}
+
+<div class="container align-content-center pt-4">
+    <div class="row" style="max-width: 1100px">
+        <div class="col col-md-8 bg-light p-3" style="border-radius: 15px">
+            <ul class="list-unstyled">
+                <li class="h4 mb-0 align-middle">@Model.Ride.DepartureLocation</li>
+                <li class="align-middle pl-4 py-3"><img src="/images/icons/arrow_down_24dp.svg" />
+                <li class="h4 mb-0 align-middle">@Model.Ride.DestinationLocation</li>
+            </ul>
+            <p>@Model.Ride.StartTime.ToString("dddd, dd.MM.yyyy HH:mm")</p>
+        </div>
+        <div class="col-1"></div>
+        <div class="col col-md-3 bg-light p-3" style="border-radius: 15px">
+            <div class="text-center">
+                <h5>Available seats:</h5>
+                <h1>
+                    @Model.Ride.SeatsAvailable
+                </h1>
+                <div class="mt-5">
+                    <form method="post">
+                        <input type="number" asp-for="@Model.RideId" hidden />
+                        <button type="submit" class="btn btn-yellow">Book ride</button>
+
+                    </form>
+                </div>
+
+
+            </div>
+            
+
+        </div>
+    </div>
+
+    <div class="row pt-4">
+        <div class="col">
+            @*<form method="post">
+                <input type="number" asp-for="@Model.RideId" hidden/>
+                <button type="submit" class="btn btn-yellow">Book ride</button>
+                
+            </form>*@
+            @if (Model.CurrentUser.Id == Model.Ride.Car.AppUserID)
+            {
+                <p class="text-danger">This is your own ride. At the moment it is possible to book it for debugging purposes.
+                    In the future this button will be deactivated for the owner </p>
+            }
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 4rem">
+        <div class="col col-md-4">
+            <div style="max-width: 15rem; max-height: 15rem">
+                <img src="/images/userimage_blank.png" style="max-width: 100%; object-fit: contain"/>
+            </div>
+
+        </div>
+        <div class="col col-md-8">
+            <ul class="list-unstyled">
+                <li><h4>@Model.Ride.Car.AppUser.UserName</h4></li>
+                <li>Car: @Model.Ride.Car</li>
+            </ul>
+        </div>
+    </div>
+
+    
+
+</div>
