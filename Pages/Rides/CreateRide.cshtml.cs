@@ -34,7 +34,7 @@ namespace ZPool.Pages.Rides
             return Page();
         }
 
-        public IActionResult OnPostAsync (Ride ride)
+        public IActionResult OnPost (Ride ride)
         {
             if(!ModelState.IsValid)
             {
