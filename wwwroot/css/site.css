@@ -12,6 +12,10 @@ a {
   color: #0366d6;
 }
 
+.rounded-border {
+    border-radius: 18px;
+}
+
 .btn-yellow {
     color: #636363;
     background-color: #fff387;

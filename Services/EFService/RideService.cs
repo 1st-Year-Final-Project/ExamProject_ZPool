@@ -54,5 +54,29 @@ namespace ZPool.Services.EFService.RideService
             var cars = service.Cars.AsNoTracking().Where(c => c.AppUserID == id);
             return cars;
         }
+
+        public IEnumerable<Ride> FilterRides(Ride ride)
+        {
+            var rides = service.Rides
+                .AsNoTracking()
+                .AsEnumerable()
+                .Where(r=>CheckDeparture(r, ride.DepartureLocation))
+                .Where(r=>CheckDestination(r, ride.DestinationLocation));
+            return rides;
+        }
+
+        private bool CheckDeparture(Ride ride, string location)
+        {
+            if (string.IsNullOrEmpty(location)) return true;
+            else if (ride.DepartureLocation.ToLower().Contains(location.ToLower())) return true;
+            else return false;
+        }
+
+        private bool CheckDestination(Ride ride, string location)
+        {
+            if (string.IsNullOrEmpty(location)) return true;
+            else if (ride.DestinationLocation.ToLower().Contains(location.ToLower())) return true;
+            else return false;
+        }
     }
 }
