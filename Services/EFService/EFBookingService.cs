@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using ZPool.Models;
 using ZPool.Services.Interface;
 
@@ -36,7 +37,7 @@ namespace ZPool.Services.EFService
 
         public IEnumerable<Booking> GetBookings()
         {
-            return service.Bookings;
+            return service.Bookings.Include(b=>b.AppUser).Include(b=>b.Ride);
         }
 
         public Booking GetBookingsByID(int id)
