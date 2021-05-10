@@ -19,6 +19,8 @@ namespace ZPool.Pages.Rides
         [BindProperty(SupportsGet = true)]
         public Ride RideCriteria { get; set; } = new Ride();
 
+        public string ScreenMessage { get; set; }
+
         public GetAllRidesModel(IRideService service)
         {
             rideService = service;
@@ -29,9 +31,16 @@ namespace ZPool.Pages.Rides
             if (!string.IsNullOrEmpty(RideCriteria.DepartureLocation) || !string.IsNullOrEmpty(RideCriteria.DestinationLocation))
             {
                 Rides = rideService.FilterRides(RideCriteria);
+                if (Rides.Count() == 0)
+                {
+                    ScreenMessage = "Sorry! We couldn't match any rides to your request.";
+                }
             }
-            else 
+            else
+            {
                 Rides = rideService.GetAllRides();
+                RideCriteria.StartTime = DateTime.Now;
+            }
         }
     }
 }

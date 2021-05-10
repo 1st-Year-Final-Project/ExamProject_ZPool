@@ -22,38 +22,37 @@
 
 <!-- Search box -->
 <div class="container">
-    <div class="row border mb-2 rounded-border">
-        <div class="col-auto border-right bg-light" style="display: flex; align-items: center; border-radius: 18px 0 0 18px">
-            <p class="m-0">Filter rides: </p>
-        </div>
+    <div class="row mb-2 bg-light">
+        <div class="col my-2 py-1 d-flex justify-content-center">
 
-        <div class="col my-2">
             <form class="form-inline">
-                
-                    <div class="form-group">
-                        <label class="mx-2">From: </label>
-                        <input type="text" asp-for="@Model.RideCriteria.DepartureLocation" class="form-control rounded-border" style="max-width: 13rem" placeholder="Copenhagen" />
-                    </div>
-                    <div class="form-group">
-                        <label class="mx-2">To: </label>
-                        <input type="text" asp-for="@Model.RideCriteria.DestinationLocation" class="form-control rounded-border" style="max-width: 13rem" placeholder="Zealand, Roskilde" />
-                    </div>
-                    <div class="form-group">
-                        <label class="mx-2">Date: </label>
-                        <input asp-for="@Model.RideCriteria.StartTime" class="form-control rounded-border" style="max-width: 13rem" />
-                    </div>
-                    <button type="submit" class="btn btn-yellow mx-2">Filter</button>
-                    <a asp-page="GetAllRides" class="btn btn-outline-dark mx-2 rounded-border">Clear Filter</a>
-                
+                <div class="form-group">
+                    <label class="mx-2"></label>
+                    <input type="text" asp-for="@Model.RideCriteria.DepartureLocation" class="form-control rounded-border" style="max-width: 13rem" placeholder="From where?"/>
+                </div>
+                <div class="form-group">
+                    <label class="mx-2"></label>
+                    <input type="text" asp-for="@Model.RideCriteria.DestinationLocation" class="form-control rounded-border" style="max-width: 13rem" placeholder="Where to?"/>
+                </div>
+                <div class="form-group">
+                    <label class="mx-2">Date: </label>
+                    <input asp-for="@Model.RideCriteria.StartTime"  asp-format="{0:yyyy-MM-ddTHH:mm}" class="form-control rounded-border" style="max-width: 13rem"/>
+                </div>
+                <button type="submit" class="btn btn-yellow mx-2">Search ride</button>
+                <a asp-page="GetAllRides" class="btn btn-outline-dark mx-2 rounded-border">Clear Filter</a>
             </form>
+
         </div>
     </div>
 </div>
 <!-- Search box end -->
 
+@if (@Model.Rides.Count() > 0)
+{
 
-<table class="table">
-    <thead>
+
+    <table class="table">
+        <thead>
         <tr>
             <th> RideID </th>
             <th> StartTime </th>
@@ -62,18 +61,18 @@
             <th> SeatsAvailable</th>
             <th> CarID</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
 
         @foreach (var item in Model.Rides)
         {
             <tr>
-                <td>  @item.RideID</td>
-                <td>  @item.StartTime  </td>
-                <td>  @item.DepartureLocation </td>
-                <td>  @item.DestinationLocation </td>
-                <td>  @item.SeatsAvailable </td>
-                <td>  @item.CarID </td>
+                <td> @item.RideID</td>
+                <td> @item.StartTime </td>
+                <td> @item.DepartureLocation </td>
+                <td> @item.DestinationLocation </td>
+                <td> @item.SeatsAvailable </td>
+                <td> @item.CarID </td>
                 <td>
                     <a asp-page="Ride" asp-route-id="@item.RideID">Details</a>|
                     <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a>|
@@ -82,7 +81,14 @@
             </tr>
         }
 
-</table>
+    </table>
+}
+else
+{
+    <div class="w-100 text-center mt-5">
+        <h5>@Model.ScreenMessage</h5>
+    </div>
+}
 
 <div>
     <a asp-page="Index">Back to List</a>

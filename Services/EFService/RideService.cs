@@ -11,10 +11,12 @@ namespace ZPool.Services.EFService.RideService
     public class RideService : IRideService
     {
         AppDbContext service;
+        private IDateTimeComparer dateComparer;
 
-        public RideService(AppDbContext context)
+        public RideService(AppDbContext context, IDateTimeComparer comparer)
         {
             service = context;
+            dateComparer = comparer;
         }
 
         public void AddRide(Ride ride)
@@ -61,7 +63,9 @@ namespace ZPool.Services.EFService.RideService
                 .AsNoTracking()
                 .AsEnumerable()
                 .Where(r=>CheckDeparture(r, ride.DepartureLocation))
-                .Where(r=>CheckDestination(r, ride.DestinationLocation));
+                .Where(r=>CheckDestination(r, ride.DestinationLocation))
+                .Where(r=>CompareDateTimes(r, ride.StartTime))
+                .OrderBy(r=>r.StartTime);
             return rides;
         }
 
@@ -77,6 +81,13 @@ namespace ZPool.Services.EFService.RideService
             if (string.IsNullOrEmpty(location)) return true;
             else if (ride.DestinationLocation.ToLower().Contains(location.ToLower())) return true;
             else return false;
+        }
+
+        private bool CompareDateTimes(Ride ride, DateTime dateCriteria)
+        {
+            bool suitable = dateComparer.CompareDateTime(ride.StartTime, dateCriteria);
+            if (suitable) return true;
+            return false;
         }
     }
 }
