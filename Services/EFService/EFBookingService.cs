@@ -37,7 +37,7 @@ namespace ZPool.Services.EFService
 
         public IEnumerable<Booking> GetBookings()
         {
-            return service.Bookings.Include(b=>b.AppUser).Include(b=>b.Ride);
+            return service.Bookings;
         }
 
         public Booking GetBookingsByID(int id)

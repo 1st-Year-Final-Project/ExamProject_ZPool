@@ -19,10 +19,10 @@ a {
     border-radius: 15px;
 }
 
-    .btn-yellow:hover {
-        color: #000000;
-        box-shadow: 1px 2px 5px 2px #C0C0C0;
-    }
+.btn-yellow:hover {
+    color: #000000;
+    box-shadow: 1px 2px 5px 2px #C0C0C0;
+}
 
 
 .btn-primary {
