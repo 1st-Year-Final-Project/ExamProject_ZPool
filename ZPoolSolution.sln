@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZPool", "ZPool.csproj", "{45A21352-8815-446F-AC89-513F452CBED8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitTestProject1", "..\xUnitTestProject\xUnitTestProject1.csproj", "{9EDC706A-4CC4-4E91-8493-2A79B9DE9D4C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitTestProject", "..\xUnitTestProject\xUnitTestProject\xUnitTestProject.csproj", "{1986C66B-D323-41D5-A119-8D07CB3AF920}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,10 @@ Global
 		{45A21352-8815-446F-AC89-513F452CBED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45A21352-8815-446F-AC89-513F452CBED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45A21352-8815-446F-AC89-513F452CBED8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EDC706A-4CC4-4E91-8493-2A79B9DE9D4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EDC706A-4CC4-4E91-8493-2A79B9DE9D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EDC706A-4CC4-4E91-8493-2A79B9DE9D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EDC706A-4CC4-4E91-8493-2A79B9DE9D4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
