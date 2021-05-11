@@ -39,7 +39,9 @@ namespace ZPool.Services.EFService.RideService
 
         public IEnumerable<Ride> GetAllRides()
         {
-            return service.Rides; 
+            return service.Rides
+                .Include(r => r.Car)
+                .ThenInclude(c => c.AppUser);
         }
 
         public Ride GetRide(int id)
