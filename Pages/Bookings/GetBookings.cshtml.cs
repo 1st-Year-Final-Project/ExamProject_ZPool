@@ -13,6 +13,7 @@ namespace ZPool.Pages.Bookings
     {
         IBookingService bookingService;
         public IEnumerable<Booking> Bookings{ get; set; }
+        public string Message { get; set; }
 
         public GetBookingsModel(IBookingService service)
         {
@@ -22,5 +23,47 @@ namespace ZPool.Pages.Bookings
         {
             Bookings = bookingService.GetBookings();
         }
+
+        public void OnPostAccept(int id)
+        {
+            try 
+            { 
+                bookingService.UpdateBookingStatus(id, "Accepted"); 
+            }
+            catch (Exception ex)
+            {
+                Message = ex.Message;
+            }
+            Bookings = bookingService.GetBookings();
+        }
+
+        public void OnPostReject(int id)
+        {
+            try
+            {
+                bookingService.UpdateBookingStatus(id, "Rejected");
+            }
+            catch (Exception ex)
+            {
+                Message = ex.Message;
+            }
+            Bookings = bookingService.GetBookings();
+        }
+
+        public void OnPostCancel(int id)
+        {
+            try
+            {
+                bookingService.UpdateBookingStatus(id, "Cancelled");
+            }
+            catch (Exception ex)
+            {
+                Message = ex.Message;
+            }
+            Bookings = bookingService.GetBookings();
+        }
+
+
+
     }
 }
