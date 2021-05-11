@@ -14,5 +14,6 @@ namespace ZPool.Services.Interface
         public IEnumerable<Ride> GetAllRides();
         public void EditRide(Ride ride);
         public IEnumerable<Car> GetRegisteredCars(int id);
+        IEnumerable<Ride> FilterRides(Ride ride);
     }
 }
