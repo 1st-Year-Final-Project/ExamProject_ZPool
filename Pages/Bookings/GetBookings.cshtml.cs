@@ -26,19 +26,23 @@ namespace ZPool.Pages.Bookings
 
         public void OnPostAccept(int id)
         {
-            try 
-            { 
-                bookingService.UpdateBookingStatus(id, "Accepted"); 
+            Bookings = bookingService.GetBookings();
+            
+            try
+            {
+                bookingService.UpdateBookingStatus(id, "Accepted");
             }
             catch (Exception ex)
             {
                 Message = ex.Message;
             }
-            Bookings = bookingService.GetBookings();
+
         }
 
         public void OnPostReject(int id)
         {
+            Bookings = bookingService.GetBookings();
+            
             try
             {
                 bookingService.UpdateBookingStatus(id, "Rejected");
@@ -47,11 +51,13 @@ namespace ZPool.Pages.Bookings
             {
                 Message = ex.Message;
             }
-            Bookings = bookingService.GetBookings();
+
         }
 
         public void OnPostCancel(int id)
         {
+            Bookings = bookingService.GetBookings();
+            
             try
             {
                 bookingService.UpdateBookingStatus(id, "Cancelled");
@@ -60,7 +66,6 @@ namespace ZPool.Pages.Bookings
             {
                 Message = ex.Message;
             }
-            Bookings = bookingService.GetBookings();
         }
 
 

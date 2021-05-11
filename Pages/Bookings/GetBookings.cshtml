@@ -16,7 +16,6 @@
     <a asp-page="Delete"> Delete a booking</a>
 </div>
 
-
 <div>
     <a asp-page="Index">Back to List</a>
 </div>
@@ -53,7 +52,7 @@
             <td>  @item.PickUpLocation </td>
             <td>  @item.DropOffLocation </td>
             <td>  @item.AppUser </td>
-            <td>  @item.Ride </td>
+            <td>  @item.Ride.RideID </td>
             <td>  @item.BookingStatus </td>
 
             @if (item.BookingStatus == "Pending")
@@ -90,14 +89,7 @@
 
         </tr>
 
-                <tr>
-                    <td>  @item.BookingID</td>
-                    <td>  @item.Date  </td>
-                    <td>  @item.PickUpLocation </td>
-                    <td>  @item.DropOffLocation </td>
-                    <td>  @item.AppUser </td>
-                    <td>  @item.Ride.RideID </td>
-                </tr>
+                
 
             }
         }
