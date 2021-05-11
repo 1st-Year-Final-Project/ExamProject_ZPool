@@ -44,7 +44,7 @@
                 <button type="submit" class="btn btn-yellow">Book ride</button>
                 
             </form>*@
-            @if (Model.CurrentUser.Id == Model.Ride.Car.AppUserID)
+            @if (Model.CurrentUser != null && Model.CurrentUser.Id == Model.Ride.Car.AppUserID)
             {
                 <p class="text-danger">This is your own ride. At the moment it is possible to book it for debugging purposes.
                     In the future this button will be deactivated for the owner </p>
