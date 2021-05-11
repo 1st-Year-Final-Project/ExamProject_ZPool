@@ -52,38 +52,6 @@
 <!-- Search box end -->
 
 
-<div class="container w-75 rounded-border" style="box-shadow: 2px 2px 3px 1px #dedede">
-    <a asp-page="Ride" asp-route-id="@ride.RideID" style="text-decoration: none" class="text-dark">
-        <div class="row rounded-border" style="border: solid 1px #CECECE">
-            <div class="col col-md-8 p-3">
-                <h5 class="ml-3">@ride.StartTime.ToString("dddd, dd.MM.yyyy HH:mm")</h5>
-                <ul class="list-unstyled ml-3">
-                    <li class="h6 mb-0 align-middle">@ride.DepartureLocation</li>
-                    <li class="align-middle pl-4 py-2"><img src="/images/icons/arrow_down_24dp.svg" />
-                    <li class="h6 mb-0 align-middle">@ride.DestinationLocation</li>
-                </ul>
-            </div>
-            <div class="col-1"></div>
-            <div class="col col-md-3 p-3 text-dark" style="border-left: solid 1px;">
-                <div class="text-center text-dark">
-                    <h4>@ride.Car.AppUser.UserName</h4>
-                    <hr/>
-                    <h5>Available seats:</h5>
-                    <h1>
-                        @ride.SeatsAvailable
-                    </h1>
-                    <div class="mt-5">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </a>
-</div>
-
-<div style="height: 40px"></div>
-
-
 @if (@Model.Rides.Count() > 0)
 {
 
