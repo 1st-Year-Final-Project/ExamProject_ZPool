@@ -2,7 +2,7 @@
 
 namespace ZPool.Migrations
 {
-    public partial class BookingStatus : Migration
+    public partial class updateBookingModel4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

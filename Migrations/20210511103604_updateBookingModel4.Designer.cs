@@ -10,8 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210511093319_rideFieldContraints")]
-    partial class rideFieldContraints
+    [Migration("20210511103604_updateBookingModel4")]
+    partial class updateBookingModel4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -256,6 +256,9 @@ namespace ZPool.Migrations
 
                     b.Property<int>("RideID")
                         .HasColumnType("int");
+
+                    b.Property<string>("StatusTwo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BookingID");
 

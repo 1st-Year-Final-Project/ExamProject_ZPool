@@ -10,8 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210506074610_one")]
-    partial class one
+    [Migration("20210511104047_bs1")]
+    partial class bs1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -242,6 +242,9 @@ namespace ZPool.Migrations
                     b.Property<int>("AppUserID")
                         .HasColumnType("int");
 
+                    b.Property<string>("BookingStatus")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -299,6 +302,7 @@ namespace ZPool.Migrations
                 {
                     b.Property<int>("RideID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("RideID")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -306,9 +310,11 @@ namespace ZPool.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("DepartureLocation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DestinationLocation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SeatsAvailable")

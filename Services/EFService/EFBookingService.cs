@@ -20,6 +20,7 @@ namespace ZPool.Services.EFService
 
         public void AddBooking(Booking booking)
         {
+
             service.Bookings.Add(booking);
             service.SaveChanges();
         }
