@@ -19,12 +19,12 @@ namespace ZPool.Pages.Notification
 
         public async Task OnGetAsync()
         {
-            Rides = await _context.Rides
-                    .Select(r => new
-                    {
-                        r.Bookings,
-                    })
-                    .ToListAsync();
+            //Rides = await _context.Rides
+            //        .Select(r => new
+            //        {
+            //            r.Bookings,
+            //        })
+            //        .ToListAsync();
 
         }
 
