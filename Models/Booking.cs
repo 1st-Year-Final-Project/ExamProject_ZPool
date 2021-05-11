@@ -13,7 +13,6 @@ namespace ZPool.Models
         public string PickUpLocation { get; set; }
         public string DropOffLocation { get; set; }
         
-
         //Foreign Keys
         public int RideID { get; set; }//FK
         public int AppUserID { get; set; }//FK

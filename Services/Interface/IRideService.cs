@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UserManagementTestApp.Models;
 using ZPool.Models;
 
 namespace ZPool.Services.Interface
@@ -15,5 +16,8 @@ namespace ZPool.Services.Interface
         public void EditRide(Ride ride);
         public IEnumerable<Car> GetRegisteredCars(int id);
         IEnumerable<Ride> FilterRides(Ride ride);
+
+        //Method for profile page
+        public IEnumerable<Ride> GetRidesByUser(AppUser user);
     }
 }

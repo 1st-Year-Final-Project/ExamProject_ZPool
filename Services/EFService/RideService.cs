@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UserManagementTestApp.Models;
 using ZPool.Models;
 using ZPool.Services.Interface;
 
@@ -52,7 +53,6 @@ namespace ZPool.Services.EFService.RideService
                 .FirstOrDefault(r=>r.RideID==id);
         }
 
-
         public IEnumerable<Car> GetRegisteredCars(int id)
         {
             var cars = service.Cars.AsNoTracking().Where(c => c.AppUserID == id);
@@ -90,6 +90,13 @@ namespace ZPool.Services.EFService.RideService
             bool suitable = dateComparer.CompareDateTime(ride.StartTime, dateCriteria);
             if (suitable) return true;
             return false;
+        }
+
+        // Method for Profile page
+        public IEnumerable<Ride> GetRidesByUser(AppUser user)
+        {
+            IEnumerable<int> lst = service.Cars.Where(c => c.AppUserID.Equals(user.Id)).ToList().Select(c => c.CarID);
+            return from r in service.Rides where lst.Contains(r.CarID) select r;
         }
     }
 }
