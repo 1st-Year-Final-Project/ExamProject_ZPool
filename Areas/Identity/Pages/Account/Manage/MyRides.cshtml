@@ -14,8 +14,6 @@
             <th> Destination </th>
             <th> Car </th>
             <th> Passengers </th>
-
-
         </tr>
     </thead>
     <tbody>
@@ -24,22 +22,19 @@
         {
             @foreach (var r in Model._myRides)
             {
-        <tr>
-            <td>  @r.StartTime </td>
-            <td>  @r.DepartureLocation </td>
-            <td>  @r.DestinationLocation </td>
-            <td>  @r.Car </td>
-            <td>  @r.Bookings </td>
-            @*<td>  @r.Bookings </td>*@
-            @*want to use user icon*@
-            <td>
-                <p>
-                    <a asp-page="./DeleteRide" asp-route-id="@r.RideID" class="text-danger">Cancel</a>
-                </p>
-            </td>
-
-
-        </tr>
+                <tr>
+                    <td>  @r.StartTime </td>
+                    <td>  @r.DepartureLocation </td>
+                    <td>  @r.DestinationLocation </td>
+                    <td>  @r.Car </td>
+                    <td>  @r.Bookings </td>
+                    @*<td>  @r.Bookings </td>*@   @*want to use user icon*@
+                    <td>
+                        <p>
+                            <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="text-danger">Cancel</a>
+                        </p>
+                    </td>
+                </tr>
             }
         }
 </table>

@@ -33,9 +33,10 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Introduction { get; set; }
-        public SelectList GenderList { get; set; }
+        public SelectList Genders { get; set; }
 
         [BindProperty] public string UserGender { get; set; }
+        //public string[] Genders = new[] { "Male", "Female", "Unspecified", "Don't want to say!" };
 
         [BindProperty] public InputModel Input { get; set; }
 
@@ -48,23 +49,19 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         private async Task LoadAsync(AppUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
             FirstName = user.FirstName;
             LastName = user.LastName;
             Email = user.Email;
-            var gender = user.Gender;
             var introduction = user.Introduction;
-
+            UserGender = user.Gender;
             // ProfilePicture = user.ProfilePicture;
 
             Input = new InputModel
             {
-                UserGender = gender,
                 Introduction = introduction
             };
-
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -75,7 +72,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            GenderList = new SelectList("Male", "Female", "Nonbinary", "Don't want to say");
+            //Genders = new SelectList("Male", "Female", "Nonbinary", "Don't want to say");
             await LoadAsync(user);
             return Page();              
         }
@@ -101,6 +98,14 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
                 await _userManager.UpdateAsync(user);
             }
 
+
+            var gender = user.Gender;
+            if (UserGender != gender)
+            {
+                user.Gender = UserGender;
+                await _userManager.UpdateAsync(user);
+            }
+           
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

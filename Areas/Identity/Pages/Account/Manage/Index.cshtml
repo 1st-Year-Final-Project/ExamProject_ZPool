@@ -22,29 +22,26 @@
                 <input asp-for="LastName" class="form-control" disabled />
             </div>
 
-            @*<div class="form-group">
-            <label asp-for="SelectGender"></label>
-            <input asp-for="SelectGender" class="form-control" />
-        </div>*@
+            <label for="genders">Choose your gender:</label><br />
 
+            @*@foreach (var gender in Model.Genders)
+            {
+                <input type="radio" asp-for="UserGender" value="@gender" />@gender<br />
+            }*@
+
+            @*</form>*@
 
             <div class="form-group">
-                <label asp-for="@Model.UserGender" class="control-label"></label>
-                <select asp-for="@Model.UserGender" class="form-control"
-                        asp-items="@Model.GenderList">
-                    <option value="">-- Select your gender --</option>
-                </select>
-                <span asp-validation-for="@Model.UserGender" class="text-danger"></span>
-            </div>
-
-            @*<label for="genders">Choose your gender:</label>
-            <select asp-for="SelectGender">
+            <select asp-for="@Model.UserGender" class="form-control" asp-items="@Model.Genders">
+                <option value="">-- Select your gender --</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Nonbinary">Nonbinary</option>
                 <option value="Don't want to say">Don't want to say</option>
+
             </select>
-            <br><br>*@
+            <span asp-validation-for="@Model.UserGender" class="text-danger"></span>
+        </div>
 
             <div class="form-group">
                 <label asp-for="Email"></label>
@@ -57,11 +54,6 @@
                 <span asp-validation-for="Input.Introduction" class="text-danger"></span>
             </div>
 
-            @*<div class="form-group">
-            <label asp-for="Username"></label>
-            <input asp-for="Username" class="form-control" disabled />
-        </div>
-            *@
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
