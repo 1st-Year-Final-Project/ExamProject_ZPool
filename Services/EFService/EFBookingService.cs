@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using ZPool.Models;
 using ZPool.Services.Interface;
 
@@ -44,7 +45,7 @@ namespace ZPool.Services.EFService
 
         public Booking GetBookingsByID(int id)
         {
-         return service.Bookings.Find(id);
+             return service.Bookings.Find(id);
         }
 
         public void UpdateBookingStatus(int id, string newBookingStatus)

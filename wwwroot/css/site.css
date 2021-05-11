@@ -12,17 +12,21 @@ a {
   color: #0366d6;
 }
 
+.rounded-border {
+    border-radius: 18px;
+}
+
 .btn-yellow {
     color: #636363;
     background-color: #fff387;
     box-shadow: 1px 1px 3px 1px #BEBEBE;
-    border-radius: 15px;
+    border-radius: 18px;
 }
 
-    .btn-yellow:hover {
-        color: #000000;
-        box-shadow: 1px 2px 5px 2px #C0C0C0;
-    }
+.btn-yellow:hover {
+    color: #000000;
+    box-shadow: 1px 2px 5px 2px #C0C0C0;
+}
 
 
 .btn-primary {

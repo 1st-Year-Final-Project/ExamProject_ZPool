@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ZPool.Models;
 
 namespace UserManagementTestApp.Pages
 {
@@ -17,7 +18,13 @@ namespace UserManagementTestApp.Pages
             _logger = logger;
         }
 
+
         public void OnGet()
+        {
+
+        }
+
+        public void OnPost()
         {
 
         }

@@ -46,6 +46,7 @@
         {
             @foreach (var item in Model.Bookings)
             {
+
         <tr>
             <td>  @item.BookingID</td>
             <td>  @item.Date  </td>
@@ -88,6 +89,16 @@
             }
 
         </tr>
+
+                <tr>
+                    <td>  @item.BookingID</td>
+                    <td>  @item.Date  </td>
+                    <td>  @item.PickUpLocation </td>
+                    <td>  @item.DropOffLocation </td>
+                    <td>  @item.AppUser </td>
+                    <td>  @item.Ride.RideID </td>
+                </tr>
+
             }
         }
 </table>
