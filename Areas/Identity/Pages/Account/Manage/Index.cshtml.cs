@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using UserManagementTestApp.Models;
 
 namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
@@ -25,56 +26,42 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
+        [TempData] public string StatusMessage { get; set; }
+
         public string Username { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Gender { get; set; }
         public string Email { get; set; }
         public string Introduction { get; set; }
+        public SelectList Genders { get; set; }
 
+        [BindProperty] public string UserGender { get; set; }
+        //public string[] Genders = new[] { "Male", "Female", "Unspecified", "Don't want to say!" };
 
-        [TempData]
-        public string StatusMessage { get; set; }
-
-        [BindProperty]
-        public InputModel Input { get; set; }
+        [BindProperty] public InputModel Input { get; set; }
 
         public class InputModel
         {
-            //[Phone]
-            //[Display(Name = "Phone number")]
-            //public string PhoneNumber { get; set; }
-
+            public string UserGender { get; set; }
             public string Introduction { get; set; }
-            
-
         }
 
         private async Task LoadAsync(AppUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
             FirstName = user.FirstName;
             LastName = user.LastName;
-            Gender = user.Gender;  // suggest: Gender should NOT be optional in AppUser.cs, because it doesn't need to be changed.
             Email = user.Email;
             var introduction = user.Introduction;
-
-            /// suggest: add an attribute of profilePicture in AppUser.cs
-            /// ProfilePicture = user.ProfilePicture;
+            UserGender = user.Gender;
+            // ProfilePicture = user.ProfilePicture;
 
             Input = new InputModel
             {
                 Introduction = introduction
             };
-
-
-            //Input = new InputModel
-            //{
-            //    PhoneNumber = phoneNumber
-            //};
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -85,8 +72,9 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
+            //Genders = new SelectList("Male", "Female", "Nonbinary", "Don't want to say");
             await LoadAsync(user);
-            return Page();
+            return Page();              
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -111,17 +99,13 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             }
 
 
-            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            //if (Input.PhoneNumber != phoneNumber)
-            //{
-            //    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-            //    if (!setPhoneResult.Succeeded)
-            //    {
-            //        StatusMessage = "Unexpected error when trying to set phone number.";
-            //        return RedirectToPage();
-            //    }
-            //}
-
+            var gender = user.Gender;
+            if (UserGender != gender)
+            {
+                user.Gender = UserGender;
+                await _userManager.UpdateAsync(user);
+            }
+           
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
