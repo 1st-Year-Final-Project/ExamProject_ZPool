@@ -37,9 +37,11 @@ namespace ZPool.Pages.Notification
         }
         public async Task OnGetAsync()
         {
+            //LoggedInUser = await _userManager.GetUserAsync(User);
+            //Rides = rideService.GetAllRides().Where(r=>r.Car.AppUserID== LoggedInUser.Id);
+            //Bookings = bookingService.GetBookings().Where(b=>b.AppUserID== LoggedInUser.Id);
+            Bookings = bookingService.GetBookings();
             LoggedInUser = await _userManager.GetUserAsync(User);
-            Rides = rideService.GetAllRides().Where(r=>r.Car.AppUserID== LoggedInUser.Id);
-            Bookings = bookingService.GetBookings().Where(b=>b.AppUserID== LoggedInUser.Id);
 
         }
         //public void OnGet()
@@ -60,6 +62,7 @@ namespace ZPool.Pages.Notification
             {
                 Message = ex.Message;
             }
+            RedirectToPage("GetBookings");
 
         }
 
@@ -75,7 +78,7 @@ namespace ZPool.Pages.Notification
             {
                 Message = ex.Message;
             }
-
+            RedirectToPage("GetBookings");
         }
 
         public void OnPostCancel(int id)
@@ -90,8 +93,7 @@ namespace ZPool.Pages.Notification
             {
                 Message = ex.Message;
             }
+            RedirectToPage("GetBookings");
         }
-
-
     }
 }
