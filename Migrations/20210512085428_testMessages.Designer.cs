@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZPool.Models;
 
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210512085428_testMessages")]
+    partial class testMessages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -307,9 +309,7 @@ namespace ZPool.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("MessageBody")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(240)")
-                        .HasMaxLength(240);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ReceiverId")
                         .HasColumnType("int");

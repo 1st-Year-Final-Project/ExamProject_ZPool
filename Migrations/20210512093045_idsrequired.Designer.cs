@@ -10,8 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210511103604_updateBookingModel4")]
-    partial class updateBookingModel4
+    [Migration("20210512093045_idsrequired")]
+    partial class idsrequired
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -257,9 +257,6 @@ namespace ZPool.Migrations
                     b.Property<int>("RideID")
                         .HasColumnType("int");
 
-                    b.Property<string>("StatusTwo")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("BookingID");
 
                     b.HasIndex("AppUserID");
@@ -299,6 +296,39 @@ namespace ZPool.Migrations
                     b.HasIndex("AppUserID");
 
                     b.ToTable("Cars");
+                });
+
+            modelBuilder.Entity("ZPool.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MessageBody")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(240)")
+                        .HasMaxLength(240);
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SendingDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("ZPool.Models.Ride", b =>
@@ -404,6 +434,21 @@ namespace ZPool.Migrations
                     b.HasOne("UserManagementTestApp.Models.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ZPool.Models.Message", b =>
+                {
+                    b.HasOne("UserManagementTestApp.Models.AppUser", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UserManagementTestApp.Models.AppUser", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

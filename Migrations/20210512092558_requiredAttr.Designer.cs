@@ -10,8 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210511103452_updateBookingModel2")]
-    partial class updateBookingModel2
+    [Migration("20210512092558_requiredAttr")]
+    partial class requiredAttr
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -298,6 +298,39 @@ namespace ZPool.Migrations
                     b.ToTable("Cars");
                 });
 
+            modelBuilder.Entity("ZPool.Models.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MessageBody")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(240)")
+                        .HasMaxLength(240);
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SendingDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("ZPool.Models.Ride", b =>
                 {
                     b.Property<int>("RideID")
@@ -401,6 +434,21 @@ namespace ZPool.Migrations
                     b.HasOne("UserManagementTestApp.Models.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ZPool.Models.Message", b =>
+                {
+                    b.HasOne("UserManagementTestApp.Models.AppUser", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UserManagementTestApp.Models.AppUser", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
