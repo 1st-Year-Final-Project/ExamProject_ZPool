@@ -21,7 +21,6 @@ namespace ZPool.Services.EFService
 
         public void AddBooking(Booking booking)
         {
-
             service.Bookings.Add(booking);
             service.SaveChanges();
         }
@@ -55,9 +54,11 @@ namespace ZPool.Services.EFService
         public IEnumerable<Booking> GetBookingsByUser(AppUser user)
         {
             return from booking
-                    in service.Bookings.Where(b => b.AppUserID.Equals(user.Id))
-                select booking;
-        }
+                   in service.Bookings.
+                   Where(b => b.AppUserID.
+                   Equals(user.Id))
+                   select booking;
+        }           
 
         public void UpdateBookingStatus(int id, string newBookingStatus)
         {
