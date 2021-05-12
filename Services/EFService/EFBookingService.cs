@@ -39,7 +39,7 @@ namespace ZPool.Services.EFService
         public IEnumerable<Booking> GetBookings()
         {
             return service.Bookings
-            .Include(b => b.Ride)
+            .Include(b => b.Ride).ThenInclude(r => r.Car)
             .Include(b => b.AppUser);
         }
 
@@ -47,6 +47,7 @@ namespace ZPool.Services.EFService
         {
              return service.Bookings.Find(id);
         }
+
 
         public void UpdateBookingStatus(int id, string newBookingStatus)
         {
