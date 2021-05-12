@@ -58,6 +58,7 @@ namespace ZPool.Services.EFService
                    Where(b => b.AppUserID.
                    Equals(user.Id))
                    select booking;
+        }           
 
         public void UpdateBookingStatus(int id, string newBookingStatus)
         {
