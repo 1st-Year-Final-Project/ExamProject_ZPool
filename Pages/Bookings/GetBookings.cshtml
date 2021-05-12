@@ -55,7 +55,7 @@
             <td>  @item.Ride.RideID </td>
             <td>  @item.BookingStatus </td>
 
-            @if (item.BookingStatus == "Pending")
+            @if (item.BookingStatus == "Pending" && item.Ride.Car.AppUserID == item.Ride.Car.AppUserID)
             {
                 <td>
                     <div class="form group">
