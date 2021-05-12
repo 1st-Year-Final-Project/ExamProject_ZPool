@@ -22,6 +22,5 @@ namespace UserManagementTestApp.Models
         public string? Introduction { get; set; }
 
         /// suggest: add an attribute of profilePicture
-
     }
 }
