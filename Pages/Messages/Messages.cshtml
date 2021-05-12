@@ -1,5 +1,8 @@
 ﻿@page
+@using ZPool.Services.Interface
+@using System.Reflection
 @model ZPool.Pages.Messages.MessagesModel
+@inject IMessageService MessageService;
 @{
     ViewData["Title"] = "My Messages";
 }
@@ -32,16 +35,12 @@
                 </div>
             </div>
 
-
         </div>
         <div class="row d-flex justify-content-center">
             <button type="submit" class="btn btn-yellow" asp-page-handler="Send">Send</button>
         </div>
     </form>
 
-    
-
-    
     <div class="row justify-content-center pt-4">
 
         <div class="col-8 d-flex flex-column border rounded-border ">
@@ -82,10 +81,14 @@
                     }
                     else
                     {
-                        <p>An error has occured.</p>
+                        <p>An error has occurred.</p>
+                    }
+
+                    @if (!@Model.Messages[i].IsRead && @Model.Messages[i].ReceiverId == Model.CurrentUser.Id)
+                    {
+                        MessageService.SetStatusToRead(@Model.Messages[i].Id);
                     }
                 }
-
             }
             
         </div>

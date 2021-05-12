@@ -47,6 +47,7 @@ namespace ZPool.Services.EFService
             {
                 message.IsRead = true;
                 _context.Update(message);
+                _context.SaveChanges();
             }
         }
 
@@ -59,6 +60,16 @@ namespace ZPool.Services.EFService
                 .OrderByDescending(m=>m.SendingDate)
                 .ToList();
             return messages;
+        }
+
+        public bool HasUnreadMessages(int userId)
+        {
+            var messages = _context.Messages
+                .AsNoTracking()
+                .Where(m => m.ReceiverId == userId)
+                .Where(m => m.IsRead == false)
+                .ToList();
+            return messages.Count > 0 ? true : false;
         }
 
 
