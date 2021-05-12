@@ -22,8 +22,6 @@
             <th></th>
         </tr>
     </thead>
-    }
-    }
     <tbody>
 
         @if (Model.Bookings != null)
@@ -39,6 +37,7 @@
                     <td>  @item.AppUser </td>
                     <td>  @item.Ride.RideID </td>
                     <td>  @item.BookingStatus </td>
+
                     @if (Model.LoggedInUser.Id == item.AppUserID)
                     {
                         @if (item.BookingStatus == "Accepted")
