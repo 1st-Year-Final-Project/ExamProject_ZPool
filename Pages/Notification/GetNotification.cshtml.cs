@@ -21,10 +21,12 @@ namespace ZPool.Pages.Notification
         IBookingService bookingService;
         public IEnumerable<Booking> Bookings { get; set; }
         public IEnumerable<Ride> Rides { get; set; }
-        private UserManager<AppUser> _userManager;
-
+        public UserManager<AppUser> _userManager;
+        [BindProperty]
+        public AppUser LoggedInUser { get; set; }
 
         public string Message { get; set; }
+
 
         public GetNotificationModel(IBookingService serviceForBooking, IRideService serviceForRides, UserManager<AppUser> userManager)
         {
@@ -35,9 +37,10 @@ namespace ZPool.Pages.Notification
         }
         public async Task OnGetAsync()
         {
-            AppUser user = await _userManager.GetUserAsync(User);
-            Rides = rideService.GetAllRides().Where(r=>r.Car.AppUserID==user.Id);
-            Bookings = bookingService.GetBookings().Where(b=>b.AppUserID==user.Id);
+            LoggedInUser = await _userManager.GetUserAsync(User);
+            Rides = rideService.GetAllRides().Where(r=>r.Car.AppUserID== LoggedInUser.Id);
+            Bookings = bookingService.GetBookings().Where(b=>b.AppUserID== LoggedInUser.Id);
+
         }
         //public void OnGet()
         //{
