@@ -52,7 +52,7 @@ namespace ZPool.Pages.Rides
                 booking.DropOffLocation = ride.DestinationLocation;
                 booking.RideID = ride.RideID;
                 booking.AppUserID = user.Id;
-
+                booking.BookingStatus = "Pending";
                 _bookingService.AddBooking(booking);
             }
             

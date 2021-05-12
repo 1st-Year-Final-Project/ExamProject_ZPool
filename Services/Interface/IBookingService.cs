@@ -16,8 +16,12 @@ namespace ZPool.Services.Interface
         public void DeleteBooking(Booking booking);
         public void EditBooking(Booking booking);
 
+
         // Method for Profile Page
         public IEnumerable<Booking> GetBookingsByUser(AppUser user);
+
+        public void UpdateBookingStatus(int id, string bookingStatus);
+
 
 
     }

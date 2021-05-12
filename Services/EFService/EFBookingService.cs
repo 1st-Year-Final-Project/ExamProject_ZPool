@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,14 +40,15 @@ namespace ZPool.Services.EFService
         public IEnumerable<Booking> GetBookings()
         {
             return service.Bookings
-                .Include(b=>b.Ride)
-                .Include(b=>b.AppUser);
+            .Include(b => b.Ride)
+            .Include(b => b.AppUser);
         }
 
         public Booking GetBookingsByID(int id)
         {
              return service.Bookings.Find(id);
         }
+
 
         // Method for Profile page
         public IEnumerable<Booking> GetBookingsByUser(AppUser user)
@@ -56,6 +58,30 @@ namespace ZPool.Services.EFService
                    Where(b => b.AppUserID.
                    Equals(user.Id))
                    select booking;
+
+        public void UpdateBookingStatus(int id, string newBookingStatus)
+        {
+           
+            Booking oldBooking = service.Bookings.Find(id);
+            if (oldBooking.BookingStatus == "Cancelled")
+            {
+                throw new ArgumentException("The status of cancelled bookings cannot be changed.");
+            }
+            else if (newBookingStatus == "Cancelled" && oldBooking.BookingStatus != "Accepted")
+            {
+                throw new ArgumentException("Bookings not accepted cannot be cancelled.");
+            }
+            else if ((newBookingStatus == "Rejected" || newBookingStatus == "Accepted")  && oldBooking.BookingStatus != "Pending")
+            {
+                throw new ArgumentException("Pending bookings can only be changed to accepted or rejected.");
+            }
+            else if (newBookingStatus == "Pending")
+            {
+                throw new ArgumentException("A booking status cannot be changed to pending.");
+            }
+            oldBooking.BookingStatus = newBookingStatus;
+            service.SaveChanges();
+
         }
     }
          
