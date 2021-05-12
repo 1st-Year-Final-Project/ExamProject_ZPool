@@ -18,6 +18,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.11" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="VisioForge.DotNet.Core.TRIAL" Version="14.0.42" />
   </ItemGroup>
 
 </Project>
