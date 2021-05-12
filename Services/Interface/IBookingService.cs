@@ -23,6 +23,5 @@ namespace ZPool.Services.Interface
         public void UpdateBookingStatus(int id, string bookingStatus);
 
 
-
     }
 }
