@@ -13,16 +13,30 @@ namespace ZPool.Services.EFService
     public class EFBookingService: IBookingService
     {
         private AppDbContext service;
+        private IMessageService _messageService;
 
-        public EFBookingService(AppDbContext context)
+        public EFBookingService(AppDbContext context, IMessageService smsService)
         {
            service = context;
+           _messageService = smsService;
         }
 
         public void AddBooking(Booking booking)
         {
             service.Bookings.Add(booking);
             service.SaveChanges();
+            SendMessageToDriver(booking);
+        }
+
+        private void SendMessageToDriver(Booking booking)
+        {
+            Message message = new Message();
+            message.SenderId = booking.AppUserID;
+            message.ReceiverId = booking.Ride.Car.AppUserID;
+            message.SendingDate = DateTime.Now;
+            message.MessageBody =
+                $"This is an automatic notification. You have a new booking request from {booking.AppUser.UserName}. Please check your bookings.";
+            _messageService.CreateMessage(message);
         }
 
         public void DeleteBooking(Booking booking)
