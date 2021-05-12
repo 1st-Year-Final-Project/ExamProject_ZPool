@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using ZPool.Models;
 using ZPool.Services.Interface;
@@ -26,6 +27,7 @@ namespace ZPool.Services.EFService
         public IEnumerable<Message> GetSentMessage(int userId)
         {
             var sent = _context.Messages.AsNoTracking()
+                .Include(m => m.Receiver)
                 .Where(m => m.SenderId == userId);
             return sent;
         }
@@ -33,7 +35,9 @@ namespace ZPool.Services.EFService
         public IEnumerable<Message> GetReceivedMessages(int userId)
         {
             return _context.Messages.AsNoTracking()
-                .Where(m => m.ReceiverId == userId);
+                .Include(m=>m.Sender)
+                .Where(m => m.ReceiverId == userId)
+                .OrderByDescending(m=>m.SendingDate);
         }
 
         public void SetStatusToRead(int id)
@@ -44,8 +48,17 @@ namespace ZPool.Services.EFService
                 message.IsRead = true;
                 _context.Update(message);
             }
-                
-            
+        }
+
+        public List<Message> GetMessagesByUserId(int userId)
+        {
+            List<Message> messages = _context.Messages
+                .Include(m => m.Sender)
+                .Include(m => m.Receiver)
+                .Where(m => m.SenderId == userId || m.ReceiverId == userId)
+                .OrderByDescending(m=>m.SendingDate)
+                .ToList();
+            return messages;
         }
 
 
