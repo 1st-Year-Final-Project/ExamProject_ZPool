@@ -41,6 +41,7 @@ namespace UserManagementTestApp
             services.AddTransient<IRideService, RideService>();
             services.AddTransient<ICarService, EFCarService>();
             services.AddTransient<IBookingService, EFBookingService>();
+            services.AddTransient<IMessageService, MessageService>();
 
             services.AddTransient<IDateTimeComparer, DateTimeComparer>();
 
