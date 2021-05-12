@@ -26,7 +26,7 @@
 <div class="container">
     <div class="row mb-2 bg-light">
         <div class="col my-2 py-1 d-flex justify-content-center">
-
+            
             <form class="form-inline">
                 <div class="form-group">
                     <label class="mx-2"></label>
@@ -69,6 +69,8 @@
 
         @foreach (var item in Model.Rides)
         {
+            if(item.StartTime>DateTime.Now)
+            { 
             <tr>
                 <td> @item.RideID</td>
                 <td> @item.StartTime </td>
@@ -80,8 +82,11 @@
                     <a asp-page="Ride" asp-route-id="@item.RideID">Details</a>|
                     <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a>|
                     <a asp-page="DeleteRide" asp-route-id="@item.RideID">Delete</a> |
+
                 </td>
             </tr>
+            }
+        }
         }
 
     </table>
