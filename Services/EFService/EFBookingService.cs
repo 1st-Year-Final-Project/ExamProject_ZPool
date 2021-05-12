@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using UserManagementTestApp.Models;
 using ZPool.Models;
 using ZPool.Services.Interface;
 
@@ -49,6 +50,16 @@ namespace ZPool.Services.EFService
              return service.Bookings.Find(id);
         }
 
+
+        // Method for Profile page
+        public IEnumerable<Booking> GetBookingsByUser(AppUser user)
+        {
+            return from booking
+                   in service.Bookings.
+                   Where(b => b.AppUserID.
+                   Equals(user.Id))
+                   select booking;
+
         public void UpdateBookingStatus(int id, string newBookingStatus)
         {
            
@@ -71,6 +82,7 @@ namespace ZPool.Services.EFService
             }
             oldBooking.BookingStatus = newBookingStatus;
             service.SaveChanges();
+
         }
     }
          

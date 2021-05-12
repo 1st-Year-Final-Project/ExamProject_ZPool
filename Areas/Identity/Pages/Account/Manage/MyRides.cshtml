@@ -1,0 +1,40 @@
+﻿@page
+@model ZPool.Areas.Identity.Pages.Account.Manage.MyRidesModel
+@{
+    ViewData["Title"] = "My Rides";
+    ViewData["ActivePage"] = ManageNavPages.MyRides;
+}
+
+<h3 style="color:red"> My Rides</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th> Start Time  </th>
+            <th> Departure </th>
+            <th> Destination </th>
+            <th> Car </th>
+            <th> Passengers </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @if (Model != null)
+        {
+            @foreach (var r in Model._myRides)
+            {
+                <tr>
+                    <td>  @r.StartTime </td>
+                    <td>  @r.DepartureLocation </td>
+                    <td>  @r.DestinationLocation </td>
+                    <td>  @r.Car </td>
+                    <td>  @r.Bookings </td>
+                    @*<td>  @r.Bookings </td>*@   @*want to use user icon*@
+                    <td>
+                        <p>
+                            <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="text-danger">Cancel</a>
+                        </p>
+                    </td>
+                </tr>
+            }
+        }
+</table>
