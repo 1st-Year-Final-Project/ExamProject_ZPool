@@ -12,6 +12,30 @@ a {
   color: #0366d6;
 }
 
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
 .rounded-border {
     border-radius: 18px;
 }
@@ -26,6 +50,10 @@ a {
 .btn-yellow:hover {
     color: #000000;
     box-shadow: 1px 2px 5px 2px #C0C0C0;
+}
+
+.bg-yellow {
+    background-color: #fff387;
 }
 
 

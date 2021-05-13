@@ -23,6 +23,7 @@ namespace ZPool.Models
         public string DestinationLocation { get; set; }
 
         [Required]
+        [Range(typeof(int), "1", "9")]
         public int SeatsAvailable { get; set; }
 
         //Foreign Keys
