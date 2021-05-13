@@ -11,6 +11,7 @@ using ZPool.Services.Interface;
 
 namespace ZPool.Pages.Rides
 {
+    [BindProperties]
     public class RideModel : PageModel
     {
         private IRideService _rideService;
@@ -27,7 +28,7 @@ namespace ZPool.Pages.Rides
         
         public Ride Ride { get; set; }
 
-        [BindProperty]
+        
         public int RideId { get; set; }
 
         public AppUser CurrentUser { get; set; }
@@ -61,6 +62,13 @@ namespace ZPool.Pages.Rides
             // it keeps the frontend clean and it is not the ride pages concern to send any notifications
 
             return RedirectToPage("/Bookings/GetBookings"); // tbd ... my bookings?
+        }
+
+        public void OnPostDelete(int rideId)
+        {
+            Ride ride = _rideService.GetRide(rideId);
+            _rideService.DeleteRide(ride);
+            RedirectToPage("/GetAllRides");
         }
     }
 }

@@ -12,12 +12,13 @@ namespace ZPool.Services.EFService.RideService
     public class RideService : IRideService
     {
         AppDbContext service;
-        private IDateTimeComparer dateComparer;
+        private IDateTimeComparer _dateComparer;
+        
 
         public RideService(AppDbContext context, IDateTimeComparer comparer)
         {
             service = context;
-            dateComparer = comparer;
+            _dateComparer = comparer;
         }
 
         public void AddRide(Ride ride)
@@ -87,7 +88,7 @@ namespace ZPool.Services.EFService.RideService
 
         private bool CompareDateTimes(Ride ride, DateTime dateCriteria)
         {
-            bool suitable = dateComparer.CompareDateTime(ride.StartTime, dateCriteria);
+            bool suitable = _dateComparer.CompareDateTime(ride.StartTime, dateCriteria);
             if (suitable) return true;
             return false;
         }

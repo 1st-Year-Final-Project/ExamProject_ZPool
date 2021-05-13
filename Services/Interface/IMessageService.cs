@@ -11,5 +11,8 @@ namespace ZPool.Services.Interface
         void CreateMessage(Message message);
         IEnumerable<Message> GetSentMessage(int userId);
         IEnumerable<Message> GetReceivedMessages(int userId);
+        List<Message> GetMessagesByUserId(int userId);
+        bool HasUnreadMessages(int userId);
+        void SetStatusToRead(int id);
     }
 }
