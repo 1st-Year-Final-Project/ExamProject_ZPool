@@ -10,12 +10,12 @@ using ZPool.Services.Interface;
 
 namespace ZPool.Pages.Bookings
 {
-    public class DeleteModel : PageModel
+    public class DeleteBookingModel : PageModel
     {
         [BindProperty]
         public Booking Booking { get; set; }
         IBookingService bookingservice;
-        public DeleteModel(IBookingService service)
+        public DeleteBookingModel(IBookingService service)
         {
             bookingservice = service;
         }

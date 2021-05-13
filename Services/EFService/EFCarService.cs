@@ -23,6 +23,7 @@ namespace ZPool.Services.EFService
 
         public void DeleteCar(Car car)
         {
+
             context.Cars.Remove(car);
             context.SaveChanges();
         }

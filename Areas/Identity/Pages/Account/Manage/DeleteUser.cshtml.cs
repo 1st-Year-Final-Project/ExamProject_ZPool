@@ -42,14 +42,13 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
                 _carService.DeleteCar(car);
             }
         }
-        public IActionResult DeleteBookings()
+        public void DeleteBookings()
         {
             var bookings = _bookingService.GetBookingsByUser(LoggedInUser);
             foreach (var booking in bookings)
             {
                 _bookingService.DeleteBooking(booking);
             }
-            return null;
         }
         
 
@@ -66,8 +65,9 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             }
             else
             {
-                DeleteBookings();
                 DeleteCars();
+                DeleteBookings();
+                
                 await _SignInManager.SignOutAsync();
                
 

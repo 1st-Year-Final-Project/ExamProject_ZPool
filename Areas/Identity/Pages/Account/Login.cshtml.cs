@@ -81,28 +81,39 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
 
-                AppUser loginUser = await _userManager.FindByEmailAsync(Input.Email);
+                try
+                {
+
+
+                    AppUser loginUser = await _userManager.FindByEmailAsync(Input.Email);
+                    var result = await _signInManager.PasswordSignInAsync(loginUser, Input.Password, Input.RememberMe, true);
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("User logged in.");
+                        return LocalRedirect(returnUrl);
+                    }
+                    if (result.RequiresTwoFactor)
+                    {
+                        return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    }
+                    if (result.IsLockedOut)
+                    {
+                        _logger.LogWarning("User account locked out.");
+                        return RedirectToPage("./Lockout");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        return Page();
+                    }
+                }
+                catch (Exception ex)  
+                {
+                    ErrorMessage = ex.Message;
+              
+                }
                 
-                var result = await _signInManager.PasswordSignInAsync(loginUser, Input.Password, Input.RememberMe, true);
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
+                
             }
 
             // If we got this far, something failed, redisplay form

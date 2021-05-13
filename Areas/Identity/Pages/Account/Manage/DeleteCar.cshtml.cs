@@ -15,11 +15,12 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public Car Car { get; set; }
 
         ICarService carService;
-
-        public DeleteCarModel(ICarService service)
+        IRideService _rideService;
+        public DeleteCarModel(ICarService service, IRideService rideService)
         {
             this.carService = service;
             Car = new Car();
+            _rideService = rideService;
         }
         public void OnGet(int id)
         {
@@ -27,6 +28,14 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         }
         public IActionResult OnPost()
         {
+            if(Car.Rides.Count>0)
+            {
+                foreach (var ride in Car.Rides)
+                {
+                    _rideService.DeleteRide(ride);
+
+                }
+            }
             carService.DeleteCar(Car);
 
             return RedirectToPage("./MyCars");
