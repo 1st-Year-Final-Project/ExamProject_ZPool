@@ -28,14 +28,14 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         }
         public IActionResult OnPost()
         {
-            if(Car.Rides.Count>0)
-            {
-                foreach (var ride in Car.Rides)
-                {
-                    _rideService.DeleteRide(ride);
+            //if(Car.Rides.Count>0)
+            //{
+            //    foreach (var ride in Car.Rides)
+            //    {
+            //        _rideService.DeleteRide(ride);
 
-                }
-            }
+            //    }
+            //}
             carService.DeleteCar(Car);
 
             return RedirectToPage("./MyCars");
