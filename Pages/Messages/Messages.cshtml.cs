@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UserManagementTestApp.Models;
 using ZPool.Models;
@@ -11,6 +12,7 @@ using ZPool.Services.Interface;
 
 namespace ZPool.Pages.Messages
 {
+    
     public class MessagesModel : PageModel
     {
         private IMessageService _messageService;
@@ -24,11 +26,11 @@ namespace ZPool.Pages.Messages
 
         [BindProperty]
         public Message NewMessage { get; set; }
-
+        [ValidateNever]
         public AppUser CurrentUser { get; set; }
         [BindProperty]
         public int ListLength { get; set; }
-
+        
         public List<Message> Messages { get; set; }
 
         public async Task OnGetAsync()
@@ -38,9 +40,13 @@ namespace ZPool.Pages.Messages
             ListLength = 8;
         }
 
-        public async Task<IActionResult> OnPostSend()
+        public async Task<IActionResult> OnPostSendAsync()
         {
             NewMessage.SendingDate = DateTime.Now;
+            if (!ModelState.IsValid)
+            {
+                return RedirectToPage("Messages");
+            }
             _messageService.CreateMessage(NewMessage);
             return RedirectToPage("Messages");
         }

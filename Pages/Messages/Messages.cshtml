@@ -23,21 +23,29 @@
                     <input asp-for="@Model.NewMessage.SenderId" hidden />
                 </div>
                 <div class="form-group">
-                    <label asp-for="@Model.NewMessage.ReceiverId" class="control-label">To:</label>
+                    <label class="control-label">To:</label>
                     <input asp-for="@Model.NewMessage.Receiver.UserName" disabled class="form-control" />
-                    <input asp-for="@Model.NewMessage.ReceiverId" class="form-control" hidden />
+                    <input asp-for="@Model.NewMessage.ReceiverId" hidden />
                 </div>
             </div>
             <div class="col-4">
                 <div class="form-group">
-                    <label asp-for="@Model.NewMessage.MessageBody" class="control-label"></label>
+                    <label class="control-label">Message text:</label>
                     <textarea asp-for="@Model.NewMessage.MessageBody" class="form-control" rows="5"></textarea>
+                    <div asp-validation-summary="All" class="text-secondary"></div>
                 </div>
             </div>
 
         </div>
         <div class="row d-flex justify-content-center">
-            <button type="submit" class="btn btn-yellow" asp-page-handler="Send">Send</button>
+            @if (Model.NewMessage == null)
+            {
+                <button type="submit" class="btn btn-yellow" disabled="">Send</button>
+            }
+            else
+            {
+                <button type="submit" asp-page-handler="Send" class="btn btn-yellow">Send</button>
+            }
         </div>
     </form>
 
