@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using UserManagementTestApp.Models;
@@ -10,7 +11,9 @@ namespace ZPool.Models
     {
         public int BookingID { get; set; }
         public DateTime Date { get; set; }
+        [Required]
         public string PickUpLocation { get; set; }
+        [Required]
         public string DropOffLocation { get; set; }
 
         public string BookingStatus { get; set; }

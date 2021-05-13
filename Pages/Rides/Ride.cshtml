@@ -24,8 +24,19 @@
                 </h1>
                 <div class="mt-5">
                     <form method="post">
-                        <input type="number" asp-for="@Model.RideId" hidden />
-                        <button type="submit" class="btn btn-yellow">Book ride</button>
+
+                        @if (Model.CurrentUser != null && Model.CurrentUser.Id == Model.Ride.Car.AppUserID)
+                        {
+                            <button disabled class="btn rounded-border btn-outline-dark tooltip">
+                                Book ride
+                                <span class="tooltiptext">You can't book your own ride.</span>
+                            </button>
+                        }
+                        else
+                        {
+                            <input type="number" asp-for="@Model.RideId" hidden />
+                            <button type="submit" class="btn btn-yellow">Book ride</button>
+                        }
 
                     </form>
                 </div>
@@ -34,21 +45,6 @@
             </div>
             
 
-        </div>
-    </div>
-
-    <div class="row pt-4">
-        <div class="col">
-            @*<form method="post">
-                <input type="number" asp-for="@Model.RideId" hidden/>
-                <button type="submit" class="btn btn-yellow">Book ride</button>
-                
-            </form>*@
-            @if (Model.CurrentUser != null && Model.CurrentUser.Id == Model.Ride.Car.AppUserID)
-            {
-                <p class="text-danger">This is your own ride. At the moment it is possible to book it for debugging purposes.
-                    In the future this button will be deactivated for the owner </p>
-            }
         </div>
     </div>
 
@@ -66,7 +62,54 @@
             </ul>
         </div>
     </div>
-
     
+    @if (Model.CurrentUser != null)
+    {
+        @if (Model.Ride.Car.AppUserID == Model.CurrentUser.Id)
+        {
+            <div class="row pt-5">
+                <div class="col d-flex justify-content-center">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a class="btn btn-outline-primary rounded-border" asp-page="EditRide" asp-route-id="@Model.RideId">Edit ride</a>
+                        </li>
+                        <li class="list-inline-item">
 
+                            <!-- Button trigger -->
+                            <button type="button" class="btn btn-outline-danger rounded-border" data-toggle="modal" data-target="#deleteRide">
+                                Delete ride
+                            </button>
+
+                            <!-- Modal pop-up -->
+                            <div class="modal fade" id="deleteRide" tabindex="-1" role="dialog" aria-labelledby="deleteRideLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteRideLabel">Delete this ride?</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body font-weight-bold">
+                                            On: @Model.Ride.StartTime.Date.ToString("dd.MM.yyyy")<br/>
+                                            From: @Model.Ride.DepartureLocation<br/>
+                                            To: @Model.Ride.DestinationLocation<br/>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <form method="post">
+                                                <input hidden asp-for="RideId"/>
+                                                <button type="submit" class="btn btn-danger" asp-page-handler="Delete">Delete ride</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+    }
+    
 </div>
