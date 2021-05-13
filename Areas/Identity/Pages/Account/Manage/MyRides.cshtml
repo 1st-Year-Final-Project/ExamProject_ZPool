@@ -33,6 +33,9 @@
                         <p>
                             <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="text-danger">Cancel</a>
                         </p>
+                        <p>
+                            <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a>
+                        </p>
                     </td>
                 </tr>
             }
