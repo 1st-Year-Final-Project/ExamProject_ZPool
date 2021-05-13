@@ -11,7 +11,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
     public class DeleteCarModel : PageModel
     {
-        //[BindProperty]
+        [BindProperty]
         public Car Car { get; set; }
 
         ICarService carService;
