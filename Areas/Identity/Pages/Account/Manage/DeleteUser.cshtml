@@ -37,6 +37,6 @@
 
 
         <input type="hidden" asp-for="LoggedInUser.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" />
+        <input asp-page-handler="Delete" method="post" type="submit" value="Delete" class="btn btn-danger" />
     </form>
 </div>
