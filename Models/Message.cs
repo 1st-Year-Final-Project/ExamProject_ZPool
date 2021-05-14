@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using UserManagementTestApp.Models;
 
 namespace ZPool.Models
@@ -12,7 +13,7 @@ namespace ZPool.Models
     {
         public int Id { get; set; }
         public bool IsRead { get; set; }
-        [Required]
+        [Required(ErrorMessage = "A message text is required.")]
         [StringLength(240)]
         public string MessageBody { get; set; }
         public DateTime SendingDate { get; set; }
@@ -20,11 +21,13 @@ namespace ZPool.Models
         [Required]
         public int SenderId { get; set; }
         [ForeignKey(nameof(SenderId))]
+        [ValidateNever]
         public AppUser Sender { get; set; }
 
         [Required]
         public int ReceiverId { get; set; }
         [ForeignKey(nameof(ReceiverId))]
+        [ValidateNever]
         public AppUser Receiver { get; set; }
     }
 }
