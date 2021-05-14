@@ -62,7 +62,7 @@
             <th> DepartureLocation</th>
             <th> DestinationLocation </th>
             <th> SeatsAvailable</th>
-            <th> CarID</th>
+            <th> NumberPlate</th>
         </tr>
         </thead>
         <tbody>
@@ -77,10 +77,10 @@
                 <td> @item.DepartureLocation </td>
                 <td> @item.DestinationLocation </td>
                 <td> @item.SeatsAvailable </td>
-                <td> @item.CarID </td>
+                <td> @item.Car.NumberPlate </td>
                 <td>
-                    <a asp-page="Ride" asp-route-id="@item.RideID">Details</a>|
-                    <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a>|
+                    <a asp-page="Ride" asp-route-id="@item.RideID">Details</a> |
+                    <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a> |
                     <a asp-page="DeleteRide" asp-route-id="@item.RideID">Delete</a> |
 
                 </td>
