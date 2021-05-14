@@ -2,8 +2,6 @@
 @model ZPool.Pages.Rides.CreateRideModel
 @{
     ViewData["Title"] = "CreateRide";
-    string dateNow = DateTime.Now.ToString(format:"yyyy-MM-dd");
-    string timeNow = DateTime.Now.ToString(format: "00:00");
 }
 
 
@@ -15,8 +13,7 @@
 
             <div class="form-group">
                 <label asp-for="@Model.Ride.StartTime" class="control-label"></label>
-                <input asp-for="@Model.Ride.StartTime" type="date" min="@dateNow" class="form-control" />
-                <input asp-for="@Model.Ride.StartTime" type="time" min="@timeNow" class="form-control" />
+                <input asp-for="@Model.Ride.StartTime" type="datetime-local" min="@DateTime.Now.ToString("yyyy-MM-ddThh:mm", Model.culture)" class="form-control" />
                 <span asp-validation-for="@Model.Ride.StartTime" class="text-danger"></span>
             </div>
 
