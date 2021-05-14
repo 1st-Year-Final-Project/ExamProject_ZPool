@@ -30,7 +30,7 @@ namespace ZPool.Pages.Rides
         public async Task<IActionResult> OnGet()
         {
             var user = await userManager.GetUserAsync(User); // will throw exception if not logged in
-            registeredCars = new SelectList(rideService.GetRegisteredCars(user.Id), "NumberPlate", "NumberPlate");
+            registeredCars = new SelectList(rideService.GetRegisteredCars(user.Id), "CarID", "NumberPlate");
             return Page();
         }
 
