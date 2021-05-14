@@ -1,7 +1,7 @@
 ﻿@page
 @model ZPool.Areas.Identity.Pages.Account.Manage.DeleteMyRideModel
 @{
-    ViewData["Title"] = "Delete My Rides";
+    ViewData["Title"] = "Delete My Ride";
     ViewData["ActivePage"] = ManageNavPages.MyRides;
 }
 
@@ -14,33 +14,18 @@
     <form method="post">
         <dl class="row">
 
-            <dt class="col-sm-2">
-                StartTime
-            </dt>
+            <dt class="col-sm-2">  Start  </dt>
+            <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.StartTime)   </dd>
 
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Ride.StartTime)
-            </dd>
+            <dt class="col-sm-2">  From  </dt>             
+            <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.DepartureLocation)  </dd>
 
-            <dt class="col-sm-2">
-                From 
-            </dt>
-
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Ride.DepartureLocation)
-            </dd>
-
-            <dt class="col-sm-2">
-                To
-            </dt>
-
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Ride.DestinationLocation)
-            </dd>
+            <dt class="col-sm-2">  To </dt>
+            <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.DestinationLocation) </dd>
         </dl>
 
-        <input type="hidden" asp-for="Ride.RideID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <input type="hidden" asp-for="MyRide.RideID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
         <a asp-page="./MyRides">Back to List</a>
     </form>
 </div>

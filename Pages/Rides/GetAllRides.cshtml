@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @using ZPool.Models
 @using ZPool.Pages.Rides
 @model ZPool.Pages.Rides.GetAllRidesModel
@@ -26,19 +26,19 @@
 <div class="container">
     <div class="row mb-2 bg-light">
         <div class="col my-2 py-1 d-flex justify-content-center">
-            
+
             <form class="form-inline">
                 <div class="form-group">
                     <label class="mx-2"></label>
-                    <input type="text" asp-for="@Model.RideCriteria.DepartureLocation" class="form-control rounded-border" style="max-width: 13rem" placeholder="From where?"/>
+                    <input type="text" asp-for="@Model.RideCriteria.DepartureLocation" class="form-control rounded-border" style="max-width: 13rem" placeholder="From where?" />
                 </div>
                 <div class="form-group">
                     <label class="mx-2"></label>
-                    <input type="text" asp-for="@Model.RideCriteria.DestinationLocation" class="form-control rounded-border" style="max-width: 13rem" placeholder="Where to?"/>
+                    <input type="text" asp-for="@Model.RideCriteria.DestinationLocation" class="form-control rounded-border" style="max-width: 13rem" placeholder="Where to?" />
                 </div>
                 <div class="form-group">
                     <label class="mx-2">Date: </label>
-                    <input asp-for="@Model.RideCriteria.StartTime"  asp-format="{0:yyyy-MM-ddTHH:mm}" class="form-control rounded-border" style="max-width: 13rem"/>
+                    <input asp-for="@Model.RideCriteria.StartTime" asp-format="{0:yyyy-MM-ddTHH:mm}" class="form-control rounded-border" style="max-width: 13rem" />
                 </div>
                 <button type="submit" class="btn btn-yellow mx-2">Search ride</button>
                 <a asp-page="GetAllRides" class="btn btn-outline-dark mx-2 rounded-border">Clear Filter</a>
@@ -56,38 +56,38 @@
 
     <table class="table">
         <thead>
-        <tr>
-            <th> RideID </th>
-            <th> StartTime </th>
-            <th> DepartureLocation</th>
-            <th> DestinationLocation </th>
-            <th> SeatsAvailable</th>
-            <th> CarID</th>
-        </tr>
+            <tr>
+                <th> RideID </th>
+                <th> StartTime </th>
+                <th> DepartureLocation</th>
+                <th> DestinationLocation </th>
+                <th> SeatsAvailable</th>
+                <th> CarID</th>
+            </tr>
         </thead>
         <tbody>
 
-        @foreach (var item in Model.Rides)
-        {
-            if(item.StartTime>DateTime.Now)
-            { 
-            <tr>
-                <td> @item.RideID</td>
-                <td> @item.StartTime </td>
-                <td> @item.DepartureLocation </td>
-                <td> @item.DestinationLocation </td>
-                <td> @item.SeatsAvailable </td>
-                <td> @item.CarID </td>
-                <td>
-                    <a asp-page="Ride" asp-route-id="@item.RideID">Details</a>|
-                    <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a>|
-                    <a asp-page="DeleteRide" asp-route-id="@item.RideID">Delete</a> |
+            @foreach (var item in Model.Rides)
+            {
+                if (item.StartTime > DateTime.Now)
+                {
+                    <tr>
+                        <td> @item.RideID</td>
+                        <td> @item.StartTime </td>
+                        <td> @item.DepartureLocation </td>
+                        <td> @item.DestinationLocation </td>
+                        <td> @item.SeatsAvailable </td>
+                        <td> @item.CarID </td>
+                        <td>
+                            <a asp-page="Ride" asp-route-id="@item.RideID">Details</a>|
+                            <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a>|
+                            <a asp-page="DeleteRide" asp-route-id="@item.RideID">Delete</a> |
 
-                </td>
-            </tr>
+                        </td>
+                    </tr>
+                }
             }
-        }
-        
+
 
     </table>
 }

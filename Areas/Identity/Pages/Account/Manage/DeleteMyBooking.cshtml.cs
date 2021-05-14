@@ -2,40 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using UserManagementTestApp.Models;
 using ZPool.Models;
 using ZPool.Services.Interface;
 
 namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
-    public class DeleteMyRideModel : PageModel
+    public class DeleteMyBookingModel : PageModel
     {
+
         [BindProperty]
-        public Ride MyRide { get; set; }
+        public Booking MyBooking { get; set; }
 
-        public IRideService _service;
+        public IBookingService _service;
 
-        public DeleteMyRideModel(IRideService service)
+        public DeleteMyBookingModel(IBookingService service)
         {
             _service = service;
-            MyRide = new Ride();
+            MyBooking = new Booking();
         }
         public void OnGet(int id)
         {
-            MyRide = _service.GetRide(id);
+            MyBooking = _service.GetBookingsByID(id);
         }
 
         public IActionResult OnPost()
         {
-            _service.DeleteRide(MyRide);
+            _service.DeleteBooking(MyBooking);
 
-            return RedirectToPage("./MyRides");
+            return RedirectToPage("./MyBookings");
         }
-
-
 
     }
 }

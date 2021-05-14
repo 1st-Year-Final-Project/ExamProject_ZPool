@@ -11,7 +11,7 @@ using ZPool.Services.Interface;
 
 namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
-    public class MyRidesModel : PageModel
+    public class BookingsForOneRideModel : PageModel
     {
 
         public UserManager<AppUser> _manager;
@@ -21,22 +21,38 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public IBookingService _bookService;
         public IEnumerable<Booking> _bookingsOfOneRide;
 
-        public Dictionary<Ride, IEnumerable<Booking>> _rideBookingMap;
+        //public Dictionary<Ride, IEnumerable<Booking>> _rideBookingMap;
 
-        public MyRidesModel(UserManager<AppUser> manager, IRideService service, IBookingService bookService)
+        [BindProperty] public Ride MyRide { get; set; }
+        //[BindProperty] public IEnumerable<Booking> BookingsOfOneRide { get; set; }
+
+        public BookingsForOneRideModel(UserManager<AppUser> manager, IRideService service, IBookingService bookService)
         {
             _rideService = service;
             _bookService = bookService;
             _manager = manager;
         }
 
-        public async Task OnGet()
+        public void OnGet(int rideId)
         {
-            AppUser user = await _manager.GetUserAsync(User);
-            _myRidesList = _rideService.GetRidesByUser(user);
-            //_bookingsOfOneRide = _bookService.GetBookingsByRide(_myRidesList);
-            //this._rideBookingMap = GetAllBookingsByRides(_myRidesList);
+            MyRide = _rideService.GetRide(rideId);
+            //BookingsOfOneRide = _bookService.GetBookingsByRideId(rideId);
         }
+
+
+        public IEnumerable<Booking> GetBookingsByRideId(int rideId)
+        {
+            return _bookService.GetBookingsByRideId(rideId);
+        }
+
+
+        //public async Task OnGet()
+        //{
+        //    AppUser user = await _manager.GetUserAsync(User);
+        //    _myRidesList = _rideService.GetRidesByUser(user);
+        //    //_bookingsOfOneRide = _bookService.GetBookingsByRide(_myRidesList);
+        //    this._rideBookingMap = GetAllBookingsByRides(_myRidesList);
+        //}
 
         //private Dictionary<Ride, IEnumerable<Booking>> GetAllBookingsByRides(IEnumerable<Ride> rides)
         //{
@@ -50,6 +66,6 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         //    return dictionaryOfBookingsForOneRide;
         //}
 
-    }
 
+    }
 }

@@ -5,7 +5,7 @@
     ViewData["ActivePage"] = ManageNavPages.MyRides;
 }
 
-<h3 style="color:red"> My Rides</h3>
+<h3> My Rides</h3>
 <table class="table">
     <thead>
         <tr>
@@ -13,31 +13,27 @@
             <th> Departure </th>
             <th> Destination </th>
             <th> Car </th>
-            <th> Passengers </th>
+            <th> Received Bookings</th>
+            <th> Comfired Passengers </th>
         </tr>
     </thead>
     <tbody>
 
         @if (Model != null)
         {
-            @foreach (var r in Model._myRides)
+            @foreach (var r in Model._myRidesList)
             {
-                <tr>
-                    <td>  @r.StartTime </td>
-                    <td>  @r.DepartureLocation </td>
-                    <td>  @r.DestinationLocation </td>
-                    <td>  @r.Car </td>
-                    <td>  @r.Bookings </td>
-                    @*<td>  @r.Bookings </td>*@   @*want to use user icon*@
-                    <td>
-                        <p>
-                            <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="text-danger">Cancel</a>
-                        </p>
-                        <p>
-                            <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a>
-                        </p>
-                    </td>
-                </tr>
+        <tr>
+            <td>  @r.StartTime </td>
+            <td>  @r.DepartureLocation </td>
+            <td>  @r.DestinationLocation </td>
+            <td>  @r.Car.Brand  @r.Car.Model </td>
+            <td>  <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID">Who book the ride</a> </td>
+            <td></td>
+            <td>  <a href="/Rides/Ride/@r.RideID" class="text-primary">Details</a>  </td>
+            <td>  <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a>  </td>
+            <td>  <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="text-danger">Cancel</a>  </td>
+        </tr>
             }
         }
 </table>

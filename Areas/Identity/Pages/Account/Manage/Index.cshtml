@@ -24,13 +24,6 @@
 
             <label for="genders">Choose your gender:</label><br />
 
-            @*@foreach (var gender in Model.Genders)
-            {
-                <input type="radio" asp-for="UserGender" value="@gender" />@gender<br />
-            }*@
-
-            @*</form>*@
-
             <div class="form-group">
             <select asp-for="@Model.UserGender" class="form-control" asp-items="@Model.Genders">
                 <option value="">-- Select your gender --</option>

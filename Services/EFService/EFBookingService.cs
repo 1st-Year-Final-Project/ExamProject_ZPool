@@ -71,10 +71,26 @@ namespace ZPool.Services.EFService
         {
             return from booking
                    in service.Bookings.
-                   Where(b => b.AppUserID.
-                   Equals(user.Id))
+                   Where(b => b.AppUserID.Equals(user.Id))
                    select booking;
-        }           
+        }
+
+        public IEnumerable<Booking> GetBookingsByRideId(int rideId)
+        {
+            return from booking
+                   in service.Bookings.
+                   Where(b => b.RideID.Equals(rideId))
+                   select booking;
+        }
+
+        //public IEnumerable<Booking> GetBookingsByRide(Ride ride)
+        //{
+        //    return from booking
+        //           in service.Bookings.
+        //           Where(b => b.Ride.Equals(ride))
+        //           select booking;
+        //}
+
 
 
         public void UpdateBookingStatus(int id, string newBookingStatus)
