@@ -35,8 +35,9 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         public string Introduction { get; set; }
         public SelectList Genders { get; set; }
 
+        [BindProperty] public byte[] UserAvatar { get; set; }
         [BindProperty] public string UserGender { get; set; }
-        //public string[] Genders = new[] { "Male", "Female", "Unspecified", "Don't want to say!" };
+        
 
         [BindProperty] public InputModel Input { get; set; }
 
@@ -44,6 +45,8 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         {
             public string UserGender { get; set; }
             public string Introduction { get; set; }
+            public string Avatar { get; set; }
+            public string UserAvatar { get; internal set; }
         }
 
         private async Task LoadAsync(AppUser user)
@@ -54,14 +57,16 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             FirstName = user.FirstName;
             LastName = user.LastName;
             Email = user.Email;
-            var introduction = user.Introduction;
             UserGender = user.Gender;
-            // ProfilePicture = user.ProfilePicture;
+            var introduction = user.Introduction;
+            var avatar = user.Avatar;
 
             Input = new InputModel
             {
-                Introduction = introduction
+                Introduction = introduction,
+                UserAvatar = avatar.ToString()
             };
+            
         }
 
         public async Task<IActionResult> OnGetAsync()
@@ -72,7 +77,6 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            //Genders = new SelectList("Male", "Female", "Nonbinary", "Don't want to say");
             await LoadAsync(user);
             return Page();              
         }
@@ -105,7 +109,14 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
                 user.Gender = UserGender;
                 await _userManager.UpdateAsync(user);
             }
-           
+
+            var avatar = user.Avatar;
+            if (UserAvatar != avatar)
+            {
+                user.Avatar = UserAvatar;
+                await _userManager.UpdateAsync(user);
+            }
+
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

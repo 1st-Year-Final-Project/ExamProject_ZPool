@@ -12,6 +12,20 @@
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+            <div class="profile-pic-div">
+                <img src="~/images/N1.jpg" id="photo" height="200" width="200">
+                <input type="file" id="file">
+                <label for="file" id="uploadBtn"></label>
+            </div>
+
+
+            <script src="app.js"></script>
+
+
+
+
+
+
             <div class="form-group">
                 <label asp-for="FirstName"></label>
                 <input asp-for="FirstName" class="form-control" disabled />
@@ -25,16 +39,16 @@
             <label for="genders">Choose your gender:</label><br />
 
             <div class="form-group">
-            <select asp-for="@Model.UserGender" class="form-control" asp-items="@Model.Genders">
-                <option value="">-- Select your gender --</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Nonbinary">Nonbinary</option>
-                <option value="Don't want to say">Don't want to say</option>
+                <select asp-for="@Model.UserGender" class="form-control" asp-items="@Model.Genders">
+                    <option value="">-- Select your gender --</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Nonbinary">Nonbinary</option>
+                    <option value="Don't want to say">Don't want to say</option>
 
-            </select>
-            <span asp-validation-for="@Model.UserGender" class="text-danger"></span>
-        </div>
+                </select>
+                <span asp-validation-for="@Model.UserGender" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <label asp-for="Email"></label>

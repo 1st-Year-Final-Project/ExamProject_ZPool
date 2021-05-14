@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Identity\Pages\Account\Manage\Index1.cshtml.cs" />
     <Compile Remove="Migrations\20210511103800_updateBookingModel5.cs" />
     <Compile Remove="Migrations\20210511103800_updateBookingModel5.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Identity\Pages\Account\Manage\Index1.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
