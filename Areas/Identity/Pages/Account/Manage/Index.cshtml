@@ -7,23 +7,71 @@
 
 <h4>@ViewData["Title"]</h4>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
+
 <div class="row">
     <div class="col-md-6">
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <br /><br /><br /><br />
 
-            <div class="profile-pic-div">
-                <img src="~/images/N1.jpg" id="photo" height="200" width="200">
-                <input type="file" id="file">
-                <label for="file" id="uploadBtn"></label>
+            <div class="avatar-div" title="choose your avatar">
+                <a asp-page="./SelectAvatar" >
+                    <img src="~/images/N1.jpg" id="photo" height="200" width="200">
+                    <input type="file" id="file">
+                    <label for="file" id="uploadBtn"></label>
+                </a>
             </div>
+            <br /><br /><br /><br />
 
+            @*@if (Model != null)
+            {
+                @foreach (var r in Model.UserAvatar)
+                {
+                    <tr>
+                        <td>  <a href="./SelectAvatar/@r." class="text-primary">Details</a>  </td>                         
+                    </tr>
+                }
+            }*@
 
-            <script src="app.js"></script>
+            <style>
+                .avatar-div {
+                    height: 150px;
+                    width: 150px;
+                    position: absolute;
+                    top: 15%;
+                    right: 15%;
+                    transform: translate(-50%,-50%);
+                    border-radius: 50%;
+                    overflow: hidden;
+                    border: 1px solid grey;
+                }
 
+                #photo {
+                    height: 100%;
+                    width: 100%;
+                }
 
+                #file {
+                    display: none;
+                }
 
-
+                #uploadBtn {
+                    height: 150px;
+                    width: 150px;
+                    position: absolute;
+                    top: 15%;
+                    right: 15%;
+                    transform: translateX(-50%);
+                    text-align: center;
+                    background: rgba(0, 0, 0, 0.7);
+                    color: wheat;
+                    line-height: 30px;
+                    font-family: sans-serif;
+                    font-size: 15px;
+                    cursor: pointer;
+                    display: none;
+                }
+            </style>
 
 
             <div class="form-group">

@@ -64,7 +64,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 Introduction = introduction,
-                UserAvatar = avatar.ToString()
+                //UserAvatar = avatar.ToString()
             };
             
         }
