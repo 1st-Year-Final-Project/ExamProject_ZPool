@@ -5,7 +5,7 @@
     ViewData["ActivePage"] = ManageNavPages.MyRides;
 }
 
-<h1>Delete My Ride</h1>
+<h2>Delete My Ride</h2>
 
 <h3>Are you sure you want to delete the following ride?</h3>
 <div>
@@ -17,7 +17,7 @@
             <dt class="col-sm-2">  Start  </dt>
             <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.StartTime)   </dd>
 
-            <dt class="col-sm-2">  From  </dt>             
+            <dt class="col-sm-2">  From  </dt>
             <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.DepartureLocation)  </dd>
 
             <dt class="col-sm-2">  To </dt>
@@ -25,7 +25,10 @@
         </dl>
 
         <input type="hidden" asp-for="MyRide.RideID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        
+        <br /> <br />
+
         <a asp-page="./MyRides">Back to List</a>
     </form>
 </div>

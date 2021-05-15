@@ -35,7 +35,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         public string Introduction { get; set; }
         public SelectList Genders { get; set; }
 
-        [BindProperty] public byte[] UserAvatar { get; set; }
+        [BindProperty] public string UserAvatarName { get; set; }
         [BindProperty] public string UserGender { get; set; }
         
 
@@ -45,8 +45,20 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         {
             public string UserGender { get; set; }
             public string Introduction { get; set; }
-            public string Avatar { get; set; }
-            public string UserAvatar { get; internal set; }
+            public string UserAvatarName { get; set; }
+        }
+
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            await LoadAsync(user);
+            return Page();
         }
 
         private async Task LoadAsync(AppUser user)
@@ -58,27 +70,19 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             LastName = user.LastName;
             Email = user.Email;
             UserGender = user.Gender;
-            var introduction = user.Introduction;
-            var avatar = user.Avatar;
 
-            Input = new InputModel
+            string avatarName = user.AvatarName;
+            if (avatarName == "")
             {
-                Introduction = introduction,
-                //UserAvatar = avatar.ToString()
-            };
-            
-        }
-
-        public async Task<IActionResult> OnGetAsync()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                UserAvatarName = "C://Users//wenqi//source//repos//ExamProject_ZPool//wwwroot//images//defult.png";
             }
 
-            await LoadAsync(user);
-            return Page();              
+            var introduction = user.Introduction;
+            Input = new InputModel
+            {
+                Introduction = introduction
+                //UserAvatar = avatar.ToString()?????????
+            };            
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -110,12 +114,12 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
                 await _userManager.UpdateAsync(user);
             }
 
-            var avatar = user.Avatar;
-            if (UserAvatar != avatar)
-            {
-                user.Avatar = UserAvatar;
-                await _userManager.UpdateAsync(user);
-            }
+            //var avatar = user.AvatarName;
+            //if (UserAvatar != avatar)
+            //{
+            //    user.Avatar = UserAvatar;
+            //    await _userManager.UpdateAsync(user);
+            //}
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

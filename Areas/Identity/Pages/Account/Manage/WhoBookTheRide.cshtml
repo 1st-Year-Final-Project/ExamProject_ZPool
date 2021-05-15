@@ -15,19 +15,74 @@
             <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.StartTime)   </dd>
 
             <dt class="col-sm-2">  From   </dt>
-            <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.DepartureLocation)  </dd>     
-            
+            <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.DepartureLocation)  </dd>
+
             <dt class="col-sm-2">  To
             <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.DestinationLocation) </dd>
-            
+
             <dt class="col-sm-2">  By </dt>
             <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.Car.Brand) </dd>
         </dl>
         <hr /><br />
 
+        <h4>Bookers:</h4>
+
+        <div>
+            @{ foreach (var booking in Model.BookingsOfOneRide)
+                {
+                    if (booking != null)
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gender</th>
+                                    <th>Avatar</th>
+                                    <th>BookingStatus</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>@booking.AppUser.FirstName</td>
+                                    <td>@booking.AppUser.LastName</td>
+                                    <td>@booking.AppUser.Gender</td>
+                                    <td>@booking.AppUser.AvatarName</td>
+                                    <td>@booking.BookingStatus</td>
+
+
+                                    @if (booking.BookingStatus == "Pending")
+                                    {
+                                        <td>
+                                            <div class="form group">
+                                                <form asp-page-handler="Accept" method="post">
+                                                    <button class="btn btn-primary">Accept</button>
+                                                    <input type="hidden" name="id" value="@booking.BookingID" />
+                                                </form>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form group">
+                                                <form asp-page-handler="Reject" method="post">
+                                                    <button class="btn btn-primary">Reject</button>
+                                                    <input type="hidden" name="id" value="@booking.BookingID" />
+                                                </form>
+                                            </div>
+                                        </td>
+                                    }
 
 
 
+
+                                <tr />
+                        </table>
+                    }
+                }
+            }
+        </div>
         <br /><hr />
         <input type="hidden" asp-for="MyRide.RideID" />
         <a asp-page="./MyRides">Back to List</a>
