@@ -3,9 +3,8 @@
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
+    var imageFlag = Model.UserAvatarName;
 }
-
-
 
 <h3>Profile</h3>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
@@ -16,24 +15,46 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <br /><br /><br /><br />
 
-            
-
             <div class="avatar-div" title="choose your avatar">
-            <a asp-page="./SelectAvatar">
-                @{ <img src="@Model.UserAvatarName" id="photo" height="200" width="200">}
+                <a asp-page="./SelectAvatar">
+                    @{
+                        if (imageFlag.Equals("default"))
+                        {
+                            <img src="~/images/defult.png" id="photo" height="200" width="200" class="img-thumbnail">
+                        }
 
+                        if (imageFlag.Equals("n1"))
+                        {
+                            <img src="~/images/N1.jpg" id="photo" height="200" width="200" class="img-thumbnail">
+                        }
 
+                        if (imageFlag.Equals("n2"))
+                        {
+                            <img src="~/images/N2.jpg" id="photo" height="200" width="200" class="img-thumbnail">
+                        }
 
-                <input type="file" id="file">
-                <label for="file" id="uploadBtn"></label>
-            </a>
-        </div>
+                        if (imageFlag.Equals("n3"))
+                        {
+                            <img src="~/images/N3.jpg" id="photo" height="200" width="200" class="img-thumbnail">
+                        }
+
+                        if (imageFlag.Equals("n4"))
+                        {
+                            <img src="~/images/N4.jpg" id="photo" height="200" width="200" class="img-thumbnail">
+                        }
+
+                        if (imageFlag.Equals("n5"))
+                        {
+                            <img src="~/images/N5.jpg" id="photo" height="200" width="200" class="img-thumbnail">
+                        }
+
+                    }
+
+                    <input type="file" id="file">
+                    <label for="file" id="uploadBtn"></label>
+                </a>
+            </div>
             <br /><br /><br /><br />
-
-            
-
-
-
 
             <style>
                 .avatar-div {

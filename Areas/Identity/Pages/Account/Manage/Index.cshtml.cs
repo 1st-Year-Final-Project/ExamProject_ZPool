@@ -37,7 +37,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 
         [BindProperty] public string UserAvatarName { get; set; }
         [BindProperty] public string UserGender { get; set; }
-        
+
 
         [BindProperty] public InputModel Input { get; set; }
 
@@ -45,7 +45,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         {
             public string UserGender { get; set; }
             public string Introduction { get; set; }
-            public string UserAvatarName { get; set; }
+            //public string UserAvatarName { get; set; }
         }
 
 
@@ -72,9 +72,9 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             UserGender = user.Gender;
 
             string avatarName = user.AvatarName;
-            if (avatarName == "")
+            if (avatarName == "" || avatarName == null)
             {
-                UserAvatarName = "C://Users//wenqi//source//repos//ExamProject_ZPool//wwwroot//images//defult.png";
+                UserAvatarName = "default";
             }
 
             var introduction = user.Introduction;
@@ -82,7 +82,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             {
                 Introduction = introduction
                 //UserAvatar = avatar.ToString()?????????
-            };            
+            };
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -100,7 +100,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             }
 
             var introduction = user.Introduction;
-            if(Input.Introduction != introduction)
+            if (Input.Introduction != introduction)
             {
                 user.Introduction = Input.Introduction;
                 await _userManager.UpdateAsync(user);

@@ -34,20 +34,10 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             AppUser user = await _maneger.GetUserAsync(User);
             MyRide = _rideService.GetRide(id);
 
-            List<Booking> bookings = _bookingService.GetBookingsByRideId(id).ToList();
-
-            //loading dependent AppUser for each Booking
-
-            foreach (Booking booking in bookings)
-            {
-                int appUserId = booking.AppUserID;
-                await _maneger.FindByIdAsync(appUserId.ToString());
-            }
-
-            BookingsOfOneRide = bookings;
+            await LoadBookingByRideId(id);
         }
 
-        public void OnPostAccept(int id)
+        public async Task OnPostAccept(int id)
         {
             try
             {
@@ -57,10 +47,16 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             {
                 Message = ex.Message;
             }
+
+            //reconstruc the data senario            
+            int rideId = GetRideIdFromBooking(id);
+            await LoadBookingByRideId(rideId);
+            MyRide = _rideService.GetRide(rideId);
+
             RedirectToPage("WhoBookTheRide");
         }
 
-        public void OnPostReject(int id)
+        public async Task OnPostReject(int id)
         {
             try
             {
@@ -70,10 +66,16 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             {
                 Message = ex.Message;
             }
+
+            //reconstruc the data senario            
+            int rideId = GetRideIdFromBooking(id);
+            await LoadBookingByRideId(rideId);
+            MyRide = _rideService.GetRide(rideId);
+
             RedirectToPage("WhoBookTheRide");
         }
 
-        public void OnPostCancel(int id)
+        public async Task OnPostCancel(int id)
         {
             try
             {
@@ -83,9 +85,33 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             {
                 Message = ex.Message;
             }
+
+            //reconstruc the data senario            
+            int rideId = GetRideIdFromBooking(id);
+            await LoadBookingByRideId(rideId);
+            MyRide = _rideService.GetRide(rideId);
+
             RedirectToPage("WhoBookTheRide");
         }
+        private async Task LoadBookingByRideId(int rideId)
+        {
+            List<Booking> bookings = _bookingService.GetBookingsByRideId(rideId).ToList();
 
+            //loading dependent AppUser for each Booking
+            foreach (Booking booking in bookings)
+            {
+                int appUserId = booking.AppUserID;
+                await _maneger.FindByIdAsync(appUserId.ToString());
+            }
+
+            BookingsOfOneRide = bookings;
+        }
+
+        private int GetRideIdFromBooking(int bookingId)
+        {
+            Booking currentBooking = _bookingService.GetBookingsByID(bookingId);
+            return currentBooking.RideID;
+        }
     }
 
 }
