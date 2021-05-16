@@ -1,13 +1,12 @@
 ﻿@page
-@model IndexModel
+@model ZPool.Areas.Identity.Pages.Account.Manage.ReadOnlyProfilePageModel
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
     var imageFlag = Model.UserAvatarName;
 }
 
-<h3>Profile</h3>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<h3>@Model.User s'Profile</h3>
 
 <div class="row">
     <div class="col-md-6">
@@ -18,32 +17,32 @@
             <div class="avatar-div" title="choose your avatar">
                 <a asp-page="./SelectAvatar">
                     @{
-                        if (imageFlag.Equals("default.png"))
+                        if (imageFlag.Equals("default"))
                         {
                             <img src="~/images/defult.png" id="photo" height="200" width="200">
                         }
 
-                        if (imageFlag.Equals("N1.jpg"))
+                        if (imageFlag.Equals("n1"))
                         {
                             <img src="~/images/N1.jpg" id="photo" height="200" width="200">
                         }
 
-                        if (imageFlag.Equals("N2.jpg"))
+                        if (imageFlag.Equals("n2"))
                         {
                             <img src="~/images/N2.jpg" id="photo" height="200" width="200">
                         }
 
-                        if (imageFlag.Equals("N3.jpg"))
+                        if (imageFlag.Equals("n3"))
                         {
                             <img src="~/images/N3.jpg" id="photo" height="200" width="200">
                         }
 
-                        if (imageFlag.Equals("N4.jpg"))
+                        if (imageFlag.Equals("n4"))
                         {
                             <img src="~/images/N4.jpg" id="photo" height="200" width="200">
                         }
 
-                        if (imageFlag.Equals("N5.jpg"))
+                        if (imageFlag.Equals("n5"))
                         {
                             <img src="~/images/N5.jpg" id="photo" height="200" width="200">
                         }
@@ -53,6 +52,7 @@
                     <label for="file" id="uploadBtn"></label>
                 </a>
             </div>
+
 
             <style>
                 .avatar-div {
@@ -72,7 +72,7 @@
                     width: 100%;
                 }
             </style>
-            <br /><br /><br /><br />
+            <br /><br /><br /><br /><br /><br /><br /><br />
 
             <div class="form-group">
                 <label asp-for="FirstName"></label>
@@ -84,36 +84,21 @@
                 <input asp-for="LastName" class="form-control" disabled />
             </div>
 
-            <label for="genders">Choose your gender:</label><br />
-
             <div class="form-group">
-                <select asp-for="@Model.UserGender" class="form-control" asp-items="@Model.Genders">
-                    <option value="">-- Select your gender --</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Nonbinary">Nonbinary</option>
-                    <option value="Don't want to say">Don't want to say</option>
-
-                </select>
-                <span asp-validation-for="@Model.UserGender" class="text-danger"></span>
+                <label asp-for="UserGender"></label>
+                <input asp-for="UserGender" class="form-control" disabled />
             </div>
 
             <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" disabled />
+                <label asp-for="Introduction"></label>
+                <input asp-for="Introduction" class="form-control" disabled />
             </div>
 
-            <div class="form-group" width="53" height="10">
-                <label asp-for="Input.Introduction" width="53" height="10"> About Me</label>
-                <input asp-for="Input.Introduction" class="form-control" width="53" height="10" />
-                <span asp-validation-for="Input.Introduction" class="text-danger" width="53" height="10"></span>
-            </div>
 
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+
+
+
+
+
+
         </form>
-    </div>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
