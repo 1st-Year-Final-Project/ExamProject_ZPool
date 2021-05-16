@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
@@ -12,7 +13,7 @@ using ZPool.Services.Interface;
 
 namespace ZPool.Pages.Messages
 {
-    
+    [Authorize]
     public class MessagesModel : PageModel
     {
         private IMessageService _messageService;
@@ -33,11 +34,18 @@ namespace ZPool.Pages.Messages
         
         public List<Message> Messages { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             CurrentUser = await _userManager.GetUserAsync(User);
+
+            if (CurrentUser == null)
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity", returnUrl = "/Pages/Messages/Messages"});
+            }
+
             Messages = _messageService.GetMessagesByUserId(CurrentUser.Id);
             ListLength = 8;
+            return Page();
         }
 
         public async Task<IActionResult> OnPostSendAsync()
