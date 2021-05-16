@@ -51,7 +51,43 @@
                                     <td>@booking.AppUser.FirstName</td>
                                     <td>@booking.AppUser.LastName</td>
                                     <td>@booking.AppUser.Gender</td>
-                                    <td></td>
+                                    <td>
+                                        <a asp-page="./ReadOnlyProfilePage" asp-route-id="@booking.AppUserID">
+                                            @{
+                                                var imageFlag = booking.AppUser.AvatarName;
+                                                if (imageFlag.Equals("default.png"))
+                                                {
+                                                    <img src="~/images/defult.png" id="photo" height="50" width="50">
+                                                }
+
+                                                if (imageFlag.Equals("N1.jpg"))
+                                                {
+                                                    <img src="~/images/N1.jpg" id="photo" height="50" width="50">
+                                                }
+
+                                                if (imageFlag.Equals("N2.jpg"))
+                                                {
+                                                    <img src="~/images/N2.jpg" id="photo" height="50" width="50">
+                                                }
+
+                                                if (imageFlag.Equals("N3.jpg"))
+                                                {
+                                                    <img src="~/images/N3.jpg" id="photo" height="50" width="50">
+                                                }
+
+                                                if (imageFlag.Equals("N4.jpg"))
+                                                {
+                                                    <img src="~/images/N4.jpg" id="photo" height="50" width="50">
+                                                }
+
+                                                if (imageFlag.Equals("N5.jpg"))
+                                                {
+                                                    <img src="~/images/N5.jpg" id="photo" height="50" width="50">
+                                                }
+                                            }                                          
+                                        </a>                                    
+
+                                    </td>
                                     <td>@booking.BookingStatus</td>
 
 
@@ -74,10 +110,6 @@
                                             </div>
                                         </td>
                                     }
-
-
-
-
                                 <tr />
                         </table>
                     }

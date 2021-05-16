@@ -21,6 +21,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public IBookingService _bookingService;
         public IRideService _rideService;
         public string Message { get; set; }
+        public string UserAvatarName { get; set; }
 
         public WhoBookTheRideModel(UserManager<AppUser> maneger, IBookingService bookingService, IRideService rideService)
         {
@@ -101,6 +102,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             foreach (Booking booking in bookings)
             {
                 int appUserId = booking.AppUserID;
+                
                 await _maneger.FindByIdAsync(appUserId.ToString());
             }
 

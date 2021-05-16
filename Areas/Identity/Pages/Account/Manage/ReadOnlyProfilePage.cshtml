@@ -6,73 +6,51 @@
     var imageFlag = Model.UserAvatarName;
 }
 
-<h3>@Model.User s'Profile</h3>
+<h3>@Model.FirstName 's Profile</h3>
 
 <div class="row">
     <div class="col-md-6">
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <br /><br /><br /><br />
+            <br /><br />
 
-            <div class="avatar-div" title="choose your avatar">
-                <a asp-page="./SelectAvatar">
-                    @{
-                        if (imageFlag.Equals("default"))
-                        {
-                            <img src="~/images/defult.png" id="photo" height="200" width="200">
-                        }
-
-                        if (imageFlag.Equals("n1"))
-                        {
-                            <img src="~/images/N1.jpg" id="photo" height="200" width="200">
-                        }
-
-                        if (imageFlag.Equals("n2"))
-                        {
-                            <img src="~/images/N2.jpg" id="photo" height="200" width="200">
-                        }
-
-                        if (imageFlag.Equals("n3"))
-                        {
-                            <img src="~/images/N3.jpg" id="photo" height="200" width="200">
-                        }
-
-                        if (imageFlag.Equals("n4"))
-                        {
-                            <img src="~/images/N4.jpg" id="photo" height="200" width="200">
-                        }
-
-                        if (imageFlag.Equals("n5"))
-                        {
-                            <img src="~/images/N5.jpg" id="photo" height="200" width="200">
-                        }
+            <div class="form-group">
+                <label asp-for="@Model.UserAvatarName" hidden></label>
+                <input asp-for="@Model.UserAvatarName" class="form-control" disabled hidden />
+                @{
+                    if (imageFlag.Equals("default.png"))
+                    {
+                        <img src="~/images/defult.png" id="photo" height="200" width="200">
                     }
 
-                    <input type="file" id="file">
-                    <label for="file" id="uploadBtn"></label>
-                </a>
+                    if (imageFlag.Equals("N1.jpg"))
+                    {
+                        <img src="~/images/N1.jpg" id="photo" height="200" width="200">
+                    }
+
+                    if (imageFlag.Equals("N2.jpg"))
+                    {
+                        <img src="~/images/N2.jpg" id="photo" height="200" width="200">
+                    }
+
+                    if (imageFlag.Equals("N3.jpg"))
+                    {
+                        <img src="~/images/N3.jpg" id="photo" height="200" width="200">
+                    }
+
+                    if (imageFlag.Equals("N4.jpg"))
+                    {
+                        <img src="~/images/N4.jpg" id="photo" height="200" width="200">
+                    }
+
+                    if (imageFlag.Equals("N5.jpg"))
+                    {
+                        <img src="~/images/N5.jpg" id="photo" height="200" width="200">
+                    }
+                }
             </div>
 
-
-            <style>
-                .avatar-div {
-                    height: 150px;
-                    width: 150px;
-                    position: absolute;
-                    top: 15%;
-                    right: 15%;
-                    transform: translate(-50%,-50%);
-                    border-radius: 50%;
-                    overflow: hidden;
-                    border: 1px solid grey;
-                }
-
-                #photo {
-                    height: 100%;
-                    width: 100%;
-                }
-            </style>
-            <br /><br /><br /><br /><br /><br /><br /><br />
+            <br /><br />
 
             <div class="form-group">
                 <label asp-for="FirstName"></label>
@@ -93,12 +71,6 @@
                 <label asp-for="Introduction"></label>
                 <input asp-for="Introduction" class="form-control" disabled />
             </div>
-
-
-
-
-
-
-
-
         </form>
+    </div>
+</div>

@@ -25,9 +25,12 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public string UserAvatarName { get; set; }
         public string UserGender { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            var user = await _userManager.GetUserAsync(User);
+            //var user = await _userManager.GetUserAsync(User);
+
+            var user = await _userManager.FindByIdAsync(id.ToString());
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -51,7 +54,12 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             if (avatarName == "" || avatarName == null)
             {
                 UserAvatarName = "default";
-            }            
+            }
+            else
+            {
+                UserAvatarName = avatarName;
+            } 
+            
         }
 
         public async Task<IActionResult> OnPostAsync()
