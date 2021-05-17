@@ -75,7 +75,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             
             if (string.IsNullOrEmpty(avatarName))
             {
-                UserAvatarName = "default";
+                UserAvatarName = "default.png";
             }
             else
             {
