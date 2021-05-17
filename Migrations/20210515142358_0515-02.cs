@@ -2,29 +2,27 @@
 
 namespace ZPool.Migrations
 {
-    public partial class requiredAttr : Migration
+    public partial class _051502 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "MessageBody",
-                table: "Messages",
-                maxLength: 240,
-                nullable: false,
+                name: "AvatarName",
+                table: "AspNetUsers",
+                nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(max)",
-                oldNullable: true);
+                oldType: "nvarchar(max)");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "MessageBody",
-                table: "Messages",
+                name: "AvatarName",
+                table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: true,
+                nullable: false,
                 oldClrType: typeof(string),
-                oldMaxLength: 240);
+                oldNullable: true);
         }
     }
 }

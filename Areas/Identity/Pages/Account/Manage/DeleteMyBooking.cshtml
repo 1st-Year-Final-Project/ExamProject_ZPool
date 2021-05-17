@@ -1,0 +1,54 @@
+﻿@page
+@model ZPool.Areas.Identity.Pages.Account.Manage.DeleteMyBookingModel
+@{
+    ViewData["Title"] = "Delete My Booking";
+    ViewData["ActivePage"] = ManageNavPages.MyBookings;
+}
+
+<h3>Delete My Booking</h3>
+
+<h4>Are you sure you want to delete the following booking?</h4>
+<div>
+
+    <hr />
+    <form method="post">
+        <dl class="row">
+
+            <dt class="col-sm-2">
+                StartTime
+            </dt>
+
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MyBooking.Date)
+            </dd>
+
+            <dt class="col-sm-2">
+                Status
+            </dt>
+
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MyBooking.BookingStatus)
+            </dd>
+
+            <dt class="col-sm-2">
+                From
+            </dt>
+
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MyBooking.PickUpLocation)
+            </dd>
+
+            <dt class="col-sm-2">
+                To
+            </dt>
+
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MyBooking.DropOffLocation)
+            </dd>
+        </dl>
+
+        <input type="hidden" asp-for="MyBooking.BookingID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./MyBookings">Back to List</a>
+    </form>
+</div>

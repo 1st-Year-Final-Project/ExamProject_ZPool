@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Identity\Pages\Account\Manage\Index1.cshtml.cs" />
     <Compile Remove="Migrations\20210511103800_updateBookingModel5.cs" />
     <Compile Remove="Migrations\20210511103800_updateBookingModel5.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Identity\Pages\Account\Manage\Index1.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +29,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.11" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
     <PackageReference Include="VisioForge.DotNet.Core.TRIAL" Version="14.0.42" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

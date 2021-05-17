@@ -24,7 +24,6 @@ namespace ZPool.Pages.Rides
             _userManager = userServise;
             _bookingService = bookingService;
         }
-
         
         public Ride Ride { get; set; }
 
