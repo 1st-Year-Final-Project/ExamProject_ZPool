@@ -13,15 +13,14 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
     public class WhoBookTheRideModel : PageModel
     {
-        [BindProperty]
-        public Ride MyRide { get; set; }
+        [BindProperty] public Ride MyRide { get; set; }
+        //[BindProperty] public string UserAvatarName { get; set; }
         public IEnumerable<Booking> BookingsOfOneRide { get; set; }
-
         public UserManager<AppUser> _maneger;
         public IBookingService _bookingService;
         public IRideService _rideService;
         public string Message { get; set; }
-        public string UserAvatarName { get; set; }
+        
 
         public WhoBookTheRideModel(UserManager<AppUser> maneger, IBookingService bookingService, IRideService rideService)
         {
@@ -36,6 +35,27 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             MyRide = _rideService.GetRide(id);
 
             await LoadBookingByRideId(id);
+        }
+
+        private async Task LoadBookingByRideId(int rideId)
+        {
+            List<Booking> bookings = _bookingService.GetBookingsByRideId(rideId).ToList();
+
+            //loading dependent AppUser for each Booking
+            foreach (Booking booking in bookings)
+            {
+                int appUserId = booking.AppUserID;
+
+                await _maneger.FindByIdAsync(appUserId.ToString());
+            }
+
+            BookingsOfOneRide = bookings;
+        }
+
+        private int GetRideIdFromBooking(int bookingId)
+        {
+            Booking currentBooking = _bookingService.GetBookingsByID(bookingId);
+            return currentBooking.RideID;
         }
 
         public async Task OnPostAccept(int id)
@@ -94,26 +114,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 
             RedirectToPage("WhoBookTheRide");
         }
-        private async Task LoadBookingByRideId(int rideId)
-        {
-            List<Booking> bookings = _bookingService.GetBookingsByRideId(rideId).ToList();
-
-            //loading dependent AppUser for each Booking
-            foreach (Booking booking in bookings)
-            {
-                int appUserId = booking.AppUserID;
-                
-                await _maneger.FindByIdAsync(appUserId.ToString());
-            }
-
-            BookingsOfOneRide = bookings;
-        }
-
-        private int GetRideIdFromBooking(int bookingId)
-        {
-            Booking currentBooking = _bookingService.GetBookingsByID(bookingId);
-            return currentBooking.RideID;
-        }
+       
     }
 
 }
