@@ -56,36 +56,36 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th> RideID </th>
-                <th> StartTime </th>
-                <th> DepartureLocation</th>
-                <th> DestinationLocation </th>
-                <th> SeatsAvailable</th>
-                <th> CarID</th>
-            </tr>
+        <tr>
+            <th> RideID </th>
+            <th> StartTime </th>
+            <th> DepartureLocation</th>
+            <th> DestinationLocation </th>
+            <th> SeatsAvailable</th>
+            <th> NumberPlate</th>
+        </tr>
         </thead>
         <tbody>
 
-            @foreach (var item in Model.Rides)
-            {
-                if (item.StartTime > DateTime.Now)
-                {
-                    <tr>
-                        <td> @item.RideID</td>
-                        <td> @item.StartTime </td>
-                        <td> @item.DepartureLocation </td>
-                        <td> @item.DestinationLocation </td>
-                        <td> @item.SeatsAvailable </td>
-                        <td> @item.CarID </td>
-                        <td>
-                            <a asp-page="Ride" asp-route-id="@item.RideID">Details</a>|
-                            <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a>|
-                            <a asp-page="DeleteRide" asp-route-id="@item.RideID">Delete</a> |
+        @foreach (var item in Model.Rides)
+        {
+            if(item.StartTime>DateTime.Now)
+            { 
+            <tr>
+                <td> @item.RideID</td>
+                <td> @item.StartTime </td>
+                <td> @item.DepartureLocation </td>
+                <td> @item.DestinationLocation </td>
+                <td> @item.SeatsAvailable </td>
+                <td> @item.Car.NumberPlate </td>
+                <td>
+                    <a asp-page="Ride" asp-route-id="@item.RideID">Details</a> |
+                    <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a> |
+                    <a asp-page="DeleteRide" asp-route-id="@item.RideID">Delete</a> |
 
-                        </td>
-                    </tr>
-                }
+                </td>
+            </tr>
+
             }
 
 

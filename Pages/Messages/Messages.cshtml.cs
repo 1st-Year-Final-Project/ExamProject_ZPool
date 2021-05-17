@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UserManagementTestApp.Models;
 using ZPool.Models;
@@ -11,6 +13,7 @@ using ZPool.Services.Interface;
 
 namespace ZPool.Pages.Messages
 {
+    [Authorize]
     public class MessagesModel : PageModel
     {
         private IMessageService _messageService;
@@ -24,23 +27,34 @@ namespace ZPool.Pages.Messages
 
         [BindProperty]
         public Message NewMessage { get; set; }
-
+        [ValidateNever]
         public AppUser CurrentUser { get; set; }
         [BindProperty]
         public int ListLength { get; set; }
-
+        
         public List<Message> Messages { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             CurrentUser = await _userManager.GetUserAsync(User);
+
+            if (CurrentUser == null)
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity", returnUrl = "/Pages/Messages/Messages"});
+            }
+
             Messages = _messageService.GetMessagesByUserId(CurrentUser.Id);
             ListLength = 8;
+            return Page();
         }
 
-        public async Task<IActionResult> OnPostSend()
+        public async Task<IActionResult> OnPostSendAsync()
         {
             NewMessage.SendingDate = DateTime.Now;
+            if (!ModelState.IsValid)
+            {
+                return RedirectToPage("Messages");
+            }
             _messageService.CreateMessage(NewMessage);
             return RedirectToPage("Messages");
         }

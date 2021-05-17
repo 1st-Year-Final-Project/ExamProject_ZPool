@@ -47,7 +47,6 @@ namespace ZPool.Pages.Bookings
                 Message = ex.Message;
             }
             RedirectToPage("GetBookings");
-
         }
 
         public void OnPostReject(int id)

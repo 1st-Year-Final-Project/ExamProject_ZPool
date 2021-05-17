@@ -27,7 +27,6 @@ namespace ZPool.Pages.Rides
         
         public Ride Ride { get; set; }
 
-        
         public int RideId { get; set; }
 
         public AppUser CurrentUser { get; set; }
@@ -56,11 +55,7 @@ namespace ZPool.Pages.Rides
                 _bookingService.AddBooking(booking);
             }
             
-            // the question is where in the whole process should be the method for the notification
-            // I think in the Service class, as an extra method
-            // it keeps the frontend clean and it is not the ride pages concern to send any notifications
-
-            return RedirectToPage("/Bookings/GetBookings"); // tbd ... my bookings?
+            return RedirectToPage("/Account/Manage/MyBookings", new { area = "Identity" });
         }
 
         public void OnPostDelete(int rideId)

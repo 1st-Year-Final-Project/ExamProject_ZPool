@@ -25,7 +25,13 @@
                 <div class="mt-5">
                     <form method="post">
 
-                        @if (Model.CurrentUser != null && Model.CurrentUser.Id == Model.Ride.Car.AppUserID)
+                        @if (Model.CurrentUser == null)
+                        {
+                            <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Rides/Ride?id=@Model.Ride.RideID">
+                                You must be logged in to book a ride.
+                            </a>
+                        }
+                        else if (Model.CurrentUser != null && Model.CurrentUser.Id == Model.Ride.Car.AppUserID)
                         {
                             <button disabled class="btn rounded-border btn-outline-dark tooltip">
                                 Book ride
@@ -40,11 +46,7 @@
 
                     </form>
                 </div>
-
-
             </div>
-            
-
         </div>
     </div>
 
@@ -53,7 +55,6 @@
             <div style="max-width: 15rem; max-height: 15rem">
                 <img src="/images/userimage_blank.png" style="max-width: 100%; object-fit: contain"/>
             </div>
-
         </div>
         <div class="col col-md-8">
             <ul class="list-unstyled">

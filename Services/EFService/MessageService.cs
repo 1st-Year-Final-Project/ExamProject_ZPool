@@ -72,6 +72,14 @@ namespace ZPool.Services.EFService
             return messages.Count > 0 ? true : false;
         }
 
+        public void DeleteMessagesByUserId(int id)
+        {
+            _context.Messages.FromSqlRaw("spDeleteMessagesByID {0}", id)
+                .ToList()
+                .FirstOrDefault();
+            _context.SaveChanges();
+        }
+
 
     }
 }
