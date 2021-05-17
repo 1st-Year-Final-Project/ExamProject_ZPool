@@ -12,7 +12,7 @@
         AppUser user = await UserManager.GetUserAsync(User);
         if (MessageService.HasUnreadMessages(user.Id))
         {
-            smsClass = "border border-danger";
+            smsClass = "border border-danger rounded-border";
         }
     }
 }
