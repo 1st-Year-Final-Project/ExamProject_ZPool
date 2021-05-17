@@ -1,11 +1,15 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using UserManagementTestApp.Models;
+using ZPool.Models;
+using ZPool.Services.Interface;
 
 namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 {
@@ -14,15 +18,21 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
+        private ICarService _carService;
+        private IMessageService _messageService;
 
         public DeletePersonalDataModel(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeletePersonalDataModel> logger,
+            ICarService carService,
+            IMessageService messageService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _carService = carService;
+            _messageService = messageService;
         }
 
         [BindProperty]
@@ -67,6 +77,13 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            foreach (var car in _carService.GetCarsByUser(user.Id))
+            {
+                _carService.DeleteCar(car);
+            }
+            _messageService.DeleteMessagesByUserId(user.Id);
+
+
             var result = await _userManager.DeleteAsync(user);
             var userId = await _userManager.GetUserIdAsync(user);
             if (!result.Succeeded)
@@ -80,5 +97,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 
             return Redirect("~/");
         }
+
+
     }
 }

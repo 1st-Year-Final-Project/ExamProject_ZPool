@@ -21,9 +21,17 @@ namespace ZPool.Services.EFService
             context.SaveChanges();
         }
 
+        //public void DeleteCar(Car car)
+        //{
+        //    context.Cars.Remove(car);
+        //    context.SaveChanges();
+        //}
+
         public void DeleteCar(Car car)
         {
-            context.Cars.Remove(car);
+            context.Cars.FromSqlRaw("spDeleteCarByID {0}", car.CarID)
+                .ToList()
+                .FirstOrDefault();
             context.SaveChanges();
         }
 

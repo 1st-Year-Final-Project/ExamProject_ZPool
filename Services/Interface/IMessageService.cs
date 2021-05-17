@@ -14,5 +14,6 @@ namespace ZPool.Services.Interface
         List<Message> GetMessagesByUserId(int userId);
         bool HasUnreadMessages(int userId);
         void SetStatusToRead(int id);
+        void DeleteMessagesByUserId(int id);
     }
 }
