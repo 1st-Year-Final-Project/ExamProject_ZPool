@@ -27,7 +27,7 @@
 
                         @if (Model.CurrentUser == null)
                         {
-                            <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Rides/Ride?id=@Model.Ride.RideID">
+                            <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Rides/Ride/@Model.Ride.RideID">
                                 You must be logged in to book a ride.
                             </a>
                         }
@@ -53,27 +53,38 @@
     <div class="row" style="margin-top: 4rem">
         <div class="col col-md-4">
             <div style="max-width: 15rem; max-height: 15rem">
-                <img src="/images/userimage_blank.png" style="max-width: 100%; object-fit: contain"/>
+                @if (Model.Ride.Car.AppUser.AvatarName != null)
+                {
+                    <img src="/images/@Model.Ride.Car.AppUser.AvatarName" style="max-width: 100%; object-fit: contain" />
+                }
+                else
+                {
+                    <img src="/images/userimage_blank.png" style="max-width: 100%; object-fit: contain" />
+                }
             </div>
         </div>
         <div class="col col-md-8">
             <ul class="list-unstyled">
                 <li><h4>@Model.Ride.Car.AppUser.UserName</h4></li>
                 <li>Car: @Model.Ride.Car</li>
-                <li>
-                    <form method="post" asp-page-handler="Send" class="mt-3">
-                        <div class="form-group" style="width: 15rem">
-                            <input hidden asp-for="RideId" value="@Model.RideId"/>
-                            <input hidden asp-for="Message.SenderId" value="@Model.CurrentUser.Id"/>
-                            <input hidden asp-for="Message.ReceiverId" value="@Model.Ride.Car.AppUserID"/>
-                            <textarea rows="4" class="form-control" asp-for="Message.MessageBody" placeholder="Send me a message"></textarea>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-yellow rounded-border">Send message</button>
-                        </div>
-                        
-                    </form>
-                </li>
+
+                @if (Model.CurrentUser != null)
+                {
+                    <li>
+                        <form method="post" asp-page-handler="Send" class="mt-3">
+                            <div class="form-group" style="width: 15rem">
+                                <input hidden asp-for="RideId" value="@Model.RideId" />
+                                <input hidden asp-for="Message.SenderId" value="@Model.CurrentUser.Id" />
+                                <input hidden asp-for="Message.ReceiverId" value="@Model.Ride.Car.AppUserID" />
+                                <textarea rows="4" class="form-control" asp-for="Message.MessageBody" placeholder="Send me a message"></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-yellow rounded-border">Send message</button>
+                            </div>
+                        </form>
+                    </li>
+                }
+
             </ul>
         </div>
     </div>
