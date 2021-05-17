@@ -1,14 +1,13 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ZPool.Migrations
 {
-    public partial class _0514 : Migration
+    public partial class avatarColumn : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<byte[]>(
-                name: "Avatar",
+            migrationBuilder.AddColumn<string>(
+                name: "AvatarName",
                 table: "AspNetUsers",
                 nullable: true);
         }
@@ -16,7 +15,7 @@ namespace ZPool.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Avatar",
+                name: "AvatarName",
                 table: "AspNetUsers");
         }
     }
