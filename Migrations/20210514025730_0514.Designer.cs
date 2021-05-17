@@ -10,8 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210512085428_testMessages")]
-    partial class testMessages
+    [Migration("20210514025730_0514")]
+    partial class _0514
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,6 +161,9 @@ namespace ZPool.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<byte[]>("Avatar")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -249,9 +252,11 @@ namespace ZPool.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DropOffLocation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PickUpLocation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RideID")
@@ -277,18 +282,21 @@ namespace ZPool.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Brand")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberOfSeats")
                         .HasColumnType("int");
 
                     b.Property<string>("NumberPlate")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CarID");
@@ -309,7 +317,9 @@ namespace ZPool.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("MessageBody")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(240)")
+                        .HasMaxLength(240);
 
                     b.Property<int>("ReceiverId")
                         .HasColumnType("int");

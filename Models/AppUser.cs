@@ -18,9 +18,8 @@ namespace UserManagementTestApp.Models
         public override int Id { get; set; } // this is overridden from the baseclass, pls don't change
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string? Gender { get; set; }  
+        public string? Gender { get; set; }
         public string? Introduction { get; set; }
-
-        /// suggest: add an attribute of profilePicture
+        public string? AvatarName { get; set; } 
     }
 }

@@ -10,8 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210512093045_idsrequired")]
-    partial class idsrequired
+    [Migration("20210514220205_0515")]
+    partial class _0515
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,6 +161,10 @@ namespace ZPool.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("AvatarName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -249,9 +253,11 @@ namespace ZPool.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DropOffLocation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PickUpLocation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RideID")
@@ -277,18 +283,21 @@ namespace ZPool.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Brand")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("NumberOfSeats")
                         .HasColumnType("int");
 
                     b.Property<string>("NumberPlate")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CarID");

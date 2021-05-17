@@ -19,6 +19,8 @@ namespace ZPool.Services.Interface
 
         // Method for Profile Page
         public IEnumerable<Booking> GetBookingsByUser(AppUser user);
+        //public IEnumerable<Booking> GetBookingsByRide(Ride ride);
+        public IEnumerable<Booking> GetBookingsByRideId(int rideId);
 
         public void UpdateBookingStatus(int id, string bookingStatus);
 
