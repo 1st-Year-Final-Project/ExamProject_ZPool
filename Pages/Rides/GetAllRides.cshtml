@@ -69,8 +69,8 @@
 
         @foreach (var item in Model.Rides)
         {
-            if(item.StartTime>DateTime.Now)
-            { 
+            if (item.StartTime > DateTime.Now)
+            {
             <tr>
                 <td> @item.RideID</td>
                 <td> @item.StartTime </td>
@@ -88,7 +88,7 @@
 
             }
 
-
+        }
     </table>
 }
 else
