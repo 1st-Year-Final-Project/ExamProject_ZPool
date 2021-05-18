@@ -63,6 +63,7 @@ namespace ZPool.Services.EFService.RideService
         public IEnumerable<Ride> FilterRides(Ride ride)
         {
             var rides = service.Rides
+                .Include(r=>r.Car)
                 .AsNoTracking()
                 .AsEnumerable()
                 .Where(r=>CheckDeparture(r, ride.DepartureLocation))

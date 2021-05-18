@@ -13,21 +13,43 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
     public class MyRidesModel : PageModel
     {
+
         public UserManager<AppUser> _manager;
-        public IRideService _service;
+        public IRideService _rideService;
+        public IEnumerable<Ride> _myRidesList;
 
-        public IEnumerable<Ride> _myRides;
+        public IBookingService _bookService;
+        public IEnumerable<Booking> _bookingsOfOneRide;
 
-        public MyRidesModel(UserManager<AppUser> manager, IRideService service)
+        public Dictionary<Ride, IEnumerable<Booking>> _rideBookingMap;
+
+        public MyRidesModel(UserManager<AppUser> manager, IRideService service, IBookingService bookService)
         {
-            _service = service;
+            _rideService = service;
+            _bookService = bookService;
             _manager = manager;
         }
 
         public async Task OnGet()
         {
             AppUser user = await _manager.GetUserAsync(User);
-            _myRides = _service.GetRidesByUser(user);
+            _myRidesList = _rideService.GetRidesByUser(user);
+            //_bookingsOfOneRide = _bookService.GetBookingsByRide(_myRidesList);
+            //this._rideBookingMap = GetAllBookingsByRides(_myRidesList);
         }
+
+        //private Dictionary<Ride, IEnumerable<Booking>> GetAllBookingsByRides(IEnumerable<Ride> rides)
+        //{
+        //    Dictionary<Ride, IEnumerable<Booking>> dictionaryOfBookingsForOneRide = new Dictionary<Ride, IEnumerable<Booking>>();
+        //    foreach (Ride ride in rides)
+        //    {
+        //        IEnumerable<Booking> bookings = _bookService.GetBookingsByRide(ride);
+        //        if (bookings != null && bookings.Count() > 0) { dictionaryOfBookingsForOneRide.Add(ride, bookings); }
+        //    }
+
+        //    return dictionaryOfBookingsForOneRide;
+        //}
+
     }
+
 }

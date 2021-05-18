@@ -42,5 +42,7 @@ namespace ZPool.Pages.Rides
                 RideCriteria.StartTime = DateTime.Now;
             }
         }
+
+        
     }
 }

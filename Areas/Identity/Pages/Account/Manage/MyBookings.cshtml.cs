@@ -29,5 +29,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             AppUser user = await _manager.GetUserAsync(User);
             _myBookings = _service.GetBookingsByUser(user);
         }
+
+
     }
 }

@@ -14,23 +14,23 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
     public class DeleteMyRideModel : PageModel
     {
         [BindProperty]
-        public Ride Ride { get; set; }
+        public Ride MyRide { get; set; }
 
         public IRideService _service;
 
         public DeleteMyRideModel(IRideService service)
         {
             _service = service;
-            Ride = new Ride();
+            MyRide = new Ride();
         }
         public void OnGet(int id)
         {
-            Ride = _service.GetRide(id);
+            MyRide = _service.GetRide(id);
         }
 
         public IActionResult OnPost()
         {
-            _service.DeleteRide(Ride);
+            _service.DeleteRide(MyRide);
 
             return RedirectToPage("./MyRides");
         }

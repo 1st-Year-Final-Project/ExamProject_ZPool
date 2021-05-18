@@ -35,8 +35,9 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         public string Introduction { get; set; }
         public SelectList Genders { get; set; }
 
+        [BindProperty] public string UserAvatarName { get; set; }
         [BindProperty] public string UserGender { get; set; }
-        //public string[] Genders = new[] { "Male", "Female", "Unspecified", "Don't want to say!" };
+
 
         [BindProperty] public InputModel Input { get; set; }
 
@@ -44,6 +45,20 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         {
             public string UserGender { get; set; }
             public string Introduction { get; set; }
+            //public string UserAvatarName { get; set; }
+        }
+
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            await LoadAsync(user);
+            return Page();
         }
 
         private async Task LoadAsync(AppUser user)
@@ -54,27 +69,25 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             FirstName = user.FirstName;
             LastName = user.LastName;
             Email = user.Email;
-            var introduction = user.Introduction;
             UserGender = user.Gender;
-            // ProfilePicture = user.ProfilePicture;
 
+            string avatarName = user.AvatarName;
+            
+            if (string.IsNullOrEmpty(avatarName))
+            {
+                UserAvatarName = "default.png";
+            }
+            else
+            {
+                UserAvatarName = user.AvatarName;
+            }
+
+            var introduction = user.Introduction;
             Input = new InputModel
             {
                 Introduction = introduction
+                //UserAvatar = avatar.ToString()?????????
             };
-        }
-
-        public async Task<IActionResult> OnGetAsync()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            //Genders = new SelectList("Male", "Female", "Nonbinary", "Don't want to say");
-            await LoadAsync(user);
-            return Page();              
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -92,12 +105,11 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             }
 
             var introduction = user.Introduction;
-            if(Input.Introduction != introduction)
+            if (Input.Introduction != introduction)
             {
                 user.Introduction = Input.Introduction;
                 await _userManager.UpdateAsync(user);
             }
-
 
             var gender = user.Gender;
             if (UserGender != gender)
@@ -105,7 +117,14 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
                 user.Gender = UserGender;
                 await _userManager.UpdateAsync(user);
             }
-           
+
+            var avatar = user.AvatarName;
+            if (UserAvatarName != avatar)
+            {
+                user.AvatarName = UserAvatarName;
+                await _userManager.UpdateAsync(user);
+            }
+
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

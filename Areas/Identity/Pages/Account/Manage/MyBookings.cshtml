@@ -6,7 +6,7 @@
 }
 
 
-<h3 style="color:red"> My Bookings</h3>
+<h3> My Bookings</h3>
 
 <table class="table">
     <thead>
@@ -23,15 +23,13 @@
         {
             @foreach (var b in Model._myBookings)
             {
-                <tr>
-                    <td>  @b.Date </td>
-                    <td>  @b.PickUpLocation </td>
-                    <td>  @b.DropOffLocation </td>
-                    @*<td>  @b.Confirmed </td>*@
-                </tr>
-            <td>
-                <a asp-page="CancleBooking" asp-route-id="@b.RideID">Delete</a> |
-            </td>
-        }
+        <tr>
+            <td>  @b.Date </td>
+            <td>  @b.PickUpLocation </td>
+            <td>  @b.DropOffLocation </td>
+            <td>  @b.BookingStatus </td>
+            <td>   <a asp-page="./DeleteMyBooking" asp-route-id="@b.BookingID" class="btn btn-danger">Cancel</a> </td>
+        </tr>   
+            }
         }
     </table>
