@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal.Account;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UserManagementTestApp.Models;
@@ -17,12 +18,17 @@ namespace ZPool.Pages.Rides
         private IRideService _rideService;
         private UserManager<AppUser> _userManager;
         private IBookingService _bookingService;
+        private IMessageService _messageService;
 
-        public RideModel(IRideService rideService, UserManager<AppUser> userServise, IBookingService bookingService)
+        public RideModel(IRideService rideService, 
+            UserManager<AppUser> userServise, 
+            IBookingService bookingService, 
+            IMessageService messageService)
         {
             _rideService = rideService;
             _userManager = userServise;
             _bookingService = bookingService;
+            _messageService = messageService;
         }
         
         public Ride Ride { get; set; }
@@ -30,6 +36,8 @@ namespace ZPool.Pages.Rides
         public int RideId { get; set; }
 
         public AppUser CurrentUser { get; set; }
+
+        public Message Message { get; set; }
 
         public async Task OnGetAsync(int id)
         {
@@ -63,6 +71,14 @@ namespace ZPool.Pages.Rides
             Ride ride = _rideService.GetRide(rideId);
             _rideService.DeleteRide(ride);
             RedirectToPage("/GetAllRides");
+        }
+
+        public async Task<IActionResult> OnPostSend()
+        {
+            CurrentUser = await _userManager.GetUserAsync(User);
+            Message.SendingDate = DateTime.Now;
+            _messageService.CreateMessage(Message);
+            return RedirectToPage("/Rides/Ride", new { id = RideId});
         }
     }
 }

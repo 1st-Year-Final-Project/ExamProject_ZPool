@@ -38,9 +38,9 @@
 
         </div>
         <div class="row d-flex justify-content-center">
-            @if (Model.NewMessage == null)
+            @if (Model.NewMessage == null || Model.NewMessage.ReceiverId == 0)
             {
-                <button type="submit" class="btn btn-yellow" disabled="">Send</button>
+                <button type="submit" class="btn btn-yellow" disabled>Send</button>
             }
             else
             {
