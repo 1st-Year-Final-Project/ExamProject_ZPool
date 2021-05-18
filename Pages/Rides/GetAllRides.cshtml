@@ -1,9 +1,10 @@
 ﻿@page 
 @using ZPool.Models
 @using ZPool.Pages.Rides
+@using ZPool.Services.Interface
 @model ZPool.Pages.Rides.GetAllRidesModel
 @{
-    ViewData["Title"] = "GetAllRides";
+    ViewData["Title"] = "Rides";
 }
 
 <div>
@@ -49,7 +50,7 @@
 </div>
 <!-- Search box end -->
 
-
+<!-- Results -->
 @if (@Model.Rides.Count() > 0)
 {
     <table class="table">
