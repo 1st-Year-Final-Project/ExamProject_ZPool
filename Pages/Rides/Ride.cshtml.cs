@@ -66,11 +66,11 @@ namespace ZPool.Pages.Rides
             return RedirectToPage("/Account/Manage/MyBookings", new { area = "Identity" });
         }
 
-        public void OnPostDelete(int rideId)
+        public IActionResult OnPostDelete(int rideId)
         {
             Ride ride = _rideService.GetRide(rideId);
             _rideService.DeleteRide(ride);
-            RedirectToPage("/GetAllRides");
+            return RedirectToPage("/Rides/GetAllRides");
         }
 
         public async Task<IActionResult> OnPostSend()
