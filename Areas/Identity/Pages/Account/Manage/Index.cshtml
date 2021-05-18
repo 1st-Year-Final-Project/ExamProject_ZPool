@@ -103,15 +103,22 @@
                 <input asp-for="Email" class="form-control" disabled />
             </div>
 
-            <div class="form-group" width="53" height="10">
+            
+                <div class="form-group">
+                    <label class="control-label">About Me</label>
+                    <textarea asp-for="@Model.Introduction" class="form-control" cols="50" rows="10"></textarea>
+                    @*<div asp-validation-for="Introduction" class="text-secondary">*@
+                </div>
+            
+
+            @*<div class="form-group" width="53" height="10">
                 <label asp-for="Input.Introduction" width="53" height="10"> About Me</label>
                 <input asp-for="Input.Introduction" class="form-control" width="53" height="10" />
                 <span asp-validation-for="Input.Introduction" class="text-danger" width="53" height="10"></span>
-            </div>
+            </div>*@
 
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
-    </div>
 </div>
 
 @section Scripts {
