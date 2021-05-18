@@ -20,10 +20,11 @@ namespace ZPool.Pages.Administration
 
         public IEnumerable<AppUser> Users { get; set; }
 
+        public string StatusMessage { get; set; }
 
-
-        public void OnGet()
+        public void OnGet(string statusMessage)
         {
+            StatusMessage = statusMessage;
             Users = _userManager.Users;
         }
 

@@ -37,8 +37,11 @@ namespace ZPool.Pages.Administration
 
         public List<IdentityError> ErrorList { get; set; } = new List<IdentityError>();
 
-        public async Task OnGetAsync(int userId)
+        public string StatusMessage { get; set; }
+
+        public async Task OnGetAsync(int userId, string statusMessage)
         {
+            StatusMessage = statusMessage;
             AppUser user = await _userManager.FindByIdAsync(userId.ToString());
             UserId = userId;
             Input.FirstName = user.FirstName;
@@ -65,7 +68,7 @@ namespace ZPool.Pages.Administration
                 return Page();
             }
 
-            return RedirectToPage($"/Administration/EditUser", new {userId = user.Id});
+            return RedirectToPage($"/Administration/EditUser", new {userId = user.Id, statusMessage = "The user data was updated" });
         }
     }
 }
