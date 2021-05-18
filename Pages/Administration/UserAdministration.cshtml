@@ -25,6 +25,8 @@
                         <td>@u.UserName</td>
                         <td>@u.FirstName @u.LastName</td>
                         <td>@u.Email</td>
+                        <td><a asp-page="EditUser" asp-route-userId="@u.Id">Edit</a></td>
+                        <td><a asp-page="EditUser" asp-route-userId="@u.Id" class="text-danger">Delete</a></td>
                     </tr>
                 }
                 </tbody>
