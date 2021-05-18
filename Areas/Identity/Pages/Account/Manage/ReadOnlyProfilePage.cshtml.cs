@@ -53,7 +53,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             string avatarName = user.AvatarName;
             if (avatarName == "" || avatarName == null)
             {
-                UserAvatarName = "default";
+                UserAvatarName = "default.png";
             }
             else
             {
