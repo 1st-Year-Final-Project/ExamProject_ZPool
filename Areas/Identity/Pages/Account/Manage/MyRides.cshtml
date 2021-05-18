@@ -6,6 +6,12 @@
 }
 
 <h3> My Rides</h3>
+</br>
+
+<a asp-page="/Cars/Create">Create New Ride</a>
+
+</br></br>
+
 <table class="table">
     <thead>
         <tr>
@@ -22,17 +28,17 @@
         {
             @foreach (var r in Model._myRidesList)
             {
-        <tr>
-            <td>  @r.StartTime </td>
-            <td>  @r.DepartureLocation </td>
-            <td>  @r.DestinationLocation </td>
-            <td>  @r.Car.Brand  @r.Car.Model </td>
-            <td>  <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID">Who book the ride</a> </td>
-            <td></td>
-            <td>  <a href="/Rides/Ride/@r.RideID" class="text-primary">Details</a>  </td>
-            <td>  <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a>  </td>
-            <td>  <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="btn btn-danger">Cancel</a>  </td>
-        </tr>
+                <tr>
+                    <td>  @r.StartTime </td>
+                    <td>  @r.DepartureLocation </td>
+                    <td>  @r.DestinationLocation </td>
+                    <td>  @r.Car.Brand  @r.Car.Model </td>
+                    <td>  <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID">Who book the ride</a> </td>
+                    <td></td>
+                    <td>  <a href="/Rides/Ride/@r.RideID" class="text-primary">Details</a>  </td>
+                    <td>  <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a>  </td>
+                    <td>  <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="btn btn-danger">Cancel</a>  </td>
+                </tr>
             }
         }
 </table>
