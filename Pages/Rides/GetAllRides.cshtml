@@ -52,18 +52,17 @@
 
 @if (@Model.Rides.Count() > 0)
 {
-
-
     <table class="table">
+
         <thead>
-        <tr>
-            <th> RideID </th>
-            <th> StartTime </th>
-            <th> DepartureLocation</th>
-            <th> DestinationLocation </th>
-            <th> SeatsAvailable</th>
-            <th> NumberPlate</th>
-        </tr>
+            <tr>
+                <th> RideID </th>
+                <th> StartTime </th>
+                <th> DepartureLocation</th>
+                <th> DestinationLocation </th>
+                <th> SeatsAvailable</th>
+                <th> NumberPlate</th>
+            </tr>
         </thead>
         <tbody>
 
@@ -71,6 +70,7 @@
         {
             if (item.StartTime > DateTime.Now)
             {
+
             <tr>
                 <td> @item.RideID</td>
                 <td> @item.StartTime </td>
@@ -87,6 +87,7 @@
             </tr>
 
             }
+
         }
 
     </table>
