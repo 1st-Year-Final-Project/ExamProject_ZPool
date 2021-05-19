@@ -37,10 +37,15 @@
                     <td>  @r.SeatsAvailable </td>
                     <td>  @r.Car.NumberPlate </td>
                     @*<td>  @r.Car.Brand  @r.Car.Model </td>*@
-                    <td>  <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID" class="btn btn-outline-info rounded-border">Booked by</a> </td>
-                    <td>  <a href="/Rides/Ride/@r.RideID" class="text-primary">Details</a>  </td>
-                    <td>  <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a>  </td>
-                    <td>  <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="btn btn-danger rounded-border">Cancel</a>  </td>
+                <td>
+                    <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID" class="text-primary">Booked by</a> |
+                    <a href="/Rides/Ride/@r.RideID" class="text-primary">Details</a> |
+                    <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a> 
+                </td> 
+                <td>
+                    <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="btn btn-danger rounded-border">Cancel</a>
+                </td>
+                    
                 </tr>
             }
         }
