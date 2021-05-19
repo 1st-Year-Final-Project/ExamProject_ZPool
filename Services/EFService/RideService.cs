@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UserManagementTestApp.Models;
 using ZPool.Models;
+using ZPool.Pages.Rides;
 using ZPool.Services.Interface;
 
 namespace ZPool.Services.EFService.RideService
@@ -60,7 +61,7 @@ namespace ZPool.Services.EFService.RideService
             return cars;
         }
 
-        public IEnumerable<Ride> FilterRides(Ride ride)
+        public IEnumerable<Ride> FilterRides(RideCriteriaInputModel ride)
         {
             var rides = service.Rides
                 .Include(r=>r.Car)

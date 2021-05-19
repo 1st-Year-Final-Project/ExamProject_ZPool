@@ -1,6 +1,9 @@
 ﻿@page "{id}"
 @using UserManagementTestApp.Models
+@using ZPool.Models
+@using ZPool.Services.Interface
 @model ZPool.Pages.Rides.RideModel
+@inject IRideService RideService;
 @{
     ViewData["Title"] = "View Ride";
 }
@@ -20,7 +23,7 @@
             <div class="text-center">
                 <h5>Available seats:</h5>
                 <h1>
-                    @Model.Ride.SeatsAvailable
+                   @Model.Ride.SeatsAvailable
                 </h1>
                 <div class="mt-5">
                     <form method="post">
