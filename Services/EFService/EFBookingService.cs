@@ -21,6 +21,15 @@ namespace ZPool.Services.EFService
            _messageService = smsService;
         }
 
+        public bool AlreadyBooked(int rideId, int userId)
+        {
+            int check = service.Bookings
+                .Where(b => b.RideID == rideId)
+                .Where(b=> b.BookingStatus == "Pending" || b.BookingStatus == "Accepted")
+                .Count(b => b.AppUserID == userId);
+            return (check > 0) ? true : false;
+        }
+
         public void AddBooking(Booking booking)
         {
             service.Bookings.Add(booking);
@@ -63,10 +72,7 @@ namespace ZPool.Services.EFService
         {
              return service.Bookings.Find(id);
         }
-
-
-
-
+        
         // Method for Profile page
         public IEnumerable<Booking> GetBookingsByUser(AppUser user)
         {
@@ -93,8 +99,6 @@ namespace ZPool.Services.EFService
         //           select booking;
         //}
 
-
-
         public void UpdateBookingStatus(int id, string newBookingStatus)
         {
            
@@ -117,7 +121,6 @@ namespace ZPool.Services.EFService
             }
             oldBooking.BookingStatus = newBookingStatus;
             service.SaveChanges();
-
         }
     }
          
