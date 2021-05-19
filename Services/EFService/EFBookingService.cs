@@ -32,9 +32,12 @@ namespace ZPool.Services.EFService
 
         public void AddBooking(Booking booking)
         {
-            service.Bookings.Add(booking);
-            service.SaveChanges();
-            SendMessageToDriver(booking);
+            if (!AlreadyBooked(booking.RideID, booking.AppUserID))
+            {
+                service.Bookings.Add(booking);
+                service.SaveChanges();
+                SendMessageToDriver(booking);
+            }
         }
 
         private void SendMessageToDriver(Booking booking)
