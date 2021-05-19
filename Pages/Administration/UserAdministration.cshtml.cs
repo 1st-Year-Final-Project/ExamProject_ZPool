@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Sentry.Protocol;
 using UserManagementTestApp.Models;
 
 namespace ZPool.Pages.Administration
@@ -23,11 +24,34 @@ namespace ZPool.Pages.Administration
         public IEnumerable<AppUser> Users { get; set; }
 
         public string StatusMessage { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string SearchCriteria { get; set; }
 
-        public void OnGet(string statusMessage)
+        public async Task<IActionResult> OnGetAsync(string statusMessage)
         {
-            StatusMessage = statusMessage;
-            Users = _userManager.Users;
+            if (!string.IsNullOrEmpty(SearchCriteria))
+            {
+                AppUser user = await _userManager.FindByEmailAsync(SearchCriteria);
+                if (user != null)
+                {
+                    List<AppUser> users = new List<AppUser>();
+                    users.Add(user);
+                    Users = users;
+                }
+                else
+                {
+                    return RedirectToPage(new {statusMessage = "Error: No user found."});
+                }
+                
+            }
+            else
+            {
+                StatusMessage = statusMessage;
+                Users = _userManager.Users;
+                
+            }
+
+            return Page();
         }
 
 

@@ -7,6 +7,20 @@
 <div class="container">
     <partial name="_StatusMessage" model="Model.StatusMessage" />
     <h3> Administration: Users</h3>
+    <div class="row mb-2">
+        <div class="col">
+            <form method="get">
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label asp-for="SearchCriteria">Find users by email: </label>
+                        <input type="email" asp-for="SearchCriteria" class="form-control rounded-border ml-2"/>
+                        <button type="submit" class="btn btn-yellow rounded-border ml-2">Search</button>
+                        <a asp-page="UserAdministration" class="btn btn-outline-primary rounded-border ml-2">Clear filter</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
 
