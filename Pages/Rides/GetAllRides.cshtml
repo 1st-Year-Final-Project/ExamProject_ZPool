@@ -7,6 +7,7 @@
 @using UserManagementTestApp.Models
 @using ZPool.Services.Interface
 @inject SignInManager<AppUser> SignInManager
+@inject IRideService RideService
 
 @model ZPool.Pages.Rides.GetAllRidesModel
 @{
@@ -75,7 +76,8 @@
                 <th> Date & Time </th>
                 <th> From</th>
                 <th> To </th>
-                <th> Seats Available</th>
+                <th> Seats Total</th>
+                <th> Seats Left</th>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <th> Car</th>
@@ -89,6 +91,7 @@
             {
                 if (item.StartTime > DateTime.Now)
                 {
+
                     <tr>
                         @*<td> @item.RideID</td>*@
                         <td> @item.StartTime </td>
@@ -119,6 +122,7 @@
                     </td>
 
                     </tr>
+
 
 
                 }
