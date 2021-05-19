@@ -12,10 +12,10 @@ namespace ZPool.Services.Interface
    
         public IEnumerable<Booking> GetBookings();
         public Booking GetBookingsByID(int id);
+        bool AlreadyBooked(int rideId, int userId);
         public void AddBooking(Booking booking);
         public void DeleteBooking(Booking booking);
         public void EditBooking(Booking booking);
-
 
         // Method for Profile Page
         public IEnumerable<Booking> GetBookingsByUser(AppUser user);
@@ -23,6 +23,8 @@ namespace ZPool.Services.Interface
         public IEnumerable<Booking> GetBookingsByRideId(int rideId);
 
         public void UpdateBookingStatus(int id, string bookingStatus);
+
+
 
 
     }
