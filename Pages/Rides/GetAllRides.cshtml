@@ -1,8 +1,6 @@
 ﻿@page
-
 @using ZPool.Models
 @using ZPool.Pages.Rides
-
 @using Microsoft.AspNetCore.Identity
 @using UserManagementTestApp.Models
 @using ZPool.Services.Interface
@@ -98,6 +96,7 @@
                         <td> @item.DepartureLocation </td>
                         <td> @item.DestinationLocation </td>
                         <td> @item.SeatsAvailable </td>
+                        <td> @RideService.SeatsLeft(item.RideID)</td>
                         @if (SignInManager.IsSignedIn(User))
                          {
                             <td> @item.Car.NumberPlate </td>
@@ -109,22 +108,19 @@
 
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <a asp-page="EditRides" asp-route-id="@item.RideID">Edit</a>
+                            <a asp-page="/Rides/EditRide" asp-route-id="@item.RideID">Edit</a>
                         }
 
                         |
 
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <a asp-page="DeleteRides" asp-route-id="@item.RideID">Delete</a>
+                            <a asp-page="/Rides/DeleteRide" asp-route-id="@item.RideID">Delete</a>
                         }
 
                     </td>
 
                     </tr>
-
-
-
                 }
 
 
