@@ -76,7 +76,7 @@
                 <li><h4>@Model.Ride.Car.AppUser.UserName</h4></li>
                 <li>Car: @Model.Ride.Car</li>
 
-                @if (Model.CurrentUser != null)
+                @if (Model.CurrentUser != null && Model.CurrentUser.Id != Model.Ride.Car.AppUserID)
                 {
                     <li>
                         <form method="post" asp-page-handler="Send" class="mt-3">
