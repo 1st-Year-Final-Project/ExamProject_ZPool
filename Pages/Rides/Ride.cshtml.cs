@@ -39,10 +39,13 @@ namespace ZPool.Pages.Rides
 
         public Message Message { get; set; }
 
+        public int SeatsLeft { get; set; }
+
         public async Task OnGetAsync(int id)
         {
             Ride = _rideService.GetRide(id);
             RideId = id;
+            SeatsLeft = _rideService.SeatsLeft(RideId);
             CurrentUser = await _userManager.GetUserAsync(User);
         }
 

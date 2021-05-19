@@ -22,10 +22,8 @@
         <div class="col col-md-3 bg-light p-3" style="border-radius: 15px">
             <div class="text-center">
                 <h5>Available seats:</h5>
-                <h1>
-                   @Model.Ride.SeatsAvailable
-                </h1>
-                <div class="mt-5">
+                <h1>@Model.SeatsLeft</h1><h3>of @Model.Ride.SeatsAvailable</h3>
+                <div class="mt-3">
                     <form method="post">
 
                         @if (Model.CurrentUser == null)
@@ -39,6 +37,13 @@
                             <button disabled class="btn rounded-border btn-outline-dark tooltip">
                                 Book ride
                                 <span class="tooltiptext">You can't book your own ride.</span>
+                            </button>
+                        }
+                        else if (Model.SeatsLeft == 0)
+                        {
+                            <button disabled class="btn rounded-border btn-outline-dark tooltip">
+                                Book ride
+                                <span class="tooltiptext">The ride is fully booked.</span>
                             </button>
                         }
                         else

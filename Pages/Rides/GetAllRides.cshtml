@@ -7,6 +7,7 @@
 @using UserManagementTestApp.Models
 @using ZPool.Services.Interface
 @inject SignInManager<AppUser> SignInManager
+@inject IRideService RideService
 
 @model ZPool.Pages.Rides.GetAllRidesModel
 @{
@@ -75,7 +76,8 @@
                 <th> Date & Time </th>
                 <th> From</th>
                 <th> To </th>
-                <th> Seats Available</th>
+                <th> Seats Total</th>
+                <th> Seats Left</th>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <th> Car</th>
@@ -89,23 +91,28 @@
             {
                 if (item.StartTime > DateTime.Now)
                 {
-                    <tr>
-                        @*<td> @item.RideID</td>*@
-                        <td> @item.StartTime </td>
-                        <td> @item.DepartureLocation </td>
-                        <td> @item.DestinationLocation </td>
-                        <td> @item.SeatsAvailable </td>
-                        @if (SignInManager.IsSignedIn(User))
-                         {
-                            <td> @item.Car.NumberPlate </td>
-                         }
-                        <td>
-                            <a asp-page="Ride" asp-route-id="@item.RideID">Details</a> |
-                            <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a> |
-                            <a asp-page="DeleteRide" asp-route-id="@item.RideID">Delete</a> |
-                        </td>
+            
+                <tr>
 
-                    </tr>
+                    @*<td> @item.RideID</td>*@
+                    <td> @item.StartTime </td>
+                    <td> @item.DepartureLocation </td>
+                    <td> @item.DestinationLocation </td>
+                    <td> @item.SeatsAvailable </td>
+                    <td> @RideService.SeatsLeft(item.RideID)</td>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <td> @item.Car.NumberPlate </td>
+                    }
+                    <td>
+                        <a asp-page="Ride" asp-route-id="@item.RideID">Details</a> |
+                        <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a> |
+                        <a asp-page="DeleteRide" asp-route-id="@item.RideID">Delete</a> |
+                    </td>
+
+                </tr>
+            
+            
 
 
                 }
