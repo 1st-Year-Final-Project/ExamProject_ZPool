@@ -49,5 +49,5 @@ namespace ZPool.Pages.Rides
         public string DepartureLocation { get; set; }
         public string DestinationLocation { get; set; }
         public DateTime StartTime { get; set; }
-    }
+    }    
 }
