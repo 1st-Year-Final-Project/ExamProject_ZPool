@@ -6,14 +6,22 @@
 }
 
 <h3> My Rides</h3>
+</hr></br>
+<p>
+    <a asp-page="/Rides/CreateRide" class="btn btn-outline-success rounded-border">Add New Ride</a>
+</p>
+
 <table class="table">
     <thead>
         <tr>
-            <th> Start Time  </th>
-            <th> Departure </th>
-            <th> Destination </th>
-            <th> Car </th>
-            <th> Received Bookings</th>
+
+            <th> Date & Time </th>
+            <th> From </th>
+            <th> To </th>
+            @*<th> Number of Seats </th>*@
+            <th> Car</th>
+
+            @*<th> Received Bookings</th>*@
         </tr>
     </thead>
     <tbody>
@@ -22,17 +30,23 @@
         {
             @foreach (var r in Model._myRidesList)
             {
-        <tr>
-            <td>  @r.StartTime </td>
-            <td>  @r.DepartureLocation </td>
-            <td>  @r.DestinationLocation </td>
-            <td>  @r.Car.Brand  @r.Car.Model </td>
-            <td>  <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID">Who book the ride</a> </td>
-            <td></td>
-            <td>  <a href="/Rides/Ride/@r.RideID" class="text-primary">Details</a>  </td>
-            <td>  <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a>  </td>
-            <td>  <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="btn btn-danger">Cancel</a>  </td>
-        </tr>
+                <tr>
+                    <td>  @r.StartTime </td>
+                    <td>  @r.DepartureLocation </td>
+                    <td>  @r.DestinationLocation </td>
+                    @*<td>  @r.SeatsAvailable </td>*@
+                    <td>  @r.Car.NumberPlate </td>
+                    @*<td>  @r.Car.Brand  @r.Car.Model </td>*@
+                <td>
+                    <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID" class="text-primary">Booked by</a> |
+                    <a href="/Rides/Ride/@r.RideID" class="text-primary">Details</a> |
+                    <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a> 
+                </td> 
+                <td>
+                    <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="btn btn-danger rounded-border">Cancel</a>
+                </td>
+                    
+                </tr>
             }
         }
 </table>

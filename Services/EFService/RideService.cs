@@ -101,5 +101,16 @@ namespace ZPool.Services.EFService.RideService
             IEnumerable<int> lst = service.Cars.Where(c => c.AppUserID.Equals(user.Id)).ToList().Select(c => c.CarID);
             return from r in service.Rides where lst.Contains(r.CarID) select r;
         }
+
+        public int SeatsLeft(int rideId)
+        {
+            int acceptedBookings = service.Bookings
+                .Where(b => b.RideID == rideId)
+                .Count(b => b.BookingStatus == "Accepted");
+
+            int seatsLeft = service.Rides.Find(rideId).SeatsAvailable - acceptedBookings;
+
+            return seatsLeft;
+        }
     }
 }

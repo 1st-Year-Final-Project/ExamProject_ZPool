@@ -56,6 +56,7 @@ namespace UserManagementTestApp
             })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders()
+                .AddRoles<IdentityRole<int>>()
                 .AddDefaultUI();
 
             services.Configure<IdentityOptions>(options =>
@@ -71,7 +72,10 @@ namespace UserManagementTestApp
 
             });
             
-            services.AddRazorPages();
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizeFolder("/Administration");
+            });
             
         }
 

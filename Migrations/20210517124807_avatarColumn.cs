@@ -2,7 +2,7 @@
 
 namespace ZPool.Migrations
 {
-    public partial class avatarName : Migration
+    public partial class avatarColumn : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,28 +1,41 @@
-﻿@page 
+﻿@page
 @using ZPool.Models
 @using ZPool.Pages.Rides
+@using Microsoft.AspNetCore.Identity
+@using UserManagementTestApp.Models
 @using ZPool.Services.Interface
+@inject SignInManager<AppUser> SignInManager
+@inject IRideService RideService
+
 @model ZPool.Pages.Rides.GetAllRidesModel
 @{
     ViewData["Title"] = "Rides";
 }
 
-<div>
-    <a asp-page="CreateRide"> Create a Ride</a>
-</div>
 
 
-<div>
-    <a asp-page="EditRide"> Edit a Ride</a>
-</div>
 
-<div>
-    <a asp-page="DeleteRide"> Delete a Ride</a>
-</div>
+@*<div>
+        <a asp-page="EditRide"> Edit a Ride</a>
+    </div>
+
+    <div>
+        <a asp-page="DeleteRide"> Delete a Ride</a>
+    </div>*@
 
 
-<h4 style="color:black"> List of Rides</h4>
+<h1 style="color:black"> Rides</h1>
+<br>
 
+@if (SignInManager.IsSignedIn(User))
+{
+    <div>
+        <a asp-page="CreateRide" class="btn btn-outline-success rounded-border">Add New Ride</a>
+        @*<a asp-page="CreateRide"> Create a Ride</a>*@
+    </div>
+
+}
+<br>
 <!-- Search box -->
 <div class="container">
     <div class="row mb-2 bg-light">
@@ -57,40 +70,62 @@
 
         <thead>
             <tr>
-                <th> RideID </th>
-                <th> StartTime </th>
-                <th> DepartureLocation</th>
-                <th> DestinationLocation </th>
-                <th> SeatsAvailable</th>
-                <th> NumberPlate</th>
+                @*<th> RideID </th>*@
+                <th> Date & Time </th>
+                <th> From</th>
+                <th> To </th>
+                <th> Seats Total</th>
+                <th> Seats Left</th>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <th> Car</th>
+                }
+
             </tr>
         </thead>
         <tbody>
 
-        @foreach (var item in Model.Rides)
-        {
-            if (item.StartTime > DateTime.Now)
+            @foreach (var item in Model.Rides)
             {
+                if (item.StartTime > DateTime.Now)
+                {
 
-            <tr>
-                <td> @item.RideID</td>
-                <td> @item.StartTime </td>
-                <td> @item.DepartureLocation </td>
-                <td> @item.DestinationLocation </td>
-                <td> @item.SeatsAvailable </td>
-                <td> @item.Car.NumberPlate </td>
-                <td>
-                    <a asp-page="Ride" asp-route-id="@item.RideID">Details</a> |
-                    <a asp-page="EditRide" asp-route-id="@item.RideID">Edit</a> |
-                    <a asp-page="DeleteRide" asp-route-id="@item.RideID">Delete</a> |
+                    <tr>
+                        @*<td> @item.RideID</td>*@
+                        <td> @item.StartTime </td>
+                        <td> @item.DepartureLocation </td>
+                        <td> @item.DestinationLocation </td>
+                        <td> @item.SeatsAvailable </td>
+                        <td> @RideService.SeatsLeft(item.RideID)</td>
+                        @if (SignInManager.IsSignedIn(User))
+                         {
+                            <td> @item.Car.NumberPlate </td>
+                         }
+                    <td>
+                        <a asp-page="Ride" asp-route-id="@item.RideID">Details</a>
 
-                </td>
-            </tr>
 
-            }
 
-        }
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <ins>|</ins> <a asp-page="/Rides/EditRide" asp-route-id="@item.RideID"> Edit</a> <ins>|</ins>
+                        }
 
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <a asp-page="/Rides/DeleteRide" asp-route-id="@item.RideID"> Delete</a>
+                        }
+
+                    </td>
+
+                    </tr>
+                }
+
+
+             }
+
+        </tbody>
     </table>
 }
 else
@@ -101,5 +136,7 @@ else
 }
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page=/Index />Homepage</a>
 </div>
+
+

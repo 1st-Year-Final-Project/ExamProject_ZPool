@@ -21,11 +21,23 @@ namespace ZPool.Services.EFService
            _messageService = smsService;
         }
 
+        public bool AlreadyBooked(int rideId, int userId)
+        {
+            int check = service.Bookings
+                .Where(b => b.RideID == rideId)
+                .Where(b=> b.BookingStatus == "Pending" || b.BookingStatus == "Accepted")
+                .Count(b => b.AppUserID == userId);
+            return (check > 0) ? true : false;
+        }
+
         public void AddBooking(Booking booking)
         {
-            service.Bookings.Add(booking);
-            service.SaveChanges();
-            SendMessageToDriver(booking);
+            if (!AlreadyBooked(booking.RideID, booking.AppUserID))
+            {
+                service.Bookings.Add(booking);
+                service.SaveChanges();
+                SendMessageToDriver(booking);
+            }
         }
 
         private void SendMessageToDriver(Booking booking)
@@ -54,7 +66,8 @@ namespace ZPool.Services.EFService
         public IEnumerable<Booking> GetBookings()
         {
             return service.Bookings
-            .Include(b => b.Ride).ThenInclude(r => r.Car)
+            .Include(b => b.Ride).ThenInclude(r => r.Car).
+             ThenInclude(c =>c.AppUser)
             .Include(b => b.AppUser);
         }
 
@@ -62,15 +75,13 @@ namespace ZPool.Services.EFService
         {
              return service.Bookings.Find(id);
         }
-
-
-
-
+        
         // Method for Profile page
         public IEnumerable<Booking> GetBookingsByUser(AppUser user)
         {
             return from booking
-                   in service.Bookings.
+                   in service.Bookings.Include(r => r.Ride).ThenInclude(c => c.Car).
+                   ThenInclude(c => c.AppUser).
                    Where(b => b.AppUserID.Equals(user.Id))
                    select booking;
         }
@@ -90,8 +101,6 @@ namespace ZPool.Services.EFService
         //           Where(b => b.Ride.Equals(ride))
         //           select booking;
         //}
-
-
 
         public void UpdateBookingStatus(int id, string newBookingStatus)
         {
@@ -115,7 +124,6 @@ namespace ZPool.Services.EFService
             }
             oldBooking.BookingStatus = newBookingStatus;
             service.SaveChanges();
-
         }
     }
          
