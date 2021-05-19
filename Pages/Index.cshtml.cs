@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ZPool.Models;
 
-namespace UserManagementTestApp.Pages
+namespace ZPool.Pages
 {
     public class IndexModel : PageModel
     {

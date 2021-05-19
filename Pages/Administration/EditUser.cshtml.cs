@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using UserManagementTestApp.Models;
+using ZPool.Models;
 using VisioForge.Shared.MediaFoundation;
 
 namespace ZPool.Pages.Administration
 {
+    [Authorize(Roles = "Admin")]
     public class EditUserModel : PageModel
     {
         private UserManager<AppUser> _userManager;

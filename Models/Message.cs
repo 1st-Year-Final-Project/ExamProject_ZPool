@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using UserManagementTestApp.Models;
+using ZPool.Models;
 
 namespace ZPool.Models
 {
