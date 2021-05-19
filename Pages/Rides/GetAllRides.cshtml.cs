@@ -17,10 +17,10 @@ namespace ZPool.Pages.Rides
         public IEnumerable<Ride> Rides { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public Ride RideCriteria { get; set; } = new Ride();
-
+        public RideCriteriaInputModel RideCriteria { get; set; } = new RideCriteriaInputModel();
+        
         public string ScreenMessage { get; set; }
-
+        
         public GetAllRidesModel(IRideService service)
         {
             rideService = service;
@@ -42,8 +42,12 @@ namespace ZPool.Pages.Rides
                 RideCriteria.StartTime = DateTime.Now;
             }
         }
-
     }
 
-    
+    public class RideCriteriaInputModel
+    {
+        public string DepartureLocation { get; set; }
+        public string DestinationLocation { get; set; }
+        public DateTime StartTime { get; set; }
+    }    
 }
