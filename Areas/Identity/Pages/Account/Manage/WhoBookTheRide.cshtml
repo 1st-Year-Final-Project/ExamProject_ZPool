@@ -5,13 +5,13 @@
     ViewData["ActivePage"] = ManageNavPages.MyRides;
 }
 
-<h3>Who book the following ride</h3>
+<h3>Who booked this ride?</h3>
 <hr />
 <div>
     @*<form method="post">*@
     <dl class="row">
 
-        <dt class="col-sm-2">  Start  </dt>
+        <dt class="col-sm-2">  Date & Time  </dt>
         <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.StartTime)   </dd>
 
         <dt class="col-sm-2">  From   </dt>
@@ -20,12 +20,12 @@
         <dt class="col-sm-2">  To
         <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.DestinationLocation) </dd>
 
-        <dt class="col-sm-2">  By </dt>
-        <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.Car.Brand) </dd>
+        <dt class="col-sm-2">  Car </dt>
+        <dd class="col-sm-10"> @Html.DisplayFor(model => model.MyRide.Car.NumberPlate) </dd>
     </dl>
     <hr /><br />
 
-    <h4>Bookers:</h4>
+    <h4>Booked by:</h4>
 
     <div>
         @{ foreach (var booking in Model.BookingsOfOneRide)
@@ -39,82 +39,93 @@
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Gender</th>
-                                <th>Avatar</th>
-                                <th>BookingStatus</th>
+                                <th>Profile</th>
+                                <th>Status</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>@booking.AppUser.FirstName</td>
-                                <td>@booking.AppUser.LastName</td>
-                                <td>@booking.AppUser.Gender</td>
-                                <td>
-                                    <a asp-page="./ReadOnlyProfilePage" asp-route-id="@booking.AppUserID">
-                                        @{
-                                            var imageFlag = booking.AppUser.AvatarName;
+                                    <tr>
+                                        <td>@booking.AppUser.FirstName</td>
+                                        <td>@booking.AppUser.LastName</td>
+                                        <td>@booking.AppUser.Gender</td>
+                                        <td>
+                                            <a asp-page="./ReadOnlyProfilePage" asp-route-id="@booking.AppUserID">
+                                                @{
+                                                    var imageFlag = booking.AppUser.AvatarName;
 
-                                            if (string.IsNullOrEmpty(imageFlag) || imageFlag.Equals("default.png"))
-                                            {
-                                                <img src="~/images/default.png" id="photo" height="50" width="50">
-                                            }
-                                            else
-                                            {
+                                                    if (string.IsNullOrEmpty(imageFlag) || imageFlag.Equals("default.png"))
+                                                    {
+                                                        <img src="~/images/default.png" id="photo" height="50" width="50">
+                                                    }
+                                                    else
+                                                    {
 
-                                                if (imageFlag.Equals("N1.jpg"))
-                                                {
-                                                    <img src="~/images/N1.jpg" id="photo" height="50" width="50">
+                                                        if (imageFlag.Equals("N1.jpg"))
+                                                        {
+                                                            <img src="~/images/N1.jpg" id="photo" height="50" width="50">
+                                                        }
+
+                                                        if (imageFlag.Equals("N2.jpg"))
+                                                        {
+                                                            <img src="~/images/N2.jpg" id="photo" height="50" width="50">
+                                                        }
+
+                                                        if (imageFlag.Equals("N3.jpg"))
+                                                        {
+                                                            <img src="~/images/N3.jpg" id="photo" height="50" width="50">
+                                                        }
+
+                                                        if (imageFlag.Equals("N4.jpg"))
+                                                        {
+                                                            <img src="~/images/N4.jpg" id="photo" height="50" width="50">
+                                                        }
+
+                                                        if (imageFlag.Equals("N5.jpg"))
+                                                        {
+                                                            <img src="~/images/N5.jpg" id="photo" height="50" width="50">
+                                                        }
+                                                    }
                                                 }
+                                            </a>
 
-                                                if (imageFlag.Equals("N2.jpg"))
-                                                {
-                                                    <img src="~/images/N2.jpg" id="photo" height="50" width="50">
-                                                }
+                                        </td>
+                                        <td>@booking.BookingStatus</td>
 
-                                                if (imageFlag.Equals("N3.jpg"))
-                                                {
-                                                    <img src="~/images/N3.jpg" id="photo" height="50" width="50">
-                                                }
-
-                                                if (imageFlag.Equals("N4.jpg"))
-                                                {
-                                                    <img src="~/images/N4.jpg" id="photo" height="50" width="50">
-                                                }
-
-                                                if (imageFlag.Equals("N5.jpg"))
-                                                {
-                                                    <img src="~/images/N5.jpg" id="photo" height="50" width="50">
-                                                }
-                                            }
+                                        @if (booking.BookingStatus == "Accepted")
+                                        {
+                                            <td>
+                                                <div class="form group">
+                                                    <form asp-page-handler="Cancel" method="post">
+                                                        <button class="btn btn-danger rounded-border">Cancel</button>
+                                                        <input type="hidden" name="id" value="@booking.BookingID" />
+                                                    </form>
+                                                </div>
+                                            </td>
                                         }
-                                    </a>
 
-                                </td>
-                                <td>@booking.BookingStatus</td>
-
-
-                                @if (booking.BookingStatus == "Pending")
-                                {
-                                    <td>
-                                        <div class="form group">
-                                            <form asp-page-handler="Accept" method="post">
-                                                <button class="btn btn-primary">Accept</button>
-                                                <input type="hidden" name="id" value="@booking.BookingID" />
-                                            </form>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="form group">
-                                            <form asp-page-handler="Reject" method="post">
-                                                <button class="btn btn-primary">Reject</button>
-                                                <input type="hidden" name="id" value="@booking.BookingID" />
-                                            </form>
-                                        </div>
-                                    </td>
-                                }
-                            <tr />
+                                        @if (booking.BookingStatus == "Pending")
+                                        {
+                                            <td>
+                                                <div class="form group">
+                                                    <form asp-page-handler="Accept" method="post">
+                                                        <button class="btn btn-success">Accept</button>
+                                                        <input type="hidden" name="id" value="@booking.BookingID" />
+                                                    </form>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form group">
+                                                    <form asp-page-handler="Reject" method="post">
+                                                        <button class="btn btn-primary">Reject</button>
+                                                        <input type="hidden" name="id" value="@booking.BookingID" />
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        }
+<tr />
                     </table>
                 }
             }
@@ -122,6 +133,6 @@
     </div>
     <br /><hr />
     <input type="hidden" asp-for="MyRide.RideID" />
-    <a asp-page="./MyRides">Back to List</a>
+    <a asp-page="./MyRides">Back to My Rides</a>
     @*</form>*@
 </div>

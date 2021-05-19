@@ -3,18 +3,24 @@
 @{
     ViewData["Title"] = "My Bookings";
     ViewData["ActivePage"] = ManageNavPages.MyBookings;
+
+
 }
 
 
 <h3> My Bookings</h3>
-
+</hr></br>
 <table class="table">
     <thead>
         <tr>
-            <th> Start Time  </th>
-            <th> Departure </th>
-            <th> Destination </th>
+            <th> Date & Time  </th>
+            <th> From </th>
+            <th> To </th>
+            <th> Passenger </th>
+            <th> Driver </th>
+            <th> Car </th>
             <th> Status </th>
+
         </tr>
     </thead>
     <tbody>
@@ -23,13 +29,17 @@
         {
             @foreach (var b in Model._myBookings)
             {
-        <tr>
-            <td>  @b.Date </td>
-            <td>  @b.PickUpLocation </td>
-            <td>  @b.DropOffLocation </td>
-            <td>  @b.BookingStatus </td>
-            <td>   <a asp-page="./DeleteMyBooking" asp-route-id="@b.BookingID" class="btn btn-danger">Cancel</a> </td>
-        </tr>   
+                <tr>
+                    <td>  @b.Date </td>
+                    <td>  @b.PickUpLocation </td>
+                    <td>  @b.DropOffLocation </td>
+                    <td>  @b.AppUser </td>
+                    <td>  @b.Ride.Car.AppUser.UserName </td>
+                    <td>  @b.Ride.Car.NumberPlate </td>
+                    <td>  @b.BookingStatus </td>
+                    <td>   <a asp-page="./DeleteMyBooking" asp-route-id="@b.BookingID" class="btn btn-danger rounded-border">Cancel</a> </td>
+                </tr>
+
             }
         }
-    </table>
+</table>
