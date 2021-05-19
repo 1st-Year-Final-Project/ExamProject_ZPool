@@ -54,7 +54,8 @@ namespace ZPool.Services.EFService
         public IEnumerable<Booking> GetBookings()
         {
             return service.Bookings
-            .Include(b => b.Ride).ThenInclude(r => r.Car)
+            .Include(b => b.Ride).ThenInclude(r => r.Car).
+             ThenInclude(c =>c.AppUser)
             .Include(b => b.AppUser);
         }
 
@@ -70,7 +71,8 @@ namespace ZPool.Services.EFService
         public IEnumerable<Booking> GetBookingsByUser(AppUser user)
         {
             return from booking
-                   in service.Bookings.
+                   in service.Bookings.Include(r => r.Ride).ThenInclude(c => c.Car).
+                   ThenInclude(c => c.AppUser).
                    Where(b => b.AppUserID.Equals(user.Id))
                    select booking;
         }

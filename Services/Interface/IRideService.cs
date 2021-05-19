@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UserManagementTestApp.Models;
 using ZPool.Models;
+using ZPool.Pages.Rides;
 
 namespace ZPool.Services.Interface
 {
@@ -15,9 +16,11 @@ namespace ZPool.Services.Interface
         public IEnumerable<Ride> GetAllRides();
         public void EditRide(Ride ride);
         public IEnumerable<Car> GetRegisteredCars(int id);
-        IEnumerable<Ride> FilterRides(Ride ride);
+        IEnumerable<Ride> FilterRides(RideCriteriaInputModel ride);
 
         //Method for profile page
         public IEnumerable<Ride> GetRidesByUser(AppUser user);
+        int SeatsLeft(int rideId);
+
     }
 }

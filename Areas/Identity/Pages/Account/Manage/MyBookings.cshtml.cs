@@ -17,6 +17,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public IBookingService _service;
 
         public IEnumerable<Booking> _myBookings;
+      
 
         public MyBookingsModel(IBookingService service, UserManager<AppUser> manager)
         {

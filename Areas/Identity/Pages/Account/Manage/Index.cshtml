@@ -18,7 +18,7 @@
             <div class="avatar-div" title="choose your avatar">
                 <a asp-page="./SelectAvatar">
                     @{
-                        if (imageFlag.Equals("defult.png"))
+                        if (imageFlag.Equals("default.png"))
                         {
                             <img src="~/images/default.png" id="photo" height="200" width="200">
                         }
@@ -76,18 +76,18 @@
 
             <div class="form-group">
                 <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" class="form-control" disabled />
+                <input asp-for="FirstName" class="form-control rounded-border" disabled />
             </div>
 
             <div class="form-group">
                 <label asp-for="LastName"></label>
-                <input asp-for="LastName" class="form-control" disabled />
+                <input asp-for="LastName" class="form-control rounded-border" disabled />
             </div>
 
             <label for="genders">Choose your gender:</label><br />
 
             <div class="form-group">
-                <select asp-for="@Model.UserGender" class="form-control" asp-items="@Model.Genders">
+                <select asp-for="@Model.UserGender" class="form-control rounded-border" asp-items="@Model.Genders">
                     <option value="">-- Select your gender --</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -100,18 +100,25 @@
 
             <div class="form-group">
                 <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" disabled />
+                <input asp-for="Email" class="form-control rounded-border" disabled />
             </div>
 
-            <div class="form-group" width="53" height="10">
+            
+                <div class="form-group">
+                    <label class="control-label">About Me</label>
+                    <textarea asp-for="@Model.Introduction" class="form-control" cols="50" rows="10"></textarea>
+                    @*<div asp-validation-for="Introduction" class="text-secondary">*@
+                </div>
+            
+
+            @*<div class="form-group" width="53" height="10">
                 <label asp-for="Input.Introduction" width="53" height="10"> About Me</label>
-                <input asp-for="Input.Introduction" class="form-control" width="53" height="10" />
+                <input asp-for="Input.Introduction" class="form-control rounded-border" width="53" height="10" />
                 <span asp-validation-for="Input.Introduction" class="text-danger" width="53" height="10"></span>
-            </div>
+            </div>*@
 
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+            <button id="update-profile-button" type="submit" class="btn btn-success rounded-border">Save</button>
         </form>
-    </div>
 </div>
 
 @section Scripts {
