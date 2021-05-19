@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using ZPool.Models;
 using ZPool.Services.Interface;
-using ZPool.Models;
+using UserManagementTestApp.Models;
 using System.Globalization;
 
 namespace ZPool.Pages.Rides

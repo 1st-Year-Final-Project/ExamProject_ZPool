@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ZPool.Models;
+using UserManagementTestApp.Models;
 using ZPool.Helpers;
 using ZPool.Models;
 using ZPool.Services.EFService.RideService;
@@ -22,7 +22,7 @@ using ZPool.Services.EFService;
 
 
 
-namespace ZPool
+namespace UserManagementTestApp
 {
     public class Startup
     {
@@ -56,7 +56,6 @@ namespace ZPool
             })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders()
-                .AddRoles<IdentityRole<int>>()
                 .AddDefaultUI();
 
             services.Configure<IdentityOptions>(options =>
@@ -72,10 +71,7 @@ namespace ZPool
 
             });
             
-            services.AddRazorPages(options =>
-            {
-                options.Conventions.AuthorizeFolder("/Administration");
-            });
+            services.AddRazorPages();
             
         }
 

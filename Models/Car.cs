@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using ZPool.Models;
+using UserManagementTestApp.Models;
 
 namespace ZPool.Models
 {

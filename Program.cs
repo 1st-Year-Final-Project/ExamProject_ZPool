@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ZPool
+namespace UserManagementTestApp
 {
     public class Program
     {

@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using ZPool.Models;
+using UserManagementTestApp.Models;
 
-namespace ZPool.Areas.Identity.Pages.Account.Manage
+namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {
@@ -149,7 +149,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("ZPool"),
+                _urlEncoder.Encode("UserManagementTestApp"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

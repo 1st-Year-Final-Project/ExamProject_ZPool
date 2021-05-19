@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ZPool.Models;
+using UserManagementTestApp.Models;
 
-namespace ZPool.Areas.Identity.Pages.Account.Manage
+namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {

@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using ZPool.Models;
+using UserManagementTestApp.Models;
 using ZPool.Models;
 using ZPool.Services.Interface;
 
-namespace ZPool.Areas.Identity.Pages.Account.Manage
+namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 {
     public class DeletePersonalDataModel : PageModel
     {
