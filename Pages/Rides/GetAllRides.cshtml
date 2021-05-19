@@ -25,7 +25,7 @@
 
 
 <h1 style="color:black"> Rides</h1>
-</br>
+<br>
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -35,7 +35,7 @@
     </div>
 
 }
-</br>
+<br>
 <!-- Search box -->
 <div class="container">
     <div class="row mb-2 bg-light">
@@ -104,18 +104,17 @@
                     <td>
                         <a asp-page="Ride" asp-route-id="@item.RideID">Details</a>
 
-                        |
+
 
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <a asp-page="/Rides/EditRide" asp-route-id="@item.RideID">Edit</a>
+                            <ins>|</ins> <a asp-page="/Rides/EditRide" asp-route-id="@item.RideID"> Edit</a> <ins>|</ins>
                         }
 
-                        |
 
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <a asp-page="/Rides/DeleteRide" asp-route-id="@item.RideID">Delete</a>
+                            <a asp-page="/Rides/DeleteRide" asp-route-id="@item.RideID"> Delete</a>
                         }
 
                     </td>
