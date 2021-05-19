@@ -20,7 +20,7 @@ namespace ZPool.Pages.Rides
         public RideCriteriaInputModel RideCriteria { get; set; } = new RideCriteriaInputModel();
         
         public string ScreenMessage { get; set; }
-        
+
         public GetAllRidesModel(IRideService service)
         {
             rideService = service;
