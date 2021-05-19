@@ -2,22 +2,24 @@
 @model ZPool.Pages.Notification.GetNotificationModel
 @{
 }
-
+  
 <h1>Notifications</h1>
+  </br></br>
 @*@foreach (var b in Model.Rides)
     {
         <div> @b </div>
       }*@
-<h4 style="color:red"> List of Ride bookings</h4>
+@*<h4 style="color:red"> List of Ride bookings</h4>*@
 <table class="table">
     <thead>
         <tr>
-            <th> BookingID </th>
-            <th> Date </th>
-            <th> PickUpLocation</th>
-            <th> DropOffLocation </th>
-            <th> AppUser</th>
-            <th> Ride</th>
+            @*<th> BookingID </th>*@
+            <th> Date & Time </th>
+            <th> From</th>
+            <th> To </th>
+            <th> Passenger</th>
+            <th> Driver</th>
+            <th> Car</th>
             <th> Status</th>
             <th></th>
         </tr>
@@ -30,14 +32,18 @@
             {
                 @if(item.Date.Day> item.Date.Day-5)
                     { 
-        <tr>
-            <td>  @item.BookingID</td>
-            <td>  @item.Date  </td>
-            <td>  @item.PickUpLocation </td>
-            <td>  @item.DropOffLocation </td>
-            <td>  @item.AppUser </td>
-            <td>  @item.Ride.RideID </td>
-            <td>  @item.BookingStatus </td>
+        
+
+
+                <tr>
+                    @*<td>  @item.BookingID</td>*@
+                    <td>  @item.Date  </td>
+                    <td>  @item.PickUpLocation </td>
+                    <td>  @item.DropOffLocation </td>
+                    <td>  @item.AppUser </td>
+                    <td>  @item.Ride.Car.AppUser.UserName </td>
+                    <td>  @item.Ride.Car.NumberPlate </td>
+                    <td>  @item.BookingStatus </td>
 
             @if (Model.LoggedInUser.Id == item.AppUserID)
             {
@@ -52,6 +58,7 @@
                         </div>
                     </td>
                 }
+
 
             }
            
