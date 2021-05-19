@@ -2,13 +2,15 @@
 
 @using ZPool.Models
 @using ZPool.Pages.Rides
+
 @using Microsoft.AspNetCore.Identity
 @using UserManagementTestApp.Models
 @using ZPool.Services.Interface
 @inject SignInManager<AppUser> SignInManager
+
 @model ZPool.Pages.Rides.GetAllRidesModel
 @{
-    ViewData["Title"] = "GetAllRides";
+    ViewData["Title"] = "Rides";
 }
 
 
@@ -62,7 +64,7 @@
 </div>
 <!-- Search box end -->
 
-
+<!-- Results -->
 @if (@Model.Rides.Count() > 0)
 {
     <table class="table">
