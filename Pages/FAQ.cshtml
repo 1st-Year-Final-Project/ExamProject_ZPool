@@ -114,28 +114,24 @@
                                         Carpooling here is mainly about making new friendships and doing our world greener.
                                     </p>
 
-
-
-
-
-
-
-
-
-
-
-
-
-                                    @*Here I stopped*@
-
                                     <h4>How to create a ride?</h4>
                                     <p>
                                         To create a ride you need to be logged in and have at least one car created in your list of cars on your personal profile page.
-                                        After these two conditions are successfully completed, click on the rides page. Here you can see Create a new ride button which will move you to the
-                                        form for filling all the necessary information. In case you decide to not create the ride, just click on the button Back to the list in the end of the page.
+                                        After these two conditions are successfully completed, click on the rides page. Here you can see Add new ride button which will move you to the
+                                        form for filling all the necessary information. In case you decide not to create the ride, just click on the link Back to the list in the end of the page.
                                         Otherwise, in this one form, all the fields are required.After you fill all of them, click on Create button and you are going
                                         to be moved to List of rides where your newly created ride is available.
                                     </p>
+                                    <p>
+                                        Other way is to open your personal profile page by clicking on your name up on the right side and choose the My Rides option on the left side of the page.
+                                        Here you can see the list of your Rides and also a button Add New Ride which will move you to the form for creating a ride.
+                                    </p>
+                                    <p>
+                                        In case you are still completely lost and have no idea how to access the form for creating a ride, here is the link but don't forget to be logged in and have a car created!<br />
+                                        <a asp-page="/Rides/CreateRide">Add a ride</a>
+
+                                    </p>
+                                    <p style="color:red"> if the user is not logged in, there is an error</p>
 
                                     <h4>Where can I see the list of my rides?</h4>
                                     <p>
@@ -143,25 +139,56 @@
                                         your name up on the right side. On this page you can see My Rides on the left side option in which the list of rides created by you is shown.
                                     </p>
 
+
+
+
+
                                     <h4>How to edit a ride?</h4>
                                     <p>
                                         To edit a ride, you have to be logged in and have at least one ride created. Go to your personal profile page by clicking on your name up on the
-                                        right side. Now on the left side choose the My rides option which shows the page with all your created rides.
+                                        right side. Now on the left side choose the My rides option which shows the page with the list of all your created rides.
+                                        Here in every line is a link for editing exactly that one ride. Click on that and to make sure you are editing the right one, the information are
+                                        provided. If you find out you do not wish to edit this one ride, just click on the link Back To Rides which will move you back to the list of rides.
+                                        If you are sure this one is the ride you want to edit, change all the necessary information you need and click on Save Changes button. This action will
+                                        move you back to the list of rides where the information are going to be changed immediately.
                                     </p>
-                                    <p style="color:red">Not finished yet? how will it be with Rides page?</p>
+                                    <p>
+                                        Another way to edit a ride is to open a page with Rides where you can see also your rides. Next to each your ride you can see the link for editing it. This
+                                        link will move you to Edit Page for the ride. To make sure you are editing the right one, all the information about it are provided. If you find out you do not wish to edit this one ride, just click on the link Back To Rides which will move you back to the list of rides.
+                                        If you are sure this one is the ride you want to edit, change all the necessary information you need and click on Save Changes button. This action will
+                                        move you back to the list of rides where the information are going to be changed immediately.
+                                    </p>
+                                    <p>
+                                        One more way is to either open Rides Page, choose the ride you want to edit and click on details or choose the ride from My Rides option in your personal profile page and
+                                        again, click on details. Both links will move you to detailed page of your ride where on the botton of the page you can see again button for Editing Ride.
+                                        To make sure you are editing the right one, all the information about it are provided. If you find out you do not wish to edit this one ride, just click on the link Back To Rides which will move you back to the list of rides.
+                                        If you are sure this one is the ride you want to edit, change all the necessary information you need and click on Save Changes button. This action will
+                                        move you back to the list of rides where the information are going to be changed immediately.
+                                    </p>
 
 
-                                    <h4>How to cancel a ride?</h4>
+
+                                    <h4>How to cancel/delete a ride?</h4>
                                     <p>
                                         To cancel a ride, you have to be logged in and have at least one ride created. Go to your personal profile page by clicking on your name up on the
-                                        right side. Now on the left side choose the My rides option which shows the page with all your created rides. Each ride ha on the right side of lines the button for cancelling.
+                                        right side. Now on the left side choose the My rides option which shows the page with all your created rides. Each ride has on the right side of lines the button for cancelling.
                                         After clicking on it you are going to be redirected to the page which asks you if you are really sure you want to delete the ride. Make sure you chose the right one by checking all the
-                                        information on the current page and confirm it by clicking on Delete button. The ride will be immediately deleted and not shown for others anymore.
+                                        information on the current page and confirm it by clicking on Delete button. The ride will be immediately deleted and not shown for others anymore. In case you find out you do not wish to
+                                        delete exactly this one ride, click on Back to List link on the bottom of page and it will move you back to the list of your rides where you can choose the right one.
                                     </p>
-                                    <p style="color:red">how will it be with Rides page?</p>
+                                    <p>
+                                        Another way to edit a ride is to open a page with Rides where you can see also your rides. Next to each your ride you can see the link for deleting it. This
+                                        link will move you to Delete Page for the ride. To make sure you are deleting the right one, all the information about it are provided. If you find out you do not wish to delete this one ride, just click on the link Back To List which will move you back to the list of rides.
+                                        If you are sure this one is the ride you want to delete click on Delete button. This action will
+                                        move you back to the list of rides where the ride is not shown anymore.
+                                    </p>
+                                    <p>
+                                        One more way is to either open Rides Page, choose the ride you want to Delete and click on details or choose the ride from My Rides option in your personal profile page and
+                                        again, click on details. Both links will move you to detailed page of your ride where on the botton of the page you can see again button for Deleting Ride.
+                                        To make sure you are deleting the right one, all the information about it are provided. Click on the Delete ride button shown on the screen and the ride will be deleted immediately.
+                                        Except for the ride are deleted also all bookings made for the ride.
+                                    </p>
 
-
-                                    @*Questions up need finished sites so that i know where everywhere i should redirect people*@
 
 
 
@@ -179,12 +206,15 @@
                                     <p>
                                         After another user books your ride, you will get a notification and also a message. All your notifications can be found under the bell next to your name up on the right side.
                                         Next to the notification bell, there are messages which will have a red circle around if you got some. Another place where you can find out if someone has booked your ride is on your personal profile page.
-                                        There when you choose the My Rides option on the left side the list of the rides is displayed. Choose the ride for which you wish to see the bookings and click on the "Who booked the ride" link. To make sure
+                                        There when you choose the My Rides option on the left side the list of the rides is displayed. Choose the ride for which you wish to see the bookings and click on the "Bookings from" link. To make sure
                                         you chose the right ride, all information are provided. Under these information, the people who has booked your ride are listed there also with their booking statuses. If you wish to check the accounts, just click
                                         on their avatar.
                                     </p>
-                                    
-                       
+
+
+
+
+
                                     <h4>How to contact people who are taking my ride?</h4>
                                     <p></p>
 
