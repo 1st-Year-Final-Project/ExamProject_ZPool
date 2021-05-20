@@ -13,39 +13,50 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
     public class MyBookingsModel : PageModel
     {
-        public UserManager<AppUser> _manager;
-        public IBookingService _service;
-
-        public IEnumerable<Booking> _myBookings;
+        public UserManager<AppUser> Manager;
+        public IBookingService BookingService;
+        public IEnumerable<Booking> MyBookings { get; set; }
         public string Message { get; set; }
-
+        [BindProperty] public string FilterCriteria { get; set; }
+                
         public MyBookingsModel(IBookingService service, UserManager<AppUser> manager)
         {
-            _service = service;
-            _manager = manager;
+            BookingService = service;
+            Manager = manager;
         }
 
         public async Task OnGet()
         {
-            AppUser user = await _manager.GetUserAsync(User);
-            _myBookings = _service.GetBookingsByUser(user);
+            AppUser user = await Manager.GetUserAsync(User);
+            MyBookings = BookingService.GetBookingsByUser(user);
         }
 
         public async Task OnPostCancel(int id)
         {
-            AppUser user = await _manager.GetUserAsync(User);
-            _myBookings = _service.GetBookingsByUser(user);
             try
             {
-                _service.UpdateBookingStatus(id, "Cancelled");
+                BookingService.UpdateBookingStatus(id, "Cancelled");
             }
             catch (Exception ex)
             {
                 Message = ex.Message;
             }
+            AppUser user = await Manager.GetUserAsync(User);
+            MyBookings = BookingService.GetBookingsByUser(user);
+
             RedirectToPage("MyBookings");
         }
 
 
+        public async Task OnPostFilter(string status)
+        {
+            if (!String.IsNullOrEmpty(FilterCriteria))
+            {
+                AppUser user = await Manager.GetUserAsync(User);
+                MyBookings = BookingService.GetBookingsByStatus(FilterCriteria, user);
+            }
+            
+            RedirectToPage("MyBookings");
+        } 
     }
 }

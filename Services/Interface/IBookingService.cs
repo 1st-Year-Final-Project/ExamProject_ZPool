@@ -9,7 +9,6 @@ namespace ZPool.Services.Interface
 {
    public  interface IBookingService
     {
-   
         public IEnumerable<Booking> GetBookings();
         public Booking GetBookingsByID(int id);
         bool AlreadyBooked(int rideId, int userId);
@@ -24,11 +23,7 @@ namespace ZPool.Services.Interface
         public IEnumerable<Booking> GetBookingsByUser(AppUser user);
         //public IEnumerable<Booking> GetBookingsByRide(Ride ride);
         public IEnumerable<Booking> GetBookingsByRideId(int rideId);
-
         public void UpdateBookingStatus(int id, string bookingStatus);
-
-
-
-
+        public IEnumerable<Booking> GetBookingsByStatus(string FilterCriteria, AppUser user);
     }
 }
