@@ -14,21 +14,44 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
     public class MyBookingsModel : PageModel
     {
         public UserManager<AppUser> _manager;
-        public IBookingService _service;
+        public IBookingService _bookingService;
+        public IEnumerable<Booking> MyBookings { get; set; }
+        public string Message { get; set; }
 
-        public IEnumerable<Booking> _myBookings;
-      
 
         public MyBookingsModel(IBookingService service, UserManager<AppUser> manager)
         {
-            _service = service;
+            _bookingService = service;
             _manager = manager;
         }
 
         public async Task OnGet()
         {
             AppUser user = await _manager.GetUserAsync(User);
-            _myBookings = _service.GetBookingsByUser(user);
+            MyBookings = _bookingService.GetBookingsByUser(user);
+        }
+
+        public async Task OnPostCancel(int id)
+        {
+            AppUser user = await _manager.GetUserAsync(User);
+            MyBookings = _bookingService.GetBookingsByUser(user);
+            //MyBookings = _bookingService.GetBookings();
+
+            try
+            {
+                _bookingService.UpdateBookingStatus(id, "Cancelled");
+            }
+            catch (Exception ex)
+            {
+                Message = ex.Message;
+            }
+
+            //reconstruc the data senario            
+
+            //await LoadBookingByRideId(rideId);
+            //MyRide = _rideService.GetRide(rideId);
+
+            RedirectToPage("MyBookings");
         }
 
 

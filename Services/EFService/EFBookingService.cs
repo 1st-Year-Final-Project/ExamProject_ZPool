@@ -70,7 +70,7 @@ namespace ZPool.Services.EFService
             .Include(b => b.AppUser);
         }
 
-        public Booking GetBookingsByID(int id)
+        public Booking GetBookingsByID(int id)  // Suggest: GetBookingByID, not Bookings
         {
              return service.Bookings.Find(id);
         }
@@ -109,11 +109,11 @@ namespace ZPool.Services.EFService
             {
                 throw new ArgumentException("The status of cancelled bookings cannot be changed.");
             }
-            //else if (/*newBookingStatus == "Cancelled"*//* &&*/ oldBooking.BookingStatus != "Accepted")
+            //else if (newBookingStatus == "Cancelled" && oldBooking.BookingStatus != "Accepted")
             //{
             //    throw new ArgumentException("Bookings not accepted cannot be cancelled.");
             //}
-            else if ((newBookingStatus == "Rejected" || newBookingStatus == "Accepted" || newBookingStatus == "Cancelled" )  && oldBooking.BookingStatus != "Pending")
+            else if ((newBookingStatus == "Rejected" || newBookingStatus == "Accepted" /*|| newBookingStatus == "Cancelled" */)  && oldBooking.BookingStatus != "Pending")
             {
                 throw new ArgumentException("Pending bookings can only be changed to accepted, rejected or cancelled.");
             }

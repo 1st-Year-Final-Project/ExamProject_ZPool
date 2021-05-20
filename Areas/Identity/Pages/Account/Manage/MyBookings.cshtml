@@ -3,24 +3,19 @@
 @{
     ViewData["Title"] = "My Bookings";
     ViewData["ActivePage"] = ManageNavPages.MyBookings;
-
-
 }
 
 <h3> My Bookings</h3>
 </hr></br>
-
     <p>
         <a asp-page="/Rides/GetAllRides" class="btn btn-outline-success rounded-border">Book a Ride</a>
 
     </p>
-
 </br>
 
 <table class="table">
     <thead>
         <tr>
-
             <th style="width:50px"> Date & Time  </th>
             <th style="width:600px"> From </th>
             <th style="width:600px"> To </th>
@@ -33,11 +28,9 @@
     <tbody>
         @if (Model != null)
         {
-            @foreach (var b in Model._myBookings)
+            @foreach (var b in Model.MyBookings)
             {
-
-
-        <tr>
+            <tr>
             <td>  @b.Date </td>
             <td>  @b.PickUpLocation </td>
             <td>  @b.DropOffLocation </td>
@@ -83,7 +76,7 @@
             </td>
             <td>  @b.Ride.Car.Color / @b.Ride.Car.Brand @b.Ride.Car.Model / @b.Ride.Car.NumberPlate </td>
             <td>  @b.BookingStatus </td>
-            @*<td>   <a asp-page="./DeleteMyBooking" asp-route-id="@b.BookingID" class="btn btn-danger rounded-border">Cancel</a> </td>*@
+            
             @if (b.BookingStatus == "Accepted" || b.BookingStatus == "Pending")
             {
                 <td>
@@ -94,8 +87,8 @@
                         </form>
                     </div>
                 </td>
-            }            
-        </tr>
+            }                 
+            </tr>
             }
         }
 </table>
