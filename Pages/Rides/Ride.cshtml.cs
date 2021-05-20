@@ -48,7 +48,10 @@ namespace ZPool.Pages.Rides
             CurrentUser = await _userManager.GetUserAsync(User);
             Ride = _rideService.GetRide(id);
             RideId = id;
-            AlreadyBooked = _bookingService.AlreadyBooked(RideId, CurrentUser.Id);
+            if (CurrentUser != null)
+            {
+                AlreadyBooked = _bookingService.AlreadyBooked(RideId, CurrentUser.Id);
+            }
             SeatsLeft = _rideService.SeatsLeft(RideId);
         }
 
