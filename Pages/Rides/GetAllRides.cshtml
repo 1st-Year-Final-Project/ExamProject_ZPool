@@ -93,19 +93,10 @@
 
 
 
-                        @if (SignInManager.IsSignedIn(User))
+                        @if (SignInManager.IsSignedIn(User) && SignInManager.UserManager.GetUserId(User) == item.Car.AppUserID.ToString())
                         {
-                            <a asp-page="/Rides/EditRide" asp-route-id="@item.RideID" class="ml-2">
-                                             <button class="edit-btn"><i class="fas fa-edit"></i></button>
-                                         </a>
-                        }
-
-
-                        @if (SignInManager.IsSignedIn(User))
-                        {
-                            <a asp-page="/Rides/DeleteRide" asp-route-id="@item.RideID" class="ml-2"><button class="delete-btn"><i class="fas fa-trash-alt"></i></button></a>
-
-                            
+                            <ins>|</ins> <a asp-page="/Rides/EditRide" asp-route-id="@item.RideID"> Edit</a> <ins>|</ins>
+                            <a asp-page="/Rides/DeleteRide" asp-route-id="@item.RideID" class="text-danger"> Delete</a>
                         }
 
                     </td>
