@@ -47,6 +47,15 @@
                                 <span class="tooltiptext">The ride is fully booked.</span>
                             </button>
                         }
+
+                        else if (Model.AlreadyBooked)
+                        {
+                            <button disabled class="btn rounded-border btn-outline-dark tooltip">
+                                Book ride
+                                <span class="tooltiptext">You have already booked this ride.</span>
+                            </button>
+                        }
+
                         else
                         {
                             <input type="number" asp-for="@Model.RideId" hidden />
@@ -76,7 +85,7 @@
                 <li><h4>@Model.Ride.Car.AppUser.UserName</h4></li>
                 <li>Car: @Model.Ride.Car</li>
 
-                @if (Model.CurrentUser != null)
+                @if (Model.CurrentUser != null && Model.CurrentUser.Id != Model.Ride.Car.AppUserID)
                 {
                     <li>
                         <form method="post" asp-page-handler="Send" class="mt-3">

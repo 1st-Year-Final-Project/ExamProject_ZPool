@@ -5,7 +5,7 @@
     ViewData["ActivePage"] = ManageNavPages.MyRides;
 }
 
-<h3>Who book the following ride</h3>
+<h3>Who booked this ride?</h3>
 <hr />
 <div>
     <dl class="row">
@@ -24,8 +24,8 @@
     </dl>
     <hr /><br />
 
-    <h4>Bookings from:</h4>
 
+    <h4>Bookings from:</h4>
     <div>
         @{ foreach (var booking in Model.BookingsOfOneRide)
 
@@ -54,7 +54,6 @@
                                             <a asp-page="./ReadOnlyProfilePage" asp-route-id="@booking.AppUserID">
                                                 @{
                                                     var imageFlag = booking.AppUser.AvatarName;
-
                                                 if (string.IsNullOrEmpty(imageFlag) || imageFlag.Equals("default.png"))
                                                 {
                                                     <img src="~/images/default.png" id="photo" height="50" width="50" title="click me">
@@ -81,6 +80,23 @@
                                                 {
                                                     <img src="~/images/N4.jpg" id="photo" height="50" width="50" title="click me">
                                                 }
+                                            </a>
+
+                                        </td>
+                                        <td>@booking.BookingStatus</td>
+
+                                        @if (booking.BookingStatus == "Accepted")
+                                        {
+                                            <td>
+                                                <div class="form group">
+                                                    <form asp-page-handler="Cancel" method="post">
+                                                        <button class="btn btn-danger rounded-border">Cancel</button>
+                                                        <input type="hidden" name="id" value="@booking.BookingID" />
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        }
+
 
                                                 if (imageFlag.Equals("N5.jpg"))
                                                 {
@@ -123,6 +139,7 @@
                                                 </div>
                                             </td>
                                         }
+
 <tr />
                     </table>
                 }
