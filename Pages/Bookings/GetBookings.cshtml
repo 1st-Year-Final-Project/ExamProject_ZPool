@@ -62,7 +62,7 @@
 
                     @if (Model.LoggedInUser.Id == item.AppUserID)
                     {
-                        @if (item.BookingStatus == "Accepted")
+                        @if (item.BookingStatus == "Accepted" || item.BookingStatus=="Pending")
                         {
                             <td>
                                 <div class="form group">

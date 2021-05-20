@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using UserManagementTestApp.Models;
 using ZPool.Models;
 using ZPool.Services.Interface;
@@ -110,13 +109,13 @@ namespace ZPool.Services.EFService
             {
                 throw new ArgumentException("The status of cancelled bookings cannot be changed.");
             }
-            else if (newBookingStatus == "Cancelled" && oldBooking.BookingStatus != "Accepted")
+            //else if (/*newBookingStatus == "Cancelled"*//* &&*/ oldBooking.BookingStatus != "Accepted")
+            //{
+            //    throw new ArgumentException("Bookings not accepted cannot be cancelled.");
+            //}
+            else if ((newBookingStatus == "Rejected" || newBookingStatus == "Accepted" || newBookingStatus == "Cancelled" )  && oldBooking.BookingStatus != "Pending")
             {
-                throw new ArgumentException("Bookings not accepted cannot be cancelled.");
-            }
-            else if ((newBookingStatus == "Rejected" || newBookingStatus == "Accepted")  && oldBooking.BookingStatus != "Pending")
-            {
-                throw new ArgumentException("Pending bookings can only be changed to accepted or rejected.");
+                throw new ArgumentException("Pending bookings can only be changed to accepted, rejected or cancelled.");
             }
             else if (newBookingStatus == "Pending")
             {

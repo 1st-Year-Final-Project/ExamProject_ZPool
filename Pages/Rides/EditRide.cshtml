@@ -19,7 +19,7 @@
 
             <div class="form-group">
                 <label asp-for="@Model.ride.DepartureLocation" class="control-label"></label>
-                <input asp-for="@Model.ride.DepartureLocation" class="form-control rounded-border" style="max-width: 13rem" />
+                <input asp-for="@Model.ride.DepartureLocation" class="form-control rounded-border"  style="max-width: 13rem" />
                 <span asp-validation-for="@Model.ride.DepartureLocation" class="text-danger"></span>
             </div>
 
@@ -46,6 +46,6 @@
         @*</div>*@
     </div>
     <div>
-        <a asp-page="GetAllRides">Back to Rides</a>
+        <a asp-area="Identity" asp-page="/Account/Manage/MyRides">Back to My Rides</a>
     </div>
 
