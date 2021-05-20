@@ -32,7 +32,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Introduction { get; set; }
+        [BindProperty] public string Introduction { get; set; }
         public SelectList Genders { get; set; }
 
         [BindProperty] public string UserAvatarName { get; set; }
@@ -45,7 +45,6 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         {
             public string UserGender { get; set; }
             public string Introduction { get; set; }
-            //public string UserAvatarName { get; set; }
         }
 
 
@@ -70,6 +69,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             LastName = user.LastName;
             Email = user.Email;
             UserGender = user.Gender;
+            Introduction = user.Introduction;
 
             string avatarName = user.AvatarName;
             
@@ -81,13 +81,6 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             {
                 UserAvatarName = user.AvatarName;
             }
-
-            var introduction = user.Introduction;
-            Input = new InputModel
-            {
-                Introduction = introduction
-                //UserAvatar = avatar.ToString()?????????
-            };
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -105,9 +98,9 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             }
 
             var introduction = user.Introduction;
-            if (Input.Introduction != introduction)
+            if (Introduction != introduction)
             {
-                user.Introduction = Input.Introduction;
+                user.Introduction = Introduction;
                 await _userManager.UpdateAsync(user);
             }
 

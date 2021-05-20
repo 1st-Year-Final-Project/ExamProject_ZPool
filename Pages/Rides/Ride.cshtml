@@ -8,6 +8,7 @@
     ViewData["Title"] = "View Ride";
 }
 
+<h3>Ride Details</h3>
 <div class="container align-content-center pt-4">
     <div class="row" style="max-width: 1100px">
         <div class="col col-md-8 bg-light p-3" style="border-radius: 15px">
@@ -46,6 +47,7 @@
                                 <span class="tooltiptext">The ride is fully booked.</span>
                             </button>
                         }
+
                         else if (Model.AlreadyBooked)
                         {
                             <button disabled class="btn rounded-border btn-outline-dark tooltip">
@@ -53,12 +55,12 @@
                                 <span class="tooltiptext">You have already booked this ride.</span>
                             </button>
                         }
+
                         else
                         {
                             <input type="number" asp-for="@Model.RideId" hidden />
                             <button type="submit" class="btn btn-yellow">Book ride</button>
                         }
-
                     </form>
                 </div>
             </div>
