@@ -16,6 +16,9 @@ namespace ZPool.Services.Interface
         public void DeleteBooking(Booking booking);
         public void EditBooking(Booking booking);
 
+        //Method to filter booking by logged in users in Bookings page
+        public IEnumerable<Booking> GetBookingsByDriversID(AppUser user);
+
         // Method for Profile Page
         public IEnumerable<Booking> GetBookingsByUser(AppUser user);
         //public IEnumerable<Booking> GetBookingsByRide(Ride ride);
