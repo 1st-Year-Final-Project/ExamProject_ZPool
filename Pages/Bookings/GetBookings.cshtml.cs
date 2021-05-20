@@ -16,7 +16,8 @@ namespace ZPool.Pages.Bookings
         IBookingService bookingService;
         UserManager<AppUser> userManager;
 
-        public IEnumerable<Booking> Bookings{ get; set; }
+        public IEnumerable<Booking> Bookings { get; set; }
+       
 
         [BindProperty]
         public AppUser LoggedInUser { get; set; }
@@ -30,14 +31,14 @@ namespace ZPool.Pages.Bookings
         }
         public async Task OnGet()
         {
-            Bookings = bookingService.GetBookings();
             LoggedInUser = await userManager.GetUserAsync(User);
+            Bookings = bookingService.GetBookingsByDriversID(LoggedInUser);
         }
 
-        public void OnPostAccept(int id)
+        public async Task OnPostAccept(int id)
         {
-            Bookings = bookingService.GetBookings();
-            
+            LoggedInUser = await userManager.GetUserAsync(User);
+            //Bookings = bookingService.GetBookingsByDriversID(LoggedInUser);
             try
             {
                 bookingService.UpdateBookingStatus(id, "Accepted");
@@ -46,12 +47,14 @@ namespace ZPool.Pages.Bookings
             {
                 Message = ex.Message;
             }
-            RedirectToPage("GetBookings");
+            /* RedirectToPage("GetBookings")*/
+            Bookings = bookingService.GetBookingsByDriversID(LoggedInUser);
         }
 
-        public void OnPostReject(int id)
+        public async Task OnPostReject(int id)
         {
-            Bookings = bookingService.GetBookings();
+            LoggedInUser = await userManager.GetUserAsync(User);
+            Bookings = bookingService.GetBookingsByDriversID(LoggedInUser);
             
             try
             {
@@ -61,13 +64,14 @@ namespace ZPool.Pages.Bookings
             {
                 Message = ex.Message;
             }
-            RedirectToPage("GetBookings");
+            //RedirectToPage("GetBookings");
         }
 
-        public void OnPostCancel(int id)
+        public async Task OnPostCancel(int id)
         {
-            Bookings = bookingService.GetBookings();
-            
+            LoggedInUser = await userManager.GetUserAsync(User);
+            Bookings = bookingService.GetBookingsByDriversID(LoggedInUser);
+
             try
             {
                 bookingService.UpdateBookingStatus(id, "Cancelled");
@@ -76,7 +80,7 @@ namespace ZPool.Pages.Bookings
             {
                 Message = ex.Message;
             }
-            RedirectToPage("GetBookings");
+            //RedirectToPage("GetBookings");
         }
     }
 }
