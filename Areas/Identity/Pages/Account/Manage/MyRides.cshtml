@@ -27,19 +27,30 @@
             @foreach (var r in Model._myRidesList)
             {
 
-        <tr>
-            <td>  @r.StartTime </td>
-            <td>  @r.DepartureLocation </td>
-            <td>  @r.DestinationLocation </td>
-            <td>  @r.Car.Brand  @r.Car.Model </td>
-            <td>  @r.SeatsAvailable</td>
-            <td>  <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID">Booked by </a> </td>  
-            <td> <a href="/Rides/Ride/@r.RideID" class="text-primary">Details </a> </td> 
-            <td> <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a> </td> 
-            <td>  <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="text-danger">Delete</a>  </td>
-        </tr>
+             <tr>
+                 <td>  @r.StartTime </td>
+                 <td>  @r.DepartureLocation </td>
+                 <td>  @r.DestinationLocation </td>
+                 <td>  @r.Car.Brand  @r.Car.Model </td>
+                 <td>  @r.SeatsAvailable</td>
+                 <td style="vertical-align: middle">  <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID">Booked by </a> </td>  
+                 <td style="vertical-align: middle"> <a href="/Rides/Ride/@r.RideID" class="text-primary">Details </a> </td> 
+                 <td style="vertical-align: middle">
 
-                
+                     <a href="/Rides/EditRide/@r.RideID" style="text-decoration: none">
+                        <button class="edit-btn">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                     </a>
+                 </td> 
+                 <td style="vertical-align: middle">  
+                     <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" style="text-decoration: none">
+                        <button class="delete-btn">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                     </a>  
+                 </td>
+             </tr>
             }
         }
 </table>
