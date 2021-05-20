@@ -14,6 +14,34 @@ a {
   color: #0366d6;
 }
 
+.delete-btn {
+    background-color: red;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.va-middle tr td {
+    vertical-align: middle;
+}
+
+.edit-btn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    padding: 10px 14px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.i {
+    padding: 14px;
+}
+
 .nav-pills > li > a.active {
     border-radius: 18px !important;
     background-color: #fff387 !important;

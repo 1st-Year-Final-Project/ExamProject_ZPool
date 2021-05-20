@@ -70,7 +70,7 @@
 
             </tr>
         </thead>
-        <tbody>
+        <tbody class="va-middle">
 
             @foreach (var item in Model.Rides)
             {
@@ -78,7 +78,6 @@
                 {
 
                     <tr>
-                        @*<td> @item.RideID</td>*@
                         <td> @item.StartTime </td>
                         <td> @item.DepartureLocation </td>
                         <td> @item.DestinationLocation </td>
@@ -90,13 +89,16 @@
                          }
                     <td>
                         <a asp-page="Ride" asp-route-id="@item.RideID">Details</a>
-
-
-
+                        
                         @if (SignInManager.IsSignedIn(User) && SignInManager.UserManager.GetUserId(User) == item.Car.AppUserID.ToString())
                         {
-                            <ins>|</ins> <a asp-page="/Rides/EditRide" asp-route-id="@item.RideID"> Edit</a> <ins>|</ins>
-                            <a asp-page="/Rides/DeleteRide" asp-route-id="@item.RideID" class="text-danger"> Delete</a>
+                    <a asp-page="/Rides/EditRide" asp-route-id="@item.RideID">
+                        <button class="edit-btn ml-2"><i class="fas fa-edit"></i></button>
+                    </a>
+
+                    <a asp-page="/Rides/DeleteRide" asp-route-id="@item.RideID">
+                        <button class="delete-btn ml-2"><i class="fas fa-trash-alt"></i></button>
+                    </a>
                         }
 
                     </td>
