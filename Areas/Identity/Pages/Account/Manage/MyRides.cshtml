@@ -26,6 +26,7 @@
         {
             @foreach (var r in Model._myRidesList)
             {
+
         <tr>
             <td>  @r.StartTime </td>
             <td>  @r.DepartureLocation </td>
@@ -37,6 +38,8 @@
             <td> <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a> </td> 
             <td>  <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="text-danger">Delete</a>  </td>
         </tr>
+
+                
             }
         }
 </table>

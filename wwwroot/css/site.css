@@ -14,6 +14,12 @@ a {
   color: #0366d6;
 }
 
+.nav-pills > li > a.active {
+    border-radius: 18px !important;
+    background-color: #fff387 !important;
+    color: #636363 !important;
+}
+
 .footer-link {
     font-weight: 300;
     color: black;
