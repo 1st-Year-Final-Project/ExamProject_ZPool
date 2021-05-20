@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
+using UserManagementTestApp.Models;
 using ZPool.Models;
 using ZPool.Services.Interface;
 
@@ -15,6 +15,7 @@ namespace ZPool.Pages.Rides
         IRideService rideService;
 
         public IEnumerable<Ride> Rides { get; set; }
+        public AppUser CurrentUser { get; set; }
 
         [BindProperty(SupportsGet = true)]
         public RideCriteriaInputModel RideCriteria { get; set; } = new RideCriteriaInputModel();
