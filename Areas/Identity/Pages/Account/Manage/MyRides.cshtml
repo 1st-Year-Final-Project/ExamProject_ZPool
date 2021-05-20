@@ -35,16 +35,15 @@
                  <td>  @r.SeatsAvailable</td>
                  <td style="vertical-align: middle">  <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID">Booked by </a> </td>  
                  <td style="vertical-align: middle"> <a href="/Rides/Ride/@r.RideID" class="text-primary">Details </a> </td> 
-                 <td style="vertical-align: middle">
+                 <td style="vertical-align: middle; white-space:nowrap;">
 
-                     <a href="/Rides/EditRide/@r.RideID" style="text-decoration: none">
+                     <a href="/Rides/EditRide/@r.RideID" style="text-decoration: none" class="ml-2" alt="Edit">
                         <button class="edit-btn">
                             <i class="fas fa-edit"></i>
                         </button>
                      </a>
-                 </td> 
-                 <td style="vertical-align: middle">  
-                     <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" style="text-decoration: none">
+                 
+                     <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" style="text-decoration: none" class="ml-2" alt="Delete">
                         <button class="delete-btn">
                             <i class="fas fa-trash-alt"></i>
                         </button>
