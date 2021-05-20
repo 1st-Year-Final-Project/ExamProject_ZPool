@@ -62,7 +62,7 @@ namespace ZPool.Pages.Notification
             {
                 Message = ex.Message;
             }
-            RedirectToPage("GetBookings");
+            RedirectToPage("GetNotification");
 
         }
 
@@ -78,7 +78,7 @@ namespace ZPool.Pages.Notification
             {
                 Message = ex.Message;
             }
-            RedirectToPage("GetBookings");
+            RedirectToPage("GetNotification");
         }
 
         public void OnPostCancel(int id)
@@ -93,7 +93,7 @@ namespace ZPool.Pages.Notification
             {
                 Message = ex.Message;
             }
-            RedirectToPage("GetBookings");
+            RedirectToPage("GetNotification");
         }
     }
 }
