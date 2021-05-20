@@ -32,7 +32,8 @@
             <td>  @b.Date </td>
             <td>  @b.PickUpLocation </td>
             <td>  @b.DropOffLocation </td>
-            <td>  @b.Ride.Car.AppUser
+            <td>
+                @b.Ride.Car.AppUser
                 <a asp-page="./ReadOnlyProfilePage" asp-route-id="@b.Ride.Car.AppUser.Id">
                     @{
                         var imageFlag = b.Ride.Car.AppUser.AvatarName;
@@ -73,6 +74,7 @@
             </td>
             <td>  @b.Ride.Car.Color / @b.Ride.Car.Brand @b.Ride.Car.Model / @b.Ride.Car.NumberPlate </td>
             <td>  @b.BookingStatus </td>
+            @*<td>   <a asp-page="./CancelMyBooking" asp-route-id="@b.BookingID" class="btn btn-danger rounded-border">Cancel</a> </td>*@
             <td>   <a asp-page="./DeleteMyBooking" asp-route-id="@b.BookingID" class="btn btn-danger rounded-border">Cancel</a> </td>
         </tr>
 
