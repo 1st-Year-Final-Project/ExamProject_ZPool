@@ -17,7 +17,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public IBookingService _service;
 
         public IEnumerable<Booking> _myBookings;
-      
+        public string Message { get; set; }
 
         public MyBookingsModel(IBookingService service, UserManager<AppUser> manager)
         {
@@ -29,6 +29,21 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         {
             AppUser user = await _manager.GetUserAsync(User);
             _myBookings = _service.GetBookingsByUser(user);
+        }
+
+        public async Task OnPostCancel(int id)
+        {
+            AppUser user = await _manager.GetUserAsync(User);
+            _myBookings = _service.GetBookingsByUser(user);
+            try
+            {
+                _service.UpdateBookingStatus(id, "Cancelled");
+            }
+            catch (Exception ex)
+            {
+                Message = ex.Message;
+            }
+            RedirectToPage("MyBookings");
         }
 
 
