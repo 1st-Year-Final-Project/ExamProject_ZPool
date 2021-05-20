@@ -27,7 +27,7 @@
 
                             <h4>Why do I need to register my car?</h4>
                             <p>
-                                In case you plan to be just a passanger who is using the application just for looking for rides and not for creating them, there is no need
+                                In case you plan to be just a passenger who is using the application just for looking for rides and not for creating them, there is no need
                                 for you to register your car. In the other case, when you also want to be the one who is driving the other people to the destinations, to create
                                 the ride offers there is a need to have a car registered in your profile. Without it, it will not allow you to create a ride because no plate number will
                                 be available in the list which is required field in the form.
@@ -43,21 +43,21 @@
 
                             <h4>How to register a car?</h4>
                             <p>
-                                Before registrating your car you need to be at first logged in or create a new profile. The first way how to register a car is to check the
-                                checkbox with "I want to register a car" statement while registrating. This way it will automatically move you to the form for car registration after you save the registration form for a user.
+                                Before registering your car you need to be at first logged in or create a new profile. The first way how to register a car is to check the
+                                checkbox with "I want to register a car" statement while registering. This way it will automatically move you to the form for car registration after you save the registration form for a user.
                                 The other way when you are just logged in as a user, you need to open your personal profile page by clicking on your name up on the right side.
                                 On this page you can see My cars option in which there is a button for creating a new car. After clicking on the button you are in the registration form for cars.
                                 As soon as you save all the information the car is created and shown in your list of cars. For creating a car the necessary information are Brand,
                                 Model, Number of seats and PlateNumber.
                             </p>
-                            <p>In case you are still completely lost and have no idea how to access the registration form, here is the link but dont forget to be logged in! <a asp-page="./Areas/Identity/Pages/Account/Manage/CreateCar">Create a car</a></p>
-                            <p style="color:red">the link doesnt work</p>
 
-
+                            <p>In case you are still completely lost and have no idea how to access the registration form, here is the link but don't forget to be logged in!<br/> 
+                            <a asp-area="Identity" asp-page="/Account/Manage/CreateCar">Create a car</a></p>
+                            
                             <h4>Where can I see my registered cars?</h4>
                             <p>
                                 You have to be logged in and have at least one car created. Just open your personal profile page by clicking on
-                                your name up on the right side. On this page you can see My cars option in which the list of cars registered by you is shown.
+                                your name up on the right side. On this page you can see My cars option on the left side in which the list of cars registered by you is shown.
                             </p>
 
 
@@ -80,7 +80,9 @@
                                 the end of the line is the option for Deleting the car. After clicking on the button the page for deleting is open. Be careful to choose the right car you want to delete. To make sure
                                 you chose the right one, all the information are displayed on this Delete Page. If you find out you do not want to delete exactly this one car, you can easily click on the Back
                                 to the list link in the end and choose the right car. If you are sure you want to delete exactly this one car, click on the red Delete button. After
-                                this action, the list of your cars is displayed again, but the car is not shown anymore as well as all its possibilities for creating a ride with this car are not available anymore. 
+
+                                this action, the list of your cars is displayed again, but the car is not shown anymore as well as all its possibilities for creating a ride with this car are not available anymore.
+                              
                                 After you delete a car, also all bookings and rides connected to this car are deleted.
                             </p>
 
@@ -108,7 +110,7 @@
 
                                     <h4>What will I get from processing a ride?</h4>
                                     <p>
-                                        Our application is fully without money. It means, noone will pay you for driving him or her as well as you will not have to pay to anyone after the ride.
+                                        Our application is fully without money. It means, no one will pay you for driving him or her as well as you will not have to pay to anyone after the ride.
                                         Carpooling here is mainly about making new friendships and doing our world greener.
                                     </p>
 
@@ -129,14 +131,19 @@
                                     <h4>How to create a ride?</h4>
                                     <p>
                                         To create a ride you need to be logged in and have at least one car created in your list of cars on your personal profile page.
-                                        After these two conditions are sucessfuly completed, click on the rides page. Here you can see Create a new ride button which will move you to the
+                                        After these two conditions are successfully completed, click on the rides page. Here you can see Create a new ride button which will move you to the
                                         form for filling all the necessary information. In case you decide to not create the ride, just click on the button Back to the list in the end of the page.
                                         Otherwise, in this one form, all the fields are required.After you fill all of them, click on Create button and you are going
                                         to be moved to List of rides where your newly created ride is available.
                                     </p>
 
+                                    <h4>Where can I see the list of my rides?</h4>
+                                    <p>
+                                        You have to be logged in and have at least one ride created. Just open your personal profile page by clicking on
+                                        your name up on the right side. On this page you can see My Rides on the left side option in which the list of rides created by you is shown.
+                                    </p>
 
-                                    <h4>How to edit a ride</h4>
+                                    <h4>How to edit a ride?</h4>
                                     <p>
                                         To edit a ride, you have to be logged in and have at least one ride created. Go to your personal profile page by clicking on your name up on the
                                         right side. Now on the left side choose the My rides option which shows the page with all your created rides.
@@ -144,7 +151,7 @@
                                     <p style="color:red">Not finished yet? how will it be with Rides page?</p>
 
 
-                                    <h4>How to cancel a ride</h4>
+                                    <h4>How to cancel a ride?</h4>
                                     <p>
                                         To cancel a ride, you have to be logged in and have at least one ride created. Go to your personal profile page by clicking on your name up on the
                                         right side. Now on the left side choose the My rides option which shows the page with all your created rides. Each ride ha on the right side of lines the button for cancelling.
@@ -153,26 +160,35 @@
                                     </p>
                                     <p style="color:red">how will it be with Rides page?</p>
 
+
+                                    @*Questions up need finished sites so that i know where everywhere i should redirect people*@
+
+
+
                                     <h4>Can I cancel the ride even if someone booked it?</h4>
-                                    <p>In case the ride cant happen because of any circumstances, you have the full right to cancel it without any fees.</p>
-
-
-                                    <h4>How do I know if someone has booked my ride</h4>
                                     <p>
-                                        After another user books your ride, you will get a notification. All your notifications can be found under the bell next to your name up on the right side.
-                                        After you open them, you can see the status of all rides
+                                        In case the ride cannot happen because of any circumstances, you have the full right to cancel it without any fees anytime. So even if someone has booked your ride,
+                                        you can still cancel it.
                                     </p>
-                                    <p style="color:red">Shouldnt that be changed that just not accepted or rejected bookings are shown..? and pending as well .. and the others could be just in bookings</p>
-                                    <p>Those which have Accept and Reject buttons in the end of the line shows the user who booked your ride and you can decide if you want to accept him or her, or reject.</p>
 
                                     <h4>Can I reject someone who booked my ride?</h4>
-                                    <p>If you do not want to drive with someone because of some reasons as bad experiences or any other reason, you have the full right to reject the person.</p>
+                                    <p>If you do not want to drive with someone because of any reasons, you have the full right to reject the person.</p>
 
 
-                                    <h4>How to contact people who are taking my ride</h4>
+                                    <h4>How do I know if someone has booked my ride?</h4>
+                                    <p>
+                                        After another user books your ride, you will get a notification and also a message. All your notifications can be found under the bell next to your name up on the right side.
+                                        Next to the notification bell, there are messages which will have a red circle around if you got some. Another place where you can find out if someone has booked your ride is on your personal profile page.
+                                        There when you choose the My Rides option on the left side the list of the rides is displayed. Choose the ride for which you wish to see the bookings and click on the "Who booked the ride" link. To make sure
+                                        you chose the right ride, all information are provided. Under these information, the people who has booked your ride are listed there also with their booking statuses. If you wish to check the accounts, just click
+                                        on their avatar.
+                                    </p>
+                                    
+                       
+                                    <h4>How to contact people who are taking my ride?</h4>
                                     <p></p>
-                                    <p style="color:red">Messages function explained</p>
 
+                                    <p style="color:red">Is it just through the reply option in the messages?</p>
                                 </div>
                             </div>
                         </div>
@@ -227,7 +243,8 @@
                             <p></p>
                             <p style="color:red">Messages function explained later</p>
                             <h4>How much does it cost</h4>
-                            <p>Our application is fully without money. It means you will not be charged anything as well as noone will pay you for anything.</p>
+
+                            <p>Our application is fully without money. It means you will not be charged anything as well as no one will pay you for anything.</p>
                         </div>
                     </div>
                 </div>
@@ -259,7 +276,8 @@
                             <h4>What are the messages for?</h4>
                             <p>The messages section is used by the driver and the passenger to correspond to each other</p>
                             <h4>How to send a message?</h4>
-                            <p>There will be a pop up message on the screen. If you book a ride, the driver gets an automatic message . You can also write a smessage to the driver and ask for his phone number.</p>
+
+                            <p>There will be a pop up message on the screen. If you book a ride, the driver gets an automatic message . You can also write a message to the driver and ask for his phone number.</p>
                             <p style="color:red">Messages function explained later</p>
                             <h4>Where can i see the messages i received?</h4>
                             <p>The received message is available in the messages inbox.You can find it on the top on the right side next to the notification bell.</p>
@@ -327,7 +345,8 @@
                                                 in which all the fields are necessary to insert. After you fill them, you can decide if you want to register also a car immediately or not.
                                                 If you decide to do so, just check the checkbox and you will be redirected to the car registration form after confirming the information in the form.
                                                 If you do not wish to register a car, you will be redirected to the main page after confirming the information. To find out more about why should you
-                                                register your car, chech the car section with questions
+
+                                                register your car, check the car section with questions
                                             </p>
                                             <h4>What is needed for registration</h4>
                                             <p>To register yourself you just need to fill your First and Last name, email and create original password.</p>

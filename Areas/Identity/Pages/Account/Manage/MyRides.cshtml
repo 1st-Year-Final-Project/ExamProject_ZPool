@@ -14,18 +14,14 @@
 <table class="table">
     <thead>
         <tr>
-
-            <th> Date & Time </th>
-            <th> From </th>
-            <th> To </th>
-            <th> Number of Seats </th>
-            <th> Car</th>
-
-            @*<th> Received Bookings</th>*@
+            <th @*style="width:10"*@> Date & Time </th>
+            <th @*style="width:100*@> From </th>
+            <th @*style="width:100*@> To </th>
+            <th @*style="width:100*@> Car</th>
+            <th @*style="width:10*@> Seats Available </th>
         </tr>
     </thead>
     <tbody>
-
         @if (Model != null)
         {
             @foreach (var r in Model._myRidesList)
@@ -34,18 +30,12 @@
                     <td>  @r.StartTime </td>
                     <td>  @r.DepartureLocation </td>
                     <td>  @r.DestinationLocation </td>
-                    <td>  @r.SeatsAvailable </td>
-                    <td>  @r.Car.NumberPlate </td>
-                    @*<td>  @r.Car.Brand  @r.Car.Model </td>*@
-                <td>
-                    <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID" class="text-primary">Booked by</a> |
-                    <a href="/Rides/Ride/@r.RideID" class="text-primary">Details</a> |
-                    <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a> 
-                </td> 
-                <td>
-                    <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="btn btn-danger rounded-border">Cancel</a>
-                </td>
-                    
+                    <td>  @r.Car.Brand  @r.Car.Model </td>
+                    <td>  @r.SeatsAvailable</td>
+                    <td>  <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID">Bookings from</a> </td>
+                    <td>  <a href="/Rides/Ride/@r.RideID" class="text-primary">Details</a>  </td>
+                    <td>  <a href="/Rides/EditRide/@r.RideID" class="text-primary">Edit</a>  </td>
+                    <td>  <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" class="btn btn-danger">Cancel</a>  </td>
                 </tr>
             }
         }

@@ -41,12 +41,18 @@ namespace ZPool.Pages.Rides
 
         public int SeatsLeft { get; set; }
 
+        public bool AlreadyBooked { get; set; }
         public async Task OnGetAsync(int id)
         {
+            CurrentUser = await _userManager.GetUserAsync(User);
             Ride = _rideService.GetRide(id);
             RideId = id;
+
+            if (CurrentUser != null)
+            {
+                AlreadyBooked = _bookingService.AlreadyBooked(RideId, CurrentUser.Id);
+            }
             SeatsLeft = _rideService.SeatsLeft(RideId);
-            CurrentUser = await _userManager.GetUserAsync(User);
         }
 
         public async Task<IActionResult> OnPostAsync()
