@@ -25,6 +25,7 @@
     {
         @foreach (var item in Model.Cars)
         {
+
         <tr>
             <td>  @item.Color </td>
             <td>  @item.Brand </td>
@@ -34,6 +35,7 @@
             <td>  <a asp-page="./EditCar" asp-route-id="@item.CarID">Edit</a> </td>
             <td>  <a asp-page="./DeleteCar" asp-route-id="@item.CarID" class="text-danger">Delete </a> </td>
         </tr>
+
         }
     }
 </table>

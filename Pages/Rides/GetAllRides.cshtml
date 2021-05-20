@@ -12,7 +12,6 @@
     ViewData["Title"] = "Rides";
 }
 
-
 <h1 style="color:black"> Rides</h1>
 </br>
 
@@ -20,9 +19,11 @@
 {
     <div>
         <a asp-page="CreateRide" class="btn btn-outline-success rounded-border">Add New Ride</a>
+
     </div>
 }
 </br>
+
 <!-- Search box -->
 <div class="container">
     <div class="row mb-2 bg-light">
@@ -52,51 +53,63 @@
 <!-- Results -->
 @if (@Model.Rides.Count() > 0)
 {
-<table class="table">
-   
-    <thead>
-        <tr>
-            <th style="10"> Date & Time </th>
-            <th style="100"> From</th>
-            <th style="100"> To </th>
-            @*<th style="500"> Seats Total</th>*@
-            <th style="10"> Seats Available</th>
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <th> Car </th>
-            }
-            <th style="500">  </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Rides)
-        {
-            if (item.StartTime > DateTime.Now)
-            {
-                <tr>
-                    <td> @item.StartTime </td>
-                    <td> @item.DepartureLocation </td>
-                    <td> @item.DestinationLocation </td>
-                    <td> @item.SeatsAvailable </td>
-                    @if (SignInManager.IsSignedIn(User))
-                     {
-                        <td> @item.Car.Color / @item.Car.Brand @item.Car.Model </td>
-                     }
-                    
-                <td style="500">
+    <table class="table">
 
-                    @if (SignInManager.IsSignedIn(User))
-                    {
+        <thead>
+            <tr>
+                @*<th> RideID </th>*@
+                <th> Date & Time </th>
+                <th> From</th>
+                <th> To </th>
+                <th> Seats Total</th>
+                <th> Seats Left</th>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <th> Car</th>
+                }
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Rides)
+            {
+                if (item.StartTime > DateTime.Now)
+                {
+
+                    <tr>
+                        @*<td> @item.RideID</td>*@
+                        <td> @item.StartTime </td>
+                        <td> @item.DepartureLocation </td>
+                        <td> @item.DestinationLocation </td>
+                        <td> @item.SeatsAvailable </td>
+                        <td> @RideService.SeatsLeft(item.RideID)</td>
+                        @if (SignInManager.IsSignedIn(User))
+                         {
+                            <td> @item.Car.NumberPlate </td>
+                         }
+                    <td>
                         <a asp-page="Ride" asp-route-id="@item.RideID">Details</a>
-                        @*<a asp-page="EditRides" asp-route-id="@item.RideID">Edit</a><ins>|</ins>
-                        <a style="color:red" asp-page="DeleteRides" asp-route-id="@item.RideID">Delete</a>*@
-                    }
-                </td>
-                </tr>
-            }
-         }
-    </tbody>
-</table>
+
+
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <ins>|</ins> <a asp-page="/Rides/EditRide" asp-route-id="@item.RideID"> Edit</a> <ins>|</ins>
+                        }
+
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <a asp-page="/Rides/DeleteRide" asp-route-id="@item.RideID"> Delete</a>
+                        }
+
+                    </td>
+                    </tr>
+                }
+             }
+        </tbody>
+    </table>
 }
 else
 {
@@ -105,8 +118,5 @@ else
     </div>
 }
 
-@*<div>
-    <a asp-page=/Index />Homepage</a>
-</div>*@
 
 
