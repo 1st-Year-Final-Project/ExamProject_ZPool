@@ -67,25 +67,13 @@ namespace ZPool.Services.EFService.RideService
                 .Include(r=>r.Car)
                 .AsNoTracking()
                 .AsEnumerable()
-                .Where(r=>CheckDeparture(r, ride.DepartureLocation))
-                .Where(r=>CheckDestination(r, ride.DestinationLocation))
+                .Where(r=>r.DepartureLocation.ToLower()
+                    .Contains(ride.DepartureLocation.ToLower()))
+                .Where(r=>r.DestinationLocation.ToLower()
+                    .Contains(ride.DestinationLocation.ToLower()))
                 .Where(r=>CompareDateTimes(r, ride.StartTime))
                 .OrderBy(r=>r.StartTime);
             return rides;
-        }
-
-        private bool CheckDeparture(Ride ride, string location)
-        {
-            if (string.IsNullOrEmpty(location)) return true;
-            else if (ride.DepartureLocation.ToLower().Contains(location.ToLower())) return true;
-            else return false;
-        }
-
-        private bool CheckDestination(Ride ride, string location)
-        {
-            if (string.IsNullOrEmpty(location)) return true;
-            else if (ride.DestinationLocation.ToLower().Contains(location.ToLower())) return true;
-            else return false;
         }
 
         private bool CompareDateTimes(Ride ride, DateTime dateCriteria)
