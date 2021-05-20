@@ -13,47 +13,54 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
     public class MyBookingsModel : PageModel
     {
-        public UserManager<AppUser> _manager;
-        public IBookingService _bookingService;
+        public UserManager<AppUser> Manager;
+        public IBookingService BookingService;
+        private AppDbContext DbContext;
         public IEnumerable<Booking> MyBookings { get; set; }
         public string Message { get; set; }
+        [BindProperty] public string FilterCriteria { get; set; }
 
 
-        public MyBookingsModel(IBookingService service, UserManager<AppUser> manager)
+        public MyBookingsModel(IBookingService service, UserManager<AppUser> manager, AppDbContext dbContext)
         {
-            _bookingService = service;
-            _manager = manager;
+            BookingService = service;
+            Manager = manager;
+            DbContext = dbContext;
         }
 
         public async Task OnGet()
         {
-            AppUser user = await _manager.GetUserAsync(User);
-            MyBookings = _bookingService.GetBookingsByUser(user);
+            AppUser user = await Manager.GetUserAsync(User);
+            MyBookings = BookingService.GetBookingsByUser(user);
         }
 
         public async Task OnPostCancel(int id)
         {
-            AppUser user = await _manager.GetUserAsync(User);
-            MyBookings = _bookingService.GetBookingsByUser(user);
-            //MyBookings = _bookingService.GetBookings();
-
             try
             {
-                _bookingService.UpdateBookingStatus(id, "Cancelled");
+                BookingService.UpdateBookingStatus(id, "Cancelled");
             }
             catch (Exception ex)
             {
                 Message = ex.Message;
             }
 
-            //reconstruc the data senario            
-
-            //await LoadBookingByRideId(rideId);
-            //MyRide = _rideService.GetRide(rideId);
+            AppUser user = await Manager.GetUserAsync(User);
+            MyBookings = BookingService.GetBookingsByUser(user);
 
             RedirectToPage("MyBookings");
         }
 
 
+        public async Task OnPostFilter(string status)
+        {
+            if (!String.IsNullOrEmpty(FilterCriteria))
+            {
+                AppUser user = await Manager.GetUserAsync(User);
+                MyBookings = BookingService.GetBookingsByStatus(FilterCriteria, user);
+            }
+
+            RedirectToPage("MyBookings");
+        }  
     }
 }

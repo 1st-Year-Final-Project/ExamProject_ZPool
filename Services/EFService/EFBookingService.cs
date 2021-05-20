@@ -124,7 +124,25 @@ namespace ZPool.Services.EFService
             oldBooking.BookingStatus = newBookingStatus;
             service.SaveChanges();
         }
+
+        //public IEnumerable<Booking> GetBookingsByStatus(string status)
+        //{
+        //    return from booking
+        //           in service.Bookings.
+        //           Where(b => b.BookingStatus.Equals(status))
+        //           select booking;
+        //}
+
+
+        public IEnumerable<Booking> GetBookingsByStatus(string status, AppUser user)
+        {
+            return service.Bookings
+            .Include(b => b.Ride).ThenInclude(r => r.Car).
+                ThenInclude(c => c.AppUser)
+            .Include(b => b.AppUser)
+            .Where(b=>b.BookingStatus.Equals(status))
+            .Where(b=>b.AppUser.Equals(user));
+        }
+
     }
-         
-    
 }
