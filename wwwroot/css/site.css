@@ -24,6 +24,10 @@ a {
     cursor: pointer;
 }
 
+.va-middle tr td {
+    vertical-align: middle;
+}
+
 .edit-btn {
     background-color: DodgerBlue;
     border: none;
