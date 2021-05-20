@@ -54,17 +54,31 @@
                                             <a asp-page="./ReadOnlyProfilePage" asp-route-id="@booking.AppUserID">
                                                 @{
                                                     var imageFlag = booking.AppUser.AvatarName;
-                                                if (string.IsNullOrEmpty(imageFlag) || imageFlag.Equals("default.png"))
-                                                {
+                                                    if (string.IsNullOrEmpty(imageFlag) || imageFlag.Equals("default.png"))
+                                                    {
                                                     <img src="~/images/default.png" id="photo" height="50" width="50" title="click me">
-                                                }
-                                                else
-                                                {
+                                                    }
+                                                    else
+                                                    {
+                                                        if (imageFlag.Equals("N1.jpg"))
+                                                        {
+                                                            <img src="~/images/N1.jpg" id="photo" height="50" width="50" title="click me">
+                                                        }
 
-                                                if (imageFlag.Equals("N1.jpg"))
-                                                {
-                                                    <img src="~/images/N1.jpg" id="photo" height="50" width="50" title="click me">
-                                                }
+                                                        if (imageFlag.Equals("N2.jpg"))
+                                                        {
+                                                            <img src="~/images/N2.jpg" id="photo" height="50" width="50" title="click me">
+                                                        }
+
+                                                        if (imageFlag.Equals("N3.jpg"))
+                                                        {
+                                                            <img src="~/images/N3.jpg" id="photo" height="50" width="50" title="click me">
+                                                        }
+
+                                                        if (imageFlag.Equals("N4.jpg"))
+                                                        {
+                                                            <img src="~/images/N4.jpg" id="photo" height="50" width="50" title="click me">
+                                                        }
 
                                                 if (imageFlag.Equals("N2.jpg"))
                                                 {
@@ -96,7 +110,7 @@
                                             <td>
                                                 <div class="form group">
                                                     <form asp-page-handler="Cancel" method="post">
-                                                        <button class="btn btn-danger rounded-border">Cancel Ride</button>
+                                                        <button class="btn btn-danger rounded-border">Cancel</button>
                                                         <input type="hidden" name="id" value="@booking.BookingID" />
                                                     </form>
                                                 </div>
@@ -108,7 +122,7 @@
                                             <td>
                                                 <div class="form group">
                                                     <form asp-page-handler="Accept" method="post">
-                                                        <button class="btn btn-success">Accept</button>
+                                                        <button class="btn btn-success rounded-border">Accept</button>
                                                         <input type="hidden" name="id" value="@booking.BookingID" />
                                                     </form>
                                                 </div>
@@ -116,7 +130,7 @@
                                             <td>
                                                 <div class="form group">
                                                     <form asp-page-handler="Reject" method="post">
-                                                        <button class="btn btn-primary">Reject</button>
+                                                        <button class="btn btn-primary rounded-border">Reject</button>
                                                         <input type="hidden" name="id" value="@booking.BookingID" />
                                                     </form>
                                                 </div>
