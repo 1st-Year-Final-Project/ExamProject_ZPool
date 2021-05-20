@@ -47,12 +47,12 @@
 
             @if (Model.LoggedInUser.Id == item.AppUserID)
             {
-                @if (item.BookingStatus == "Accepted")
+                @if (item.BookingStatus == "Accepted" || item.BookingStatus == "Pending")
                 {
                     <td>
                         <div class="form group">
                             <form asp-page-handler="Cancel" method="post">
-                                <button class="btn btn-primary">Cancel</button>
+                                <button class="btn btn-danger rounded-border">Cancel</button>
                                 <input type="hidden" name="id" value="@item.BookingID" />
                             </form>
                         </div>
@@ -69,7 +69,7 @@
                     <td>
                         <div class="form group">
                             <form asp-page-handler="Accept" method="post">
-                                <button class="btn btn-primary">Accept</button>
+                                <button class="btn btn-success rounded-border">Accept</button>
                                 <input type="hidden" name="id" value="@item.BookingID" />
                             </form>
                         </div>
@@ -77,7 +77,7 @@
                     <td>
                         <div class="form group">
                             <form asp-page-handler="Reject" method="post">
-                                <button class="btn btn-primary">Reject</button>
+                                <button class="btn btn-primary rounded-border">Reject</button>
                                 <input type="hidden" name="id" value="@item.BookingID" />
                             </form>
                         </div>
