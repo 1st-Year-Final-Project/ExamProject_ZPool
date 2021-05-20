@@ -12,12 +12,11 @@
 <table class="table">
     <thead>
     <tr>
-        @*<th> Car Id </th>*@
+        <th> Color </th>
         <th> Brand </th>
         <th> Model </th>
         <th> Number of Seats </th>
-        <th> Plate Number </th>
-        <th> Color </th>
+        <th> Plate Number </th>  
     </tr>
     </thead>
     <tbody>
@@ -26,22 +25,17 @@
     {
         @foreach (var item in Model.Cars)
         {
-            <tr>
-                @*<td>  @item.CarID </td>*@
-                <td>  @item.Brand </td>
-                <td>  @item.Model </td>
-                <td>  @item.NumberOfSeats </td>
-                <td>  @item.NumberPlate </td>
-                <td>  @item.Color </td>
-                <td>
-                    <p>
-                        <a asp-page="./EditCar" asp-route-id="@item.CarID">Edit</a>
-                    </p>
-                    <p>
-                        <a asp-page="./DeleteCar" asp-route-id="@item.CarID" class="text-danger">Delete </a>
-                    </p>
-                </td>
-            </tr>
+
+        <tr>
+            <td>  @item.Color </td>
+            <td>  @item.Brand </td>
+            <td>  @item.Model </td>
+            <td>  @item.NumberOfSeats </td>
+            <td>  @item.NumberPlate </td>
+            <td>  <a asp-page="./EditCar" asp-route-id="@item.CarID">Edit</a> </td>
+            <td>  <a asp-page="./DeleteCar" asp-route-id="@item.CarID" class="text-danger">Delete </a> </td>
+        </tr>
+
         }
     }
 </table>

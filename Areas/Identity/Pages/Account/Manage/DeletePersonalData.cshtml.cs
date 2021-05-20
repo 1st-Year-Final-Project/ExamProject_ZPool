@@ -96,7 +96,5 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 
             return Redirect("~/");
         }
-
-
     }
 }

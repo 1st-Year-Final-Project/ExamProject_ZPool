@@ -5,11 +5,9 @@
 }
 
 
-
-
-<h2>Edit this Ride</h2>
-<div class="form-group">
-    @*<div class="col-md-4">*@
+<h3>Edit this Ride</h3>
+    <div class="form-group">
+        @*<div class="col-md-4">*@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ride.RideID" />
@@ -44,9 +42,10 @@
             <div class="form group">
                 <input type="submit" value="Save Changes" class="btn btn-outline-success rounded-border" />
             </div>
-        </form>  
-    @*</div>*@
-</div>
-<div>
-    <a asp-page="GetAllRides">Back to Rides</a>
-</div>
+        </form>
+        @*</div>*@
+    </div>
+    <div>
+        <a asp-page="GetAllRides">Back to Rides</a>
+    </div>
+
