@@ -15,17 +15,15 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
     {
         public UserManager<AppUser> Manager;
         public IBookingService BookingService;
-        private AppDbContext DbContext;
         public IEnumerable<Booking> MyBookings { get; set; }
         public string Message { get; set; }
         [BindProperty] public string FilterCriteria { get; set; }
 
 
-        public MyBookingsModel(IBookingService service, UserManager<AppUser> manager, AppDbContext dbContext)
+        public MyBookingsModel(IBookingService service, UserManager<AppUser> manager)
         {
             BookingService = service;
             Manager = manager;
-            DbContext = dbContext;
         }
 
         public async Task OnGet()

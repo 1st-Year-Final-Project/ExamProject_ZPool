@@ -93,17 +93,9 @@ namespace ZPool.Services.EFService
                    select booking;
         }
 
-        //public IEnumerable<Booking> GetBookingsByRide(Ride ride)
-        //{
-        //    return from booking
-        //           in service.Bookings.
-        //           Where(b => b.Ride.Equals(ride))
-        //           select booking;
-        //}
 
         public void UpdateBookingStatus(int id, string newBookingStatus)
         {
-           
             Booking oldBooking = service.Bookings.Find(id);
             if (oldBooking.BookingStatus == "Cancelled")
             {
@@ -124,15 +116,6 @@ namespace ZPool.Services.EFService
             oldBooking.BookingStatus = newBookingStatus;
             service.SaveChanges();
         }
-
-        //public IEnumerable<Booking> GetBookingsByStatus(string status)
-        //{
-        //    return from booking
-        //           in service.Bookings.
-        //           Where(b => b.BookingStatus.Equals(status))
-        //           select booking;
-        //}
-
 
         public IEnumerable<Booking> GetBookingsByStatus(string status, AppUser user)
         {
