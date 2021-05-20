@@ -50,14 +50,18 @@
                                 As soon as you save all the information the car is created and shown in your list of cars. For creating a car the necessary information are Brand,
                                 Model, Number of seats and PlateNumber.
                             </p>
-                            <p>In case you are still completely lost and have no idea how to access the registration form, here is the link but dont forget to be logged in! <a asp-page="./Areas/Identity/Pages/Account/Manage/CreateCar">Add a car</a></p>
-                            <p style="color:red">the link doesnt work</p>      
+
+                            <p>In case you are still completely lost and have no idea how to access the registration form, here is the link but dont forget to be logged in! 
+                            <a href="./Areas/Identity/Account/Manage/CreateCar">Create a car</a></p>
+                            <p style="color:red">the link doesnt work, maybe i am dumb but i tried fucking every combination how to write it :D someone do it please</p>
+                                 
+
 
 
                             <h4>Where can I see my registered cars?</h4>
                             <p>
                                 You have to be logged in and have at least one car created. Just open your personal profile page by clicking on
-                                your name up on the right side. On this page you can see My cars option in which the list of cars registered by you is shown.
+                                your name up on the right side. On this page you can see My cars option on the left side in which the list of cars registered by you is shown.
                             </p>
 
 
@@ -134,9 +138,13 @@
                                         Otherwise, in this one form, all the fields are required.After you fill all of them, click on Create button and you are going
                                         to be moved to List of rides where your newly created ride is available.
                                     </p>
+                                    <h4>Where can I see the list of my rides?</h4>
+                                    <p>
+                                        You have to be logged in and have at least one ride created. Just open your personal profile page by clicking on
+                                        your name up on the right side. On this page you can see My Rides on the left side option in which the list of rides created by you is shown.
+                                    </p>
 
-
-                                    <h4>How to edit a ride</h4>
+                                    <h4>How to edit a ride?</h4>
                                     <p>
                                         To edit a ride, you have to be logged in and have at least one ride created. Go to your personal profile page by clicking on your name up on the
                                         right side. Now on the left side choose the My rides option which shows the page with all your created rides.
@@ -144,7 +152,7 @@
                                     <p style="color:red">Not finished yet? how will it be with Rides page?</p>
 
 
-                                    <h4>How to cancel a ride</h4>
+                                    <h4>How to cancel a ride?</h4>
                                     <p>
                                         To cancel a ride, you have to be logged in and have at least one ride created. Go to your personal profile page by clicking on your name up on the
                                         right side. Now on the left side choose the My rides option which shows the page with all your created rides. Each ride ha on the right side of lines the button for cancelling.
@@ -153,26 +161,42 @@
                                     </p>
                                     <p style="color:red">how will it be with Rides page?</p>
 
+
+                                    @*Questions up need finished sites so that i know where everywhere i should redirect people*@
+
+
+
                                     <h4>Can I cancel the ride even if someone booked it?</h4>
-                                    <p>In case the ride cant happen because of any circumstances, you have the full right to cancel it without any fees.</p>
-
-
-                                    <h4>How do I know if someone has booked my ride</h4>
                                     <p>
-                                        After another user books your ride, you will get a notification. All your notifications can be found under the bell next to your name up on the right side.
-                                        After you open them, you can see the status of all rides
+                                        In case the ride cannot happen because of any circumstances, you have the full right to cancel it without any fees anytime. So even if someone has booked your ride,
+                                        you can still cancel it.
                                     </p>
-                                    <p style="color:red">Shouldnt that be changed that just not accepted or rejected bookings are shown..? and pending as well .. and the others could be just in bookings</p>
-                                    <p>Those which have Accept and Reject buttons in the end of the line shows the user who booked your ride and you can decide if you want to accept him or her, or reject.</p>
 
                                     <h4>Can I reject someone who booked my ride?</h4>
-                                    <p>If you do not want to drive with someone because of some reasons as bad experiences or any other reason, you have the full right to reject the person.</p>
+                                    <p>If you do not want to drive with someone because of any reasons, you have the full right to reject the person.</p>
 
 
-                                    <h4>How to contact people who are taking my ride</h4>
+                                    <h4>How do I know if someone has booked my ride?</h4>
+                                    <p>
+                                        After another user books your ride, you will get a notification and also a message. All your notifications can be found under the bell next to your name up on the right side.
+                                        Next to the notification bell, there are messages which will have a red circle around if you got some. Another place where you can find out if someone has booked your ride is on your personal profile page.
+                                        There when you choose the My Rides option on the left side the list of the rides is displayed. Choose the ride for which you wish to see the bookings and click on the "Who booked the ride" link. To make sure
+                                        you chose the right ride, all information are provided. Under these information, the people who has booked your ride are listed there also with their booking statuses. If you wish to chech the accounts, just click
+                                        on their avatar.
+                                    </p>
+                                    
+                                    
+
+
+
+
+
+
+
+                                    <h4>How to contact people who are taking my ride?</h4>
                                     <p></p>
-                                    <p style="color:red">Messages function explained</p>
 
+                                    <p style="color:red">Is it just through the reply option in the messages?</p>
                                 </div>
                             </div>
                         </div>

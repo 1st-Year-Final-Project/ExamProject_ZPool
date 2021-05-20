@@ -46,6 +46,13 @@
                                 <span class="tooltiptext">The ride is fully booked.</span>
                             </button>
                         }
+                        else if (Model.AlreadyBooked)
+                        {
+                            <button disabled class="btn rounded-border btn-outline-dark tooltip">
+                                Book ride
+                                <span class="tooltiptext">You have already booked this ride.</span>
+                            </button>
+                        }
                         else
                         {
                             <input type="number" asp-for="@Model.RideId" hidden />
