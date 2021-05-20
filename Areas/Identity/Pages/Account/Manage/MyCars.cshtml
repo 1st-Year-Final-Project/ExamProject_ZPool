@@ -32,12 +32,12 @@
                 <td>  @item.Model </td>
                 <td>  @item.NumberOfSeats </td>
                 <td>  @item.NumberPlate </td>
-                <td>  <a asp-page="./EditCar" asp-route-id="@item.CarID" style="text-decoration: none">
+                <td style="white-space:nowrap;">  <a asp-page="./EditCar" asp-route-id="@item.CarID" style="text-decoration: none" alt="Edit">
                     <button class="edit-btn ml-2">
                         <i class="fas fa-edit"></i>
                     </button>
                     </a> 
-                    <a asp-page="./DeleteCar" asp-route-id="@item.CarID" style="text-decoration: none">
+                    <a asp-page="./DeleteCar" asp-route-id="@item.CarID" style="text-decoration: none" alt="Delete">
                         <button class="delete-btn ml-2">
                             <i class="fas fa-trash-alt"></i>
                         </button>
