@@ -101,7 +101,7 @@
 
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <a asp-page="/Rides/DeleteRide" asp-route-id="@item.RideID"> Delete</a>
+                            <a asp-page="/Rides/DeleteRide" asp-route-id="@item.RideID" class="text-danger"> Delete</a>
                         }
 
                     </td>

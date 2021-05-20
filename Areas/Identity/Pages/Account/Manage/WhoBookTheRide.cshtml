@@ -79,23 +79,21 @@
                                                         {
                                                             <img src="~/images/N4.jpg" id="photo" height="50" width="50" title="click me">
                                                         }
-                                                    
-                                         
-                                        @*</td>
 
-                                        <td>@booking.BookingStatus</td>
+                                                if (imageFlag.Equals("N2.jpg"))
+                                                {
+                                                    <img src="~/images/N2.jpg" id="photo" height="50" width="50" title="click me">
+                                                }
 
-                                        @if (booking.BookingStatus == "Accepted")
-                                        {
-                                            <td>
-                                                <div class="form group">
-                                                    <form asp-page-handler="Cancel" method="post">
-                                                        <button class="btn btn-danger rounded-border">Cancel</button>
-                                                        <input type="hidden" name="id" value="@booking.BookingID" />
-                                                    </form>
-                                                </div>
-                                            </td>
-                                        }*@
+                                                if (imageFlag.Equals("N3.jpg"))
+                                                {
+                                                    <img src="~/images/N3.jpg" id="photo" height="50" width="50" title="click me">
+                                                }
+
+                                                if (imageFlag.Equals("N4.jpg"))
+                                                {
+                                                    <img src="~/images/N4.jpg" id="photo" height="50" width="50" title="click me">
+                                                }
 
                                                 if (imageFlag.Equals("N5.jpg"))
                                                 {

@@ -13,35 +13,35 @@
             <input type="hidden" asp-for="@Model.Car.CarID" />
             <div class="form-group">
                 <label asp-for="@Model.Car.Brand" class="control-label"></label>
-                <input asp-for="@Model.Car.Brand" class="form-control" />
+                <input asp-for="@Model.Car.Brand" class="form-control rounded-border" />
                 <span asp-validation-for="@Model.Car.Brand" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Car.Model" class="control-label"></label>
-                <input asp-for="@Model.Car.Model" class="form-control" />
+                <input asp-for="@Model.Car.Model" class="form-control rounded-border" />
                 <span asp-validation-for="@Model.Car.Model" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Car.Color" class="control-label"></label>
-                <input asp-for="@Model.Car.Color" class="form-control" />
+                <input asp-for="@Model.Car.Color" class="form-control rounded-border" />
                 <span asp-validation-for="@Model.Car.Color" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Car.NumberOfSeats" class="control-label"></label>
-                <input asp-for="@Model.Car.NumberOfSeats" class="form-control" />
+                <input asp-for="@Model.Car.NumberOfSeats" class="form-control rounded-border" />
                 <span asp-validation-for="@Model.Car.NumberOfSeats" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="@Model.Car.NumberPlate" class="control-label"></label>
-                <input asp-for="@Model.Car.NumberPlate" class="form-control" />
+                <input asp-for="@Model.Car.NumberPlate" class="form-control rounded-border" />
                 <span asp-validation-for="@Model.Car.NumberPlate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-outline-success rounded-border" />
             </div>
         </form>
     </div>
 </div>
 <div>
-    <a asp-page="./MyCars">Back to List</a>
+    <a asp-page="./MyCars">Back to My Cars</a>
 </div>
