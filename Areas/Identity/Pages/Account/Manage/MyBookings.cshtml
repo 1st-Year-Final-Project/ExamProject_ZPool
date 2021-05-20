@@ -36,15 +36,16 @@
             @foreach (var b in Model._myBookings)
             {
 
-                <tr>
-                    <td>  @b.Date </td>
-                    <td>  @b.PickUpLocation </td>
-                    <td>  @b.DropOffLocation </td>
-                    <td>
-                        @b.Ride.Car.AppUser
-                        <a asp-page="./ReadOnlyProfilePage" asp-route-id="@b.Ride.Car.AppUser.Id">
-                            @{
-                                var imageFlag = b.Ride.Car.AppUser.AvatarName;
+
+        <tr>
+            <td>  @b.Date </td>
+            <td>  @b.PickUpLocation </td>
+            <td>  @b.DropOffLocation </td>
+            <td>
+                @b.Ride.Car.AppUser
+                <a asp-page="./ReadOnlyProfilePage" asp-route-id="@b.Ride.Car.AppUser.Id">
+                    @{
+                        var imageFlag = b.Ride.Car.AppUser.AvatarName;
 
                                 if (string.IsNullOrEmpty(b.Ride.Car.AppUser.AvatarName) || b.Ride.Car.AppUser.AvatarName.Equals("default.png"))
                                 {
@@ -78,13 +79,23 @@
                                     }
                                 }
                             }
-                        </a>
-                    </td>
-                    <td>  @b.Ride.Car.Color / @b.Ride.Car.Brand @b.Ride.Car.Model / @b.Ride.Car.NumberPlate </td>
-                    <td>  @b.BookingStatus </td>
-                    <td>   <a asp-page="./DeleteMyBooking" asp-route-id="@b.BookingID" class="btn btn-danger rounded-border">Cancel</a> </td>
-                </tr>
-
+                </a>
+            </td>
+            <td>  @b.Ride.Car.Color / @b.Ride.Car.Brand @b.Ride.Car.Model / @b.Ride.Car.NumberPlate </td>
+            <td>  @b.BookingStatus </td>
+            @*<td>   <a asp-page="./DeleteMyBooking" asp-route-id="@b.BookingID" class="btn btn-danger rounded-border">Cancel</a> </td>*@
+            @if (b.BookingStatus == "Accepted" || b.BookingStatus == "Pending")
+            {
+                <td>
+                    <div class="form group">
+                        <form asp-page-handler="Cancel" method="post">
+                            <button class="btn btn-danger rounded-border">Cancel</button>
+                            <input type="hidden" name="id" value="@b.BookingID" />
+                        </form>
+                    </div>
+                </td>
+            }            
+        </tr>
             }
         }
 </table>
