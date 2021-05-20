@@ -31,10 +31,9 @@ namespace ZPool.Pages.Bookings
         // more details, see https://aka.ms/RazorPagesCRUD.
         public IActionResult OnPost(Booking booking)
         {
-            if (booking == booking)
-            {
+           
                 bookingservice.DeleteBooking(booking);
-            }
+            
 
 
             return RedirectToPage();
