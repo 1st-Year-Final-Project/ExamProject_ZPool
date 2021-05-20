@@ -5,10 +5,10 @@
     ViewData["ActivePage"] = ManageNavPages.MyCars;
 }
 
-<h1>Delete Car</h1>
+@*<h1>Delete Car</h1>*@
 
-<h3>Are you sure you want to delete @Model.Car.Brand @Model.Car.Model?<br/>
-    All associated Rides and Bookings will be deleted as well.</h3>
+<h3>Are you sure you want to delete this car? @*@Model.Car.Brand @Model.Car.Model @Model.Car.NumberPlate*@<br /></h3>
+<p>All associated Rides and Bookings will be deleted as well.</p> 
 <div>
     
     <hr />
@@ -50,7 +50,7 @@
 
 
         <input type="hidden" asp-for="Car.CarID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./MyCars">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger rounded-border" /> |
+        <a asp-page="./MyCars">Back to My Cars</a>
     </form>
 </div>
