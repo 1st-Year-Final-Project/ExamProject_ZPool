@@ -39,10 +39,13 @@ namespace ZPool.Pages.Rides
 
         public Message Message { get; set; }
 
+        public int SeatsLeft { get; set; }
+
         public async Task OnGetAsync(int id)
         {
             Ride = _rideService.GetRide(id);
             RideId = id;
+            SeatsLeft = _rideService.SeatsLeft(RideId);
             CurrentUser = await _userManager.GetUserAsync(User);
         }
 
@@ -66,11 +69,11 @@ namespace ZPool.Pages.Rides
             return RedirectToPage("/Account/Manage/MyBookings", new { area = "Identity" });
         }
 
-        public void OnPostDelete(int rideId)
+        public IActionResult OnPostDelete(int rideId)
         {
             Ride ride = _rideService.GetRide(rideId);
             _rideService.DeleteRide(ride);
-            RedirectToPage("/GetAllRides");
+            return RedirectToPage("/Rides/GetAllRides");
         }
 
         public async Task<IActionResult> OnPostSend()

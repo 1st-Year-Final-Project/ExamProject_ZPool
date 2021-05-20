@@ -13,8 +13,6 @@
     <div class="col-md-6">
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <br /><br /><br /><br /><br /><br />
-
             <div class="avatar-div" title="choose your avatar">
                 <a asp-page="./SelectAvatar">
                     @{
@@ -58,10 +56,6 @@
                 .avatar-div {
                     height: 150px;
                     width: 150px;
-                    position: absolute;
-                    top: 15%;
-                    right: 15%;
-                    transform: translate(-50%,-50%);
                     border-radius: 50%;
                     overflow: hidden;
                     border: 1px solid grey;
@@ -72,22 +66,21 @@
                     width: 100%;
                 }
             </style>
-            <br /><br /><br /><br />
 
             <div class="form-group">
                 <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" class="form-control" disabled />
+                <input asp-for="FirstName" class="form-control rounded-border" disabled />
             </div>
 
             <div class="form-group">
                 <label asp-for="LastName"></label>
-                <input asp-for="LastName" class="form-control" disabled />
+                <input asp-for="LastName" class="form-control rounded-border" disabled />
             </div>
 
             <label for="genders">Choose your gender:</label><br />
 
             <div class="form-group">
-                <select asp-for="@Model.UserGender" class="form-control" asp-items="@Model.Genders">
+                <select asp-for="@Model.UserGender" class="form-control rounded-border" asp-items="@Model.Genders">
                     <option value="">-- Select your gender --</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -100,7 +93,7 @@
 
             <div class="form-group">
                 <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" disabled />
+                <input asp-for="Email" class="form-control rounded-border" disabled />
             </div>
 
             <div class="form-group">

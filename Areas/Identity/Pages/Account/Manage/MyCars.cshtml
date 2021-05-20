@@ -4,20 +4,19 @@
     ViewData["Title"] = "My Cars";
     ViewData["ActivePage"] = ManageNavPages.MyCars;
 }
-<h3> List of cars</h3>
+<h3> My Cars</h3>
 </hr></br>
 <p>
-    <a asp-page="./CreateCar" class="btn btn-outline-primary">Create New Car</a>
+    <a asp-page="./CreateCar" class="btn btn-outline-success rounded-border">Add New Car</a>
 </p>
 <table class="table">
     <thead>
     <tr>
-        <th> Car Id  </th>
+        <th> Color </th>
         <th> Brand </th>
         <th> Model </th>
-        <th> NumberOfSeats </th>
-        <th> NumberPlate </th>
-        <th> Color </th>
+        <th> Number of Seats </th>
+        <th> Plate Number </th>  
     </tr>
     </thead>
     <tbody>
@@ -26,22 +25,15 @@
     {
         @foreach (var item in Model.Cars)
         {
-            <tr>
-                <td>  @item.CarID </td>
-                <td>  @item.Brand </td>
-                <td>  @item.Model </td>
-                <td>  @item.NumberOfSeats </td>
-                <td>  @item.NumberPlate </td>
-                <td>  @item.Color </td>
-                <td>
-                    <p>
-                        <a asp-page="./EditCar" asp-route-id="@item.CarID">Edit</a>
-                    </p>
-                    <p>
-                        <a asp-page="./DeleteCar" asp-route-id="@item.CarID" class="text-danger">Delete </a>
-                    </p>
-                </td>
-            </tr>
+        <tr>
+            <td>  @item.Color </td>
+            <td>  @item.Brand </td>
+            <td>  @item.Model </td>
+            <td>  @item.NumberOfSeats </td>
+            <td>  @item.NumberPlate </td>
+            <td>  <a asp-page="./EditCar" asp-route-id="@item.CarID">Edit</a> </td>
+            <td>  <a asp-page="./DeleteCar" asp-route-id="@item.CarID" class="text-danger">Delete </a> </td>
+        </tr>
         }
     }
 </table>

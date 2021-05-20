@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UserManagementTestApp.Models;
 using ZPool.Models;
+using ZPool.Pages.Rides;
 using ZPool.Services.Interface;
 
 namespace ZPool.Services.EFService.RideService
@@ -60,7 +61,7 @@ namespace ZPool.Services.EFService.RideService
             return cars;
         }
 
-        public IEnumerable<Ride> FilterRides(Ride ride)
+        public IEnumerable<Ride> FilterRides(RideCriteriaInputModel ride)
         {
             var rides = service.Rides
                 .Include(r=>r.Car)
@@ -99,6 +100,17 @@ namespace ZPool.Services.EFService.RideService
         {
             IEnumerable<int> lst = service.Cars.Where(c => c.AppUserID.Equals(user.Id)).ToList().Select(c => c.CarID);
             return from r in service.Rides where lst.Contains(r.CarID) select r;
+        }
+
+        public int SeatsLeft(int rideId)
+        {
+            int acceptedBookings = service.Bookings
+                .Where(b => b.RideID == rideId)
+                .Count(b => b.BookingStatus == "Accepted");
+
+            int seatsLeft = service.Rides.Find(rideId).SeatsAvailable - acceptedBookings;
+
+            return seatsLeft;
         }
     }
 }

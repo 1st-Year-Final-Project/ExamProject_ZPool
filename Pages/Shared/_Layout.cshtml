@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using UserManagementTestApp.Models
+@using ZPool.Services.Interface
+@inject SignInManager<AppUser> SignInManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,7 +18,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-yellow border-bottom box-shadow mb-3 py-0">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <img src="/images/logo1_1.png" class="ml-1 mr-3" style="max-height: 50px"/>
+                    <img src="/images/logo1_1.png" class="ml-1 mr-3" style="max-height: 50px" />
                     Z-Pool
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -32,15 +37,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Rides/GetAllRides">Rides</a>
                         </li>
+
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Bookings/GetBookings">Bookings</a>
+                            </li>
+
+                        }
+
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container"  style="min-height: 70vh">
+    <div class="container" style="min-height: 70vh">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -58,13 +73,12 @@
                     <h3>Z-Pool</h3>
 
                     <ul class="list-unstyled mb-0">
-                    
                     </ul>
                 </div>
                 <!--Grid column-->
                 <!--Grid column 2-->
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0 text-center text-md-left d-flex justify-content-center">
-                    
+
                     <ul class="list-unstyled mb-0">
                         <li>
                             <h6 class="text-uppercase">Navigation</h6>
@@ -112,7 +126,7 @@
     <!-- Footer -->
 
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 

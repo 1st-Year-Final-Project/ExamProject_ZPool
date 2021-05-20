@@ -55,23 +55,23 @@
             <br /><br />
 
             <div class="form-group">
-                <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" class="form-control" disabled />
+                <label asp-for="FirstName"> First Name </label>
+                <input asp-for="FirstName" class="form-control rounded-border" disabled />
             </div>
 
             <div class="form-group">
-                <label asp-for="LastName"></label>
-                <input asp-for="LastName" class="form-control" disabled />
+                <label asp-for="LastName"> Last Name </label>
+                <input asp-for="LastName" class="form-control rounded-border" disabled />
             </div>
 
             <div class="form-group">
-                <label asp-for="UserGender"></label>
-                <input asp-for="UserGender" class="form-control" disabled />
+                <label asp-for="UserGender"> Gender </label>
+                <input asp-for="UserGender" class="form-control rounded-border" disabled />
             </div>
 
             <div class="form-group">
-                <label asp-for="Introduction"></label>
-                <input asp-for="Introduction" class="form-control" disabled />
+                <label class="control-label">About Me</label>
+                <textarea asp-for="@Model.Introduction" class="form-control" cols="50" rows="10" disabled></textarea>
             </div>
         </form>
     </div>

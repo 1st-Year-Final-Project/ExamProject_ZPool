@@ -9,14 +9,23 @@ namespace ZPool.Models
 {
     public class Car
     {
+        
         public int CarID { get; set; }
         [Required]
+        [Display(Name = "Brand:")]
         public string Brand { get; set; }
         [Required]
+        [Display(Name = "Model:")]
         public string Model { get; set; }
+        
         [Required]
+        [Display(Name ="Car:")]
         public string NumberPlate { get; set; }
+
+        [Display(Name = "Color:")]
         public string Color { get; set; }
+
+        [Display(Name = "Number of Seats:")]
         [Range(typeof(int), "1", "9")]
         public int NumberOfSeats { get; set; }
 

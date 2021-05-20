@@ -2,11 +2,23 @@
 
 namespace ZPool.Migrations
 {
-    public partial class one : Migration
+    public partial class storedProcedures : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            
+            string proc = @"Create Proc spDeleteCarByID @CarID int as
+                                        BEGIN
+                                        delete
+                                        [Bookings]
+                                        From [Bookings]
+                                        inner join Rides on Rides.RideId = [Bookings].RideID
+                                        where rides.CarID = @CarID
+                                        delete from Rides where CarID = @CarID
+                                        delete from [Cars] where CarID = @CarID
+                                        select * from Cars
+                                        end";
+            migrationBuilder.Sql(proc);
+
             string proc2 = @"
             CREATE Proc[dbo].[spDeleteUserByID]
             @AppUserID int
@@ -57,7 +69,8 @@ namespace ZPool.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            
+            string proc = @"Drop Proc spDeleteCarByID";
+            migrationBuilder.Sql(proc);
 
             string proc2 = @"Drop Proc spDeleteUserByID";
             migrationBuilder.Sql(proc2);
@@ -65,5 +78,6 @@ namespace ZPool.Migrations
             string proc3 = @"Drop Proc spDeleteUserByID";
             migrationBuilder.Sql(proc3);
         }
+      
     }
 }
