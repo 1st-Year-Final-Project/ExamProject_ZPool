@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-md-6">
         <form id="profile-form" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="ModelOnly"></div>
             <div class="avatar-div" title="choose your avatar">
                 <a asp-page="./SelectAvatar">
                     @{
@@ -75,19 +75,19 @@
             <div class="form-group">
                 <label asp-for="FirstName"></label>
                 <input asp-for="FirstName" class="form-control rounded-border" />
-                <span asp-validation-for="Input.@Model.FirstName" class="text-danger"></span>
+                <span asp-validation-for="Input.@Model.FirstName"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="LastName"></label>
                 <input asp-for="LastName" class="form-control rounded-border" />
-                <span asp-validation-for="Input.@Model.LastName" class="text-danger"></span>
+                <span asp-validation-for="Input.@Model.LastName"></span>
             </div>
 
             <label for="genders">Choose your gender:</label><br />
 
             <div class="form-group">
-                <select asp-for="@Model.UserGender" class="form-control rounded-border" asp-items="@Model.Genders">
+                <select asp-for="@Model.UserGender" class="form-control rounded-border" asp-items="@Model.GenderList">
                     <option value="">-- Select your gender --</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
