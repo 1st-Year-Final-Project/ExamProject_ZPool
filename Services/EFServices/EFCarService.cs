@@ -56,5 +56,11 @@ namespace ZPool.Services.EFServices
             var cars = _context.Cars.AsNoTracking().Where(c => c.AppUserID == userId);
             return cars;
         }
+
+        public IEnumerable<Car> GetCarsNumberPlate(string numberPlate)
+        {
+            var cars = _context.Cars.AsNoTracking().Where(c => c.NumberPlate == numberPlate);
+            return cars;
+        }
     }
 }

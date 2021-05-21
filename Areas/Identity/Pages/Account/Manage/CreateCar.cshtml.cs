@@ -16,9 +16,12 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 
         [BindProperty]
         public Car Car { get; set; }
-
+        public string Message { get; set; }
         ICarService carService;
         private UserManager<AppUser> _userManager;
+    
+
+    
 
         public CreateCarModel(ICarService service, UserManager<AppUser> userManager)
         {
@@ -39,9 +42,26 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            car.AppUserID = user.Id;
-            carService.AddCar(car);
-            return RedirectToPage("MyCars");
+            string typedNumberPlate = car.NumberPlate;
+            bool Carfound;
+            Carfound = false;
+            IEnumerable<Car> carPlates = carService.GetCarsNumberPlate(typedNumberPlate);
+            if ( carPlates.Count() > 0)
+            {
+                Carfound = true;
+            }
+
+            if (Carfound == false)
+            {
+                car.AppUserID = user.Id;
+                carService.AddCar(car);
+                return RedirectToPage("MyCars");
+            }
+            else
+            {
+                Message = "You cannot add two cars with the same number plate";
+                return Page();
+            }
         }
     }
 }
