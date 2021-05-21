@@ -42,7 +42,6 @@ namespace ZPool.Pages.Administration
                 {
                     return RedirectToPage(new {statusMessage = "Error: No user found."});
                 }
-                
             }
             else
             {
@@ -50,10 +49,7 @@ namespace ZPool.Pages.Administration
                 Users = _userManager.Users;
                 
             }
-
             return Page();
         }
-
-
     }
 }
