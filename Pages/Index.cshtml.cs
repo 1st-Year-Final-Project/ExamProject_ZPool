@@ -30,7 +30,7 @@ namespace ZPool.Pages
 
         public IActionResult OnPost()
         {
-            return RedirectToPage("/Rides/GetAllRides", RideCriteria);
+            return RedirectToPage("/Rides/GetRides", RideCriteria);
         }
     }
 }
