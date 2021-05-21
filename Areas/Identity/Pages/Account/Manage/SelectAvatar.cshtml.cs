@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UserManagementTestApp.Models;
 using ZPool.Models;
-using ZPool.Services.Interface;
+using ZPool.Services.Interfaces;
 
 namespace ZPool.Areas.Identity.Pages.Account.Manage
 {

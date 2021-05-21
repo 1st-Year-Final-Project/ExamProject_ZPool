@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using UserManagementTestApp.Models;
 using ZPool.Models;
 using ZPool.Pages.Rides;
-using ZPool.Services.Interface;
+using ZPool.Services.Interfaces;
 
-namespace ZPool.Services.EFService.RideService
+namespace ZPool.Services.EFServices.RideService
 {
     public class RideService : IRideService
     {

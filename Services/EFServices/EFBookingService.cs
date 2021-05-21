@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using UserManagementTestApp.Models;
 using ZPool.Models;
-using ZPool.Services.Interface;
+using ZPool.Services.Interfaces;
 
-namespace ZPool.Services.EFService
+namespace ZPool.Services.EFServices
 {
     public class EFBookingService: IBookingService
     {

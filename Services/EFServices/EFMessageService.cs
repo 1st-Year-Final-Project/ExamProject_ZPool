@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using ZPool.Models;
-using ZPool.Services.Interface;
+using ZPool.Services.Interfaces;
 
-namespace ZPool.Services.EFService
+namespace ZPool.Services.EFServices
 {
     public class MessageService : IMessageService
     {

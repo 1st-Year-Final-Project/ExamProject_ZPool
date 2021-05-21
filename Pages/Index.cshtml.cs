@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ZPool.Models;
 using ZPool.Pages.Rides;
-using ZPool.Services.Interface;
+using ZPool.Services.Interfaces;
 
 namespace UserManagementTestApp.Pages
 {

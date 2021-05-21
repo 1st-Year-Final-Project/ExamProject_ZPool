@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ZPool.Models;
-using ZPool.Services.Interface;
+using ZPool.Services.Interfaces;
 
-namespace ZPool.Services.EFService
+namespace ZPool.Services.EFServices
 {
     public class EFCarService : ICarService
     {

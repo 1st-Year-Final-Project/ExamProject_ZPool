@@ -6,7 +6,7 @@ using UserManagementTestApp.Models;
 using ZPool.Models;
 using ZPool.Pages.Rides;
 
-namespace ZPool.Services.Interface
+namespace ZPool.Services.Interfaces
 {
     public interface IRideService
     {

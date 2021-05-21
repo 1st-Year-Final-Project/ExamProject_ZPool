@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using UserManagementTestApp.Models;
 using ZPool.Models;
 
-namespace ZPool.Services.Interface
+namespace ZPool.Services.Interfaces
 {
    public  interface IBookingService
     {
