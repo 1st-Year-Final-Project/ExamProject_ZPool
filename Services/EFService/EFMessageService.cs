@@ -40,9 +40,9 @@ namespace ZPool.Services.EFService
                 .OrderByDescending(m=>m.SendingDate);
         }
 
-        public void SetStatusToRead(int id)
+        public void SetStatusToRead(int mId)
         {
-            Message message = _context.Messages.FirstOrDefault(m => m.Id == id);
+            Message message = _context.Messages.FirstOrDefault(m => m.Id == mId);
             if (message != null)
             {
                 message.IsRead = true;
@@ -72,9 +72,9 @@ namespace ZPool.Services.EFService
             return messages.Count > 0 ? true : false;
         }
 
-        public void DeleteMessagesByUserId(int id)
+        public void DeleteMessagesByUserId(int userId)
         {
-            _context.Messages.FromSqlRaw("spDeleteMessagesByID {0}", id)
+            _context.Messages.FromSqlRaw("spDeleteMessagesByID {0}", userId)
                 .ToList()
                 .FirstOrDefault();
             _context.SaveChanges();

@@ -10,57 +10,50 @@ namespace ZPool.Services.EFService
 {
     public class EFCarService : ICarService
     {
-        AppDbContext context;
+        AppDbContext _context;
         public EFCarService(AppDbContext service)
         {
-            context = service;
+            _context = service;
         }
         public void AddCar(Car car)
         {
-            context.Cars.Add(car);
-            context.SaveChanges();
+            _context.Cars.Add(car);
+            _context.SaveChanges();
         }
-
-        //public void DeleteCar(Car car)
-        //{
-        //    context.Cars.Remove(car);
-        //    context.SaveChanges();
-        //}
 
         public void DeleteCar(Car car)
         {
-            context.Cars.FromSqlRaw("spDeleteCarByID {0}", car.CarID)
+            _context.Cars.FromSqlRaw("spDeleteCarByID {0}", car.CarID)
                 .ToList()
                 .FirstOrDefault();
-            context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public IEnumerable<Car> GetCars()
         {
-            return context.Cars;
+            return _context.Cars;
         }
-        public Car GetCar(int id)
+        public Car GetCar(int carId)
         {
-            var car = context.Cars.Include(c => c.AppUser).FirstOrDefault(c => c.CarID == id);
+            var car = _context.Cars.Include(c => c.AppUser).FirstOrDefault(c => c.CarID == carId);
             return car;
         }
 
         public void UpdateCar(Car car)
         {
-            
-            Car OldCar = context.Cars.Find(car.CarID);
-            OldCar.CarID = car.CarID;
-            OldCar.Brand = car.Brand;
-            OldCar.Model = car.Model;
-            OldCar.NumberOfSeats = car.NumberOfSeats;
-            OldCar.NumberPlate = car.NumberPlate;
-            OldCar.Color = car.Color;
-            context.SaveChanges();
+            Car oldCar = _context.Cars.Find(car.CarID);
+            oldCar.CarID = car.CarID;
+            oldCar.Brand = car.Brand;
+            oldCar.Model = car.Model;
+            oldCar.NumberOfSeats = car.NumberOfSeats;
+            oldCar.NumberPlate = car.NumberPlate;
+            oldCar.Color = car.Color;
+            _context.SaveChanges();
         }
 
-        public IEnumerable<Car> GetCarsByUser(int id)
+        public IEnumerable<Car> GetCarsByUser(int userId)
         {
-            var cars = context.Cars.AsNoTracking().Where(c => c.AppUserID == id);
+            var cars = _context.Cars.AsNoTracking().Where(c => c.AppUserID == userId);
             return cars;
         }
     }

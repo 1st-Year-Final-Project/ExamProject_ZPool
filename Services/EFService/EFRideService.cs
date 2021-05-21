@@ -12,55 +12,55 @@ namespace ZPool.Services.EFService.RideService
 {
     public class RideService : IRideService
     {
-        AppDbContext service;
+        AppDbContext _context;
         
         public RideService(AppDbContext context)
         {
-            service = context;
+            _context = context;
         }
 
         public void AddRide(Ride ride)
         {
-            service.Rides.Add(ride);
-            service.SaveChanges();
+            _context.Rides.Add(ride);
+            _context.SaveChanges();
         }
 
         public void DeleteRide(Ride ride)
         {
-            service.Rides.Remove(ride);
-            service.SaveChanges();
+            _context.Rides.Remove(ride);
+            _context.SaveChanges();
         }
 
         public void EditRide(Ride ride)
         {
-            service.Rides.Update(ride);
-            service.SaveChanges();  
+            _context.Rides.Update(ride);
+            _context.SaveChanges();  
         }
 
         public IEnumerable<Ride> GetAllRides()
         {
-            return service.Rides
+            return _context.Rides
                 .Include(r => r.Car)
                 .ThenInclude(c => c.AppUser);
         }
 
-        public Ride GetRide(int id)
+        public Ride GetRide(int rideId)
         {
-            return service.Rides
+            return _context.Rides
                 .Include(r=>r.Car)
                 .ThenInclude(c=>c.AppUser)
-                .FirstOrDefault(r=>r.RideID==id);
+                .FirstOrDefault(r=>r.RideID==rideId);
         }
 
-        public IEnumerable<Car> GetRegisteredCars(int id)
+        public IEnumerable<Car> GetRegisteredCars(int userId)
         {
-            var cars = service.Cars.AsNoTracking().Where(c => c.AppUserID == id);
+            var cars = _context.Cars.AsNoTracking().Where(c => c.AppUserID == userId);
             return cars;
         }
 
         public IEnumerable<Ride> FilterRides(RideCriteriaInputModel criteria)
         {
-            var rides = service.Rides
+            var rides = _context.Rides
                 .Include(r=>r.Car)
                 .AsNoTracking()
                 .AsEnumerable()
@@ -99,17 +99,17 @@ namespace ZPool.Services.EFService.RideService
         // Method for Profile page
         public IEnumerable<Ride> GetRidesByUser(AppUser user)
         {
-            IEnumerable<int> lst = service.Cars.Where(c => c.AppUserID.Equals(user.Id)).ToList().Select(c => c.CarID);
-            return from r in service.Rides where lst.Contains(r.CarID) select r;
+            IEnumerable<int> lst = _context.Cars.Where(c => c.AppUserID.Equals(user.Id)).ToList().Select(c => c.CarID);
+            return from r in _context.Rides where lst.Contains(r.CarID) select r;
         }
 
         public int SeatsLeft(int rideId)
         {
-            int acceptedBookings = service.Bookings
+            int acceptedBookings = _context.Bookings
                 .Where(b => b.RideID == rideId)
                 .Count(b => b.BookingStatus == "Accepted");
 
-            int seatsLeft = service.Rides.Find(rideId).SeatsAvailable - acceptedBookings;
+            int seatsLeft = _context.Rides.Find(rideId).SeatsAvailable - acceptedBookings;
 
             return seatsLeft;
         }
