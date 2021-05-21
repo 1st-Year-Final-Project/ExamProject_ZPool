@@ -7,111 +7,98 @@
 
 <h3> My Bookings</h3>
 </hr></br>
-    <p>
-        <a asp-page="/Rides/GetAllRides" class="btn btn-outline-success rounded-border">Book a Ride</a>
-    </p>
+<p>
+    <a asp-page="/Rides/GetAllRides" class="btn btn-outline-success rounded-border">Book a Ride</a>
+</p>
 </br>
 
-    <form asp-page-handler="StatusFilter" method="post">
-        <p>
-            Search Booking Status: <input type="text" asp-for="StatusCriteria" class="form-control rounded-border" style="max-width: 13rem" />
-            <input type="submit" value="Filter" class="btn btn-success rounded-border" /> </br>
-            <a asp-page="Identity/Account/Manage/MyBookings">Back to Full List </a>
-        </p>
-    </form>
-        <!--<p>
-        Search Booking Date Time: <input-->
-        @*type="text"*@ @*asp-for="StatusCriteria"*@
-        <!--asp-for="Model.DateTimeCriteria.Date" asp-format="{0:yyyy-MM-dd}" class="form-control rounded-border" style="max-width: 13rem"/>
-        <input type="submit" value="Filter" />
-        
-    </p>-->
-    @*<form asp-page-handler="DateTimeFilter" method="post">
-        <div class="form-group">
-            <label class="mx-2">Date: </label>
-            <input id="date" type="date" asp-for="@Model.DateTimeCriteria" class="form-control rounded-border" style="max-width: 13rem" />
-        </div>
-        <button type="submit" class="btn btn-yellow mx-2">Search Bookings</button>
+<form asp-page-handler="StatusFilter" method="post">
+    <p>
+        Search Booking Status: <input type="text" asp-for="StatusCriteria" class="form-control rounded-border" style="max-width: 13rem" />
+        </br>
+        <input type="submit" value="Filter" class="btn btn-success rounded-border" />
         <a asp-page="Identity/Account/Manage/MyBookings">Back to Full List </a>
-    </form>*@
+    </p>
+</form>
 
 
-        <table class="table">
-            <thead>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width:50px"> Date & Time  </th>
+            <th style="width:600px"> From </th>
+            <th style="width:600px"> To </th>
+            <th style="width:800px"> Driver / Profile </th>
+            <th style="width:1000px"> Car </th>
+            <th style="width:10px"> Status </th>
+            <th style="width:10px"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var b in Model.MyBookings)
+            {
                 <tr>
-                    <th style="width:50px"> Date & Time  </th>
-                    <th style="width:600px"> From </th>
-                    <th style="width:600px"> To </th>
-                    <th style="width:800px"> Driver / Profile </th>
-                    <th style="width:1000px"> Car </th>
-                    <th style="width:10px"> Status </th>
-                    <th style="width:10px"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model != null)
-                {
-                    @foreach (var b in Model.MyBookings)
-                    {
-                        <tr>
-                            <td>  @b.Date </td>
-                            <td>  @b.PickUpLocation </td>
-                            <td>  @b.DropOffLocation </td>
-                            <td>
-                                @b.Ride.Car.AppUser
-                                <a asp-page="./ReadOnlyProfilePage" asp-route-id="@b.Ride.Car.AppUser.Id">
-                                    @{
-                                        var imageFlag = b.Ride.Car.AppUser.AvatarName;
+                    <td>  @b.Date </td>
+                    <td>  @b.PickUpLocation </td>
+                    <td>  @b.DropOffLocation </td>
+                    <td>
+                        @b.Ride.Car.AppUser
+                        <a asp-page="./ReadOnlyProfilePage" asp-route-id="@b.Ride.Car.AppUser.Id">
+                            @{
+                                var imageFlag = b.Ride.Car.AppUser.AvatarName;
 
-                                        if (string.IsNullOrEmpty(b.Ride.Car.AppUser.AvatarName) || b.Ride.Car.AppUser.AvatarName.Equals("default.png"))
-                                        {
-                                            <img src="~/images/default.png" id="photo" height="50" width="50" title="click me">
-                                        }
-                                        else
-                                        {
-                                            if (imageFlag.Equals("N1.jpg"))
-                                            {
-                                                <img src="~/images/N1.jpg" id="photo" height="50" width="50" title="click me">
-                                            }
-
-                                            if (imageFlag.Equals("N2.jpg"))
-                                            {
-                                                <img src="~/images/N2.jpg" id="photo" height="50" width="50" title="click me">
-                                            }
-
-                                            if (imageFlag.Equals("N3.jpg"))
-                                            {
-                                                <img src="~/images/N3.jpg" id="photo" height="50" width="50" title="click me">
-                                            }
-
-                                            if (imageFlag.Equals("N4.jpg"))
-                                            {
-                                                <img src="~/images/N4.jpg" id="photo" height="50" width="50" title="click me">
-                                            }
-
-                                            if (imageFlag.Equals("N5.jpg"))
-                                            {
-                                                <img src="~/images/N5.jpg" id="photo" height="50" width="50" title="click me">
-                                            }
-                                        }
+                                if (string.IsNullOrEmpty(b.Ride.Car.AppUser.AvatarName) || b.Ride.Car.AppUser.AvatarName.Equals("default.png"))
+                                {
+                                    <img src="~/images/default.png" id="photo" height="50" width="50" title="click me">
+                                }
+                                else
+                                {
+                                    if (imageFlag.Equals("N1.jpg"))
+                                    {
+                                        <img src="~/images/N1.jpg" id="photo" height="50" width="50" title="click me">
                                     }
-                                </a>
-                            </td>
-                            <td>  @b.Ride.Car.Color / @b.Ride.Car.Brand @b.Ride.Car.Model / @b.Ride.Car.NumberPlate </td>
-                            <td>  @b.BookingStatus </td>
 
-                            @if (b.BookingStatus == "Accepted" || b.BookingStatus == "Pending")
-                            {
-                                <td>
-                                    <div class="form group">
-                                        <form asp-page-handler="Cancel" method="post">
-                                            <button class="btn btn-danger rounded-border">Cancel</button>
-                                            <input type="hidden" name="id" value="@b.BookingID" />
-                                        </form>
-                                    </div>
-                                </td>
+                                    if (imageFlag.Equals("N2.jpg"))
+                                    {
+                                        <img src="~/images/N2.jpg" id="photo" height="50" width="50" title="click me">
+                                    }
+
+                                    if (imageFlag.Equals("N3.jpg"))
+                                    {
+                                        <img src="~/images/N3.jpg" id="photo" height="50" width="50" title="click me">
+                                    }
+
+                                    if (imageFlag.Equals("N4.jpg"))
+                                    {
+                                        <img src="~/images/N4.jpg" id="photo" height="50" width="50" title="click me">
+                                    }
+
+                                    if (imageFlag.Equals("N5.jpg"))
+                                    {
+                                        <img src="~/images/N5.jpg" id="photo" height="50" width="50" title="click me">
+                                    }
+                                }
                             }
-                        </tr>
+                        </a>
+                    </td>
+                    <td>  @b.Ride.Car.Color / @b.Ride.Car.Brand @b.Ride.Car.Model / @b.Ride.Car.NumberPlate </td>
+                    <td>  @b.BookingStatus </td>
+
+                    @if (b.BookingStatus == "Accepted" || b.BookingStatus == "Pending")
+                    {
+                        <td>
+                            <div class="form group">
+                                <form asp-page-handler="Cancel" method="post">
+                                    <button class="btn btn-danger rounded-border">Cancel</button>
+                                    <input type="hidden" name="id" value="@b.BookingID" />
+                                </form>
+                            </div>
+                        </td>
                     }
-                }
-        </table>
+                </tr>
+            }
+        }
+</table>
