@@ -1,10 +1,12 @@
 ﻿@page
 @model ZPool.Areas.Identity.Pages.Account.Manage.MyRidesModel
 @{
+
     ViewData["Title"] = "My Rides";
     ViewData["ActivePage"] = ManageNavPages.MyRides;
 }
 
+@*ViewData["Title"] = "My Rides";*@
 <h3> My Rides</h3>
 </hr></br>
 <p>
@@ -24,31 +26,31 @@
     <tbody>
         @if (Model != null)
         {
-            @foreach (var r in Model._myRidesList)
+        @foreach (var r in Model._myRidesList)
             {
-             <tr>
-                 <td>  @r.StartTime </td>
-                 <td>  @r.DepartureLocation </td>
-                 <td>  @r.DestinationLocation </td>
-                 <td>  @r.Car.Brand  @r.Car.Model </td>
-                 <td>  @r.SeatsAvailable</td>
-                 <td style="vertical-align: middle">  <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID">Bookings </a> </td>  
-                 <td style="vertical-align: middle"> <a href="/Rides/Ride/@r.RideID" class="text-primary">Details </a> </td> 
-                 <td style="vertical-align: middle; white-space:nowrap;">
+        <tr>
+            <td>  @r.StartTime </td>
+            <td>  @r.DepartureLocation </td>
+            <td>  @r.DestinationLocation </td>
+            <td>  @r.Car.Brand  @r.Car.Model </td>
+            <td>  @r.SeatsAvailable</td>
+            <td style="vertical-align: middle">  <a asp-page="./WhoBookTheRide" asp-route-id="@r.RideID">Bookings </a> </td>
+            <td style="vertical-align: middle"> <a href="/Rides/RideDetails/@r.RideID" class="text-primary">Details </a> </td>
+            <td style="vertical-align: middle; white-space:nowrap;">
 
-                     <a href="/Rides/EditRide/@r.RideID" style="text-decoration: none" class="ml-2" alt="Edit">
-                        <button class="edit-btn">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                     </a>
-                 
-                     <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" style="text-decoration: none" class="ml-2" alt="Delete">
-                        <button class="delete-btn">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                     </a>  
-                 </td>
-             </tr>
+                <a href="/Rides/EditRide/@r.RideID" style="text-decoration: none" class="ml-2" alt="Edit">
+                    <button class="edit-btn">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </a>
+
+                <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" style="text-decoration: none" class="ml-2" alt="Delete">
+                    <button class="delete-btn">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </a>
+            </td>
+        </tr>
             }
         }
 </table>

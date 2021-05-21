@@ -52,7 +52,7 @@ namespace ZPool.Pages.Rides
             if (ride.SeatsAvailable <= car.NumberOfSeats)
             {
                 rideService.AddRide(ride);
-                return RedirectToPage("GetAllRides");
+                return RedirectToPage("GetRides");
             }
             else
             {

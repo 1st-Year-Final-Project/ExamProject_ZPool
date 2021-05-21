@@ -8,7 +8,7 @@
 
 @model ZPool.Pages.Rides.GetAllRidesModel
 @{
-    ViewData["Title"] = "Rides";
+    ViewData["Title"] = "GetRides";
 }
 
 <h1 style="color:black"> Rides</h1>
@@ -42,7 +42,7 @@
                     <input asp-for="@Model.RideCriteria.StartTime" asp-format="{0:yyyy-MM-ddTHH:mm}" class="form-control rounded-border" style="max-width: 13rem" />
                 </div>
                 <button type="submit" class="btn btn-yellow mx-2">Search ride</button>
-                <a asp-page="GetAllRides" class="btn btn-outline-dark mx-2 rounded-border">Clear Filter</a>
+                <a asp-page="GetRides" class="btn btn-outline-dark mx-2 rounded-border">Clear Filter</a>
             </form>
         </div>
     </div>
@@ -87,7 +87,7 @@
                             <td> @item.Car.NumberPlate </td>
                          }
                     <td style="white-space:nowrap;">
-                        <a asp-page="Ride" asp-route-id="@item.RideID">Details</a>
+                        <a asp-page="RideDetails" asp-route-id="@item.RideID">Details</a>
                         
                         @if (SignInManager.IsSignedIn(User) && SignInManager.UserManager.GetUserId(User) == item.Car.AppUserID.ToString())
                         {
