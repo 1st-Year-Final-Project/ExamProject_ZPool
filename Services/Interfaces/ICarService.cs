@@ -14,5 +14,6 @@ namespace ZPool.Services.Interfaces
         Car GetCar(int carId);
         void UpdateCar(Car car);
         IEnumerable<Car> GetCarsByUser(int userId);
+        IEnumerable<Car> GetCarsNumberPlate(string numberPlate);
     }
 }
