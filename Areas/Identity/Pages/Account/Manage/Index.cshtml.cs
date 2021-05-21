@@ -32,12 +32,12 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public string Username { get; set; }
         public string Email { get; set; }
         public SelectList GenderList { get; set; }
+
         [BindProperty] public string FirstName { get; set; }
         [BindProperty] public string LastName { get; set; }     
         [BindProperty] public string Introduction { get; set; }  // It is "About Me" 
         [BindProperty] public string UserAvatarName { get; set; }
         [BindProperty] public string UserGender { get; set; }
-
 
         [BindProperty] public InputModel Input { get; set; }
 
