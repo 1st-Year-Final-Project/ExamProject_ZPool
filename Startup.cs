@@ -12,7 +12,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UserManagementTestApp.Models;
-using ZPool.Helpers;
 using ZPool.Models;
 using ZPool.Services.EFService.RideService;
 using ZPool.Services.Interface;
@@ -42,9 +41,7 @@ namespace UserManagementTestApp
             services.AddTransient<ICarService, EFCarService>();
             services.AddTransient<IBookingService, EFBookingService>();
             services.AddTransient<IMessageService, MessageService>();
-
-            services.AddTransient<IDateTimeComparer, DateTimeComparer>();
-
+            
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("LocalConnection")));

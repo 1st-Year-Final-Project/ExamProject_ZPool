@@ -114,7 +114,6 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 
             RedirectToPage("WhoBookTheRide");
         }
-
     }
 
 }
