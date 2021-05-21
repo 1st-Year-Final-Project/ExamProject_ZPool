@@ -144,15 +144,5 @@ namespace ZPool.Services.EFService
             .Where(b => b.BookingStatus.Equals(status))
             .Where(b => b.Ride.Car.AppUser.Equals(user));
         }
-
-        //public IEnumerable<Booking> GetBookingsByDateTime(DateTime dateTime1, DateTime dateTime2, AppUser user)
-        //{
-        //    return service.Bookings
-        //   .Include(b => b.Ride).ThenInclude(r => r.Car)
-        //   .ThenInclude(c => c.AppUser)
-        //   .Include(b => b.AppUser)
-        //   .Where(b => b.Date.CompareTo(dateTime1)<0 && b.Date.CompareTo(dateTime2) > 0)
-        //   .Where(b => b.AppUser.Equals(user));
-        //}
     }
 }

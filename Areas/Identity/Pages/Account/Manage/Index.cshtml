@@ -51,7 +51,6 @@
                     <label for="file" id="uploadBtn"></label>
                 </a>
             </div>
-
             <style>
                 .avatar-div {
                     height: 150px;
@@ -81,7 +80,8 @@
 
             <div class="form-group">
                 <label asp-for="LastName"></label>
-                <input asp-for="LastName" class="form-control rounded-border"/>
+                <input asp-for="LastName" class="form-control rounded-border" />
+                <span asp-validation-for="Input.@Model.LastName" class="text-danger"></span>
             </div>
 
             <label for="genders">Choose your gender:</label><br />
@@ -112,8 +112,9 @@
 
             <button id="update-profile-button" type="submit" class="btn btn-success rounded-border">Save</button>
         </form>
-</div>
+    </div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+</div>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
