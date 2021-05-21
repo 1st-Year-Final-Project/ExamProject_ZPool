@@ -11,17 +11,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UserManagementTestApp.Models;
 using ZPool.Models;
-using ZPool.Services.EFService.RideService;
-using ZPool.Services.Interface;
-using ZPool.Services.EFService;
+using ZPool.Services.EFServices.RideService;
+using ZPool.Services.Interfaces;
+using ZPool.Services.EFServices;
 
 
 
 
 
-namespace UserManagementTestApp
+namespace ZPool
 {
     public class Startup
     {
