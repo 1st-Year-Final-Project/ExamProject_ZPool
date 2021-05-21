@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using UserManagementTestApp.Models;
+using ZPool.Models;
 
-namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
+namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
@@ -31,10 +31,10 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
        
         public string Username { get; set; }
         public string Email { get; set; }
+        public SelectList GenderList { get; set; }
         [BindProperty] public string FirstName { get; set; }
-        [BindProperty] public string LastName { get; set; }        
-        [BindProperty] public string Introduction { get; set; }
-        public SelectList Genders { get; set; }
+        [BindProperty] public string LastName { get; set; }     
+        [BindProperty] public string Introduction { get; set; }  // It is "About Me" 
         [BindProperty] public string UserAvatarName { get; set; }
         [BindProperty] public string UserGender { get; set; }
 
@@ -45,8 +45,9 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         {
             public string UserGender { get; set; }
             public string Introduction { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
         }
-
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -85,39 +86,15 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
+            var user = await _userManager.GetUserAsync(User);        
 
-            if (!ModelState.IsValid)
-            {
-                await LoadAsync(user);
-                return Page();
-            }
+            user.FirstName = FirstName;
+            user.LastName = LastName;
+            user.Gender = UserGender;
+            user.Introduction = Introduction;
+            user.AvatarName = UserAvatarName;
 
-            var introduction = user.Introduction;
-            if (Introduction != introduction)
-            {
-                user.Introduction = Introduction;
-                await _userManager.UpdateAsync(user);
-            }
-
-            var gender = user.Gender;
-            if (UserGender != gender)
-            {
-                user.Gender = UserGender;
-                await _userManager.UpdateAsync(user);
-            }
-
-            var avatar = user.AvatarName;
-            if (UserAvatarName != avatar)
-            {
-                user.AvatarName = UserAvatarName;
-                await _userManager.UpdateAsync(user);
-            }
-
+            await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

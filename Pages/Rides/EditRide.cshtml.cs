@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZPool.Models;
-using ZPool.Services.Interface;
+using ZPool.Services.Interfaces;
 
 namespace ZPool.Pages.Rides
 {

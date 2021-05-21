@@ -5,23 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using UserManagementTestApp.Models;
 using ZPool.Models;
-using ZPool.Services.Interface;
+using ZPool.Services.Interfaces;
 
 namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
     public class MyRidesModel : PageModel
     {
-
         public UserManager<AppUser> _manager;
         public IRideService _rideService;
         public IEnumerable<Ride> _myRidesList;
 
         public IBookingService _bookService;
         public IEnumerable<Booking> _bookingsOfOneRide;
-
-        public Dictionary<Ride, IEnumerable<Booking>> _rideBookingMap;
 
         public MyRidesModel(UserManager<AppUser> manager, IRideService service, IBookingService bookService)
         {
@@ -34,22 +30,6 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         {
             AppUser user = await _manager.GetUserAsync(User);
             _myRidesList = _rideService.GetRidesByUser(user);
-            //_bookingsOfOneRide = _bookService.GetBookingsByRide(_myRidesList);
-            //this._rideBookingMap = GetAllBookingsByRides(_myRidesList);
         }
-
-        //private Dictionary<Ride, IEnumerable<Booking>> GetAllBookingsByRides(IEnumerable<Ride> rides)
-        //{
-        //    Dictionary<Ride, IEnumerable<Booking>> dictionaryOfBookingsForOneRide = new Dictionary<Ride, IEnumerable<Booking>>();
-        //    foreach (Ride ride in rides)
-        //    {
-        //        IEnumerable<Booking> bookings = _bookService.GetBookingsByRide(ride);
-        //        if (bookings != null && bookings.Count() > 0) { dictionaryOfBookingsForOneRide.Add(ride, bookings); }
-        //    }
-
-        //    return dictionaryOfBookingsForOneRide;
-        //}
-
     }
-
 }

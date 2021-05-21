@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ZPool.Models;
-using ZPool.Services.Interface;
+using ZPool.Services.Interfaces;
 
 namespace ZPool.Pages.Bookings
 {
