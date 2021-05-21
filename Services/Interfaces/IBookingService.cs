@@ -8,21 +8,21 @@ namespace ZPool.Services.Interfaces
 {
    public  interface IBookingService
     {
-        public IEnumerable<Booking> GetBookings();
-        public Booking GetBookingsByID(int bookingId);
+        IEnumerable<Booking> GetBookings();
+        Booking GetBookingsByID(int bookingId);
         bool AlreadyBooked(int rideId, int userId);
-        public void AddBooking(Booking booking);
-        public void DeleteBooking(Booking booking);
-        public void EditBooking(Booking booking);
+        void AddBooking(Booking booking);
+        void DeleteBooking(Booking booking);
+        void EditBooking(Booking booking);
 
         //Method to filter booking by logged in users in Bookings page
-        public IEnumerable<Booking> GetBookingsByDriversID(AppUser user);
+        IEnumerable<Booking> GetBookingsByDriversID(AppUser user);
 
         // Method for Profile Page
-        public IEnumerable<Booking> GetBookingsByUser(AppUser user);
-        public IEnumerable<Booking> GetBookingsByRideId(int rideId);
-        public void UpdateBookingStatus(int id, string bookingStatus);
-        public IEnumerable<Booking> GetBookingsByStatus(string StatusFilter, AppUser user);
-        public IEnumerable<Booking> GetBookingsByStatusForDrivers(string StatusFilter, AppUser user);
+        IEnumerable<Booking> GetBookingsByUser(AppUser user);
+        IEnumerable<Booking> GetBookingsByRideId(int rideId);
+        void UpdateBookingStatus(int id, string bookingStatus);
+        IEnumerable<Booking> GetBookingsByStatus(string statusFilter, AppUser user);
+        IEnumerable<Booking> GetBookingsByStatusForDrivers(string statusFilter, AppUser user);
     }
 }
