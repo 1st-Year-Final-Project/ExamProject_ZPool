@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using ZPool.Models;
 
-namespace UserManagementTestApp.Models
+namespace ZPool.Models
 {
     public class AppUser : IdentityUser<int>
     {

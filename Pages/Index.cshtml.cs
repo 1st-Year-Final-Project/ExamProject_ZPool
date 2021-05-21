@@ -9,7 +9,7 @@ using ZPool.Models;
 using ZPool.Pages.Rides;
 using ZPool.Services.Interfaces;
 
-namespace UserManagementTestApp.Pages
+namespace ZPool.Pages
 {
     public class IndexModel : PageModel
     {
