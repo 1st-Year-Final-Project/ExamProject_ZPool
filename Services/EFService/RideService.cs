@@ -13,13 +13,10 @@ namespace ZPool.Services.EFService.RideService
     public class RideService : IRideService
     {
         AppDbContext service;
-        private IDateTimeComparer _dateComparer;
         
-
-        public RideService(AppDbContext context, IDateTimeComparer comparer)
+        public RideService(AppDbContext context)
         {
             service = context;
-            _dateComparer = comparer;
         }
 
         public void AddRide(Ride ride)
@@ -61,18 +58,20 @@ namespace ZPool.Services.EFService.RideService
             return cars;
         }
 
-        public IEnumerable<Ride> FilterRides(RideCriteriaInputModel ride)
+        public IEnumerable<Ride> FilterRides(RideCriteriaInputModel criteria)
         {
             var rides = service.Rides
                 .Include(r=>r.Car)
                 .AsNoTracking()
                 .AsEnumerable()
-                .Where(r=>CheckDeparture(r, ride.DepartureLocation))
-                .Where(r=>CheckDestination(r, ride.DestinationLocation))
-                .Where(r=>CompareDateTimes(r, ride.StartTime))
+                .Where(ride=>CheckDeparture(ride, criteria.DepartureLocation))
+                .Where(ride=>CheckDestination(ride, criteria.DestinationLocation))
+                .Where(ride=>CheckStartTime(ride, criteria.StartTime))
                 .OrderBy(r=>r.StartTime);
             return rides;
         }
+
+        #region FilterHelperMethods
 
         private bool CheckDeparture(Ride ride, string location)
         {
@@ -88,12 +87,14 @@ namespace ZPool.Services.EFService.RideService
             else return false;
         }
 
-        private bool CompareDateTimes(Ride ride, DateTime dateCriteria)
+        private bool CheckStartTime(Ride ride, DateTime searchTime)
         {
-            bool suitable = _dateComparer.CompareDateTime(ride.StartTime, dateCriteria);
-            if (suitable) return true;
-            return false;
+            bool inRange = (ride.StartTime >= searchTime.Subtract(new TimeSpan(2, 0, 0)) &&
+                            ride.StartTime <= searchTime.Add(new TimeSpan(2, 0, 0)));
+            return inRange ? true : false;
         }
+
+        #endregion
 
         // Method for Profile page
         public IEnumerable<Ride> GetRidesByUser(AppUser user)

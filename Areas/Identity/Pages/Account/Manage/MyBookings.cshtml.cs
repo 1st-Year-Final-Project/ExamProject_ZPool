@@ -13,24 +13,63 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
     public class MyBookingsModel : PageModel
     {
-        public UserManager<AppUser> _manager;
-        public IBookingService _service;
-
-        public IEnumerable<Booking> _myBookings;
-      
+        public UserManager<AppUser> Manager;
+        public IBookingService BookingService;
+        public IEnumerable<Booking> MyBookings { get; set; }
+        public string Message { get; set; }
+        [BindProperty] public string StatusCriteria { get; set; }
+        [BindProperty] public DateTime DateTime1 { get; set; }
+        [BindProperty] public DateTime DateTime2 { get; set; }
 
         public MyBookingsModel(IBookingService service, UserManager<AppUser> manager)
         {
-            _service = service;
-            _manager = manager;
+            BookingService = service;
+            Manager = manager;
         }
 
         public async Task OnGet()
         {
-            AppUser user = await _manager.GetUserAsync(User);
-            _myBookings = _service.GetBookingsByUser(user);
+            AppUser user = await Manager.GetUserAsync(User);
+            MyBookings = BookingService.GetBookingsByUser(user).OrderByDescending(b=>b.Date);
+        }
+
+        public async Task OnPostCancel(int id)
+        {
+            try
+            {
+                BookingService.UpdateBookingStatus(id, "Cancelled");
+            }
+            catch (Exception ex)
+            {
+                Message = ex.Message;
+            }
+            AppUser user = await Manager.GetUserAsync(User);
+            MyBookings = BookingService.GetBookingsByUser(user);
+
+            RedirectToPage("MyBookings");
         }
 
 
+        public async Task OnPostStatusFilter(string status)
+        {
+            if (!String.IsNullOrEmpty(StatusCriteria))
+            {
+                AppUser user = await Manager.GetUserAsync(User);
+                MyBookings = BookingService.GetBookingsByStatus(StatusCriteria, user);
+            }
+            
+            RedirectToPage("MyBookings");
+        }
+
+        //public async Task OnPostDateTimeFilter(DateTime dateTime1, DateTime dateTime2)
+        //{
+        //    if (!dateTime.Equals(DateTimeCriteria))
+        //    {
+        //        AppUser user = await Manager.GetUserAsync(User);
+        //        MyBookings = BookingService.GetBookingsByDateTime(DateTimeCriteria, user);
+        //    }
+
+        //    RedirectToPage("MyBookings");
+        //}
     }
 }

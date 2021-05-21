@@ -18,7 +18,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             _userManager = userManager;
         }
 
-        public string Username { get; set; }
+        public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Introduction { get; set; }
@@ -44,7 +44,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
 
-            Username = userName;
+            UserName = userName;
             FirstName = user.FirstName;
             LastName = user.LastName;
             UserGender = user.Gender;
