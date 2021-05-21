@@ -28,7 +28,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public async Task OnGet()
         {
             AppUser user = await _manager.GetUserAsync(User);
-            _myRidesList = _rideService.GetRidesByUser(user);
+            _myRidesList = _rideService.GetRidesByUser(user).OrderByDescending(Ride => Ride.StartTime);
         }
     }
 }
