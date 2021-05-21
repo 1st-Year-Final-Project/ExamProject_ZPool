@@ -35,8 +35,10 @@ namespace ZPool.Services.EFServices
         }
         public Car GetCar(int carId)
         {
-            var car = _context.Cars.Include(c => c.AppUser).FirstOrDefault(c => c.CarID == carId);
-            return car;
+            return _context.Cars
+                .Include(c => c.AppUser)
+                .FirstOrDefault(c => c.CarID == carId);
+            
         }
 
         public void UpdateCar(Car car)
@@ -53,8 +55,8 @@ namespace ZPool.Services.EFServices
 
         public IEnumerable<Car> GetCarsByUser(int userId)
         {
-            var cars = _context.Cars.AsNoTracking().Where(c => c.AppUserID == userId);
-            return cars;
+            return _context.Cars.AsNoTracking()
+                .Where(c => c.AppUserID == userId);
         }
     }
 }
