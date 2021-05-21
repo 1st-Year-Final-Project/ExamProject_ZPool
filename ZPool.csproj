@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>aspnet-UserManagementTestApp-B51AF83A-AFBF-4907-B1E8-446E21817174</UserSecretsId>
+    <UserSecretsId>aspnet-ZPool-B51AF83A-AFBF-4907-B1E8-446E21817174</UserSecretsId>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
   </PropertyGroup>
 

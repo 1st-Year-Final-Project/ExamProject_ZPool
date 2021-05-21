@@ -149,7 +149,7 @@ namespace ZPool.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("UserManagementTestApp.Models.AppUser", b =>
+            modelBuilder.Entity("ZPool.Models.AppUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -380,7 +380,7 @@ namespace ZPool.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("UserManagementTestApp.Models.AppUser", null)
+                    b.HasOne("ZPool.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -389,7 +389,7 @@ namespace ZPool.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("UserManagementTestApp.Models.AppUser", null)
+                    b.HasOne("ZPool.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -404,7 +404,7 @@ namespace ZPool.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("UserManagementTestApp.Models.AppUser", null)
+                    b.HasOne("ZPool.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -413,7 +413,7 @@ namespace ZPool.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("UserManagementTestApp.Models.AppUser", null)
+                    b.HasOne("ZPool.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -422,7 +422,7 @@ namespace ZPool.Migrations
 
             modelBuilder.Entity("ZPool.Models.Booking", b =>
                 {
-                    b.HasOne("UserManagementTestApp.Models.AppUser", "AppUser")
+                    b.HasOne("ZPool.Models.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -437,7 +437,7 @@ namespace ZPool.Migrations
 
             modelBuilder.Entity("ZPool.Models.Car", b =>
                 {
-                    b.HasOne("UserManagementTestApp.Models.AppUser", "AppUser")
+                    b.HasOne("ZPool.Models.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -446,13 +446,13 @@ namespace ZPool.Migrations
 
             modelBuilder.Entity("ZPool.Models.Message", b =>
                 {
-                    b.HasOne("UserManagementTestApp.Models.AppUser", "Receiver")
+                    b.HasOne("ZPool.Models.AppUser", "Receiver")
                         .WithMany()
                         .HasForeignKey("ReceiverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("UserManagementTestApp.Models.AppUser", "Sender")
+                    b.HasOne("ZPool.Models.AppUser", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)

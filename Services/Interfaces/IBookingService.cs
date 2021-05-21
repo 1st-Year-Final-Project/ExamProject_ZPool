@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UserManagementTestApp.Models;
 using ZPool.Models;
 
-namespace ZPool.Services.Interface
+namespace ZPool.Services.Interfaces
 {
    public  interface IBookingService
     {
         public IEnumerable<Booking> GetBookings();
-        public Booking GetBookingsByID(int id);
+        public Booking GetBookingsByID(int bookingId);
         bool AlreadyBooked(int rideId, int userId);
         public void AddBooking(Booking booking);
         public void DeleteBooking(Booking booking);
