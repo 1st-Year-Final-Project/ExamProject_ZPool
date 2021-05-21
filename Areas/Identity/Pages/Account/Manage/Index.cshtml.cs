@@ -45,6 +45,8 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
         {
             public string UserGender { get; set; }
             public string Introduction { get; set; }
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
         }
 
 
@@ -97,6 +99,21 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
+            var firstName = user.FirstName;
+            if (FirstName != firstName)
+            {
+                user.FirstName = FirstName;
+                await _userManager.UpdateAsync(user);
+            }
+
+            var lastName = user.LastName;
+            if (LastName != lastName)
+            {
+                user.LastName = LastName;
+                await _userManager.UpdateAsync(user);
+            }
+
+
             var introduction = user.Introduction;
             if (Introduction != introduction)
             {
@@ -121,6 +138,9 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
+
+            //user.FirstName = FirstName;
+            
         }
     }
 }

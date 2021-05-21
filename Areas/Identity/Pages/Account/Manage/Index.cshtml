@@ -81,7 +81,8 @@
 
             <div class="form-group">
                 <label asp-for="LastName"></label>
-                <input asp-for="LastName" class="form-control rounded-border"/>
+                <input asp-for="LastName" class="form-control rounded-border" />
+                <span asp-validation-for="Input.@Model.LastName" class="text-danger"></span>
             </div>
 
             <label for="genders">Choose your gender:</label><br />
