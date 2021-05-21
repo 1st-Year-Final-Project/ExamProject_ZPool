@@ -27,8 +27,6 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            //var user = await _userManager.GetUserAsync(User);
-
             var user = await _userManager.FindByIdAsync(id.ToString());
 
             if (user == null)
@@ -58,8 +56,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             else
             {
                 UserAvatarName = avatarName;
-            } 
-            
+            }             
         }
 
         public async Task<IActionResult> OnPostAsync()

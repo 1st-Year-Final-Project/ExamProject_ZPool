@@ -44,8 +44,6 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             {
                 UserAvatarName = user.AvatarName;
             }
-
-
         }
 
         public async Task<IActionResult> OnPostAsync()
