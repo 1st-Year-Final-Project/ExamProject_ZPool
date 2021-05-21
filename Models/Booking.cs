@@ -11,6 +11,7 @@ namespace ZPool.Models
     {
         public int BookingID { get; set; }
         public DateTime Date { get; set; }
+
         [Required]
         public string PickUpLocation { get; set; }
         [Required]
