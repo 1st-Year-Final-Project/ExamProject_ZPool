@@ -59,16 +59,5 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             
             RedirectToPage("MyBookings");
         }
-
-        //public async Task OnPostDateTimeFilter(DateTime dateTime1, DateTime dateTime2)
-        //{
-        //    if (!dateTime.Equals(DateTimeCriteria))
-        //    {
-        //        AppUser user = await Manager.GetUserAsync(User);
-        //        MyBookings = BookingService.GetBookingsByDateTime(DateTimeCriteria, user);
-        //    }
-
-        //    RedirectToPage("MyBookings");
-        //}
     }
 }
