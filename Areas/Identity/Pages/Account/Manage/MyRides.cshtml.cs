@@ -25,7 +25,6 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             _bookService = bookService;
             _manager = manager;
         }
-
         public async Task OnGet()
         {
             AppUser user = await _manager.GetUserAsync(User);
