@@ -18,15 +18,18 @@ namespace ZPool.Pages.Rides
         [BindProperty]
         public Ride Ride { get; set; }
         public SelectList registeredCars { get; set; }
+        public string Message { get; set; }
         public CultureInfo culture { get; set; } //Created culture property to use in the formatting of date & time.
 
         IRideService rideService;
+        ICarService carService;
         UserManager<AppUser> userManager;
         
-        public CreateRideModel( IRideService service, UserManager<AppUser> manager)
+        public CreateRideModel( IRideService service, ICarService carService, UserManager<AppUser> manager)
         {
             this.rideService = service;
             userManager = manager;
+            this.carService = carService;
         }
 
        
@@ -38,15 +41,26 @@ namespace ZPool.Pages.Rides
             return Page();
         }
 
-        public IActionResult OnPost (Ride ride)
+        public async Task<IActionResult> OnPost(Ride ride)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
-            rideService.AddRide(ride);
-            return RedirectToPage("GetAllRides");
-             
+            Car car = carService.GetCar(ride.CarID);
+            if (ride.SeatsAvailable <= car.NumberOfSeats)
+            {
+                rideService.AddRide(ride);
+                return RedirectToPage("GetAllRides");
+            }
+            else
+            {
+                var user = await userManager.GetUserAsync(User);
+                registeredCars = new SelectList(rideService.GetRegisteredCars(user.Id), "CarID", "NumberPlate");
+                Message = "The seats available cannot exceed the number of seats in your car.";
+                return Page();
+            }
+
         }
 
     }
