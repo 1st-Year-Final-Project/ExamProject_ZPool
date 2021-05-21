@@ -31,10 +31,10 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
        
         public string Username { get; set; }
         public string Email { get; set; }
+        public SelectList GenderList { get; set; }
         [BindProperty] public string FirstName { get; set; }
-        [BindProperty] public string LastName { get; set; }        
-        [BindProperty] public string Introduction { get; set; }
-        public SelectList Genders { get; set; }
+        [BindProperty] public string LastName { get; set; }     
+        [BindProperty] public string Introduction { get; set; }  // It is "About Me" 
         [BindProperty] public string UserAvatarName { get; set; }
         [BindProperty] public string UserGender { get; set; }
 
@@ -48,7 +48,6 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             public string FirstName { get; set; }
             public string LastName { get; set; }
         }
-
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -87,55 +86,7 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
-            //if (user == null)
-            //{
-            //    return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            //}
-
-            //if (!ModelState.IsValid)
-            //{
-            //    await LoadAsync(user);
-            //    return Page();
-            //}
-
-            //var firstName = user.FirstName;
-            //if (FirstName != firstName)
-            //{
-            //    user.FirstName = FirstName;
-            //    await _userManager.UpdateAsync(user);
-            //}
-
-            //var lastName = user.LastName;
-            //if (LastName != lastName)
-            //{
-            //    user.LastName = LastName;
-            //    await _userManager.UpdateAsync(user);
-            //}
-
-
-            //var introduction = user.Introduction;
-            //if (Introduction != introduction)
-            //{
-            //    user.Introduction = Introduction;
-            //    await _userManager.UpdateAsync(user);
-            //}
-
-            //var gender = user.Gender;
-            //if (UserGender != gender)
-            //{
-            //    user.Gender = UserGender;
-            //    await _userManager.UpdateAsync(user);
-            //}
-
-            //var avatar = user.AvatarName;
-            //if (UserAvatarName != avatar)
-            //{
-            //    user.AvatarName = UserAvatarName;
-            //    await _userManager.UpdateAsync(user);
-            //}
-
-
+            var user = await _userManager.GetUserAsync(User);        
 
             user.FirstName = FirstName;
             user.LastName = LastName;
@@ -147,10 +98,6 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
-
-            
-
-
         }
     }
 }

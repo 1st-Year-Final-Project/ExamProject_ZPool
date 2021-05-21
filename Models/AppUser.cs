@@ -19,7 +19,7 @@ namespace UserManagementTestApp.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string? Gender { get; set; }
-        public string? Introduction { get; set; }
+        public string? Introduction { get; set; } // It is "About Me"
         public string? AvatarName { get; set; } 
     }
 }
