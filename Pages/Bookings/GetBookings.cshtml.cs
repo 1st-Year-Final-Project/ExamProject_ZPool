@@ -93,7 +93,8 @@ namespace ZPool.Pages.Bookings
                 Bookings = bookingService.GetBookingsByStatusForDrivers(StatusCriteria, user);
             }
 
-            RedirectToPage("Bookings");
+            //RedirectToPage("Bookings");
+            RedirectToPage("BookingDetails");
         }
     }
 }

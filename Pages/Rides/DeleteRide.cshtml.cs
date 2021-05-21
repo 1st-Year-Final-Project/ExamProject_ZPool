@@ -31,7 +31,7 @@ namespace ZPool.Pages.Rides
             
                 rideService.DeleteRide(ride);
             
-            return RedirectToPage("GetAllRides");
+            return RedirectToPage("GetRides");
         }
     }
 }

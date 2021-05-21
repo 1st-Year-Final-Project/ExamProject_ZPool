@@ -71,7 +71,6 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             Email = user.Email;
             UserGender = user.Gender;
             Introduction = user.Introduction;
-
             UserAvatarName = user.AvatarName;
             
             if (string.IsNullOrEmpty(UserAvatarName))
