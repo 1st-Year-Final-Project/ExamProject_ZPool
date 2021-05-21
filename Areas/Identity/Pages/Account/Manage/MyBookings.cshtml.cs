@@ -14,11 +14,11 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
     {
         public UserManager<AppUser> Manager;
         public IBookingService BookingService;
+
         public IEnumerable<Booking> MyBookings { get; set; }
         public string Message { get; set; }
+
         [BindProperty] public string StatusCriteria { get; set; }
-        [BindProperty] public DateTime DateTime1 { get; set; }
-        [BindProperty] public DateTime DateTime2 { get; set; }
 
         public MyBookingsModel(IBookingService service, UserManager<AppUser> manager)
         {
@@ -47,7 +47,6 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 
             RedirectToPage("MyBookings");
         }
-
 
         public async Task OnPostStatusFilter(string status)
         {
