@@ -28,13 +28,13 @@ namespace UserManagementTestApp.Areas.Identity.Pages.Account.Manage
 
         [TempData] public string StatusMessage { get; set; }
 
+       
         public string Username { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public string Email { get; set; }
+        [BindProperty] public string FirstName { get; set; }
+        [BindProperty] public string LastName { get; set; }        
         [BindProperty] public string Introduction { get; set; }
         public SelectList Genders { get; set; }
-
         [BindProperty] public string UserAvatarName { get; set; }
         [BindProperty] public string UserGender { get; set; }
 

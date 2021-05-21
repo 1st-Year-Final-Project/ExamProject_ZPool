@@ -17,9 +17,10 @@ namespace ZPool.Pages.Bookings
         UserManager<AppUser> userManager;
 
         public IEnumerable<Booking> Bookings { get; set; }
-       
+        [BindProperty] public string StatusCriteria { get; set; }
 
         [BindProperty]
+
         public AppUser LoggedInUser { get; set; }
 
         public string Message { get; set; }
@@ -32,7 +33,7 @@ namespace ZPool.Pages.Bookings
         public async Task OnGet()
         {
             LoggedInUser = await userManager.GetUserAsync(User);
-            Bookings = bookingService.GetBookingsByDriversID(LoggedInUser);
+            Bookings = bookingService.GetBookingsByDriversID(LoggedInUser).OrderByDescending(b => b.Date);
         }
 
         public async Task OnPostAccept(int id)
@@ -55,7 +56,7 @@ namespace ZPool.Pages.Bookings
         {
             LoggedInUser = await userManager.GetUserAsync(User);
             Bookings = bookingService.GetBookingsByDriversID(LoggedInUser);
-            
+
             try
             {
                 bookingService.UpdateBookingStatus(id, "Rejected");
@@ -81,6 +82,17 @@ namespace ZPool.Pages.Bookings
                 Message = ex.Message;
             }
             //RedirectToPage("GetBookings");
+        }
+
+        public async Task OnPostStatusFilter(string status)
+        {
+            if (!String.IsNullOrEmpty(StatusCriteria))
+            {
+                AppUser user = await userManager.GetUserAsync(User);
+                Bookings = bookingService.GetBookingsByStatusForDrivers(StatusCriteria, user);
+            }
+
+            RedirectToPage("Bookings");
         }
     }
 }

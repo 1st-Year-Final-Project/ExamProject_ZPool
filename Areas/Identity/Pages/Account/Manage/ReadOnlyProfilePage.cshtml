@@ -14,45 +14,50 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <br /><br />
 
-                  <div class="form-group">                      
-                      @{
+            <div class="form-group">
+                @{
 
-                          if (string.IsNullOrEmpty(imageFlag) || imageFlag.Equals("default.png"))
-                          {
-                              <img src="~/images/default.png" id="photo" height="200" width="200">
-                          }
-                          else
-                          {
+                    if (string.IsNullOrEmpty(imageFlag) || imageFlag.Equals("default.png"))
+                    {
+                        <img src="~/images/default.png" id="photo" height="200" width="200">
+                    }
+                    else
+                    {
 
-                              if (imageFlag.Equals("N1.jpg"))
-                              {
-                                  <img src="~/images/N1.jpg" id="photo" height="200" width="200">
-                              }
+                        if (imageFlag.Equals("N1.jpg"))
+                        {
+                            <img src="~/images/N1.jpg" id="photo" height="200" width="200">
+                        }
 
-                              if (imageFlag.Equals("N2.jpg"))
-                              {
-                                  <img src="~/images/N2.jpg" id="photo" height="200" width="200">
-                              }
+                        if (imageFlag.Equals("N2.jpg"))
+                        {
+                            <img src="~/images/N2.jpg" id="photo" height="200" width="200">
+                        }
 
-                              if (imageFlag.Equals("N3.jpg"))
-                              {
-                                  <img src="~/images/N3.jpg" id="photo" height="200" width="200">
-                              }
+                        if (imageFlag.Equals("N3.jpg"))
+                        {
+                            <img src="~/images/N3.jpg" id="photo" height="200" width="200">
+                        }
 
-                              if (imageFlag.Equals("N4.jpg"))
-                              {
-                                  <img src="~/images/N4.jpg" id="photo" height="200" width="200">
-                              }
+                        if (imageFlag.Equals("N4.jpg"))
+                        {
+                            <img src="~/images/N4.jpg" id="photo" height="200" width="200">
+                        }
 
-                              if (imageFlag.Equals("N5.jpg"))
-                              {
-                                  <img src="~/images/N5.jpg" id="photo" height="200" width="200">
-                              }
-                          }
-                      }
-                  </div>
+                        if (imageFlag.Equals("N5.jpg"))
+                        {
+                            <img src="~/images/N5.jpg" id="photo" height="200" width="200">
+                        }
+                    }
+                }
+            </div>
 
             <br /><br />
+
+            <div class="form-group">
+                <label asp-for="UserName"> User Name </label>
+                <input asp-for="UserName" class="form-control rounded-border" disabled />
+            </div>
 
             <div class="form-group">
                 <label asp-for="FirstName"> First Name </label>
