@@ -18,6 +18,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             _userManager = userManager;
         }
 
+        public AppUser UserToCheck { get; set; }  // the UserToCheck is who you want to check their readonly profile
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -40,9 +41,9 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 
         private async Task LoadAsync(AppUser user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
+            UserToCheck = await _userManager.GetUserAsync(User);
 
-            UserName = userName;
+            UserName = user.UserName;
             FirstName = user.FirstName;
             LastName = user.LastName;
             UserGender = user.Gender;
@@ -56,36 +57,18 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             else
             {
                 UserAvatarName = avatarName;
-            }             
+            }
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
+            var user = await _userManager.GetUserAsync(User);        
 
-            if (!ModelState.IsValid)
-            {
-                await LoadAsync(user);
-                return Page();
-            }
-
-            var gender = user.Gender;
-            if (UserGender != gender)
-            {
-                user.Gender = UserGender;
-                await _userManager.UpdateAsync(user);
-            }
-
-            var avatar = user.AvatarName;
-            if (UserAvatarName != avatar)
-            {
-                user.AvatarName = UserAvatarName;
-                await _userManager.UpdateAsync(user);
-            }
+            user.FirstName = FirstName;
+            user.LastName = LastName;
+            user.Gender = UserGender;
+            user.Introduction = Introduction;
+            user.AvatarName = UserAvatarName;
 
             return RedirectToPage();
         }
