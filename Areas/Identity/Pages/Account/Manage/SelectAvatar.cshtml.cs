@@ -71,7 +71,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             }
 
             
-            return RedirectToPage();
+            return RedirectToPage("Index");
         }
 
     }
