@@ -5,20 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using UserManagementTestApp.Models;
 using ZPool.Models;
-using ZPool.Services.Interface;
+using ZPool.Services.Interfaces;
 
 namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
     public class WhoBookTheRideModel : PageModel
     {
-        [BindProperty] public Ride MyRide { get; set; }
-        //[BindProperty] public string UserAvatarName { get; set; }
         public IEnumerable<Booking> BookingsOfOneRide { get; set; }
+
         public UserManager<AppUser> _maneger;
         public IBookingService _bookingService;
         public IRideService _rideService;
+
+        public Ride MyRide { get; set; }
         public string Message { get; set; }
         
 
@@ -115,5 +115,4 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             RedirectToPage("WhoBookTheRide");
         }
     }
-
 }

@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using UserManagementTestApp.Models;
 using ZPool.Models;
-using ZPool.Services.Interface;
+using ZPool.Services.Interfaces;
 
 namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
@@ -60,16 +59,5 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             
             RedirectToPage("MyBookings");
         }
-
-        //public async Task OnPostDateTimeFilter(DateTime dateTime1, DateTime dateTime2)
-        //{
-        //    if (!dateTime.Equals(DateTimeCriteria))
-        //    {
-        //        AppUser user = await Manager.GetUserAsync(User);
-        //        MyBookings = BookingService.GetBookingsByDateTime(DateTimeCriteria, user);
-        //    }
-
-        //    RedirectToPage("MyBookings");
-        //}
     }
 }
