@@ -149,7 +149,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("UserManagementTestApp"),
+                _urlEncoder.Encode("ZPool"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }
