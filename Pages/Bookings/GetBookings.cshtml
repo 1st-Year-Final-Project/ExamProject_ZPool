@@ -21,7 +21,14 @@
     <a asp-page="/Rides/GetAllRides" class="btn btn-outline-success rounded-border">Book a Ride</a>
 </div>
 
-
+</br>
+<form asp-page-handler="StatusFilter" method="post">
+    <p>
+        Search Booking Status: <input type="text" asp-for="StatusCriteria" class="form-control rounded-border" style="max-width: 13rem" />
+        <input type="submit" value="Filter" class="btn btn-success rounded-border" />
+        <a asp-page="./GetBookings">Back to Full List </a>
+    </p>
+</form>
 
 <div>
     <p> @Model.Message </p>
@@ -42,60 +49,60 @@
     </thead>
     <tbody>
 
-            @if (Model.Bookings != null)
+        @if (Model.Bookings != null)
+        {
+            @foreach (var item in Model.Bookings)
             {
-                @foreach (var item in Model.Bookings)
-                {
 
-        <tr>
-            @*<td>  @item.BookingID</td>*@
-            <td>  @item.Date  </td>
-            <td>  @item.PickUpLocation </td>
-            <td>  @item.DropOffLocation </td>
-            <td>  @item.AppUser </td>
-            <td>  @item.Ride.Car.AppUser.UserName </td>
-            <td>  @item.Ride.Car.NumberPlate </td>
-            <td>  @item.BookingStatus </td>
+                <tr>
+                    @*<td>  @item.BookingID</td>*@
+                    <td>  @item.Date  </td>
+                    <td>  @item.PickUpLocation </td>
+                    <td>  @item.DropOffLocation </td>
+                    <td>  @item.AppUser </td>
+                    <td>  @item.Ride.Car.AppUser.UserName </td>
+                    <td>  @item.Ride.Car.NumberPlate </td>
+                    <td>  @item.BookingStatus </td>
 
-            @if (item.BookingStatus == "Accepted" || item.BookingStatus == "Pending" && Model.LoggedInUser.Id == item.AppUserID)
-            {
-                 <td>
-                    <div class="form group">
-                        <form asp-page-handler="Cancel" method="post">
-                            <button class="btn btn-danger rounded-border">Cancel</button>
-                            <input type="hidden" name="id" value="@item.BookingID" />
-                        </form>
-                    </div>
-                </td>
+                    @if (item.BookingStatus == "Accepted" || item.BookingStatus == "Pending" && Model.LoggedInUser.Id == item.AppUserID)
+                    {
+                        <td>
+                            <div class="form group">
+                                <form asp-page-handler="Cancel" method="post">
+                                    <button class="btn btn-danger rounded-border">Cancel</button>
+                                    <input type="hidden" name="id" value="@item.BookingID" />
+                                </form>
+                            </div>
+                        </td>
 
+                    }
+
+                    @if (item.Ride.Car.AppUserID == Model.LoggedInUser.Id)
+                    {
+                        @if (item.BookingStatus == "Pending")
+                        {
+                            <td>
+                                <div class="form group">
+                                    <form asp-page-handler="Accept" method="post">
+                                        <button class="btn btn-success rounded-border">Accept</button>
+                                        <input type="hidden" name="id" value="@item.BookingID" />
+                                    </form>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form group">
+                                    <form asp-page-handler="Reject" method="post">
+                                        <button class="btn btn-primary rounded-border">Reject</button>
+                                        <input type="hidden" name="id" value="@item.BookingID" />
+                                    </form>
+                                </div>
+                            </td>
+                        }
+
+                    }
+                </tr>
             }
-            
-            @if (item.Ride.Car.AppUserID == Model.LoggedInUser.Id)
-            {
-                @if (item.BookingStatus == "Pending")
-                {
-                    <td>
-                        <div class="form group">
-                            <form asp-page-handler="Accept" method="post">
-                                <button class="btn btn-success rounded-border">Accept</button>
-                                <input type="hidden" name="id" value="@item.BookingID" />
-                            </form>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form group">
-                            <form asp-page-handler="Reject" method="post">
-                                <button class="btn btn-primary rounded-border">Reject</button>
-                                <input type="hidden" name="id" value="@item.BookingID" />
-                            </form>
-                        </div>
-                    </td>
-                }
-
-            }
-        </tr>
-                }
-            }
+        }
 
 </table>
 

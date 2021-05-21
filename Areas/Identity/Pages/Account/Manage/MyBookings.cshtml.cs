@@ -17,8 +17,10 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public IBookingService BookingService;
         public IEnumerable<Booking> MyBookings { get; set; }
         public string Message { get; set; }
-        [BindProperty] public string FilterCriteria { get; set; }
-                
+        [BindProperty] public string StatusCriteria { get; set; }
+        [BindProperty] public DateTime DateTime1 { get; set; }
+        [BindProperty] public DateTime DateTime2 { get; set; }
+
         public MyBookingsModel(IBookingService service, UserManager<AppUser> manager)
         {
             BookingService = service;
@@ -28,7 +30,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public async Task OnGet()
         {
             AppUser user = await Manager.GetUserAsync(User);
-            MyBookings = BookingService.GetBookingsByUser(user);
+            MyBookings = BookingService.GetBookingsByUser(user).OrderByDescending(b=>b.Date);
         }
 
         public async Task OnPostCancel(int id)
@@ -48,15 +50,26 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         }
 
 
-        public async Task OnPostFilter(string status)
+        public async Task OnPostStatusFilter(string status)
         {
-            if (!String.IsNullOrEmpty(FilterCriteria))
+            if (!String.IsNullOrEmpty(StatusCriteria))
             {
                 AppUser user = await Manager.GetUserAsync(User);
-                MyBookings = BookingService.GetBookingsByStatus(FilterCriteria, user);
+                MyBookings = BookingService.GetBookingsByStatus(StatusCriteria, user);
             }
             
             RedirectToPage("MyBookings");
-        } 
+        }
+
+        //public async Task OnPostDateTimeFilter(DateTime dateTime1, DateTime dateTime2)
+        //{
+        //    if (!dateTime.Equals(DateTimeCriteria))
+        //    {
+        //        AppUser user = await Manager.GetUserAsync(User);
+        //        MyBookings = BookingService.GetBookingsByDateTime(DateTimeCriteria, user);
+        //    }
+
+        //    RedirectToPage("MyBookings");
+        //}
     }
 }

@@ -24,6 +24,8 @@ namespace ZPool.Services.Interface
         //public IEnumerable<Booking> GetBookingsByRide(Ride ride);
         public IEnumerable<Booking> GetBookingsByRideId(int rideId);
         public void UpdateBookingStatus(int id, string bookingStatus);
-        public IEnumerable<Booking> GetBookingsByStatus(string FilterCriteria, AppUser user);
+        public IEnumerable<Booking> GetBookingsByStatus(string StatusFilter, AppUser user);
+        public IEnumerable<Booking> GetBookingsByStatusForDrivers(string StatusFilter, AppUser user);
+        //public IEnumerable<Booking> GetBookingsByDateTime(DateTime DateTime1, DateTime DateTime2, AppUser user); 
     }
 }

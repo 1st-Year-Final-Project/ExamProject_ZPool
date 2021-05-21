@@ -123,14 +123,36 @@ namespace ZPool.Services.EFService
             service.SaveChanges();
         }
 
+        // For the profile function My Bookings
         public IEnumerable<Booking> GetBookingsByStatus(string status, AppUser user)
         {
             return service.Bookings
-            .Include(b => b.Ride).ThenInclude(r => r.Car).
-                ThenInclude(c => c.AppUser)
+            .Include(b => b.Ride).ThenInclude(r => r.Car)
+            .ThenInclude(c => c.AppUser)
             .Include(b => b.AppUser)
             .Where(b=>b.BookingStatus.Equals(status))
             .Where(b=>b.AppUser.Equals(user));
         }
+
+        // For the top bar function Bookings
+        public IEnumerable<Booking> GetBookingsByStatusForDrivers(string status, AppUser user)
+        {
+            return service.Bookings
+            .Include(b => b.Ride).ThenInclude(r => r.Car)
+            .ThenInclude(c => c.AppUser)
+            .Include(b => b.AppUser)
+            .Where(b => b.BookingStatus.Equals(status))
+            .Where(b => b.Ride.Car.AppUser.Equals(user));
+        }
+
+        //public IEnumerable<Booking> GetBookingsByDateTime(DateTime dateTime1, DateTime dateTime2, AppUser user)
+        //{
+        //    return service.Bookings
+        //   .Include(b => b.Ride).ThenInclude(r => r.Car)
+        //   .ThenInclude(c => c.AppUser)
+        //   .Include(b => b.AppUser)
+        //   .Where(b => b.Date.CompareTo(dateTime1)<0 && b.Date.CompareTo(dateTime2) > 0)
+        //   .Where(b => b.AppUser.Equals(user));
+        //}
     }
 }

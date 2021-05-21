@@ -12,13 +12,28 @@
     </p>
 </br>
 
-    <form asp-page-handler="Filter"  method="post">
+    <form asp-page-handler="StatusFilter" method="post">
         <p>
-            Search Booking Status: <input type="text" asp-for="FilterCriteria" />
-            <input type="submit" value="Filter" />
+            Search Booking Status: <input type="text" asp-for="StatusCriteria" class="form-control rounded-border" style="max-width: 13rem" />
+            <input type="submit" value="Filter" class="btn btn-success rounded-border" />
             <a asp-page="Identity/Account/Manage/MyBookings">Back to Full List </a>
         </p>
     </form>
+        <!--<p>
+        Search Booking Date Time: <input-->
+        @*type="text"*@ @*asp-for="StatusCriteria"*@
+        <!--asp-for="Model.DateTimeCriteria.Date" asp-format="{0:yyyy-MM-dd}" class="form-control rounded-border" style="max-width: 13rem"/>
+        <input type="submit" value="Filter" />
+        
+    </p>-->
+    @*<form asp-page-handler="DateTimeFilter" method="post">
+        <div class="form-group">
+            <label class="mx-2">Date: </label>
+            <input id="date" type="date" asp-for="@Model.DateTimeCriteria" class="form-control rounded-border" style="max-width: 13rem" />
+        </div>
+        <button type="submit" class="btn btn-yellow mx-2">Search Bookings</button>
+        <a asp-page="Identity/Account/Manage/MyBookings">Back to Full List </a>
+    </form>*@
 
 
         <table class="table">
