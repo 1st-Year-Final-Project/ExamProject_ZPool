@@ -71,10 +71,9 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             Email = user.Email;
             UserGender = user.Gender;
             Introduction = user.Introduction;
-
-            string avatarName = user.AvatarName;
+            UserAvatarName = user.AvatarName;
             
-            if (string.IsNullOrEmpty(avatarName))
+            if (string.IsNullOrEmpty(UserAvatarName))
             {
                 UserAvatarName = "default.png";
             }
@@ -92,7 +91,6 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             user.LastName = LastName;
             user.Gender = UserGender;
             user.Introduction = Introduction;
-            user.AvatarName = UserAvatarName;
 
             await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);
