@@ -28,16 +28,16 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 
         [TempData] public string StatusMessage { get; set; }
 
-       
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public SelectList GenderList { get; set; }
-
         [BindProperty] public string FirstName { get; set; }
         [BindProperty] public string LastName { get; set; }     
         [BindProperty] public string Introduction { get; set; }  // It is "About Me" 
         [BindProperty] public string UserAvatarName { get; set; }
         [BindProperty] public string UserGender { get; set; }
+
+        public SelectList GenderList { get; set; }
+        public AppUser LoggedInUser { get; set; }
+        public string Username { get; set; }
+        public string Email { get; set; }       
 
         [BindProperty] public InputModel Input { get; set; }
 
@@ -63,18 +63,18 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 
         private async Task LoadAsync(AppUser user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
+            LoggedInUser = await _userManager.GetUserAsync(User);
 
-            Username = userName;
+            Username = user.UserName;
             FirstName = user.FirstName;
             LastName = user.LastName;
             Email = user.Email;
             UserGender = user.Gender;
             Introduction = user.Introduction;
 
-            string avatarName = user.AvatarName;
+            UserAvatarName = user.AvatarName;
             
-            if (string.IsNullOrEmpty(avatarName))
+            if (string.IsNullOrEmpty(UserAvatarName))
             {
                 UserAvatarName = "default.png";
             }
@@ -92,7 +92,6 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             user.LastName = LastName;
             user.Gender = UserGender;
             user.Introduction = Introduction;
-            user.AvatarName = UserAvatarName;
 
             await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);

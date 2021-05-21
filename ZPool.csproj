@@ -36,4 +36,11 @@
     <PackageReference Include="VisioForge.DotNet.Core.TRIAL" Version="14.0.42" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\images\N1.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

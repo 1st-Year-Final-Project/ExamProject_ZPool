@@ -32,7 +32,9 @@ namespace ZPool.Pages.Bookings
         public async Task OnGet()
         {
             LoggedInUser = await userManager.GetUserAsync(User);
-            Bookings = bookingService.GetBookingsByDriversID(LoggedInUser).OrderByDescending(b => b.Date);
+            Bookings = bookingService
+                .GetBookingsByDriversID(LoggedInUser)
+                .OrderByDescending(b => b.Date);
         }
 
         public async Task OnPostAccept(int id)

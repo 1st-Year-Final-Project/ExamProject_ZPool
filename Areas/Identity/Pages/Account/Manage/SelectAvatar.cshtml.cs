@@ -16,6 +16,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<AppUser> _manager;
 
         public SelectList AvatarList { get; set; }
+        public AppUser LoggedInUser { get; set; }
         [BindProperty]public string UserAvatarName { get; set; }
 
         public SelectAvatarModel(UserManager<AppUser> manager)
@@ -32,15 +33,14 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 
         private async Task LoadAsync(AppUser user)
         {
-            var userName = await _manager.GetUserNameAsync(user);
+            LoggedInUser = await _manager.GetUserAsync(User);
+            UserAvatarName = user.AvatarName;
 
-            string avatarName = user.AvatarName;
-            if (avatarName == "" || avatarName == null)
+            if (string.IsNullOrEmpty(UserAvatarName))
             {
-                UserAvatarName = "default";
+                UserAvatarName = "default.png";
             }
-
-            if (!string.IsNullOrWhiteSpace(avatarName))
+            else
             {
                 UserAvatarName = user.AvatarName;
             }
@@ -66,10 +66,8 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
                 user.AvatarName = UserAvatarName;
                 await _manager.UpdateAsync(user);
             }
-
             
             return RedirectToPage("Index");
         }
-
     }
 }
