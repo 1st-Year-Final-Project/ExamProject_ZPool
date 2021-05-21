@@ -39,7 +39,8 @@ namespace ZPool.Pages.Messages
 
             if (CurrentUser == null)
             {
-                return RedirectToPage("/Account/Login", new { area = "Identity", returnUrl = "/Pages/Messages/Messages"});
+                return RedirectToPage("/Account/Login", 
+                    new { area = "Identity", returnUrl = "/Pages/Messages/Messages"});
             }
 
             Messages = _messageService.GetMessagesByUserId(CurrentUser.Id);
@@ -47,7 +48,7 @@ namespace ZPool.Pages.Messages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostSendAsync()
+        public IActionResult OnPostSend()
         {
             NewMessage.SendingDate = DateTime.Now;
             if (!ModelState.IsValid)

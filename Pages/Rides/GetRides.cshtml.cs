@@ -13,22 +13,21 @@ namespace ZPool.Pages.Rides
     {
         IRideService rideService;
 
-        public IEnumerable<Ride> Rides { get; set; }
-        public AppUser CurrentUser { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public RideCriteriaInputModel RideCriteria { get; set; } = new RideCriteriaInputModel();
-        
-        public string ScreenMessage { get; set; }
-
         public GetAllRidesModel(IRideService service)
         {
             rideService = service;
         }
-        
+
+        public IEnumerable<Ride> Rides { get; set; }
+        public AppUser CurrentUser { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public RideCriteriaInputModel RideCriteria { get; set; } = new RideCriteriaInputModel();
+        public string ScreenMessage { get; set; }
+
         public void OnGet()
         {
-            if (!string.IsNullOrEmpty(RideCriteria.DepartureLocation) || !string.IsNullOrEmpty(RideCriteria.DestinationLocation))
+            if (!string.IsNullOrEmpty(RideCriteria.DepartureLocation) 
+                || !string.IsNullOrEmpty(RideCriteria.DestinationLocation))
             {
                 Rides = rideService.FilterRides(RideCriteria);
                 if (Rides.Count() == 0)

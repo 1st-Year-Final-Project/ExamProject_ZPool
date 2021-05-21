@@ -61,13 +61,15 @@ namespace ZPool.Pages.Rides
 
             if (user != null && ride != null)
             {
-                Booking booking = new Booking();
-                booking.Date = DateTime.Now;
-                booking.PickUpLocation = ride.DepartureLocation;
-                booking.DropOffLocation = ride.DestinationLocation;
-                booking.RideID = ride.RideID;
-                booking.AppUserID = user.Id;
-                booking.BookingStatus = "Pending";
+                Booking booking = new Booking
+                {
+                    Date = DateTime.Now,
+                    PickUpLocation = ride.DepartureLocation,
+                    DropOffLocation = ride.DestinationLocation,
+                    RideID = ride.RideID,
+                    AppUserID = user.Id,
+                    BookingStatus = "Pending"
+                };
                 _bookingService.AddBooking(booking);
             }
             

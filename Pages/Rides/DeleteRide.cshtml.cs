@@ -28,9 +28,7 @@ namespace ZPool.Pages.Rides
 
         public IActionResult OnPost(Ride ride)
         {
-            
-                rideService.DeleteRide(ride);
-            
+            rideService.DeleteRide(ride);
             return RedirectToPage("GetRides");
         }
     }

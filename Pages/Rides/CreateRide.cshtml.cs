@@ -33,7 +33,6 @@ namespace ZPool.Pages.Rides
             this.carService = carService;
         }
 
-       
         public async Task<IActionResult> OnGet()
         {
             culture = new CultureInfo("en-US"); //setting culture object to US English. Date filters are picky.
@@ -44,12 +43,11 @@ namespace ZPool.Pages.Rides
 
         public async Task<IActionResult> OnPost(Ride ride)
         {
-
             if (!ModelState.IsValid)
-
             {
                 return Page();
             }
+
             Car car = carService.GetCar(ride.CarID);
             if (ride.SeatsAvailable <= car.NumberOfSeats)
             {
@@ -63,8 +61,6 @@ namespace ZPool.Pages.Rides
                 Message = "The seats available cannot exceed the number of seats in your car.";
                 return Page();
             }
-
         }
-
     }
 }
