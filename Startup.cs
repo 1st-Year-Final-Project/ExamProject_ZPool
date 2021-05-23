@@ -36,10 +36,10 @@ namespace ZPool
         {
             services.AddRazorPages();
 
-            services.AddTransient<IRideService, RideService>();
+            services.AddTransient<IRideService, EFRideService>();
             services.AddTransient<ICarService, EFCarService>();
             services.AddTransient<IBookingService, EFBookingService>();
-            services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<IMessageService, EFMessageService>();
             
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
