@@ -9,11 +9,11 @@ using ZPool.Services.Interfaces;
 
 namespace ZPool.Services.EFServices
 {
-    public class MessageService : IMessageService
+    public class EFMessageService : IMessageService
     {
         private AppDbContext _context;
 
-        public MessageService(AppDbContext context)
+        public EFMessageService(AppDbContext context)
         {
             _context = context;
         }
