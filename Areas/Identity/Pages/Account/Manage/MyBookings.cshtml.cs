@@ -46,6 +46,8 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             MyBookings = BookingService.GetBookingsByUser(user);
 
             RedirectToPage("MyBookings");
+
+            //RedirectToPage("GetBookings");
         }
 
         public async Task OnPostStatusFilter(string status)

@@ -9,11 +9,11 @@ using ZPool.Services.Interfaces;
 
 namespace ZPool.Services.EFServices.RideService
 {
-    public class RideService : IRideService
+    public class EFRideService : IRideService
     {
         AppDbContext _context;
         
-        public RideService(AppDbContext context)
+        public EFRideService(AppDbContext context)
         {
             _context = context;
         }
@@ -53,21 +53,19 @@ namespace ZPool.Services.EFServices.RideService
 
         public IEnumerable<Car> GetRegisteredCars(int userId)
         {
-            var cars = _context.Cars.AsNoTracking().Where(c => c.AppUserID == userId);
-            return cars;
+            return _context.Cars.AsNoTracking().Where(c => c.AppUserID == userId);
         }
 
         public IEnumerable<Ride> FilterRides(RideCriteriaInputModel criteria)
         {
-            var rides = _context.Rides
+            return _context.Rides
                 .Include(r=>r.Car)
                 .AsNoTracking()
                 .AsEnumerable()
                 .Where(ride=>CheckDeparture(ride, criteria.DepartureLocation))
                 .Where(ride=>CheckDestination(ride, criteria.DestinationLocation))
                 .Where(ride=>CheckStartTime(ride, criteria.StartTime))
-                .OrderBy(r=>r.StartTime);
-            return rides;
+                .OrderBy(r=>r.StartTime);;
         }
 
         #region FilterHelperMethods
@@ -98,7 +96,8 @@ namespace ZPool.Services.EFServices.RideService
         // Method for Profile page
         public IEnumerable<Ride> GetRidesByUser(AppUser user)
         {
-            IEnumerable<int> lst = _context.Cars.Where(c => c.AppUserID.Equals(user.Id)).ToList().Select(c => c.CarID);
+            IEnumerable<int> lst = _context.Cars
+                .Where(c => c.AppUserID.Equals(user.Id)).ToList().Select(c => c.CarID);
             return from r in _context.Rides where lst.Contains(r.CarID) select r;
         }
 
@@ -109,7 +108,6 @@ namespace ZPool.Services.EFServices.RideService
                 .Count(b => b.BookingStatus == "Accepted");
 
             int seatsLeft = _context.Rides.Find(rideId).SeatsAvailable - acceptedBookings;
-
             return seatsLeft;
         }
     }

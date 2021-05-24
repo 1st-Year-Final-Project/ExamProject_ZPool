@@ -8,7 +8,7 @@
 <h3> My Bookings</h3>
 </hr></br>
 <p>
-    <a asp-page="/Rides/GetAllRides" class="btn btn-outline-success rounded-border">Book a Ride</a>
+    <a asp-page="/Rides/GetRides" class="btn btn-outline-success rounded-border">Book a Ride</a>
 </p>
 
 <form asp-page-handler="StatusFilter" method="post">
@@ -38,7 +38,7 @@
             @foreach (var b in Model.MyBookings)
             {
                 <tr>
-                    <td>  @b.Date </td>
+                    <td>  @b.Ride.StartTime </td>
                     <td>  @b.PickUpLocation </td>
                     <td>  @b.DropOffLocation </td>
                     <td>

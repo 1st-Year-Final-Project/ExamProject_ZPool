@@ -4,7 +4,7 @@
 @model ZPool.Pages.Rides.RideModel
 @inject IRideService RideService;
 @{
-    ViewData["Title"] = "View Ride";
+    ViewData["Title"] = "RideDetails";
 }
 
 <h3>Ride Details</h3>
@@ -28,7 +28,7 @@
 
                         @if (Model.CurrentUser == null)
                         {
-                            <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Rides/Ride/@Model.Ride.RideID">
+                            <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Rides/RideDetails/@Model.Ride.RideID">
                                 You must be logged in to book a ride.
                             </a>
                         }
@@ -141,7 +141,7 @@
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <form method="post">
                                                 <input hidden asp-for="RideId"/>
-                                                <button type="submit" class="btn btn-danger" asp-page-handler="Delete">Delete ride</button>
+                                                <button type="submit" class="btn btn-danger" asp-page-handler="DeleteRide">Delete ride</button>
                                             </form>
                                         </div>
                                     </div>

@@ -9,16 +9,16 @@ namespace ZPool.Services.Interfaces
 {
     public interface IRideService
     {
-        public void AddRide(Ride ride);
-        public void DeleteRide(Ride ride);
-        public Ride GetRide(int rideId);
-        public IEnumerable<Ride> GetAllRides();
-        public void EditRide(Ride ride);
-        public IEnumerable<Car> GetRegisteredCars(int userId);
+        void AddRide(Ride ride);
+        void DeleteRide(Ride ride);
+        Ride GetRide(int rideId);
+        IEnumerable<Ride> GetAllRides();
+        void EditRide(Ride ride);
+        IEnumerable<Car> GetRegisteredCars(int userId);
         IEnumerable<Ride> FilterRides(RideCriteriaInputModel criteria);
 
         //Method for profile page
-        public IEnumerable<Ride> GetRidesByUser(AppUser user);
+        IEnumerable<Ride> GetRidesByUser(AppUser user);
         int SeatsLeft(int rideId);
 
     }

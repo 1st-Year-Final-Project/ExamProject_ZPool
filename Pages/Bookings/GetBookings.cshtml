@@ -5,20 +5,13 @@
 }
 
 
-@*
-    <div>
-         <a asp-page="Edit"> Edit a booking</a>
-     </div>
 
-     <div>
-         <a asp-page="Delete"> Delete a booking</a>
-     </div>*@
 
 <h1 style="color:black"> Bookings </h1>
   </hr></br>
 
 <div>
-    <a asp-page="/Rides/GetAllRides" class="btn btn-outline-success rounded-border">Book a Ride</a>
+    <a asp-page="/Rides/GetRides" class="btn btn-outline-success rounded-border">Book a Ride</a>
 </div>
 
 </br>
@@ -36,7 +29,7 @@
 <table class="table">
     <thead>
         <tr>
-            @*<th> BookingID </th>*@
+          
             <th> Date & Time </th>
             <th> From</th>
             <th> To </th>
@@ -55,7 +48,7 @@
             {
 
                 <tr>
-                    @*<td>  @item.BookingID</td>*@
+                 
                     <td>  @item.Date  </td>
                     <td>  @item.PickUpLocation </td>
                     <td>  @item.DropOffLocation </td>

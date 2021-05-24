@@ -9,11 +9,11 @@ using ZPool.Services.Interfaces;
 
 namespace ZPool.Services.EFServices
 {
-    public class MessageService : IMessageService
+    public class EFMessageService : IMessageService
     {
         private AppDbContext _context;
 
-        public MessageService(AppDbContext context)
+        public EFMessageService(AppDbContext context)
         {
             _context = context;
         }
@@ -24,21 +24,6 @@ namespace ZPool.Services.EFServices
             _context.SaveChanges();
         }
 
-        public IEnumerable<Message> GetSentMessage(int userId)
-        {
-            var sent = _context.Messages.AsNoTracking()
-                .Include(m => m.Receiver)
-                .Where(m => m.SenderId == userId);
-            return sent;
-        }
-
-        public IEnumerable<Message> GetReceivedMessages(int userId)
-        {
-            return _context.Messages.AsNoTracking()
-                .Include(m=>m.Sender)
-                .Where(m => m.ReceiverId == userId)
-                .OrderByDescending(m=>m.SendingDate);
-        }
 
         public void SetStatusToRead(int mId)
         {
@@ -53,13 +38,12 @@ namespace ZPool.Services.EFServices
 
         public List<Message> GetMessagesByUserId(int userId)
         {
-            List<Message> messages = _context.Messages
+            return _context.Messages
                 .Include(m => m.Sender)
                 .Include(m => m.Receiver)
                 .Where(m => m.SenderId == userId || m.ReceiverId == userId)
                 .OrderByDescending(m=>m.SendingDate)
                 .ToList();
-            return messages;
         }
 
         public bool HasUnreadMessages(int userId)

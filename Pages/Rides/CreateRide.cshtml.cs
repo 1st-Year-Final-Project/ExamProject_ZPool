@@ -9,9 +9,11 @@ using Microsoft.AspNetCore.Identity;
 using ZPool.Models;
 using ZPool.Services.Interfaces;
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ZPool.Pages.Rides
 {
+    [Authorize]
     public class CreateRideModel : PageModel
     {
         [BindProperty]
@@ -31,28 +33,26 @@ namespace ZPool.Pages.Rides
             this.carService = carService;
         }
 
-       
         public async Task<IActionResult> OnGet()
         {
             culture = new CultureInfo("en-US"); //setting culture object to US English. Date filters are picky.
-            var user = await userManager.GetUserAsync(User); // will throw exception if not logged in          
+            var user = await userManager.GetUserAsync(User);        
             registeredCars = new SelectList(rideService.GetRegisteredCars(user.Id), "CarID", "NumberPlate");
             return Page();
         }
 
         public async Task<IActionResult> OnPost(Ride ride)
         {
-
             if (!ModelState.IsValid)
-
             {
                 return Page();
             }
+
             Car car = carService.GetCar(ride.CarID);
             if (ride.SeatsAvailable <= car.NumberOfSeats)
             {
                 rideService.AddRide(ride);
-                return RedirectToPage("GetAllRides");
+                return RedirectToPage("GetRides");
             }
             else
             {
@@ -61,8 +61,6 @@ namespace ZPool.Pages.Rides
                 Message = "The seats available cannot exceed the number of seats in your car.";
                 return Page();
             }
-
         }
-
     }
 }

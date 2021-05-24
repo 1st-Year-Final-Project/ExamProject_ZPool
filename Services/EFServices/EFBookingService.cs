@@ -66,9 +66,9 @@ namespace ZPool.Services.EFServices
         public IEnumerable<Booking> GetBookings()
         {
             return _context.Bookings
-            .Include(b => b.Ride).ThenInclude(r => r.Car).
-             ThenInclude(c => c.AppUser)
-            .Include(b => b.AppUser);
+                .Include(b => b.Ride).ThenInclude(r => r.Car)
+                .ThenInclude(c => c.AppUser)
+                .Include(b => b.AppUser);
         }
 
         public Booking GetBookingsByID(int bookingId) 
@@ -80,9 +80,11 @@ namespace ZPool.Services.EFServices
         public IEnumerable<Booking> GetBookingsByDriversID(AppUser user)
         {
             return _context.Bookings
-            .Include(b => b.Ride).ThenInclude(r => r.Car).
-             ThenInclude(c => c.AppUser)
-            .Include(b => b.AppUser).Where(b => b.Ride.Car.AppUserID.Equals(user.Id));
+                .Include(b => b.Ride)
+                .ThenInclude(r => r.Car)
+                .ThenInclude(c => c.AppUser)
+                .Include(b => b.AppUser)
+                .Where(b => b.Ride.Car.AppUserID.Equals(user.Id));
         }
 
 
@@ -90,9 +92,10 @@ namespace ZPool.Services.EFServices
         public IEnumerable<Booking> GetBookingsByUser(AppUser user)
         {
             return from booking
-                   in _context.Bookings.Include(r => r.Ride).ThenInclude(c => c.Car).
-                   ThenInclude(c => c.AppUser).
-                   Where(b => b.AppUserID.Equals(user.Id))
+                   in _context.Bookings.Include(r => r.Ride)
+                       .ThenInclude(c => c.Car)
+                       .ThenInclude(c => c.AppUser)
+                       .Where(b => b.AppUserID.Equals(user.Id))
                    select booking;
         }
 
@@ -111,7 +114,6 @@ namespace ZPool.Services.EFServices
             {
                 throw new ArgumentException("The status of cancelled or rejected bookings cannot be changed.");
             }
-           
             else if ((newBookingStatus == "Rejected" || newBookingStatus == "Accepted")  && oldBooking.BookingStatus != "Pending")
             {
                 throw new ArgumentException("Only pending bookings can be changed to accepted, rejected or cancelled.");
@@ -128,22 +130,24 @@ namespace ZPool.Services.EFServices
         public IEnumerable<Booking> GetBookingsByStatus(string status, AppUser user)
         {
             return _context.Bookings
-            .Include(b => b.Ride).ThenInclude(r => r.Car)
-            .ThenInclude(c => c.AppUser)
-            .Include(b => b.AppUser)
-            .Where(b=>b.BookingStatus.Equals(status))
-            .Where(b=>b.AppUser.Equals(user));
+                .Include(b => b.Ride)
+                .ThenInclude(r => r.Car)
+                .ThenInclude(c => c.AppUser)
+                .Include(b => b.AppUser)
+                .Where(b=>b.BookingStatus.Equals(status))
+                .Where(b=>b.AppUser.Equals(user));
         }
 
         // For the top bar function Bookings
         public IEnumerable<Booking> GetBookingsByStatusForDrivers(string status, AppUser user)
         {
             return _context.Bookings
-            .Include(b => b.Ride).ThenInclude(r => r.Car)
-            .ThenInclude(c => c.AppUser)
-            .Include(b => b.AppUser)
-            .Where(b => b.BookingStatus.Equals(status))
-            .Where(b => b.Ride.Car.AppUser.Equals(user));
+                .Include(b => b.Ride)
+                .ThenInclude(r => r.Car)
+                .ThenInclude(c => c.AppUser)
+                .Include(b => b.AppUser)
+                .Where(b => b.BookingStatus.Equals(status))
+                .Where(b => b.Ride.Car.AppUser.Equals(user));
         }
     }
 }
