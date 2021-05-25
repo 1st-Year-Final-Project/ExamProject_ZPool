@@ -18,7 +18,7 @@ namespace ZPool.Services.EFServices
            _context = context;
            _messageService = smsService;
         }
-        
+
         public void AddBooking(Booking booking)
         {
             if (!AlreadyBooked(booking.RideID, booking.AppUserID))
