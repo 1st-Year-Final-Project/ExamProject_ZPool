@@ -43,7 +43,7 @@ namespace ZPool
             
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("CloudConnection")));
+                    Configuration.GetConnectionString("CloudConnection2")));
 
             services.AddIdentity<AppUser, IdentityRole<int>>(options =>
             {
