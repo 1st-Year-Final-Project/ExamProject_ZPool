@@ -33,24 +33,24 @@
                                 be available in the list which is required field in the form.
                             </p>
 
-
                             <h4>What is needed for registering my car?</h4>
                             <p>
                                 To register a car you need to be logged in or register. Except for this step, in the registration form are fields like brand, model, number of seats and number plate which are necessary to fill.
                                 To get to the Registration form, check please the following How to register a car question.
                             </p>
 
-
                             <h4>How to register a car?</h4>
                             <p>
                                 Before registering your car you need to be at first logged in or create a new profile. The first way how to register a car is to check the
                                 checkbox with "I want to register a car" statement while registering. This way it will automatically move you to the form for car registration after you save the registration form for a user.
+                                Here you can fill all the information and click on Create button. The car will immediately appear in your list of cars.
+                            </p>
+                            <p>
                                 The other way when you are just logged in as a user, you need to open your personal profile page by clicking on your name up on the right side.
                                 On this page you can see My cars option in which there is a button for creating a new car. After clicking on the button you are in the registration form for cars. In case you decide not to create the car, you can click on Back to MyCars link under the registration form.
                                 As soon as you save all the information the car is created and shown in your list of cars. For creating a car the necessary information are Brand,
                                 Model, Number of seats and PlateNumber.
                             </p>
-
                             <p>
                                 In case you are still completely lost and have no idea how to access the registration form, here is the link but don't forget to be logged in!<br />
                                 <a asp-area="Identity" asp-page="/Account/Manage/CreateCar">Create a car</a>
@@ -62,7 +62,6 @@
                                 your name up on the right side. On this page you can see My cars option on the left side in which the list of cars registered by you is shown.
                             </p>
 
-
                             <h4>How to edit a car?</h4>
                             <p>
                                 You have to be logged in and have the car created to edit it. To do so, you need to open your personal profile page by clicking on
@@ -72,8 +71,6 @@
                                 to My Cars link in the end of the editing form and choose the right car. If you are sure you want to edit exactly this one car, write the new information where it is needed and click on the Save button in the end
                                 of the form. After this action the list of your cars is displayed again with all the new information.
                             </p>
-
-
 
                             <h4>How to delete a car?</h4>
                             <p>
@@ -102,13 +99,11 @@
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                 <div class="card-body">
 
-
                                     <h4>What does it mean to create a ride?</h4>
                                     <p>
                                         If you want to offer a ride to other people who want to go to the same destination as you, you can create a ride. People can then make a booking of your ride and if
                                         you accept them, you will all drive to the destination together.
                                     </p>
-
 
                                     <h4>What will I get from processing a ride?</h4>
                                     <p>
@@ -131,19 +126,13 @@
                                     <p>
                                         In case you are still completely lost and have no idea how to access the form for creating a ride, here is the link but don't forget to be logged in and have a car created!<br />
                                         <a asp-page="/Rides/CreateRide">Create a ride</a>
-
                                     </p>
-                                    
 
                                     <h4>Where can I see the list of my rides?</h4>
                                     <p>
                                         You have to be logged in and have at least one ride created. Just open your personal profile page by clicking on
                                         your name up on the right side. On this page you can see My Rides on the left side option in which the list of rides created by you is shown.
                                     </p>
-
-
-
-
 
                                     <h4>How to edit a ride?</h4>
                                     <p>
@@ -168,8 +157,6 @@
                                         move you back to the list of all rides where the information are going to be changed immediately.
                                     </p>
 
-
-
                                     <h4>How to cancel/delete a ride?</h4>
                                     <p>
                                         To cancel a ride, you have to be logged in and have at least one ride created. Go to your personal profile page by clicking on your name up on the
@@ -188,43 +175,52 @@
                                         One more way is to either open Rides Page, choose the ride you want to Delete and click on details in the end of the line of the ride or choose the ride from My Rides option in your personal profile page and
                                         again, click on details in the end of the line of the ride which is supposed to be changed. Both links will move you to detailed page of your ride where on the bottom of the page you can see again button for Deleting Ride.
                                         To make sure you are deleting the right one, all the information about it are provided. Click on the Delete ride button shown on the screen and the ride will be deleted immediately.
-     
+
                                     </p>
                                     <p>
                                         <b>!!! With ride are deleted also all bookings connected to it. !!!</b>
                                     </p>
 
-
-
-                                        <h4>Can I cancel the ride even if someone has booked it?</h4>
-<p>
+                                    <h4>Can I cancel the ride even if someone has booked it?</h4>
+                                    <p>
                                         In case the ride cannot happen because of any circumstances, you have the full right to cancel it without any fees anytime. So even if someone has booked your ride,
-                                        you can still cancel it.
+                                        you can still cancel it. You can find more information about how to do so in the previous question.
+                                    </p>
+
+                                    <h4>How do I know if someone has booked my ride?</h4>
+                                    <p>
+                                        After another user books your ride, you will get a notification and also a message. All your notifications can be found under the bell next to your name up on the right side.
+                                        Next to the notification bell, there are messages which will have a red circle around if you got some.
+                                    </p>
+                                    <p>
+                                        Another place where you can find out if someone has booked your ride is on your personal profile page.
+                                        There when you choose the My Rides option on the left side, the list of your rides is displayed. Choose the ride for which you wish to see the bookings and click on the "Bookings" link. To make sure
+                                        you chose the right ride, all information are provided. Under these information, the people who has booked your ride are listed also with their booking statuses. If you wish to check the accounts, just click
+                                        on their avatars (pictures).
+                                    </p>
+                                    <p>
+                                        One more way how to see people who has booked your ride and where you can accept or reject them is on Booking page on the top next to the page with Rides. Here you can see the list of all people who made bookings of your rides.
                                     </p>
 
                                     <h4>Can I reject someone who booked my ride?</h4>
                                     <p>If you do not want to drive with someone because of any reasons, you have the full right to reject the person.</p>
 
-
-                                    <h4>How do I know if someone has booked my ride?</h4>
+                                    <h4>Can I reject someone even after I accepted his or her booking request?</h4>
                                     <p>
-                                        After another user books your ride, you will get a notification and also a message. All your notifications can be found under the bell next to your name up on the right side.
-                                        Next to the notification bell, there are messages which will have a red circle around if you got some. Another place where you can find out if someone has booked your ride is on your personal profile page.
-                                        There when you choose the My Rides option on the left side the list of the rides is displayed. Choose the ride for which you wish to see the bookings and click on the "Bookings from" link. To make sure
-                                        you chose the right ride, all information are provided. Under these information, the people who has booked your ride are listed there also with their booking statuses. If you wish to check the accounts, just click
-                                        on their avatar.
+                                        You are allowed to change your opinion about people who are going to drive with you anytime. So even if you have accepted someone, you can still cancel this booking of your ride. Just open the page Bookings next to the Rides page on the top of the page.
+                                        Here you can see Cancel button next to the person who you accepted. After clicking on it, the passenger's bookings will be cancelled.
                                     </p>
-
-
-
-
+                                    <p>
+                                        Another way how to cancel already accepted booking is to open your personal profile page and there open My Rides section. Here click on Bookings link in the ride you want to see. Next to each person on the page are your options. If someone is accepted there
+                                        you can also see Cancel button next to it. After clicking on it, the passenger's bookings will be cancelled.
+                                    </p>
 
                                     <h4>How to contact people who are taking my ride?</h4>
                                     <p>
-                                        At present time, the only way to directly contact users who booked your ride, is to reply on the automatically sent booking message.
+                                        At present time, the only way to directly contact users who booked your ride, is to reply on the automatically sent booking message. It means you have to open the messages which are between your name and
+                                        notification bell on the top of the page. Here you see the message from the person who booked your ride which was automatically sent. In the end of the message, there is the button Reply. After you click on it, the passengers
+                                        name will appear as the person who you are going to send the message to. Now you can write what you want and just click on send button.
                                     </p>
-
-                                    
                                 </div>
                             </div>
                         </div>
@@ -253,63 +249,49 @@
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                         <div class="card-body">
 
-
-
-
-
                             <h4>What does it mean to make a booking?</h4>
                             <p>
-                                If you want to join a ride with someone from one place to the other on exact date, you can make a booking of his or her ride. After the driver accept
-                                your request you can drive together to your destination.
+                                If you want to join a ride with someone from one place to the other on exact date, you can make a booking of his or her ride. After the driver accepts
+                                your request, you can drive together to your destination.
                             </p>
 
-
-
                             <h4>How much does it cost to take a ride?</h4>
-
                             <p>Our application is fully without money. It means you will not be charged anything as well as no one will pay you for anything.</p>
-
 
                             <h4>How to make a booking?</h4>
                             <p>
                                 You need to be logged in to book a ride. Go to the page with Rides where you can find the specific ride for you. After you have one, click on the
                                 Details link in the end of the line where is the ride. You will see the page with all details and the driver. On the right side, there is a button for booking
                                 the ride. After you click on it, you will see your list of bookings with the booking statuses. Now you have to wait until the driver accept or reject your request.
-                                In case you have already booked the ride the button for booking it will not allow you to book it once again.
+                                In case you have already booked the ride the button for booking it will not allow you to book it once again as well as the system will not allow you to book your own ride.
                             </p>
-
+                            <p>
+                                You can also open your pesonal profile page and choose My bookings option on your left. Here you can see a button Book a Ride which will redirect you to the page with all rides. Here continue as mentioned above.
+                            </p>
 
                             <h4>Where can I see my bookings?</h4>
                             <p>
                                 To see your bookings you need to be logged in. Open your personal profile page and choose My bookings section. Here you can see the list of all your bookings with all their statuses.
-                                Another faster way to see all of them is to click on Bookings button in the navigation bar on the top of the page next to Rides button.
                             </p>
 
-
+                            <h4>What do booking statuses mean?</h4>
+                            <p>
+                                Our system has exactly 4 different booking statuses. Pending means that the driver has not accept or reject your booking. Accepted means that the driver agrees with driving you to the destination. Rejected on the other hand means
+                                that the driver does not wish to drive with you. And the last one is cancelled, what means that even if you were accepted, something might have happened and the driver eventually decided to cancel your acceptance or you can also be the one who eventually decides
+                                not to take the ride with the driver and cancels the booking.
+                            </p>
 
                             <h4>Is it possible to cancel my booking?</h4>
                             <p>
-                                You can always cancel the booking in case you cannot join the ride. You can do that on your own profile page in MyBookings section. There you can find the Cancel button next to the booking you wish to cancel. Make sure you are cancelling the right one.
+                                You can always cancel the booking in case you cannot join the ride. You can do so on your own profile page in MyBookings section. There you can find the Cancel button next to the booking you wish to cancel. Make sure you are cancelling the right one.
                             </p>
-                            <p>
-                                Another way to do so is to open Bookings page on the top of the page, which will show you the list of your bookings. Here you can see the button Cancel
-                                when your ride is accepted so that you can still cancel it anytime.
-                            </p>
-                            
 
-                            <h4>Is it possible to delete my booking from the list?</h4>
-                            <p>At the moment it is not possible.</p>
-
-                                <h4>Is it possible to cancel the booking even after the driver has confirmed it?</h4>
+                            <h4>Is it possible to cancel the booking even after the driver has confirmed it?</h4>
                             <p>You can always cancel the booking if you cannot join the ride. To find more information how to cancel it, check the previous question Is it possible to cancel my booking?</p>
-
-
-
 
 
                             <h4>How do I know if my booking has been accepted by the driver?</h4>
                             <p>You can see it under the notification bell, Bookings page or under My bookings on your personal profile page. Each of these pages is showing the status of your bookings.</p>
-
 
 
 
@@ -322,6 +304,7 @@
                                 in the conversation somehow, you can find more messages under message picture on the top of the page. To find out more about Message, check the Messages section in questions for everyone using the App.
                             </p>
 
+                            <h4>What is the search filter in bookings for?</h4>
 
 
 
@@ -332,7 +315,6 @@
             </div>
         </div>
     </div>
-
 
     <p>
         <a class="btn btn-primary mt-3" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
