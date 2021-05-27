@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Sentry.Protocol;
 using VisioForge.Shared.MediaFoundation.OPM;
 using ZPool.Models;
 using ZPool.Services.Interfaces;
@@ -18,24 +19,24 @@ namespace ZPool.Pages.Notification
     [Authorize]
     public class GetNotificationModel : PageModel
     {
-        IRideService _rideService;
-        IBookingService _bookingService;
+        
+        private IBookingService _bookingService;
+        private UserManager<AppUser> _userManager;
+
         public List<Booking> Bookings { get; set; }
-        public IEnumerable<Ride> Rides { get; set; }
-        public UserManager<AppUser> _userManager;
+
         [BindProperty]
         public AppUser LoggedInUser { get; set; }
 
         public string Message { get; set; }
 
 
-        public GetNotificationModel(IBookingService serviceForBooking, IRideService serviceForRides, UserManager<AppUser> userManager)
+        public GetNotificationModel(IBookingService serviceForBooking, UserManager<AppUser> userManager)
         {
             _bookingService = serviceForBooking;
-            _rideService = serviceForRides;
             _userManager = userManager;
-
         }
+
         public async Task OnGetAsync()
         {
             LoggedInUser = await _userManager.GetUserAsync(User);
