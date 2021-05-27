@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Sentry.Protocol;
 using VisioForge.Shared.MediaFoundation.OPM;
 using ZPool.Models;
 using ZPool.Services.Interfaces;
@@ -18,46 +19,48 @@ namespace ZPool.Pages.Notification
     [Authorize]
     public class GetNotificationModel : PageModel
     {
-        IRideService rideService;
-        IBookingService bookingService;
-        public IEnumerable<Booking> Bookings { get; set; }
-        public IEnumerable<Ride> Rides { get; set; }
-        public UserManager<AppUser> _userManager;
+        
+        private IBookingService _bookingService;
+        private UserManager<AppUser> _userManager;
+
+        public List<Booking> Bookings { get; set; }
+
         [BindProperty]
         public AppUser LoggedInUser { get; set; }
 
         public string Message { get; set; }
 
 
-        public GetNotificationModel(IBookingService serviceForBooking, IRideService serviceForRides, UserManager<AppUser> userManager)
+        public GetNotificationModel(IBookingService serviceForBooking, UserManager<AppUser> userManager)
         {
-            bookingService = serviceForBooking;
-            rideService = serviceForRides;
+            _bookingService = serviceForBooking;
             _userManager = userManager;
-
         }
+
         public async Task OnGetAsync()
         {
-            //LoggedInUser = await _userManager.GetUserAsync(User);
-            //Rides = rideService.GetAllRides().Where(r=>r.Car.AppUserID== LoggedInUser.Id);
-            //Bookings = bookingService.GetBookings().Where(b=>b.AppUserID== LoggedInUser.Id);
-            Bookings = bookingService.GetBookings();
             LoggedInUser = await _userManager.GetUserAsync(User);
+            Bookings = new List<Booking>();
 
+            foreach (var booking in _bookingService.GetBookingsByDriversID(LoggedInUser))
+            {
+                Bookings.Add(booking);
+            }
+
+            foreach (var booking in _bookingService.GetBookingsByUser(LoggedInUser))
+            {
+                Bookings.Add(booking);
+            }
+            
         }
-        //public void OnGet()
-        //{
-
-
-        //}
 
         public void OnPostAccept(int id)
         {
-            Bookings = bookingService.GetBookings();
+            Bookings = _bookingService.GetBookings().ToList();
 
             try
             {
-                bookingService.UpdateBookingStatus(id, "Accepted");
+                _bookingService.UpdateBookingStatus(id, "Accepted");
             }
             catch (Exception ex)
             {
@@ -69,11 +72,11 @@ namespace ZPool.Pages.Notification
 
         public void OnPostReject(int id)
         {
-            Bookings = bookingService.GetBookings();
+            Bookings = _bookingService.GetBookings().ToList();
 
             try
             {
-                bookingService.UpdateBookingStatus(id, "Rejected");
+                _bookingService.UpdateBookingStatus(id, "Rejected");
             }
             catch (Exception ex)
             {
@@ -84,11 +87,11 @@ namespace ZPool.Pages.Notification
 
         public void OnPostCancel(int id)
         {
-            Bookings = bookingService.GetBookings();
+            Bookings = _bookingService.GetBookings().ToList();
 
             try
             {
-                bookingService.UpdateBookingStatus(id, "Cancelled");
+                _bookingService.UpdateBookingStatus(id, "Cancelled");
             }
             catch (Exception ex)
             {
