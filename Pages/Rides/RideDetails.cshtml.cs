@@ -88,7 +88,7 @@ namespace ZPool.Pages.Rides
             CurrentUser = await _userManager.GetUserAsync(User);
             Message.SendingDate = DateTime.Now;
             _messageService.CreateMessage(Message);
-            return RedirectToPage("/Rides/Ride", new { id = RideId});
+            return RedirectToPage("/Rides/RideDetails", new { id = RideId});
         }
     }
 }

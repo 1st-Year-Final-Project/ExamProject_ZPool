@@ -31,10 +31,8 @@
             <input hidden asp-for="@Model.Ride.CarID" class="form-control rounded-border" disabled style="max-width: 13rem" />
         </div>
         <input type="hidden" asp-for="Ride.RideID" />
-        <input type="submit" value="Delete" class="btn btn-outline-danger rounded-border" /> 
-        
+        <input type="submit" value="Delete" class="btn btn-outline-danger rounded-border" />
+        <a asp-area="Identity" asp-page="/Account/Manage/MyRides">Back to My Rides</a>
+
     </form>
-</div>
-<div>
-    <a asp-area="Identity" asp-page="/Account/Manage/MyRides">Back to My Rides</a>
 </div>
