@@ -40,23 +40,12 @@ namespace ZPool.Pages.Notification
         public async Task OnGetAsync()
         {
             LoggedInUser = await _userManager.GetUserAsync(User);
-            Bookings = new List<Booking>();
-
-            foreach (var booking in _bookingService.GetBookingsByDriversID(LoggedInUser))
-            {
-                Bookings.Add(booking);
-            }
-
-            foreach (var booking in _bookingService.GetBookingsByUser(LoggedInUser))
-            {
-                Bookings.Add(booking);
-            }
-            
+            Bookings = GetNotifications();
         }
 
-        public void OnPostAccept(int id)
+        public IActionResult OnPostAccept(int id)
         {
-            Bookings = _bookingService.GetBookings().ToList();
+            Bookings = GetNotifications();
 
             try
             {
@@ -66,13 +55,13 @@ namespace ZPool.Pages.Notification
             {
                 Message = ex.Message;
             }
-            RedirectToPage("GetNotification");
+            return RedirectToPage("GetNotification");
 
         }
 
-        public void OnPostReject(int id)
+        public IActionResult OnPostReject(int id)
         {
-            Bookings = _bookingService.GetBookings().ToList();
+            Bookings = GetNotifications();
 
             try
             {
@@ -82,12 +71,12 @@ namespace ZPool.Pages.Notification
             {
                 Message = ex.Message;
             }
-            RedirectToPage("GetNotification");
+            return RedirectToPage("GetNotification");
         }
 
-        public void OnPostCancel(int id)
+        public IActionResult OnPostCancel(int id)
         {
-            Bookings = _bookingService.GetBookings().ToList();
+            Bookings = GetNotifications();
 
             try
             {
@@ -97,7 +86,24 @@ namespace ZPool.Pages.Notification
             {
                 Message = ex.Message;
             }
-            RedirectToPage("GetNotification");
+            return RedirectToPage("GetNotification");
+        }
+
+        private List<Booking> GetNotifications()
+        {
+            List<Booking> notifications = new List<Booking>();
+            
+            foreach (var booking in _bookingService.GetBookingsByDriversID(LoggedInUser))
+            {
+                notifications.Add(booking);
+            }
+
+            foreach (var booking in _bookingService.GetBookingsByUser(LoggedInUser))
+            {
+                notifications.Add(booking);
+            }
+
+            return notifications;
         }
     }
 }
