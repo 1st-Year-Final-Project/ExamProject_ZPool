@@ -24,25 +24,28 @@
     <hr /><br />
 
     <h4>Bookings from:</h4>
-    </br>
-    <div>
-        @{ foreach (var booking in Model.BookingsOfOneRide)
-            {
-                if (booking != null)
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width:120px">First Name</th>
+                <th style="width:120px">Last Name</th>
+                <th style="width:120px">Gender</th>
+                <th style="width:120px">Profile</th>
+                <th style="width:120px">Status</th>
+                <th style="width:120px"></th>
+                <th style="width:120px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @*</br>*@
+            @*<div>*@
+            @{ foreach (var booking in Model.BookingsOfOneRide)
                 {
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th style="width:120px">First Name</th>
-                                <th style="width:120px">Last Name</th>
-                                <th style="width:120px">Gender</th>
-                                <th style="width:120px">Profile</th>
-                                <th style="width:120px">Status</th>
-                                <th style="width:120px"></th>
-                                <th style="width:120px"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    if (booking != null)
+                    {
+                        if (booking.AppUser != null)
+                        {
+
                             <tr>
                                 <td>@booking.AppUser.FirstName</td>
                                 <td>@booking.AppUser.LastName</td>
@@ -75,7 +78,7 @@
                                                 if (imageFlag.Equals("N4.jpg"))
                                                 {
                                                     <img src="~/images/N4.jpg" id="photo" height="50" width="50" title="click me">
-                                                }          
+                                                }
 
                                                 if (imageFlag.Equals("N5.jpg"))
                                                 {
@@ -118,12 +121,16 @@
                                         </div>
                                     </td>
                                 }
-                            <tr />
-                    </table>
+
+                            </tr>
+                        }
+                    }
                 }
+
             }
-        }
-    </div>
+    </table>
+
+</div>
     <br /><hr />
     <input type="hidden" asp-for="MyRide.RideID" />
     <a asp-page="./MyRides">Back to My Rides</a>
