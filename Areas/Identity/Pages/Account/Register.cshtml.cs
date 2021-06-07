@@ -14,6 +14,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using ZPool.Models;
+using MailKit;
+
 
 namespace ZPool.Areas.Identity.Pages.Account
 {
