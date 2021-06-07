@@ -19,7 +19,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         private readonly SignInManager<AppUser> _signInManager;
 
         public IndexModel(
-            UserManager<AppUser> userManager,
+            UserManager<AppUser> userManager, 
             SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
