@@ -9,11 +9,11 @@ using ZPool.Services.Interfaces;
 
 namespace ZPool.Services.EFServices.RideService
 {
-    public class RideService : IRideService
+    public class EFRideService : IRideService
     {
         AppDbContext _context;
         
-        public RideService(AppDbContext context)
+        public EFRideService(AppDbContext context)
         {
             _context = context;
         }

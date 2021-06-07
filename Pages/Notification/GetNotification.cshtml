@@ -28,7 +28,7 @@
 
         @if (Model.Bookings != null)
         {
-            @foreach (var item in Model.Bookings)
+            @foreach (var item in Model.Bookings.OrderByDescending(b=>b.Date))
             {
                 @if(item.Date.Day> item.Date.Day-5)
                     { 
