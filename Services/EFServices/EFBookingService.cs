@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using ZPool.Models;
 using ZPool.Services.Interfaces;
 
@@ -12,11 +14,13 @@ namespace ZPool.Services.EFServices
     {
         private AppDbContext _context;
         private IMessageService _messageService;
+        private IEmailSender _emailSender;
 
-        public EFBookingService(AppDbContext context, IMessageService smsService)
+        public EFBookingService(AppDbContext context, IMessageService smsService, IEmailSender emailSender)
         {
            _context = context;
            _messageService = smsService;
+           _emailSender = emailSender;
         }
 
         public void AddBooking(Booking booking)
@@ -26,6 +30,7 @@ namespace ZPool.Services.EFServices
                 _context.Bookings.Add(booking);
                 _context.SaveChanges();
                 SendMessageToDriver(booking);
+                SendEmailToDriver(booking);
             }
         }
 
@@ -49,6 +54,12 @@ namespace ZPool.Services.EFServices
                 $"You have a new booking request from {booking.AppUser.UserName}. You can contact the passenger by using the Reply function."
             };
             _messageService.CreateMessage(message);
+        }
+
+        private void SendEmailToDriver(Booking booking)
+        {
+            string message = $"Dear {booking.Ride.Car.AppUser.FirstName}, \n\n You have a new booking by {booking.AppUser.UserName} for the ride \n on {booking.Ride.StartTime} \n from {booking.Ride.DepartureLocation} \n to {booking.Ride.DestinationLocation}. \n\n Best regards \n Your Zpool-Team";
+            _emailSender.SendEmailAsync(booking.Ride.Car.AppUser.Email, "New booking", message);
         }
 
         public void DeleteBooking(Booking booking)
