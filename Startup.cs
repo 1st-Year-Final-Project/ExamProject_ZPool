@@ -11,14 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using ZPool.Models;
 using ZPool.Services.EFServices.RideService;
 using ZPool.Services.Interfaces;
 using ZPool.Services.EFServices;
-
-
-
-
 
 namespace ZPool
 {
@@ -40,14 +37,15 @@ namespace ZPool
             services.AddTransient<ICarService, EFCarService>();
             services.AddTransient<IBookingService, EFBookingService>();
             services.AddTransient<IMessageService, EFMessageService>();
-            
+            services.AddTransient<IEmailSender, EmailService>();
+
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("CloudConnection")));
+                    Configuration.GetConnectionString("LocalConnection")));
 
             services.AddIdentity<AppUser, IdentityRole<int>>(options =>
             {
-                    options.SignIn.RequireConfirmedAccount = false;
+                    options.SignIn.RequireConfirmedAccount = true;
                     
             })
                 .AddEntityFrameworkStores<AppDbContext>()
