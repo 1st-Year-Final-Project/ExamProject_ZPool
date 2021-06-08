@@ -27,7 +27,16 @@ namespace ZPool.Services.EFServices
 
             using (var client = new SmtpClient())
             {
-                client.Connect("smtp-mail.outlook.com", 25, false);
+                client.Timeout = 5000;
+                try
+                {
+                    client.Connect("smtp-mail.outlook.com", 25, false);
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
                 // Note: only needed if the SMTP server requires authentication
                 client.Authenticate("zpooladm@outlook.com", "SuperSecret1!");
