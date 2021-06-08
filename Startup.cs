@@ -40,10 +40,14 @@ namespace ZPool
             services.AddTransient<ICarService, EFCarService>();
             services.AddTransient<IBookingService, EFBookingService>();
             services.AddTransient<IMessageService, EFMessageService>();
-            
+            services.AddTransient<IReviewService, EFReviewService>();
+
+
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("CloudConnection")));
+                    Configuration.GetConnectionString("LocalConnection")));
+            //Configuration.GetConnectionString("CloudConnection")));
+
 
             services.AddIdentity<AppUser, IdentityRole<int>>(options =>
             {
