@@ -69,7 +69,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
                 Message = ex.Message;
             }
 
-            //reconstruc the data senario            
+            //reconstruct the data senario            
             int rideId = GetRideIdFromBooking(id);
             await LoadBookingByRideId(rideId);
             MyRide = _rideService.GetRide(rideId);
