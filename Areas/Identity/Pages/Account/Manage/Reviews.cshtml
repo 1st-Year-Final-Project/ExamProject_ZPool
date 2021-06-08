@@ -17,7 +17,7 @@
                 <div class="form-group">
                     <label class="control-label">To:</label>
                     <input asp-for="@Model.Reviewee.UserName" disabled class="form-control" />
-                    <input asp-for="@Model.NewReview.RevieweeId" hidden />
+
                 </div>
                 <div class="form-group">
                     <label asp-for="@Model.providedRides" class="control-label"></label>
@@ -27,13 +27,30 @@
                     </select>
                     <span asp-validation-for="@Model.providedRides" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="@Model.NewReview.RateValue" class="control-label"></label>
+                    <select asp-for="@Model.NewReview.RateValue" class="form-control rounded-border" style="max-width: 13rem">
+                        <option value="">--Rating--</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+
+                    </select>
+                    <span asp-validation-for="@Model.providedRides" class="text-danger"></span>
+                </div>
             </div>
             <div class="col-4">
                 <div class="form-group">
                     <label class="control-label">Review text:</label>
-                    <textarea asp-for="@Model.NewReview.MessageBody" class="form-control" rows="5"></textarea>
+                    <textarea asp-for="@Model.NewReview.MessageBody" class="form-control" rows="8"></textarea>
                     <div asp-validation-summary="All" class="text-secondary"></div>
                 </div>
+                <input hidden asp-for="NewReview.RevieweeId" value="@Model.Reviewee.Id" />
+                <input hidden asp-for="NewReview.ReviewerId" value="@Model.Reviewer.Id" />
+
+
             </div>
 
         </div>
@@ -48,56 +65,33 @@
         <div class="col-8 d-flex flex-column border rounded-border ">
 
             @{
-            int x = Model.Reviews.Count > Model.ListLength ? Model.ListLength : Model.Reviews.Count;
+                int x = Model.Reviews.Count > Model.ListLength ? Model.ListLength : Model.Reviews.Count;
 
-            for (int i = 0; i < x; i++)
-            {
-            @if (Model.Reviewer.Id == Model.Reviews[i].RevieweeId)
-            {
+                for (int i = 0; i < x; i++)
+                {
+
                 <!--Received reviews-->
-                <div class="card rounded-border m-3 align-self-start bg-yellow" style="width: 20rem">
+                <div class="card rounded-border m-3 bg-yellow" >
                     <div class="card-body">
                         <h5 class="card-title">From: @Model.Reviews[i].Reviewer.UserName</h5>
-                        <h6 class="card-subtitle mb-2">@Model.Reviews[i].ReviewDate</h6>
+                        <h6 class="card-subtitle mb-2">Review date: @Model.Reviews[i].ReviewDate</h6>
+                        <h6 class="card-subtitle mb-2">Departure Location: @Model.Reviews[i].Ride.DepartureLocation</h6>
+                        <h6 class="card-subtitle mb-2">Destination: @Model.Reviews[i].Ride.DestinationLocation</h6>
+                        <h6 class="card-subtitle mb-2">Start time: @Model.Reviews[i].Ride.StartTime</h6>
+                        <h6 class="card-subtitle mb-2">Rating value: @Model.Reviews[i].RateValue</h6>
+
                         <p class="card-text">@Model.Reviews[i].MessageBody</p>
-                        <form method="post">
-                            <input hidden asp-for="NewReview.RevieweeId" value="@Model.Reviews[i].ReviewerId" />
-                            <input hidden asp-for="NewReview.Reviewee.UserName" value="@Model.Reviews[i].Reviewer.UserName" />
-                            <input hidden asp-for="NewReview.ReviewerId" value="@Model.Reviewer.Id" />
-                            <input hidden asp-for="ListLength" value="@x" />
-                        </form>
+
                     </div>
                 </div>
-            }
-            @*else if (Model.CurrentUser.Id == Model.Reviews[i].ReviewerId)
-        {
-            Sent reviews
-            <div class="card rounded-border m-3 align-self-end bg-secondary text-light" style="width: 20rem">
-                <div class="card-body">
-                    <h5 class="card-title">To: Model.Messages[i].Receiver.UserName</h5>
-                    <h6 class="card-subtitle mb-2"> Model.Messages[i].SendingDate</h6>
-                    <p class="card-text"> Model.Messages[i].MessageBody</p>
-                </div>
-            </div>
-        }
-        else
-        {
-            <p>An error has occurred.</p>
-        }
-
-        if (!Model.Messages[i].IsRead && Model.Messages[i].ReceiverId == Model.CurrentUser.Id)
-        {
-            MessageService.SetStatusToRead(Model.Messages[i].Id);
-        }*@
-            }
-            }
-
+                    }
+                }
         </div>
     </div>
     <div class="row justify-content-center pt-3">
         <form method="post">
             <input hidden type="number" asp-for="ListLength" value="@Model.ListLength" />
-            <button type="submit" asp-page-handler="Load" class="btn btn-outline-secondary rounded-border">Load more reviews</button>
+            <button type="submit" asp-page-handler="Load" asp-route-id="@Model.Reviewee.Id" class="btn btn-outline-secondary rounded-border">Load more reviews</button>
         </form>
     </div>
 

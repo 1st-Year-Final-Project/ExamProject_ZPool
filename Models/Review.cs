@@ -15,6 +15,7 @@ namespace ZPool.Models
         [Required(ErrorMessage = "A message text is required.")]
         [StringLength(240)]
         public string MessageBody { get; set; }
+        public int RateValue { get; set; }
 
 
         [Required]

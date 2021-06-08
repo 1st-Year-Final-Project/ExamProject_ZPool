@@ -51,16 +51,18 @@ namespace ZPool.Pages.Reviews
                 return RedirectToPage("/Account/Login",
                     new { area = "Identity", returnUrl = "/Account/Manage/Reviews" });
             }
-
             providedRides = new SelectList(_rideService.GetRidesByUser(Reviewee), "RideID", "StartTime");
-
+            
             Reviews = _reviewService.GetReviewsByUserId(Reviewee.Id);
             //Rides = _rideService.GetRidesByUser(Reviewee);
-            ListLength = 15;
+            ListLength = 5;
             return Page();
         }
-        public IActionResult OnPostReview()
+        public async Task<IActionResult> OnPostReviewAsync()
         {
+            NewReview.Reviewer = await _userManager.GetUserAsync(User);
+            NewReview.Reviewee = await _userManager.FindByIdAsync(NewReview.RevieweeId.ToString());
+            NewReview.Ride = _rideService.GetRide(NewReview.RideId);
             NewReview.ReviewDate = DateTime.Now;
             NewReview.RideId = RideId;
             if (!ModelState.IsValid)
@@ -68,13 +70,16 @@ namespace ZPool.Pages.Reviews
                 return RedirectToPage("Reviews");
             }
             _reviewService.CreateReview(NewReview);
-            return RedirectToPage("Reviews");
+            return RedirectToPage("Reviews",new {id=NewReview.RevieweeId });
         }
-        public async Task<IActionResult> OnPostLoadAsync()
+        public async Task<IActionResult> OnPostLoadAsync(int id)
         {
+            Reviewee = await _userManager.FindByIdAsync(id.ToString());
             Reviewer = await _userManager.GetUserAsync(User);
-            Reviews = _reviewService.GetReviewsByUserId(Reviewer.Id);
+            Reviews = _reviewService.GetReviewsByUserId(Reviewee.Id);
             ListLength += 5;
+            providedRides = new SelectList(_rideService.GetRidesByUser(Reviewee), "RideID", "StartTime");
+
             return Page();
         }
     }

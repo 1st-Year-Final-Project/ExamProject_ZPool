@@ -26,7 +26,7 @@ namespace ZPool.Services.EFServices
 
         public List<Review> GetReviewsByUserId(int userId)
         {
-            return _context.Reviews.Include(r => r.Reviewer).Include(r => r.Reviewee)
+            return _context.Reviews.Include(r => r.Reviewer).Include(r => r.Reviewee).Include(r=>r.Ride)
                 .Where(r => r.RevieweeId == userId)
                 .OrderByDescending(r => r.ReviewDate)
                 .ToList();
