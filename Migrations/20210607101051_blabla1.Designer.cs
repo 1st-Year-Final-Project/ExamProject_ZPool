@@ -10,8 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210521122315_createDb")]
-    partial class createDb
+    [Migration("20210607101051_blabla1")]
+    partial class blabla1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,6 +48,15 @@ namespace ZPool.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "e4e60fe4-c2bc-4ac6-b127-1c34de22cf45",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -130,6 +139,13 @@ namespace ZPool.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -233,6 +249,26 @@ namespace ZPool.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f2fb9936-ddb4-49ff-811e-4973524fa8cb",
+                            Email = "admin@zealand.com",
+                            EmailConfirmed = false,
+                            FirstName = "Admin",
+                            LastName = "Admin",
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ADMIN@ZEALAND.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJ+KE8PO6TTiXpx+pC2xV5v15h7r++IPnUpzPv7y1ezY4queC4PUjqLGIoZOKMExWw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3c9f4ef0-1aa5-47cd-ac96-3f7d4df9a976",
+                            TwoFactorEnabled = false,
+                            UserName = "Default Admin"
+                        });
                 });
 
             modelBuilder.Entity("ZPool.Models.Booking", b =>
@@ -337,6 +373,41 @@ namespace ZPool.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("ZPool.Models.Review", b =>
+                {
+                    b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("MessageBody")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(240)")
+                        .HasMaxLength(240);
+
+                    b.Property<DateTime>("ReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RevieweeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReviewerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RideId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReviewId");
+
+                    b.HasIndex("RevieweeId");
+
+                    b.HasIndex("ReviewerId");
+
+                    b.HasIndex("RideId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("ZPool.Models.Ride", b =>
@@ -457,6 +528,27 @@ namespace ZPool.Migrations
                     b.HasOne("ZPool.Models.AppUser", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ZPool.Models.Review", b =>
+                {
+                    b.HasOne("ZPool.Models.AppUser", "Reviewee")
+                        .WithMany()
+                        .HasForeignKey("RevieweeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZPool.Models.AppUser", "Reviewer")
+                        .WithMany()
+                        .HasForeignKey("ReviewerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZPool.Models.Ride", "Ride")
+                        .WithMany()
+                        .HasForeignKey("RideId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
