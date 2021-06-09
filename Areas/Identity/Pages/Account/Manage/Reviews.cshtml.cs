@@ -45,12 +45,7 @@ namespace ZPool.Pages.Reviews
         public async Task<IActionResult> OnGetAsync(int id)
         {
             Reviewer = await _userManager.GetUserAsync(User);
-            Reviewee = await _userManager.FindByIdAsync(id.ToString());
-
-            if (Reviewee == null)
-            {
-                Reviewee = await _userManager.GetUserAsync(User);
-            }
+            Reviewee = await _userManager.FindByIdAsync(id.ToString()) ?? Reviewer;
 
             if (Reviewer == null)
             {

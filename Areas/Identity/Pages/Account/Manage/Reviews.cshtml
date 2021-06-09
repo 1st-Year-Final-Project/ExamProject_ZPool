@@ -55,7 +55,7 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label class="control-label">Review text:</label>
-                        <textarea asp-for="@Model.NewReview.MessageBody" class="form-control" rows="8"></textarea>
+                        <textarea asp-for="@Model.NewReview.MessageBody" class="form-control rounded-border" rows="8"></textarea>
                         <div asp-validation-summary="All" class="text-secondary"></div>
                     </div>
                     <input hidden asp-for="NewReview.RevieweeId" value="@Model.Reviewee.Id" />
