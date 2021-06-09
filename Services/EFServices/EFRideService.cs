@@ -117,12 +117,12 @@ namespace ZPool.Services.EFServices.RideService
         {
             var result = _context.Rides.Include(r => r.Car)
                 .Where(r => r.Car.AppUserID == revieweeId)
-                .Include(r => r.Bookings).AsEnumerable().Where(r=>GetBookingsForRide(r, reviewerId))
+                .Include(r => r.Bookings).AsEnumerable().Where(r=> CheckBookingsForReview(r, reviewerId))
                 .Where(r => r.StartTime < DateTime.Now);
             return result;
         }
 
-        private bool GetBookingsForRide(Ride r, int id)
+        private bool CheckBookingsForReview(Ride r, int id)
         {
             foreach (var booking in r.Bookings.AsEnumerable())
             {
