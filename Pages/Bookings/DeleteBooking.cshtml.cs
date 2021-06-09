@@ -26,9 +26,6 @@ namespace ZPool.Pages.Bookings
             return Page();
         }
 
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public IActionResult OnPost(Booking booking)
         {
            

@@ -67,6 +67,13 @@ namespace ZPool.Services.EFServices.RideService
                 .Where(ride=>CheckStartTime(ride, criteria.StartTime))
                 .OrderBy(r=>r.StartTime);;
         }
+        //public IEnumerable<Ride> GetRidesForReview(int revieweeId, int reviewerId)
+        //{
+        //    return _context.Rides.Include(r => r.Car)
+        //        .Where(r => r.Car.AppUserID == revieweeId)
+        //        .Include(r => r.Bookings)
+        //        .Where(r => r.StartTime < DateTime.Now);
+        //}
 
         #region FilterHelperMethods
 
