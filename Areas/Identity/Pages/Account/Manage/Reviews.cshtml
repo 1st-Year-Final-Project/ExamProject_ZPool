@@ -27,11 +27,11 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label class="control-label">To:</label>
-                        <input asp-for="@Model.Reviewee.UserName" disabled class="form-control" />
+                        <input asp-for="@Model.Reviewee.UserName" disabled class="form-control rounded-border" />
 
                     </div>
                     <div class="form-group">
-                        <label asp-for="@Model.providedRides" class="control-label"></label>
+                        <label class="control-label">Date of the ride:</label>
                         <select asp-for="@Model.RideId" class="form-control rounded-border" style="max-width: 13rem"
                                 asp-items="@Model.providedRides">
                             <option value="">--Select a Ride--</option>
@@ -39,7 +39,7 @@
                         <span asp-validation-for="@Model.providedRides" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="@Model.NewReview.RateValue" class="control-label"></label>
+                        <label class="control-label">Rating value:</label>
                         <select asp-for="@Model.NewReview.RateValue" class="form-control rounded-border" style="max-width: 13rem">
                             <option value="">--Rating--</option>
                             <option value="1">1</option>
