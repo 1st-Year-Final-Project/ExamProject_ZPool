@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using ZPool.Models;
 using ZPool.Services.Interfaces;
 
@@ -30,7 +31,17 @@ namespace ZPool.Services.EFServices
                 .Where(r => r.RevieweeId == userId)
                 .OrderByDescending(r => r.ReviewDate)
                 .ToList();
+        }
 
+
+        public async Task DeleteReviewAsync(int reviewId)
+        {
+            Review review = _context.Reviews.FirstOrDefault(r=>r.ReviewId==reviewId);
+            if (review != null)
+            {
+                _context.Reviews.Remove(review);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

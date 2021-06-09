@@ -1,5 +1,7 @@
 ﻿@page
+@using ZPool.Models
 @model ZPool.Pages.Reviews.ReviewsModel
+@inject UserManager<AppUser> UserManager;
 @{
     ViewData["Title"] = "Reviews";
     ViewData["ActivePage"] = ManageNavPages.Reviews;
@@ -60,8 +62,6 @@
                     </div>
                     <input hidden asp-for="NewReview.RevieweeId" value="@Model.Reviewee.Id" />
                     <input hidden asp-for="NewReview.ReviewerId" value="@Model.Reviewer.Id" />
-
-
                 </div>
 
             </div>
@@ -97,6 +97,18 @@
                             <p class="card-text">@Model.Reviews[i].MessageBody</p>
 
                         </div>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="form-group">
+                                <form method="post" class="mx-3">
+                                    @*<input hidden asp-for="ReviewId" value="@Model.Reviews[i].ReviewId"/>*@
+                                    <button type="submit" class="btn btn-outline-danger rounded-border"
+                                            asp-page-handler="Delete" 
+                                            asp-route-reviewId="@Model.Reviews[i].ReviewId"
+                                            asp-route-revieweeId="@Model.Reviews[i].RevieweeId">Delete review</button>
+                                </form>
+                            </div>
+                        }
                     </div>
                 }
             }

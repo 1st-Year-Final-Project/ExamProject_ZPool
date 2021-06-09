@@ -10,6 +10,7 @@ namespace ZPool.Services.Interfaces
     {
         void CreateReview(Review Review);
         List<Review> GetReviewsByUserId(int userId);
+        Task DeleteReviewAsync(int reviewId);
 
     }
 }
