@@ -14,6 +14,14 @@ a {
   color: #0366d6;
 }
 
+.clickable {
+    cursor: pointer; 
+}
+
+.clickable:hover {
+    background-color: #fff387;
+}
+
 .delete-btn {
     background-color: red;
     border: none;
