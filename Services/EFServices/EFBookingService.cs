@@ -15,12 +15,17 @@ namespace ZPool.Services.EFServices
         private AppDbContext _context;
         private IMessageService _messageService;
         private IEmailSender _emailSender;
+        private IRideService _rideService;
 
-        public EFBookingService(AppDbContext context, IMessageService smsService, IEmailSender emailSender)
+        public EFBookingService(AppDbContext context, 
+            IMessageService smsService, 
+            IEmailSender emailSender, 
+            IRideService rideService)
         {
            _context = context;
            _messageService = smsService;
            _emailSender = emailSender;
+           _rideService = rideService;
         }
 
         public void AddBooking(Booking booking)
@@ -120,7 +125,10 @@ namespace ZPool.Services.EFServices
 
         public void UpdateBookingStatus(int bookingId, string newBookingStatus)
         {           
-            Booking oldBooking = _context.Bookings.Find(bookingId);
+            Booking oldBooking = _context.Bookings
+                .Include(b=>b.Ride)
+                .FirstOrDefault(b=>b.BookingID==bookingId);
+            
             if (oldBooking.BookingStatus == "Cancelled" || oldBooking.BookingStatus == "Rejected")
             {
                 throw new ArgumentException("The status of cancelled or rejected bookings cannot be changed.");
@@ -132,6 +140,10 @@ namespace ZPool.Services.EFServices
             else if (newBookingStatus == "Pending")
             {
                 throw new ArgumentException("A booking status cannot be changed to pending.");
+            }
+            else if(newBookingStatus == "Accepted" && _rideService.SeatsLeft(oldBooking.Ride.RideID) <= 0)
+            {
+                throw new ArgumentException("The ride is fully booked.");
             }
             oldBooking.BookingStatus = newBookingStatus;
             _context.SaveChanges();

@@ -20,6 +20,7 @@ namespace ZPool.Services.Interfaces
         //Method for profile page
         IEnumerable<Ride> GetRidesByUser(AppUser user);
         int SeatsLeft(int rideId);
+        IEnumerable<Ride> GetRidesForReview(int revieweeId, int reviewerId);
 
     }
 }

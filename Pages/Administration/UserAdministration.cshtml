@@ -35,14 +35,16 @@
                 <tbody>
                     @foreach (var u in Model.Users)
                     {
-                        <tr>
-                            <td>@u.Id</td>
-                            <td>@u.UserName</td>
-                            <td>@u.FirstName @u.LastName</td>
-                            <td>@u.Email</td>
-                            <td><a asp-page="EditUser" asp-route-userId="@u.Id">Edit</a></td>
-                            <td><a asp-page="DeleteUser" asp-route-userId="@u.Id" class="text-danger">Delete</a></td>
-                        </tr>
+                    <tr>
+                        <td>@u.Id</td>
+                        <td>@u.UserName</td>
+                        <td>@u.FirstName @u.LastName</td>
+                        <td>@u.Email</td>
+                        <td><a asp-area="Identity" 
+                               asp-page="/Account/Manage/ReadOnlyProfilePage" asp-route-id="@u.Id">Profile</a></td>
+                        <td><a asp-page="EditUser" asp-route-userId="@u.Id">Edit</a></td>
+                        <td><a asp-page="DeleteUser" asp-route-userId="@u.Id" class="text-danger">Delete</a></td>
+                    </tr>
                     }
                 </tbody>
 

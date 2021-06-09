@@ -1,5 +1,7 @@
 ﻿@page
+@using ZPool.Services.Interfaces
 @model ZPool.Areas.Identity.Pages.Account.Manage.WhoBookTheRideModel
+@inject IRideService RideService;
 @{
     ViewData["Title"] = "Who Book The Ride";
     ViewData["ActivePage"] = ManageNavPages.MyRides;
@@ -106,10 +108,20 @@
                                 {
                                     <td>
                                         <div class="form group">
-                                            <form asp-page-handler="Accept" method="post">
-                                                <button class="btn btn-success rounded-border">Accept</button>
-                                                <input type="hidden" name="id" value="@booking.BookingID" />
-                                            </form>
+                                            @if (RideService.SeatsLeft(Model.MyRide.RideID)>0)
+                                            {
+                                                <form asp-page-handler="Accept" method="post">
+                                                    <button class="btn btn-success rounded-border">Accept</button>
+                                                    <input type="hidden" name="id" value="@booking.BookingID"/>
+                                                </form>
+                                            }
+                                            else
+                                            {
+                                                <button disabled class="btn rounded-border btn-outline-dark tooltip">
+                                                    Accept
+                                                    <span class="tooltiptext">The ride is fully booked.</span>
+                                                </button>
+                                            }
                                         </div>
                                     </td>
                                     <td>

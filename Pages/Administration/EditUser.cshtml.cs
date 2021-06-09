@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ZPool.Models;
 using VisioForge.Shared.MediaFoundation;
 
@@ -35,8 +36,9 @@ namespace ZPool.Pages.Administration
             public string LastName { get; set; }
             public string UserName { get; set; }
             public string Email { get; set; }
+            public bool EmailConfirmed { get; set; }
         }
-
+        
         public List<IdentityError> ErrorList { get; set; } = new List<IdentityError>();
 
         public string StatusMessage { get; set; }
@@ -50,6 +52,8 @@ namespace ZPool.Pages.Administration
             Input.LastName = user.LastName;
             Input.UserName = user.UserName;
             Input.Email = user.Email;
+            Input.EmailConfirmed = user.EmailConfirmed;
+            
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -61,6 +65,7 @@ namespace ZPool.Pages.Administration
             user.LastName = Input.LastName;
             user.UserName = Input.UserName;
             user.Email = Input.Email;
+            user.EmailConfirmed = Input.EmailConfirmed;
 
             var result = await _userManager.UpdateAsync(user);
 

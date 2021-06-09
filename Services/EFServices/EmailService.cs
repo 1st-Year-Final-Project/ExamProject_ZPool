@@ -44,8 +44,6 @@ namespace ZPool.Services.EFServices
                 client.Send(message);
                 client.Disconnect(true);
             }
-
         }
-
     }
 }

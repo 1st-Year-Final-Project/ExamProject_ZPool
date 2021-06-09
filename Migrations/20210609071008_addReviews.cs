@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ZPool.Migrations
 {
-    public partial class blabla1 : Migration
+    public partial class addReviews : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,6 +15,7 @@ namespace ZPool.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ReviewDate = table.Column<DateTime>(nullable: false),
                     MessageBody = table.Column<string>(maxLength: 240, nullable: false),
+                    RateValue = table.Column<int>(nullable: false),
                     ReviewerId = table.Column<int>(nullable: false),
                     RevieweeId = table.Column<int>(nullable: false),
                     RideId = table.Column<int>(nullable: false)
@@ -39,7 +40,7 @@ namespace ZPool.Migrations
                         column: x => x.RideId,
                         principalTable: "Rides",
                         principalColumn: "RideID",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.UpdateData(
@@ -47,14 +48,14 @@ namespace ZPool.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "e4e60fe4-c2bc-4ac6-b127-1c34de22cf45");
+                value: "94b1072a-6771-4f62-b630-738bdeecb714");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "f2fb9936-ddb4-49ff-811e-4973524fa8cb", "AQAAAAEAACcQAAAAEJ+KE8PO6TTiXpx+pC2xV5v15h7r++IPnUpzPv7y1ezY4queC4PUjqLGIoZOKMExWw==", "3c9f4ef0-1aa5-47cd-ac96-3f7d4df9a976" });
+                values: new object[] { "4835a907-fd63-4009-bec7-dbc98984502a", "AQAAAAEAACcQAAAAEF3cFk0cBn71Ri4FDL6HvXMe/1mr4y20GWFI6A0CuOCRIrGHH1uwH7DKCHzuV7E4TQ==", "88621e62-70e6-455c-a127-d7b6f6d113e7" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_RevieweeId",
@@ -82,14 +83,14 @@ namespace ZPool.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "ConcurrencyStamp",
-                value: "879d5eca-fb01-443b-8caf-c0791bea5332");
+                value: "3f47080f-a4bd-4ec6-bed8-f16c356cf96d");
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: 1,
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "2421cf05-c560-4e1d-bfc2-db7945f66981", "AQAAAAEAACcQAAAAEFv6k9E1gssIkEOrbJnzwTTFoOjYpS60am6264yHK5JGLWZCZ8v/aGBHfAXyBQEPGQ==", "64475210-9ed5-43c4-892d-fa6cc026f191" });
+                values: new object[] { "fa048f6b-9b41-4980-90dc-137568688ee7", "AQAAAAEAACcQAAAAEN0V+GRnasu9OnuRMn6Dq4x9GLkFU3+B6LQ2hQ6KXwJg2MRDPcgyWcTo0jXxW7X9IA==", "df51544c-e17f-4d15-bc19-e1cd97cd3946" });
         }
     }
 }

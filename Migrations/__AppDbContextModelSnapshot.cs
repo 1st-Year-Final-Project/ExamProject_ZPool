@@ -51,7 +51,7 @@ namespace ZPool.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "1fe4e706-ee55-4ffd-a351-707b5d3febda",
+                            ConcurrencyStamp = "94b1072a-6771-4f62-b630-738bdeecb714",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -253,7 +253,7 @@ namespace ZPool.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "323360a3-4557-4705-b650-48afa0fd885b",
+                            ConcurrencyStamp = "4835a907-fd63-4009-bec7-dbc98984502a",
                             Email = "admin@zealand.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -261,9 +261,9 @@ namespace ZPool.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ZEALAND.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK+uStLPZQaEU8DaJUy6u3eh6IozDTaX9Dj8ctV2GfpfgFydXzXWOOr5zN3XUJNFiw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF3cFk0cBn71Ri4FDL6HvXMe/1mr4y20GWFI6A0CuOCRIrGHH1uwH7DKCHzuV7E4TQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ce386e78-9cff-471b-baf6-233252a4afe4",
+                            SecurityStamp = "88621e62-70e6-455c-a127-d7b6f6d113e7",
                             TwoFactorEnabled = false,
                             UserName = "Default Admin"
                         });

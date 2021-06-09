@@ -10,7 +10,7 @@
     <div class="col-md-4">
         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
         {
-            <p class="text-danger">@Model.ErrorMessage"</p>
+            <p class="text-danger">@Model.ErrorMessage</p>
         }
 
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
@@ -43,12 +43,12 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
 
-            <div class="form-check">
+            @*<div class="form-check">
                 <input type="checkbox" asp-for="Input.HasCar" class="form-check-input rounded-border">
                 <label class="form-check-label" asp-for="Input.HasCar">
                     I want to register a car
                 </label>
-            </div>
+            </div>*@
 
             <br />
             <button type="submit" class="btn btn-success rounded-border">Register</button>
@@ -60,9 +60,9 @@
             <hr />
             <div>
                 <p>
-                    Fill in the empty fields. You can decide whether you want to register a car during the user registraion process by ticking the "I want to register a car" field. 
-                    If you decide to do so, you will be redirected to the car registration form after confirming the information in the user registration form.
-                    If you do not wish to register a car, do not tick the "I want to register a car" field, and you will be redirected to the main page after confirming the information in the user registration form. 
+                    Fill in the empty fields. You can decide whether you want to register a car after the user registration process.
+                    When you follow  the link in the confirmation email, you will be redirected to a welcome page, where you can choose to automatically proceed to the car registration form after logging in.
+                    If you do not wish to register a car, you can simply log in and land on ZPool's main page. 
                     To find out more about why you should register your car, check out the car section of our <a href="https://localhost:44342/FAQ">FAQ</a>.
                 </p>
             </div>
