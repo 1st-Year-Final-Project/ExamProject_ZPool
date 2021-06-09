@@ -3,6 +3,7 @@
 @using ZPool.Services.Interfaces
 @model ZPool.Pages.Rides.RideModel
 @inject IRideService RideService;
+@inject SignInManager<AppUser> SignInManager;
 @{
     ViewData["Title"] = "RideDetails";
 }
@@ -81,7 +82,21 @@
         </div>
         <div class="col col-md-8">
             <ul class="list-unstyled">
-                <li><h4>@Model.Ride.Car.AppUser.UserName</h4></li>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li><h4>
+                        <a asp-area="Identity" 
+                           asp-page="/Account/Manage/ReadOnlyProfilePage" 
+                           asp-route-id="@Model.Ride.Car.AppUser.Id"
+                           style="text-decoration: none">
+                            @Model.Ride.Car.AppUser.UserName
+                        </a>
+                    </h4></li>
+                }
+                else
+                {
+                    <li><h4>@Model.Ride.Car.AppUser.UserName</h4></li>
+                }
                 <li>Car: @Model.Ride.Car</li>
 
                 @if (Model.CurrentUser != null && Model.CurrentUser.Id != Model.Ride.Car.AppUserID)
@@ -104,14 +119,15 @@
             </ul>
         </div>
     </div>
-    
-    @if (Model.CurrentUser != null)
-    {
-        @if (Model.Ride.Car.AppUserID == Model.CurrentUser.Id)
-        {
-            <div class="row pt-5">
-                <div class="col d-flex justify-content-center">
-                    <ul class="list-inline">
+    <div class="row pt-5">
+        <div class="col d-flex justify-content-center">
+            <ul class="list-inline">
+
+                @if (Model.CurrentUser != null)
+                {
+                    @if (Model.Ride.Car.AppUserID == Model.CurrentUser.Id)
+                    {
+
                         <li class="list-inline-item">
                             <a class="btn btn-outline-primary rounded-border" asp-page="EditRide" asp-route-id="@Model.RideId">Edit ride</a>
                         </li>
@@ -133,14 +149,14 @@
                                             </button>
                                         </div>
                                         <div class="modal-body font-weight-bold">
-                                            On: @Model.Ride.StartTime.Date.ToString("dd.MM.yyyy")<br/>
-                                            From: @Model.Ride.DepartureLocation<br/>
-                                            To: @Model.Ride.DestinationLocation<br/>
+                                            On: @Model.Ride.StartTime.Date.ToString("dd.MM.yyyy")<br />
+                                            From: @Model.Ride.DepartureLocation<br />
+                                            To: @Model.Ride.DestinationLocation<br />
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <form method="post">
-                                                <input hidden asp-for="RideId"/>
+                                                <input hidden asp-for="RideId" />
                                                 <button type="submit" class="btn btn-danger" asp-page-handler="DeleteRide">Delete ride</button>
                                             </form>
                                         </div>
@@ -148,10 +164,15 @@
                                 </div>
                             </div>
                         </li>
-                    </ul>
-                </div>
-            </div>
-        }
-    }
-    
+
+                    }
+                }
+               
+                    <li class="list-inline-item">
+                        <a class="btn btn-outline-primary rounded-border mbl-4" asp-page="GetRides">Back to list of Rides</a>
+                    </li>
+                </ul>
+
+</div>
+    </div>
 </div>

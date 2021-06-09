@@ -1,5 +1,7 @@
 ﻿@page
+@using ZPool.Services.Interfaces
 @model ZPool.Areas.Identity.Pages.Account.Manage.WhoBookTheRideModel
+@inject IRideService RideService;
 @{
     ViewData["Title"] = "Who Book The Ride";
     ViewData["ActivePage"] = ManageNavPages.MyRides;
@@ -24,25 +26,28 @@
     <hr /><br />
 
     <h4>Bookings from:</h4>
-    </br>
-    <div>
-        @{ foreach (var booking in Model.BookingsOfOneRide)
-            {
-                if (booking != null)
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width:120px">First Name</th>
+                <th style="width:120px">Last Name</th>
+                <th style="width:120px">Gender</th>
+                <th style="width:120px">Profile</th>
+                <th style="width:120px">Status</th>
+                <th style="width:120px"></th>
+                <th style="width:120px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @*</br>*@
+            @*<div>*@
+            @{ foreach (var booking in Model.BookingsOfOneRide)
                 {
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th style="width:120px">First Name</th>
-                                <th style="width:120px">Last Name</th>
-                                <th style="width:120px">Gender</th>
-                                <th style="width:120px">Profile</th>
-                                <th style="width:120px">Status</th>
-                                <th style="width:120px"></th>
-                                <th style="width:120px"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    if (booking != null)
+                    {
+                        if (booking.AppUser != null)
+                        {
+
                             <tr>
                                 <td>@booking.AppUser.FirstName</td>
                                 <td>@booking.AppUser.LastName</td>
@@ -75,7 +80,7 @@
                                                 if (imageFlag.Equals("N4.jpg"))
                                                 {
                                                     <img src="~/images/N4.jpg" id="photo" height="50" width="50" title="click me">
-                                                }          
+                                                }
 
                                                 if (imageFlag.Equals("N5.jpg"))
                                                 {
@@ -103,10 +108,20 @@
                                 {
                                     <td>
                                         <div class="form group">
-                                            <form asp-page-handler="Accept" method="post">
-                                                <button class="btn btn-success rounded-border">Accept</button>
-                                                <input type="hidden" name="id" value="@booking.BookingID" />
-                                            </form>
+                                            @if (RideService.SeatsLeft(Model.MyRide.RideID)>0)
+                                            {
+                                                <form asp-page-handler="Accept" method="post">
+                                                    <button class="btn btn-success rounded-border">Accept</button>
+                                                    <input type="hidden" name="id" value="@booking.BookingID"/>
+                                                </form>
+                                            }
+                                            else
+                                            {
+                                                <button disabled class="btn rounded-border btn-outline-dark tooltip">
+                                                    Accept
+                                                    <span class="tooltiptext">The ride is fully booked.</span>
+                                                </button>
+                                            }
                                         </div>
                                     </td>
                                     <td>
@@ -118,12 +133,17 @@
                                         </div>
                                     </td>
                                 }
-                            <tr />
-                    </table>
+
+                            </tr>
+                        }
+                    }
                 }
+
             }
-        }
-    </div>
+    </table>
+
+</div>
+<div>
     <br /><hr />
     <input type="hidden" asp-for="MyRide.RideID" />
     <a asp-page="./MyRides">Back to My Rides</a>

@@ -51,7 +51,7 @@ namespace ZPool.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "3f47080f-a4bd-4ec6-bed8-f16c356cf96d",
+                            ConcurrencyStamp = "94b1072a-6771-4f62-b630-738bdeecb714",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -253,7 +253,7 @@ namespace ZPool.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fa048f6b-9b41-4980-90dc-137568688ee7",
+                            ConcurrencyStamp = "4835a907-fd63-4009-bec7-dbc98984502a",
                             Email = "admin@zealand.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -261,9 +261,9 @@ namespace ZPool.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ZEALAND.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN0V+GRnasu9OnuRMn6Dq4x9GLkFU3+B6LQ2hQ6KXwJg2MRDPcgyWcTo0jXxW7X9IA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF3cFk0cBn71Ri4FDL6HvXMe/1mr4y20GWFI6A0CuOCRIrGHH1uwH7DKCHzuV7E4TQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "df51544c-e17f-4d15-bc19-e1cd97cd3946",
+                            SecurityStamp = "88621e62-70e6-455c-a127-d7b6f6d113e7",
                             TwoFactorEnabled = false,
                             UserName = "Default Admin"
                         });
@@ -371,6 +371,44 @@ namespace ZPool.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("ZPool.Models.Review", b =>
+                {
+                    b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("MessageBody")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(240)")
+                        .HasMaxLength(240);
+
+                    b.Property<int>("RateValue")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RevieweeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReviewerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RideId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReviewId");
+
+                    b.HasIndex("RevieweeId");
+
+                    b.HasIndex("ReviewerId");
+
+                    b.HasIndex("RideId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("ZPool.Models.Ride", b =>
@@ -491,6 +529,27 @@ namespace ZPool.Migrations
                     b.HasOne("ZPool.Models.AppUser", "Sender")
                         .WithMany()
                         .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ZPool.Models.Review", b =>
+                {
+                    b.HasOne("ZPool.Models.AppUser", "Reviewee")
+                        .WithMany()
+                        .HasForeignKey("RevieweeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZPool.Models.AppUser", "Reviewer")
+                        .WithMany()
+                        .HasForeignKey("ReviewerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ZPool.Models.Ride", "Ride")
+                        .WithMany()
+                        .HasForeignKey("RideId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

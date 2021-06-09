@@ -110,5 +110,22 @@ namespace ZPool.Services.EFServices.RideService
             int seatsLeft = _context.Rides.Find(rideId).SeatsAvailable - acceptedBookings;
             return seatsLeft;
         }
+
+        public IEnumerable<Ride> GetRidesForReview(int revieweeId, int reviewerId)
+        {
+            return _context.Rides.Include(r => r.Car)
+                .Where(r => r.Car.AppUserID == revieweeId)
+                .Include(r => r.Bookings).AsEnumerable().Where(r=> CheckBookingsForReview(r, reviewerId))
+                .Where(r => r.StartTime < DateTime.Now);
+        }
+
+        private bool CheckBookingsForReview(Ride r, int id)
+        {
+            foreach (var booking in r.Bookings.AsEnumerable())
+            {
+                if (booking.AppUserID == id && booking.BookingStatus == "Accepted") return true;
+            }
+            return false;
+        }
     }
 }

@@ -76,7 +76,7 @@
                 if (item.StartTime > DateTime.Now)
                 {
 
-                    <tr>
+                    <tr class="clickable" onclick="redirect(@item.RideID)" >
                         <td> @item.StartTime </td>
                         <td> @item.DepartureLocation </td>
                         <td> @item.DestinationLocation </td>
@@ -115,6 +115,7 @@ else
         <h5>@Model.ScreenMessage</h5>
     </div>
 }
+
 
 
 

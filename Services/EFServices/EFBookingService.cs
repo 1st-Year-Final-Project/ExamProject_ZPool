@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using ZPool.Models;
 using ZPool.Services.Interfaces;
 
@@ -12,11 +14,18 @@ namespace ZPool.Services.EFServices
     {
         private AppDbContext _context;
         private IMessageService _messageService;
+        private IEmailSender _emailSender;
+        private IRideService _rideService;
 
-        public EFBookingService(AppDbContext context, IMessageService smsService)
+        public EFBookingService(AppDbContext context, 
+            IMessageService smsService, 
+            IEmailSender emailSender, 
+            IRideService rideService)
         {
            _context = context;
            _messageService = smsService;
+           _emailSender = emailSender;
+           _rideService = rideService;
         }
 
         public void AddBooking(Booking booking)
@@ -26,6 +35,7 @@ namespace ZPool.Services.EFServices
                 _context.Bookings.Add(booking);
                 _context.SaveChanges();
                 SendMessageToDriver(booking);
+                SendEmailToDriver(booking);
             }
         }
 
@@ -49,6 +59,12 @@ namespace ZPool.Services.EFServices
                 $"You have a new booking request from {booking.AppUser.UserName}. You can contact the passenger by using the Reply function."
             };
             _messageService.CreateMessage(message);
+        }
+
+        private void SendEmailToDriver(Booking booking)
+        {
+            string message = $"Dear {booking.Ride.Car.AppUser.FirstName}, \n\n You have a new booking by {booking.AppUser.UserName} for the ride \n on {booking.Ride.StartTime} \n from {booking.Ride.DepartureLocation} \n to {booking.Ride.DestinationLocation}. \n\n Best regards \n Your Zpool-Team";
+            _emailSender.SendEmailAsync(booking.Ride.Car.AppUser.Email, "New booking", message);
         }
 
         public void DeleteBooking(Booking booking)
@@ -109,7 +125,10 @@ namespace ZPool.Services.EFServices
 
         public void UpdateBookingStatus(int bookingId, string newBookingStatus)
         {           
-            Booking oldBooking = _context.Bookings.Find(bookingId);
+            Booking oldBooking = _context.Bookings
+                .Include(b=>b.Ride)
+                .FirstOrDefault(b=>b.BookingID==bookingId);
+            
             if (oldBooking.BookingStatus == "Cancelled" || oldBooking.BookingStatus == "Rejected")
             {
                 throw new ArgumentException("The status of cancelled or rejected bookings cannot be changed.");
@@ -121,6 +140,10 @@ namespace ZPool.Services.EFServices
             else if (newBookingStatus == "Pending")
             {
                 throw new ArgumentException("A booking status cannot be changed to pending.");
+            }
+            else if(newBookingStatus == "Accepted" && _rideService.SeatsLeft(oldBooking.Ride.RideID) <= 0)
+            {
+                throw new ArgumentException("The ride is fully booked.");
             }
             oldBooking.BookingStatus = newBookingStatus;
             _context.SaveChanges();
