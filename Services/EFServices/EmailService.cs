@@ -38,7 +38,7 @@ namespace ZPool.Services.EFServices
                 }
 
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
-                // Note: only needed if the SMTP server requires authentication
+                // SMTP authentication
                 client.Authenticate("zpooladm@outlook.com", "SuperSecret1!");
 
                 client.Send(message);
