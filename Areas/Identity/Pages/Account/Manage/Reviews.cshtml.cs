@@ -46,15 +46,20 @@ namespace ZPool.Pages.Reviews
         {
             Reviewer = await _userManager.GetUserAsync(User);
             Reviewee = await _userManager.FindByIdAsync(id.ToString());
+
+            if (Reviewee == null)
+            {
+                Reviewee = await _userManager.GetUserAsync(User);
+            }
+
             if (Reviewer == null)
             {
                 return RedirectToPage("/Account/Login",
                     new { area = "Identity", returnUrl = "/Account/Manage/Reviews" });
             }
-            providedRides = new SelectList(_rideService.GetRidesByUser(Reviewee), "RideID", "StartTime");
+            providedRides = new SelectList(_rideService.GetRidesForReview(Reviewee.Id, Reviewer.Id), "RideID", "StartTime");
             
             Reviews = _reviewService.GetReviewsByUserId(Reviewee.Id);
-            //Rides = _rideService.GetRidesByUser(Reviewee);
             ListLength = 5;
             return Page();
         }
@@ -78,7 +83,7 @@ namespace ZPool.Pages.Reviews
             Reviewer = await _userManager.GetUserAsync(User);
             Reviews = _reviewService.GetReviewsByUserId(Reviewee.Id);
             ListLength += 5;
-            providedRides = new SelectList(_rideService.GetRidesByUser(Reviewee), "RideID", "StartTime");
+            providedRides = new SelectList(_rideService.GetRidesForReview(Reviewee.Id, Reviewer.Id), "RideID", "StartTime");
 
             return Page();
         }

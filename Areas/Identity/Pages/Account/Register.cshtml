@@ -10,7 +10,7 @@
     <div class="col-md-4">
         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
         {
-            <p class="text-danger">@Model.ErrorMessage"</p>
+            <p class="text-danger">@Model.ErrorMessage</p>
         }
 
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">

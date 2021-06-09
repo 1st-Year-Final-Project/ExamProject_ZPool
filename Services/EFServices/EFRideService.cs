@@ -12,10 +12,12 @@ namespace ZPool.Services.EFServices.RideService
     public class EFRideService : IRideService
     {
         AppDbContext _context;
+        private IBookingService _bookingService;
         
-        public EFRideService(AppDbContext context)
+        public EFRideService(AppDbContext context, IBookingService bookingService)
         {
             _context = context;
+            _bookingService = bookingService;
         }
 
         public void AddRide(Ride ride)
@@ -110,5 +112,25 @@ namespace ZPool.Services.EFServices.RideService
             int seatsLeft = _context.Rides.Find(rideId).SeatsAvailable - acceptedBookings;
             return seatsLeft;
         }
+
+        public IEnumerable<Ride> GetRidesForReview(int revieweeId, int reviewerId)
+        {
+            var result = _context.Rides.Include(r => r.Car)
+                .Where(r => r.Car.AppUserID == revieweeId)
+                .Include(r => r.Bookings).AsEnumerable().Where(r=>GetBookingsForRide(r, reviewerId))
+                .Where(r => r.StartTime < DateTime.Now);
+            return result;
+        }
+
+        private bool GetBookingsForRide(Ride r, int id)
+        {
+            foreach (var booking in r.Bookings.AsEnumerable())
+            {
+                if (booking.AppUserID == id && booking.BookingStatus == "Accepted") return true;
+            }
+            return false;
+        }
+
+
     }
 }

@@ -10,8 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210607101051_blabla1")]
-    partial class blabla1
+    [Migration("20210609071008_addReviews")]
+    partial class addReviews
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,7 +53,7 @@ namespace ZPool.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "e4e60fe4-c2bc-4ac6-b127-1c34de22cf45",
+                            ConcurrencyStamp = "94b1072a-6771-4f62-b630-738bdeecb714",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -255,7 +255,7 @@ namespace ZPool.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f2fb9936-ddb4-49ff-811e-4973524fa8cb",
+                            ConcurrencyStamp = "4835a907-fd63-4009-bec7-dbc98984502a",
                             Email = "admin@zealand.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -263,9 +263,9 @@ namespace ZPool.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ZEALAND.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJ+KE8PO6TTiXpx+pC2xV5v15h7r++IPnUpzPv7y1ezY4queC4PUjqLGIoZOKMExWw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF3cFk0cBn71Ri4FDL6HvXMe/1mr4y20GWFI6A0CuOCRIrGHH1uwH7DKCHzuV7E4TQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3c9f4ef0-1aa5-47cd-ac96-3f7d4df9a976",
+                            SecurityStamp = "88621e62-70e6-455c-a127-d7b6f6d113e7",
                             TwoFactorEnabled = false,
                             UserName = "Default Admin"
                         });
@@ -386,6 +386,9 @@ namespace ZPool.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(240)")
                         .HasMaxLength(240);
+
+                    b.Property<int>("RateValue")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("ReviewDate")
                         .HasColumnType("datetime2");
