@@ -12,12 +12,10 @@ namespace ZPool.Services.EFServices.RideService
     public class EFRideService : IRideService
     {
         AppDbContext _context;
-        private IBookingService _bookingService;
         
-        public EFRideService(AppDbContext context, IBookingService bookingService)
+        public EFRideService(AppDbContext context)
         {
             _context = context;
-            _bookingService = bookingService;
         }
 
         public void AddRide(Ride ride)
@@ -129,7 +127,5 @@ namespace ZPool.Services.EFServices.RideService
             }
             return false;
         }
-
-
     }
 }
