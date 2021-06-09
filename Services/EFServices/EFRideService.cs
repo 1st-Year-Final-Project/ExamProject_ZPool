@@ -115,11 +115,10 @@ namespace ZPool.Services.EFServices.RideService
 
         public IEnumerable<Ride> GetRidesForReview(int revieweeId, int reviewerId)
         {
-            var result = _context.Rides.Include(r => r.Car)
+            return _context.Rides.Include(r => r.Car)
                 .Where(r => r.Car.AppUserID == revieweeId)
                 .Include(r => r.Bookings).AsEnumerable().Where(r=> CheckBookingsForReview(r, reviewerId))
                 .Where(r => r.StartTime < DateTime.Now);
-            return result;
         }
 
         private bool CheckBookingsForReview(Ride r, int id)
