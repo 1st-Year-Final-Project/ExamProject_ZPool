@@ -41,7 +41,8 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
 
         private async Task LoadAsync(AppUser user)
         {
-            UserToCheck = await _userManager.GetUserAsync(User);
+            //UserToCheck = await _userManager.GetUserAsync(User);
+            UserToCheck = user;
 
             UserName = user.UserName;
             FirstName = user.FirstName;

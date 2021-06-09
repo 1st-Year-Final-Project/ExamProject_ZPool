@@ -37,11 +37,17 @@ namespace ZPool
             services.AddTransient<ICarService, EFCarService>();
             services.AddTransient<IBookingService, EFBookingService>();
             services.AddTransient<IMessageService, EFMessageService>();
+
+            services.AddTransient<IReviewService, EFReviewService>();
+
+
             services.AddTransient<IEmailSender, EmailService>();
+
 
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("LocalConnection")));
+
 
             services.AddIdentity<AppUser, IdentityRole<int>>(options =>
             {

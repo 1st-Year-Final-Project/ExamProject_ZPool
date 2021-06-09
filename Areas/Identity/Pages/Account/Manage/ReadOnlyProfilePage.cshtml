@@ -79,6 +79,13 @@
                 <textarea asp-for="@Model.Introduction" class="form-control" cols="50" rows="10" disabled></textarea>
 
             </div>
+
+
+           
+            <a class="btn btn-outline-primary rounded-border" asp-area="Identity" asp-route-id="@Model.UserToCheck.Id" asp-page="/Account/Manage/Reviews">Reviews</a>
+
+
+
         </form>
     </div>
 </div>

@@ -18,6 +18,7 @@ namespace ZPool.Models
         public DbSet<Booking> Bookings { get; set; }
 
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Review> Reviews { get; set; }
         
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
