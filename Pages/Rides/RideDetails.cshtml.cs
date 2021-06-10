@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -39,6 +40,7 @@ namespace ZPool.Pages.Rides
         public Message Message { get; set; }
         public int SeatsLeft { get; set; }
         public bool AlreadyBooked { get; set; }
+        public CultureInfo culture { get; set; }
         public double UserRating { get; set; }
 
         public async Task OnGetAsync(int id)
@@ -46,6 +48,7 @@ namespace ZPool.Pages.Rides
             CurrentUser = await _userManager.GetUserAsync(User);
             Ride = _rideService.GetRide(id);
             RideId = id;
+            culture = new CultureInfo("en-US");
             UserRating = _reviewService.GetRatingForUser(Ride.Car.AppUserID);
 
             if (CurrentUser != null)

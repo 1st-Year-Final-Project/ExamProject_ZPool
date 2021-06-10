@@ -7,3 +7,5 @@ function redirect(id) {
   window.location = `/Rides/RideDetails/${id}`;
 }
 
+
+
