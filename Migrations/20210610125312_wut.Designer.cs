@@ -10,8 +10,8 @@ using ZPool.Models;
 namespace ZPool.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210609071008_addReviews")]
-    partial class addReviews
+    [Migration("20210610125312_wut")]
+    partial class wut
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,7 +53,7 @@ namespace ZPool.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "94b1072a-6771-4f62-b630-738bdeecb714",
+                            ConcurrencyStamp = "2dfa2d17-9500-4ba6-b017-0d9d9fbbef12",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -255,7 +255,7 @@ namespace ZPool.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4835a907-fd63-4009-bec7-dbc98984502a",
+                            ConcurrencyStamp = "2782c9cb-c0a4-43c8-a1cd-3a70e1aee57d",
                             Email = "admin@zealand.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -263,9 +263,9 @@ namespace ZPool.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ZEALAND.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF3cFk0cBn71Ri4FDL6HvXMe/1mr4y20GWFI6A0CuOCRIrGHH1uwH7DKCHzuV7E4TQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGw+Cbn7noTwJqbBHaAEuDpGl6ZIjRVNXjbI62rMXC/OHz8034uzd0SWeAWM0zBq6g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "88621e62-70e6-455c-a127-d7b6f6d113e7",
+                            SecurityStamp = "1a4f0bc5-c001-4164-a95f-4d62ac7d0a2a",
                             TwoFactorEnabled = false,
                             UserName = "Default Admin"
                         });

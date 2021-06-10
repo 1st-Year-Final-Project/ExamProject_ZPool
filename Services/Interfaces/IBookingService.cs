@@ -24,5 +24,6 @@ namespace ZPool.Services.Interfaces
         void UpdateBookingStatus(int id, string bookingStatus);
         IEnumerable<Booking> GetBookingsByStatus(string statusFilter, AppUser user);
         IEnumerable<Booking> GetBookingsByStatusForDrivers(string statusFilter, AppUser user);
+      
     }
 }

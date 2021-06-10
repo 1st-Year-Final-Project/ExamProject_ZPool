@@ -30,6 +30,15 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         {
             AppUser user = await Manager.GetUserAsync(User);
             MyBookings = BookingService.GetBookingsByUser(user).OrderByDescending(b=>b.Date);
+          
+            foreach (var booking in MyBookings)
+            {
+                if (booking.Ride.StartTime < DateTime.Now)
+                {
+                    BookingService.UpdateBookingStatus(booking.BookingID, "Passed");
+                }
+
+            }
         }
 
         public async Task OnPostCancel(int id)
