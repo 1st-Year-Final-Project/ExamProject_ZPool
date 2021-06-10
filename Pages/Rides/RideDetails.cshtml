@@ -30,7 +30,8 @@
                         @if (Model.CurrentUser == null)
                         {
                             <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Rides/RideDetails/@Model.Ride.RideID">
-                                You must be logged in to book a ride.
+                                You must be logged in <br />
+                                to book a ride.
                             </a>
                         }
                         else if (Model.CurrentUser != null && Model.CurrentUser.Id == Model.Ride.Car.AppUserID)
