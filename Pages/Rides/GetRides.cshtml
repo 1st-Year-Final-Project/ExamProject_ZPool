@@ -73,7 +73,7 @@
 
             @foreach (var item in Model.Rides)
             {
-                if (item.StartTime > DateTime.Now)
+                if (item.StartTime > DateTime.Now && RideService.SeatsLeft(item.RideID) > 0)
                 {
 
                     <tr class="clickable" onclick="redirect(@item.RideID)" >
