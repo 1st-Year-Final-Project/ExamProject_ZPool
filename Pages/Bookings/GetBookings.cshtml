@@ -10,17 +10,14 @@
 
 
 <h1 style="color:black"> Bookings of your Rides</h1>
-  
 <br/>
-
-
-
+<a asp-page="/Rides/CreateRide" class="btn btn-outline-success rounded-border">Add New Ride</a>
 <br/>
-<form asp-page-handler="StatusFilter" method="post">
+<form asp-page-handler="StatusFilter" method="post" class="my-3">
     <p>
         Search Booking Status: <input type="text" asp-for="StatusCriteria" class="form-control rounded-border" style="max-width: 13rem" />
-        <input type="submit" value="Filter" class="btn btn-success rounded-border mt-1" />
-        <a asp-page="./GetBookings" class="mt-5">Back to Full List </a>
+        <input type="submit" value="Filter" class="btn btn-success rounded-border my-3" />
+        <a asp-page="./GetBookings" class="btn text-primary">Back to Full List </a>
     </p>
 </form>
 
