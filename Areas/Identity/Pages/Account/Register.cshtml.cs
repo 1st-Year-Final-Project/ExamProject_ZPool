@@ -72,7 +72,7 @@ namespace ZPool.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            public bool HasCar { get; set; }
+            //public bool HasCar { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -135,11 +135,11 @@ namespace ZPool.Areas.Identity.Pages.Account
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
-                    else if(Input.HasCar)
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect("/Identity/Account/Manage/CreateCar");
-                    }
+                    //else if(Input.HasCar)
+                    //{
+                    //    await _signInManager.SignInAsync(user, isPersistent: false);
+                    //    return LocalRedirect("/Identity/Account/Manage/CreateCar");
+                    //}
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);

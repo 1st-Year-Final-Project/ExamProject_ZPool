@@ -43,7 +43,7 @@ namespace ZPool.Models
             var hasher = new PasswordHasher<AppUser>();
 
             //Seeding the User to AspNetUsers table
-            builder.Entity<AppUser>()
+            //builder.Entity<AppUser>()
                 .HasData(new AppUser
                 {
                     Id = 1,

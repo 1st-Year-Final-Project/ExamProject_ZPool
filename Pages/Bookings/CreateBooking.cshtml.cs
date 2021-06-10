@@ -12,8 +12,7 @@ namespace ZPool.Pages.Bookings
 {
     public class CreateModel : PageModel
     {
-        
-
+       
         [BindProperty]
         public Booking Booking { get; set; }
         IBookingService bookingservice;
@@ -27,9 +26,6 @@ namespace ZPool.Pages.Bookings
             return Page();
          }
 
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
         public IActionResult OnPostAsync(Booking booking)
         {
             if (!ModelState.IsValid)

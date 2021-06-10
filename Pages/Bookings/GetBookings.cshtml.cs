@@ -42,7 +42,6 @@ namespace ZPool.Pages.Bookings
         public async Task OnPostAccept(int id)
         {
             LoggedInUser = await userManager.GetUserAsync(User);
-            //Bookings = bookingService.GetBookingsByDriversID(LoggedInUser);
             try
             {
                 bookingService.UpdateBookingStatus(id, "Accepted");
@@ -51,7 +50,6 @@ namespace ZPool.Pages.Bookings
             {
                 Message = ex.Message;
             }
-            /* RedirectToPage("GetBookings")*/
             Bookings = bookingService.GetBookingsByDriversID(LoggedInUser);
         }
 
@@ -68,7 +66,6 @@ namespace ZPool.Pages.Bookings
             {
                 Message = ex.Message;
             }
-            //RedirectToPage("GetBookings");
         }
 
         public async Task OnPostCancel(int id)
@@ -83,8 +80,7 @@ namespace ZPool.Pages.Bookings
             catch (Exception ex)
             {
                 Message = ex.Message;
-            }
-            //RedirectToPage("GetBookings");
+            }   
         }
 
         public async Task OnPostStatusFilter(string status)
@@ -94,8 +90,6 @@ namespace ZPool.Pages.Bookings
                 AppUser user = await userManager.GetUserAsync(User);
                 Bookings = bookingService.GetBookingsByStatusForDrivers(StatusCriteria, user);
             }
-
-            //RedirectToPage("Bookings");
             RedirectToPage("BookingDetails");
         }
     }
