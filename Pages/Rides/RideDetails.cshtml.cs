@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -31,21 +32,19 @@ namespace ZPool.Pages.Rides
         }
         
         public Ride Ride { get; set; }
-
         public int RideId { get; set; }
-
         public AppUser CurrentUser { get; set; }
-
         public Message Message { get; set; }
-
         public int SeatsLeft { get; set; }
-
         public bool AlreadyBooked { get; set; }
+        public CultureInfo culture { get; set; }
+
         public async Task OnGetAsync(int id)
         {
             CurrentUser = await _userManager.GetUserAsync(User);
             Ride = _rideService.GetRide(id);
             RideId = id;
+            culture = new CultureInfo("en-US");
 
             if (CurrentUser != null)
             {
