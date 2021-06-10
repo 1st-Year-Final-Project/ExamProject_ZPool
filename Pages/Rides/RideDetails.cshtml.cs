@@ -18,34 +18,35 @@ namespace ZPool.Pages.Rides
         private UserManager<AppUser> _userManager;
         private IBookingService _bookingService;
         private IMessageService _messageService;
+        private IReviewService _reviewService;
 
         public RideModel(IRideService rideService, 
             UserManager<AppUser> userServise, 
             IBookingService bookingService, 
-            IMessageService messageService)
+            IMessageService messageService,
+            IReviewService reviewService)
         {
             _rideService = rideService;
             _userManager = userServise;
             _bookingService = bookingService;
             _messageService = messageService;
+            _reviewService = reviewService;
         }
         
         public Ride Ride { get; set; }
-
         public int RideId { get; set; }
-
         public AppUser CurrentUser { get; set; }
-
         public Message Message { get; set; }
-
         public int SeatsLeft { get; set; }
-
         public bool AlreadyBooked { get; set; }
+        public double UserRating { get; set; }
+
         public async Task OnGetAsync(int id)
         {
             CurrentUser = await _userManager.GetUserAsync(User);
             Ride = _rideService.GetRide(id);
             RideId = id;
+            UserRating = _reviewService.GetRatingForUser(Ride.Car.AppUserID);
 
             if (CurrentUser != null)
             {
