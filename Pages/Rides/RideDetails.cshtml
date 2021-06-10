@@ -30,8 +30,7 @@
                         @if (Model.CurrentUser == null)
                         {
                             <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Rides/RideDetails/@Model.Ride.RideID">
-                                You must be logged in <br />
-                                to book a ride.
+                                You must be logged in<br/> to book a ride.
                             </a>
                         }
                         else if (Model.CurrentUser != null && Model.CurrentUser.Id == Model.Ride.Car.AppUserID)
@@ -69,10 +68,8 @@
     </div>
     
     <!-- map container -->
- 
-        <div class="mt-4 rounded-border" id="map" style="height: 400px; width: 100%"></div>
+    <div class="mt-4 rounded-border" id="map" style="height: 400px; width: 100%"></div>
    
-
     <div class="row mt-4">
         <div class="col col-md-4">
             <div style="max-width: 15rem; max-height: 15rem">
