@@ -37,7 +37,7 @@ namespace ZPool.Pages.Rides
             }
             else
             {
-                Rides = rideService.GetAllRides();
+                Rides = rideService.GetAllRides().OrderBy(r=>r.StartTime);
                 RideCriteria.StartTime = DateTime.Now;
             }
         }
