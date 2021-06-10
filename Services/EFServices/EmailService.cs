@@ -7,6 +7,7 @@ using MailKit.Security;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MimeKit;
+using MimeKit.Text;
 using ZPool.Services.Interfaces;
 
 namespace ZPool.Services.EFServices
@@ -20,7 +21,7 @@ namespace ZPool.Services.EFServices
             message.To.Add(new MailboxAddress("", $"{email}"));
             message.Subject = $"{subject}";
 
-            message.Body = new TextPart("plain")
+            message.Body = new TextPart(TextFormat.Html)
             {
                 Text = $"{htmlMessage}"
             };
@@ -30,7 +31,7 @@ namespace ZPool.Services.EFServices
                 client.Timeout = 5000;
                 try
                 {
-                    client.Connect("smtp-mail.outlook.com", 25, false);
+                    client.Connect("smtp-mail.outlook.com", 587, SecureSocketOptions.StartTls);
                 }
                 catch (Exception ex)
                 {
