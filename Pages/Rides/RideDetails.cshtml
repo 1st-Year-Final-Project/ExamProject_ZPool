@@ -100,6 +100,39 @@
                 {
                     <li><h4>@Model.Ride.Car.AppUser.UserName</h4></li>
                 }
+
+                <!-- Rating line -->
+                <li>
+                    @{
+                        int filled = Convert.ToInt32(Math.Round(Model.UserRating, 0, MidpointRounding.AwayFromZero));
+                        int empty = 5 - filled;
+
+                        if (filled > 0)
+                        {
+                            for (int i = 1; i <= filled; i++)
+                            {
+                                <span class="fa fa-star checked"></span>
+                            }
+                            if (empty > 0)
+                            {
+                                for (int i = 1; i <= empty; i++)
+                                {
+                                    <span class="fa fa-star unchecked"></span>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 1; i <= 5; i++)
+                            {
+                                <span class="fa fa-star unchecked"></span>
+                            }
+                        }
+                        <span>(@Model.UserRating)</span>
+                    }
+
+                </li>
+
                 <li>Car: @Model.Ride.Car</li>
 
                 @if (Model.CurrentUser != null && Model.CurrentUser.Id != Model.Ride.Car.AppUserID)

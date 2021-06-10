@@ -22,6 +22,15 @@ a {
     background-color: #fff387;
 }
 
+/* Colors for rating stars */
+.unchecked {
+    color: lightgrey;
+}
+
+.checked {
+    color: #fff387;
+}
+
 .delete-btn {
     background-color: red;
     border: none;

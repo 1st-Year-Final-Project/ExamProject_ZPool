@@ -43,5 +43,13 @@ namespace ZPool.Services.EFServices
                 await _context.SaveChangesAsync();
             }
         }
+
+        public double GetRatingForUser(int userId)
+        {
+            List<Review> reviews = GetReviewsByUserId(userId);
+            var mean = reviews.Count>0 ? reviews.Select(r => r.RateValue).Average() : 0;
+            double rating = Math.Round(mean, 1, MidpointRounding.AwayFromZero);
+            return rating;
+        }
     }
 }
