@@ -46,7 +46,8 @@ namespace ZPool.Services.EFServices
 
         public double GetRatingForUser(int userId)
         {
-            var mean = _context.Reviews.Where(r => r.RevieweeId == userId).Average(r => r.RateValue);
+            List<Review> reviews = GetReviewsByUserId(userId);
+            var mean = reviews.Select(r => r.RateValue).Average();
             double rating = Math.Round(mean, 1, MidpointRounding.AwayFromZero);
             return rating;
         }
