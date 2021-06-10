@@ -31,7 +31,7 @@ namespace ZPool.Services.EFServices
                 client.Timeout = 5000;
                 try
                 {
-                    client.Connect("smtp-mail.outlook.com", 25, false);
+                    client.Connect("smtp-mail.outlook.com", 587, SecureSocketOptions.StartTls);
                 }
                 catch (Exception ex)
                 {
