@@ -22,6 +22,7 @@ namespace ZPool.Migrations
                 },
                 constraints: table =>
                 {
+
                     table.PrimaryKey("PK_Reviews", x => x.ReviewId);
                     table.ForeignKey(
                         name: "FK_Reviews_AspNetUsers_RevieweeId",

@@ -17,7 +17,7 @@
                 <li class="align-middle pl-4 py-3"><img src="/images/icons/arrow_down_24dp.svg" />
                 <li class="h4 mb-0 align-middle">@Model.Ride.DestinationLocation</li>
             </ul>
-            <p>@Model.Ride.StartTime.ToString("dddd, dd.MM.yyyy HH:mm")</p>
+            <p>@Model.Ride.StartTime.ToString("dddd, dd.MM.yyyy HH:mm", Model.culture)</p>
         </div>
         <div class="col-1"></div>
         <div class="col col-md-3 bg-light p-3" style="border-radius: 15px">
@@ -30,7 +30,7 @@
                         @if (Model.CurrentUser == null)
                         {
                             <a asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="/Rides/RideDetails/@Model.Ride.RideID">
-                                You must be logged in to book a ride.
+                                You must be logged in<br/> to book a ride.
                             </a>
                         }
                         else if (Model.CurrentUser != null && Model.CurrentUser.Id == Model.Ride.Car.AppUserID)
@@ -66,8 +66,11 @@
             </div>
         </div>
     </div>
-
-    <div class="row" style="margin-top: 4rem">
+    
+    <!-- map container -->
+    <div class="mt-4 rounded-border" id="map" style="height: 400px; width: 100%"></div>
+   
+    <div class="row mt-4">
         <div class="col col-md-4">
             <div style="max-width: 15rem; max-height: 15rem">
                 @if (Model.Ride.Car.AppUser.AvatarName != null)
@@ -119,6 +122,7 @@
             </ul>
         </div>
     </div>
+
     <div class="row pt-5">
         <div class="col d-flex justify-content-center">
             <ul class="list-inline">
@@ -168,11 +172,48 @@
                     }
                 }
                
-                    <li class="list-inline-item">
-                        <a class="btn btn-outline-primary rounded-border mbl-4" asp-page="GetRides">Back to list of Rides</a>
-                    </li>
-                </ul>
+                <li class="list-inline-item">
+                    <a class="btn btn-outline-primary rounded-border mbl-4" asp-page="GetRides">Back to list of Rides</a>
+                </li>
+            </ul>
 
-</div>
+        </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    async function initMap() {
+        var directionsService = new google.maps.DirectionsService();
+        var directionsRenderer = new google.maps.DirectionsRenderer();
+        var denmark = new google.maps.LatLng(56.2639, 9.5018);
+        var mapOptions = {
+            zoom:7,
+            center: denmark
+        }
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        directionsRenderer.setMap(map);
+
+        calcRoute(directionsService, directionsRenderer);
+    }
+
+    function calcRoute(directionsService, directionsRenderer) {
+        var start = "@Model.Ride.DepartureLocation";
+        var end = "@Model.Ride.DestinationLocation";
+        var request = {
+            origin: start,
+            destination: end,
+            travelMode: 'DRIVING'
+        };
+        
+        directionsService.route(request, function(result, status) {
+            if (status == 'OK') {
+                directionsRenderer.setDirections(result);
+            }
+        });
+    }
+</script>
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0ahLGaUFf7DglPgI7qxJHl4i6rwdHTcs&callback=initMap&libraries=&v=weekly"
+    async
+></script>

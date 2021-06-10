@@ -16,7 +16,6 @@ namespace ZPool.Models
         public DbSet<Car> Cars { get; set; }
         public DbSet<Ride> Rides { get; set; }
         public DbSet<Booking> Bookings { get; set; }
-
         public DbSet<Message> Messages { get; set; }
         public DbSet<Review> Reviews { get; set; }
         
@@ -43,7 +42,7 @@ namespace ZPool.Models
             var hasher = new PasswordHasher<AppUser>();
 
             //Seeding the User to AspNetUsers table
-            //builder.Entity<AppUser>()
+            builder.Entity<AppUser>()
                 .HasData(new AppUser
                 {
                     Id = 1,
