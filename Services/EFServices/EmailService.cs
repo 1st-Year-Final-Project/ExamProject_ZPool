@@ -7,6 +7,7 @@ using MailKit.Security;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MimeKit;
+using MimeKit.Text;
 using ZPool.Services.Interfaces;
 
 namespace ZPool.Services.EFServices
@@ -20,7 +21,7 @@ namespace ZPool.Services.EFServices
             message.To.Add(new MailboxAddress("", $"{email}"));
             message.Subject = $"{subject}";
 
-            message.Body = new TextPart("plain")
+            message.Body = new TextPart(TextFormat.Html)
             {
                 Text = $"{htmlMessage}"
             };
