@@ -19,16 +19,19 @@ namespace ZPool.Pages.Rides
         private UserManager<AppUser> _userManager;
         private IBookingService _bookingService;
         private IMessageService _messageService;
+        private IReviewService _reviewService;
 
         public RideModel(IRideService rideService, 
             UserManager<AppUser> userServise, 
             IBookingService bookingService, 
-            IMessageService messageService)
+            IMessageService messageService,
+            IReviewService reviewService)
         {
             _rideService = rideService;
             _userManager = userServise;
             _bookingService = bookingService;
             _messageService = messageService;
+            _reviewService = reviewService;
         }
         
         public Ride Ride { get; set; }
@@ -38,6 +41,7 @@ namespace ZPool.Pages.Rides
         public int SeatsLeft { get; set; }
         public bool AlreadyBooked { get; set; }
         public CultureInfo culture { get; set; }
+        public double UserRating { get; set; }
 
         public async Task OnGetAsync(int id)
         {
@@ -45,6 +49,7 @@ namespace ZPool.Pages.Rides
             Ride = _rideService.GetRide(id);
             RideId = id;
             culture = new CultureInfo("en-US");
+            UserRating = _reviewService.GetRatingForUser(Ride.Car.AppUserID);
 
             if (CurrentUser != null)
             {
