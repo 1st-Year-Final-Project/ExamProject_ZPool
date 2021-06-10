@@ -5,8 +5,7 @@
     ViewData["ActivePage"] = ManageNavPages.MyBookings;
 }
 
-<h3> My Bookings</h3>
-</hr></br>
+<h3> My Bookings</h3><br/>
 <p>
     <a asp-page="/Rides/GetRides" class="btn btn-outline-success rounded-border">Book a Ride</a>
 </p>
@@ -14,7 +13,7 @@
 <form asp-page-handler="StatusFilter" method="post">
     <p>
         Search Booking Status: <input type="text" asp-for="StatusCriteria" class="form-control rounded-border" style="max-width: 10rem" />
-        </br>
+        <br/>
         <input type="submit" value="Filter" class="btn btn-success rounded-border" />
         <a asp-page="Identity/Account/Manage/MyBookings" class="btn text-primary">Back to Full List </a>
     </p>
