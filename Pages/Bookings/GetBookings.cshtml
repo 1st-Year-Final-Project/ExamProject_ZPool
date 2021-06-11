@@ -55,7 +55,7 @@
                     <td>  @item.Ride.Car.NumberPlate </td>
                     <td>  @item.BookingStatus </td>
 
-                    @if (item.BookingStatus == "Accepted" || item.BookingStatus == "Pending" && Model.LoggedInUser.Id == item.AppUserID)
+                    @if ((item.BookingStatus == "Accepted" || item.BookingStatus == "Pending") && Model.LoggedInUser.Id == item.Ride.Car.AppUserID && item.Ride.StartTime>DateTime.Now)
                     {
                         <td>
                             <div class="form group">

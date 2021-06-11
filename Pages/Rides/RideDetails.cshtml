@@ -67,8 +67,16 @@
         </div>
     </div>
     
-    <!-- map container -->
-    <div class="mt-4 rounded-border" id="map" style="height: 400px; width: 100%"></div>
+<!-- map container -->
+<div class="mt-3">
+    <p class="m-0">The route is <span id="distance" class="text-success"></span> long. The trip will take <span id="duration" class="text-success"></span>.</p>
+</div>
+<div class="mt-2 rounded-border" id="map" style="height: 400px; width: 100%">
+
+</div>
+
+
+
    
     <div class="row mt-4">
         <div class="col col-md-4">
@@ -215,6 +223,10 @@
 </div>
 
 <script type="text/javascript">
+    
+    var distanceText = document.getElementById("distance");
+    var durationText = document.getElementById("duration");
+
     async function initMap() {
         var directionsService = new google.maps.DirectionsService();
         var directionsRenderer = new google.maps.DirectionsRenderer();
@@ -241,6 +253,8 @@
         directionsService.route(request, function(result, status) {
             if (status == 'OK') {
                 directionsRenderer.setDirections(result);
+                distanceText.innerText = result.routes[0].legs[0].distance.text;
+                durationText.innerText = result.routes[0].legs[0].duration.text;
             }
         });
     }
