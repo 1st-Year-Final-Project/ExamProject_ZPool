@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ZPool.Models;
+using ZPool.Services.Interfaces;
 
 namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
@@ -17,13 +18,16 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private IReviewService _reviewService;
+
 
         public IndexModel(
             UserManager<AppUser> userManager, 
-            SignInManager<AppUser> signInManager)
+            SignInManager<AppUser> signInManager, IReviewService reviewService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _reviewService = reviewService;
         }
 
         [TempData] public string StatusMessage { get; set; }
@@ -37,7 +41,8 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public SelectList GenderList { get; set; }
         public AppUser LoggedInUser { get; set; }
         public string Username { get; set; }
-        public string Email { get; set; }       
+        public string Email { get; set; }
+        public double UserRating { get; set; }
 
         [BindProperty] public InputModel Input { get; set; }
 
@@ -72,7 +77,8 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             UserGender = user.Gender;
             Introduction = user.Introduction;
             UserAvatarName = user.AvatarName;
-            
+            UserRating = _reviewService.GetRatingForUser(user.Id);
+
             if (string.IsNullOrEmpty(UserAvatarName))
             {
                 UserAvatarName = "default.png";
