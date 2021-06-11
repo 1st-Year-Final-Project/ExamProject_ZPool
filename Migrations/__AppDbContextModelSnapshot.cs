@@ -21,7 +21,6 @@ namespace ZPool.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
-
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -52,7 +51,7 @@ namespace ZPool.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "e110f032-daeb-4ce0-88d9-a0defb76aaec",
+                            ConcurrencyStamp = "2dfa2d17-9500-4ba6-b017-0d9d9fbbef12",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -254,7 +253,7 @@ namespace ZPool.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "162170a3-dbd2-492e-b058-61fd3deda979",
+                            ConcurrencyStamp = "2782c9cb-c0a4-43c8-a1cd-3a70e1aee57d",
                             Email = "admin@zealand.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -262,9 +261,9 @@ namespace ZPool.Migrations
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ZEALAND.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEL7BlCIzrBycQEvM+673MWf8p8wamEr/76+B9fVWgAwiK4eLIQ+XZRZxk1eIcDr83Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGw+Cbn7noTwJqbBHaAEuDpGl6ZIjRVNXjbI62rMXC/OHz8034uzd0SWeAWM0zBq6g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "164dc7c6-865c-4605-aa44-ea66d11478cb",
+                            SecurityStamp = "1a4f0bc5-c001-4164-a95f-4d62ac7d0a2a",
                             TwoFactorEnabled = false,
                             UserName = "Default Admin"
                         });

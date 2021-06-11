@@ -17,7 +17,7 @@ namespace ZPool.Services.EFServices
         private IEmailSender _emailSender;
         private IRideService _rideService;
 
-        public EFBookingService(AppDbContext context, 
+            public EFBookingService(AppDbContext context, 
             IMessageService smsService, 
             IEmailSender emailSender, 
             IRideService rideService)
@@ -113,6 +113,7 @@ namespace ZPool.Services.EFServices
                        .ThenInclude(c => c.AppUser)
                        .Where(b => b.AppUserID.Equals(user.Id))
                    select booking;
+           
         }
 
         public IEnumerable<Booking> GetBookingsByRideId(int rideId)
@@ -145,6 +146,7 @@ namespace ZPool.Services.EFServices
             {
                 throw new ArgumentException("The ride is fully booked.");
             }
+          
             oldBooking.BookingStatus = newBookingStatus;
             _context.SaveChanges();
         }
@@ -172,5 +174,7 @@ namespace ZPool.Services.EFServices
                 .Where(b => b.BookingStatus.Equals(status))
                 .Where(b => b.Ride.Car.AppUser.Equals(user));
         }
+
+       
     }
 }

@@ -83,7 +83,7 @@
                     <td>  @b.Ride.Car.Color / @b.Ride.Car.Brand @b.Ride.Car.Model / @b.Ride.Car.NumberPlate </td>
                     <td>  @b.BookingStatus </td>
 
-                    @if (b.BookingStatus == "Accepted" || b.BookingStatus == "Pending")
+                    @if ((b.BookingStatus == "Accepted" || b.BookingStatus == "Pending") && b.Ride.StartTime>DateTime.Now)
                     {
                         <td>
                             <div class="form group">

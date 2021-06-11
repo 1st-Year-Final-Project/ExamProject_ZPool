@@ -38,12 +38,14 @@
             <td style="vertical-align: middle"> <a href="/Rides/RideDetails/@r.RideID" class="text-primary">Details </a> </td>
             <td style="vertical-align: middle; white-space:nowrap;">
 
+                @if(r.StartTime>DateTime.Now)
+                { 
                 <a href="/Rides/EditRide/@r.RideID" style="text-decoration: none" class="ml-2" alt="Edit">
                     <button class="edit-btn">
                         <i class="fas fa-edit"></i>
                     </button>
                 </a>
-
+                }
                 <a asp-page="./DeleteMyRide" asp-route-id="@r.RideID" style="text-decoration: none" class="ml-2" alt="Delete">
                     <button class="delete-btn">
                         <i class="fas fa-trash-alt"></i>
