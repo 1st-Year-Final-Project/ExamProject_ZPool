@@ -8,6 +8,35 @@
 
 <h3>@Model.FirstName 's Profile</h3>
 
+<!-- Rating line -->
+@{
+    int filled = Convert.ToInt32(Math.Round(Model.UserRating, 0, MidpointRounding.AwayFromZero));
+    int empty = 5 - filled;
+
+    if (filled > 0)
+    {
+        for (int i = 1; i <= filled; i++)
+        {
+            <span class="fa fa-star checked"></span>
+        }
+        if (empty > 0)
+        {
+            for (int i = 1; i <= empty; i++)
+            {
+                <span class="fa fa-star unchecked"></span>
+            }
+        }
+    }
+    else
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            <span class="fa fa-star unchecked"></span>
+        }
+    }
+    <span>(@Model.UserRating)</span>
+}
+
 <div class="row">
     <div class="col-md-6">
         <form id="profile-form" method="post">
