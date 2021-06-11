@@ -92,7 +92,7 @@
                                 </td>
                                 <td>@booking.BookingStatus</td>
 
-                                @if (booking.BookingStatus == "Accepted")
+                                @if (booking.BookingStatus == "Accepted" && booking.Ride.StartTime>DateTime.Now)
                                 {
                                     <td>
                                         <div class="form group">
@@ -104,7 +104,7 @@
                                     </td>
                                 }
 
-                                @if (booking.BookingStatus == "Pending")
+                                @if (booking.BookingStatus == "Pending" && booking.Ride.StartTime>DateTime.Now)
                                 {
                                     <td>
                                         <div class="form group">

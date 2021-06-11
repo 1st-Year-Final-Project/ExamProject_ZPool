@@ -37,13 +37,6 @@ namespace ZPool.Pages.Bookings
             Bookings = bookingService
                 .GetBookingsByDriversID(LoggedInUser)
                 .OrderByDescending(b => b.Date);
-            foreach ( var booking in Bookings)
-            {
-                if (booking.Ride.StartTime < DateTime.Now)
-                {
-                    bookingService.UpdateBookingStatus(booking.BookingID, "Passed");
-                }
-            }
         }
 
         public async Task OnPostAccept(int id)
