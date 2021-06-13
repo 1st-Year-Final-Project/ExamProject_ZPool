@@ -6,16 +6,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ZPool.Models;
+using ZPool.Services.Interfaces;
 
 namespace ZPool.Areas.Identity.Pages.Account.Manage
 {
     public class ReadOnlyProfilePageModel : PageModel
     {
         private readonly UserManager<AppUser> _userManager;
+        private IReviewService _reviewService;
 
-        public ReadOnlyProfilePageModel(UserManager<AppUser> userManager)
+        public ReadOnlyProfilePageModel(UserManager<AppUser> userManager, IReviewService reviewService)
         {
             _userManager = userManager;
+            _reviewService = reviewService;
         }
 
         public AppUser UserToCheck { get; set; }  // the UserToCheck is who you want to check their readonly profile
@@ -25,6 +28,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
         public string Introduction { get; set; }
         public string UserAvatarName { get; set; }
         public string UserGender { get; set; }
+        public double UserRating { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -49,6 +53,7 @@ namespace ZPool.Areas.Identity.Pages.Account.Manage
             LastName = user.LastName;
             UserGender = user.Gender;
             Introduction = user.Introduction;
+            UserRating = _reviewService.GetRatingForUser(user.Id);
 
             string avatarName = user.AvatarName;
             if (avatarName == "" || avatarName == null)
