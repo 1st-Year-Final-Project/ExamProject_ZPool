@@ -47,7 +47,7 @@
                     <td>  @item.Ride.Car.NumberPlate </td>
                     <td>  @item.BookingStatus </td>
 
-            @if (Model.LoggedInUser.Id == item.AppUserID)
+            @if (Model.LoggedInUser.Id == item.Ride.Car.AppUserID)
             {
                 @if (item.BookingStatus == "Accepted" && item.Ride.StartTime > DateTime.Now @*|| item.BookingStatus == "Pending"*@)
                 {
