@@ -18,6 +18,11 @@
                 <li class="h4 mb-0 align-middle">@Model.Ride.DestinationLocation</li>
             </ul>
             <p>@Model.Ride.StartTime.ToString("dddd, dd.MM.yyyy HH:mm", Model.culture)</p>
+
+            <div class="mt-3">
+                <p class="m-0">The route is <span id="distance" class="text-success"></span> long. The trip will take approximately <span id="duration" class="text-success"></span>.</p>
+            </div>
+
         </div>
         <div class="col-1"></div>
         <div class="col col-md-3 bg-light p-3" style="border-radius: 15px">
@@ -65,18 +70,15 @@
                 </div>
             </div>
         </div>
+
     </div>
     
 <!-- map container -->
-<div class="mt-3">
+@*<div class="mt-3">
     <p class="m-0">The route is <span id="distance" class="text-success"></span> long. The trip will take <span id="duration" class="text-success"></span>.</p>
-</div>
+</div>*@
 <div class="mt-2 rounded-border" id="map" style="height: 400px; width: 100%">
-
 </div>
-
-
-
    
     <div class="row mt-4">
         <div class="col col-md-4">
@@ -138,7 +140,6 @@
                         }
                         <span>(@Model.UserRating)</span>
                     }
-
                 </li>
 
                 <li>Car: @Model.Ride.Car</li>
