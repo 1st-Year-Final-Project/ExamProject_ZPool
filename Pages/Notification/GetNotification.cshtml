@@ -40,8 +40,8 @@
             <td>  @item.Ride.Car.AppUser.UserName </td>
             <td>  @item.Ride.Car.NumberPlate </td>
             <td>  @item.BookingStatus </td>
-
-            @if ((item.BookingStatus == "Accepted" || item.BookingStatus == "Pending") && item.Ride.StartTime > DateTime.Now)
+            
+            @if ((item.BookingStatus == "Accepted" || item.BookingStatus == "Pending") && item.Ride.StartTime > DateTime.Now && Model.LoggedInUser.Id != item.Ride.Car.AppUserID)
             {
                 <td>
                     <div class="form group">
