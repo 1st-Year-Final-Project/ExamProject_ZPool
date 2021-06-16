@@ -84,7 +84,7 @@ namespace ZPool.Pages.Rides
         {
             Ride ride = _rideService.GetRide(rideId);
             _rideService.DeleteRide(ride);
-            return RedirectToPage("/Rides/GetAllRides");
+            return RedirectToPage("/Rides/GetRides");
         }
 
         public async Task<IActionResult> OnPostSend()

@@ -202,8 +202,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <form method="post">
-                                                <input hidden asp-for="RideId" />
-                                                <button type="submit" class="btn btn-danger" asp-page-handler="DeleteRide">Delete ride</button>
+                                                <input hidden asp-for="@Model.RideId" />
+                                                <button type="submit" class="btn btn-danger" asp-route-rideId="@Model.RideId" asp-page-handler="Delete">Delete ride</button>
                                             </form>
                                         </div>
                                     </div>
