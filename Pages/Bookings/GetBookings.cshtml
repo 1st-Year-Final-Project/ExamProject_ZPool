@@ -45,7 +45,7 @@
             @foreach (var item in Model.Bookings)
             {
 
-        <tr>
+        <tr class="clickable" onclick="redirectToWhoBookedTheRide(@item.RideID)">
 
             <td>  @item.Date  </td>
             <td>  @item.PickUpLocation </td>
