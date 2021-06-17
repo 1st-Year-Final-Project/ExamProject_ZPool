@@ -15,7 +15,7 @@ namespace ZPool.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        [BindProperty(SupportsGet = true)]
+        [BindProperty]
         public RideCriteriaInputModel RideCriteria { get; set; } = new RideCriteriaInputModel();
 
         public IndexModel(ILogger<IndexModel> logger, IRideService service)

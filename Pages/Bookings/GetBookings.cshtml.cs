@@ -83,14 +83,16 @@ namespace ZPool.Pages.Bookings
             }   
         }
 
-        public async Task OnPostStatusFilter(string status)
+        public async Task<IActionResult> OnPostStatusFilter()
         {
+            LoggedInUser = await userManager.GetUserAsync(User);
             if (!String.IsNullOrEmpty(StatusCriteria))
             {
                 AppUser user = await userManager.GetUserAsync(User);
                 Bookings = bookingService.GetBookingsByStatusForDrivers(StatusCriteria, user);
             }
-            RedirectToPage("BookingDetails");
+
+            return Page();
         }
     }
 }

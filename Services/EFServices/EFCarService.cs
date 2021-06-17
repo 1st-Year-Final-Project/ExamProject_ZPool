@@ -34,6 +34,7 @@ namespace ZPool.Services.EFServices
         {
             return _context.Cars;
         }
+
         public Car GetCar(int carId)
         {
             return _context.Cars
