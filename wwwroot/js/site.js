@@ -7,5 +7,12 @@ function redirect(id) {
   window.location = `/Rides/RideDetails/${id}`;
 }
 
+function redirectToWhoBookedTheRide(id) {
+    window.location = `/Identity/Account/Manage/WhoBookTheRide?id=${id}`;
+}
+
+
+
+
 
 
