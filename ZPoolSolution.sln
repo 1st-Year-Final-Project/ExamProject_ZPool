@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZPool", "ZPool.csproj", "{45A21352-8815-446F-AC89-513F452CBED8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitTestProject1", "..\xUnitTestProject\xUnitTestProject1.csproj", "{609526A4-BF13-49C9-93EE-8C5A0B27B415}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitTestProject1", "..\xUnitTestsForZpool-master\xUnitTestsForZpool-master\xUnitTestProject1.csproj", "{AD350D89-ECF2-4E90-9CB9-514A7C84ADEB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZPoolTests1", "..\..\ZPoolTestsPageMode-master\ZPoolTests1.csproj", "{19935987-DBA3-492C-8FFC-E66E2032136D}"
 EndProject
