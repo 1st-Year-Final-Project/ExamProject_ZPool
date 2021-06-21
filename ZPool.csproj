@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Ratings\**" />
+    <Content Remove="Pages\Ratings\**" />
+    <EmbeddedResource Remove="Pages\Ratings\**" />
+    <None Remove="Pages\Ratings\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Areas\Identity\Pages\Account\Manage\BookingHistory.cshtml.cs" />
     <Compile Remove="Areas\Identity\Pages\Account\Manage\IBookingService.cs" />
     <Compile Remove="Areas\Identity\Pages\Account\Manage\Index1.cshtml.cs" />
@@ -42,10 +49,6 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\Ratings\" />
   </ItemGroup>
 
 </Project>
