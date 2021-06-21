@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZPool", "ZPool.csproj", "{4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitTestProject1", "..\xUnitTestsForZpool-master\xUnitTestsForZpool-master\xUnitTestProject1.csproj", "{AD350D89-ECF2-4E90-9CB9-514A7C84ADEB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZPoolTests1", "..\ZPoolTestsPageMode-master\ZPoolTestsPageMode-master\ZPoolTests1.csproj", "{2A436A08-1D48-4A8C-8563-65C847BA1977}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AD350D89-ECF2-4E90-9CB9-514A7C84ADEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD350D89-ECF2-4E90-9CB9-514A7C84ADEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD350D89-ECF2-4E90-9CB9-514A7C84ADEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A436A08-1D48-4A8C-8563-65C847BA1977}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A436A08-1D48-4A8C-8563-65C847BA1977}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A436A08-1D48-4A8C-8563-65C847BA1977}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A436A08-1D48-4A8C-8563-65C847BA1977}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
