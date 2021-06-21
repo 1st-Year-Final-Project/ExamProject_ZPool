@@ -38,7 +38,6 @@ namespace ZPool.Services.EFServices
                     throw;
                 }
 
-                client.AuthenticationMechanisms.Remove("XOAUTH2");
                 // SMTP authentication
                 client.Authenticate("zpooladm@outlook.com", "SuperSecret1!");
 

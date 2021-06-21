@@ -63,7 +63,7 @@ namespace ZPool.Services.EFServices
 
         private void SendEmailToDriver(Booking booking)
         {
-            string message = $"Dear {booking.Ride.Car.AppUser.FirstName}, \n\n You have a new booking by {booking.AppUser.UserName} for the ride \n on {booking.Ride.StartTime} \n from {booking.Ride.DepartureLocation} \n to {booking.Ride.DestinationLocation}. \n\n Best regards \n Your Zpool-Team";
+            string message = $"Dear {booking.Ride.Car.AppUser.FirstName}, You have a new booking by {booking.AppUser.UserName} for the ride on {booking.Ride.StartTime} from {booking.Ride.DepartureLocation} to {booking.Ride.DestinationLocation}. Best regards. Your Zpool-Team";
             _emailSender.SendEmailAsync(booking.Ride.Car.AppUser.Email, "New booking", message);
         }
 

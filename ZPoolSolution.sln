@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitTestProject1", "..\xUn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZPoolTests1", "..\ZPoolTestsPageMode-master\ZPoolTestsPageMode-master\ZPoolTests1.csproj", "{2A436A08-1D48-4A8C-8563-65C847BA1977}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xUnitTestProject1", "..\xUnitTestProject\xUnitTestProject1.csproj", "{4215AE57-6F10-477F-9A4E-4ADB07EBC9D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
