@@ -45,8 +45,8 @@ namespace ZPool.Pages.Rides
 
     public class RideCriteriaInputModel
     {
-        public string DepartureLocation { get; set; } = string.Empty;
-        public string DestinationLocation { get; set; } = string.Empty;
+        public string DepartureLocation { get; set; }
+        public string DestinationLocation { get; set; }
         public DateTime StartTime { get; set; }
-    }    
+    }
 }
