@@ -27,8 +27,8 @@
         {
             @foreach (var item in Model.Bookings.OrderByDescending(b=>b.Date))
             {
-                @if(item.Date.Day> item.Date.Day-5)
-                    { 
+                @*@if(item.Date.Day> item.Ride.StartTime.Day-5)
+                    {*@ 
         
 
 
@@ -109,5 +109,5 @@
         </tr>
                 }
             }
-        }
+        @*}*@
 </table>

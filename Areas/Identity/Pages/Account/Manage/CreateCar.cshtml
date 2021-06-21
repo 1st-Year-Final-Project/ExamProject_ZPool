@@ -36,11 +36,6 @@
                 <input asp-for="@Model.Car.NumberOfSeats" class="form-control rounded-border" />
                 <span asp-validation-for="@Model.Car.NumberOfSeats" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="@Model.Car.AppUserID" class="control-label"></label>
-                <input asp-for="@Model.Car.AppUserID" class="form-control" />
-                <span asp-validation-for="@Model.Car.AppUserID" class="text-danger"></span>
-            </div>*@
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-outline-success rounded-border" />
             <a asp-area="Identity" asp-page="/Account/Manage/MyCars" class="ml-3">Back to MyCars</a>
